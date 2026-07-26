@@ -1,8 +1,27 @@
 aid: decisionlink
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/decisionlink.png
 name: DecisionLink
-description: 'DecisionLink is a company surfaced as a portfolio company of accel and added to the API
-  Evangelist network as a stub for enrichment. Sector: cloud-saas. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: 'DecisionLink pioneered enterprise Customer Value Management (CVM), giving B2B sales,
+  marketing, and customer-success teams a platform to quantify, present, and defend the economic
+  value their products deliver to buyers. The company has since rebranded and relaunched as
+  Xfactor.io, a revenue-operations AI platform that builds a "digital twin" of a company''s
+  go-to-market system: it unifies CRM, pipeline, usage, and finance signals into Xfactor Central,
+  surfaces cross-source risk through Xfactor OpenInsights with plain-English alerts, and lets teams
+  simulate growth scenarios before committing with Xfactor Simulation and Growth AI. Backed by
+  Accel, the company sells to revenue and go-to-market leaders. As of this profile it exposes no
+  public developer API, SDK, or documentation surface; security posture is published via a
+  SecureFrame trust center (SOC 2 Type II).'
 url: https://raw.githubusercontent.com/api-evangelist/decisionlink/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,12 +29,19 @@ x-backed-by:
 - accel
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-rebranded-to: xfactor.io
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
 - Cloud Saas
+- Revenue Operations
+- Customer Value Management
+- Artificial Intelligence
+- Go To Market
+- Sales
+- Analytics
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,5 +49,24 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/decisionlink-domain-security.yml
 - type: Website
-  url: https://www.decisionlink.com/
+  url: https://www.xfactor.io/
+- type: Blog
+  url: https://www.xfactor.io/blog/
+- type: Support
+  url: https://www.xfactor.io/contact-us/
+- type: PrivacyPolicy
+  url: https://www.xfactor.io/privacy-notice/
+- type: TermsOfService
+  url: https://www.xfactor.io/terms-of-use/
+- type: TrustCenter
+  url: https://app.secureframe.com/ext/trust-center/xfactor-io/
+- type: Compliance
+  url: https://app.secureframe.com/ext/trust-center/xfactor-io/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
