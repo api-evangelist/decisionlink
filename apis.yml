@@ -1,15 +1,16 @@
 aid: decisionlink
 accessModel:
   pricing: unknown
-  onboarding: unknown
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Contact Sales
+  confidence: medium
+  source:
+  - https://www.xfactor.io/get-a-demo/
+  generated: '2026-08-13'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/decisionlink.png
 name: DecisionLink
 description: 'DecisionLink pioneered enterprise Customer Value Management (CVM), giving B2B sales,
@@ -19,9 +20,14 @@ description: 'DecisionLink pioneered enterprise Customer Value Management (CVM),
   go-to-market system: it unifies CRM, pipeline, usage, and finance signals into Xfactor Central,
   surfaces cross-source risk through Xfactor OpenInsights with plain-English alerts, and lets teams
   simulate growth scenarios before committing with Xfactor Simulation and Growth AI. Backed by
-  Accel, the company sells to revenue and go-to-market leaders. As of this profile it exposes no
-  public developer API, SDK, or documentation surface; security posture is published via a
-  SecureFrame trust center (SOC 2 Type II).'
+  Accel, the company sells to revenue and go-to-market leaders. The platform runs on a set of
+  FastAPI services behind api.xfactor.io — Value Proposition, Value Facts, Value Chat and
+  Collaboration Manager — which serve live OpenAPI 3.1 documents and Swagger UI reference pages
+  anonymously, while every operation itself is protected by Auth0 bearer tokens. There is no
+  developer portal, pricing page, or published onboarding path: the subscription agreement and
+  data-processing addendum are the only places the company describes its APIs in prose, and
+  API-based access is issued as SHA-256-hashed API keys to contracted customers. Security posture
+  is published via a SecureFrame trust center (SOC 2 Type II).'
 url: https://raw.githubusercontent.com/api-evangelist/decisionlink/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -32,7 +38,7 @@ x-tier-reason: portfolio-lead
 x-rebranded-to: xfactor.io
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 tags:
 - Company
 - Cloud Saas
@@ -42,7 +48,90 @@ tags:
 - Go To Market
 - Sales
 - Analytics
-apis: []
+- Value Selling
+- Forecasting
+apis:
+- name: Xfactor.io Value Proposition API
+  description: The largest of the Xfactor.io platform services — 88 paths and 109 operations
+    covering value propositions, companies, accounts, solutions and products, benefits and value
+    drivers, workflows, discovery, privileges and users, plus account factors and mappings. This is
+    the CVM core DecisionLink was built on, now served as a FastAPI service behind Auth0 bearer
+    authentication. The OpenAPI 3.1 document and its Swagger UI are reachable anonymously; every
+    operation requires a token.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - customer-value-management
+  - value-proposition
+  - revenue-operations
+  - sales
+  - b2b
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-value-proposition-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+- name: Xfactor.io Value Facts API
+  description: Reference-data service for the value model — accrual types, area types, case-study
+    improvement types, cost categories, expense types, format types, impact types, and the
+    translation/localization components used to render value propositions. 17 paths, 17 operations,
+    Auth0 bearer authentication.
+  humanURL: https://api.xfactor.io/api/v1/value-facts/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - customer-value-management
+  - reference-data
+  - localization
+  - revenue-operations
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-value-facts-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+- name: Xfactor.io Value Chat API
+  description: The Growth AI conversational service — chat sessions and history, prompt management,
+    file upload, feedback, and long-running generation jobs for value propositions and value models
+    with a /stream/{job_id}/status polling surface. 17 paths, 20 operations, Auth0 bearer
+    authentication. The service root also answers Socket.IO/Engine.IO handshakes, indicating a
+    realtime transport alongside the REST surface.
+  humanURL: https://api.xfactor.io/api/v1/value-chat/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - artificial-intelligence
+  - conversational-ai
+  - generative-ai
+  - customer-value-management
+  - async-jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-value-chat-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+- name: Xfactor.io Collaboration Manager API
+  description: The buyer-facing collaboration surface — a separate login, and read access to a
+    shared value proposition's discovery, benefits, factors and assets. 8 paths, 10 operations,
+    Auth0 bearer authentication. This is the service behind the shared value-proposition experience
+    a seller sends to a customer.
+  humanURL: https://api.xfactor.io/api/v1/collaboration/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - collaboration
+  - customer-value-management
+  - value-proposition
+  - b2b
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-collaboration-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -65,8 +154,63 @@ common:
   url: https://app.secureframe.com/ext/trust-center/xfactor-io/
 - type: Compliance
   url: https://app.secureframe.com/ext/trust-center/xfactor-io/
+- type: GitHubOrganization
+  url: https://github.com/XFactor-IO
+- type: Login
+  url: https://app.xfactor.io/
+- type: Authentication
+  url: authentication/decisionlink-authentication.yml
+- type: Conventions
+  url: conventions/decisionlink-conventions.yml
+- type: ErrorCatalog
+  url: errors/decisionlink-problem-types.yml
+- type: DataModel
+  url: data-model/decisionlink-data-model.yml
+- type: Lifecycle
+  url: lifecycle/decisionlink-lifecycle.yml
+- type: Conformance
+  url: conformance/decisionlink-conformance.yml
+- type: LLMsTxt
+  url: llms/decisionlink-llms.txt
+- type: Plans
+  url: plans/decisionlink-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/decisionlink-rate-limits.yml
+- type: Packages
+  url: packages/decisionlink-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/decisionlink-value-proposition-overlay.yaml
+- type: Overlay
+  url: overlays/decisionlink-value-facts-overlay.yaml
+- type: Overlay
+  url: overlays/decisionlink-value-chat-overlay.yaml
+- type: Overlay
+  url: overlays/decisionlink-collaboration-overlay.yaml
+x-unpointered-artifacts:
+- file: well-known/decisionlink-well-known.yml
+  reason: >-
+    Records an absence. Every /.well-known/ path on every host Xfactor.io controls returned 404,
+    301-with-no-body, or a 403 SPA shell, so no WellKnown or SecurityTxt pointer is emitted — the
+    pointer would assert a surface the provider does not serve.
+- file: mcp/decisionlink-mcp.yml
+  reason: >-
+    A derived candidate tool list, not a server. deployment.mode is none and there is no endpoint,
+    so no MCPServer pointer is emitted — the pointer would read as a verified agent surface.
+- file: conventions/decisionlink-conventions.yml
+  reason: >-
+    Wired as Conventions, but deliberately NOT as Idempotency. No idempotency key exists in any of
+    the 156 operations; the artifact records the gap, not a capability.
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 29
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Round 2 overturned round 1. The 2026-07 pass recorded "no public developer API, SDK, or
+    documentation surface". STEP 0b contract discovery against the API host root found four live
+    FastAPI OpenAPI 3.1 documents and their Swagger UI pages served anonymously at api.xfactor.io —
+    156 operations across Value Proposition, Value Facts, Value Chat and Collaboration Manager.
+    Ownership confirmed: the paths match the calls in the company's own app.xfactor.io bundle, and
+    that bundle names api.xfactor.io as its Auth0 token audience.
