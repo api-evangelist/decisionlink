@@ -1,0 +1,148 @@
+generated: '2026-08-13'
+method: probed
+source: live probes of every host in apis.yml
+note: Every /.well-known/ path on every host Xfactor.io controls misses. www.xfactor.io is WordPress and answers
+  404 or a bare 301 with no body; api.xfactor.io answers the Kubernetes ingress default backend; app.xfactor.io
+  is a CloudFront-fronted SPA that answers 403 with an HTML shell for every path, which is a miss, not a document.
+  NO WellKnown or SecurityTxt pointer is emitted in apis.yml — this file records an absence.
+hit_count: 0
+probes:
+- host: https://www.xfactor.io
+  path: /.well-known/security.txt
+  status: 404
+  content_type: text/html
+  file: null
+  note: WordPress 404 page
+- host: https://www.xfactor.io
+  path: /.well-known/openid-configuration
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/oauth-authorization-server
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/oauth-protected-resource
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/api-catalog
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/ai-plugin.json
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/agent-card.json
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://www.xfactor.io
+  path: /.well-known/agent.json
+  status: 301
+  content_type: text/html
+  file: null
+  note: redirect, no document
+- host: https://api.xfactor.io
+  path: /.well-known/security.txt
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/openid-configuration
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/oauth-protected-resource
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/api-catalog
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/ai-plugin.json
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/agent-card.json
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://api.xfactor.io
+  path: /.well-known/agent.json
+  status: 404
+  content_type: text/plain
+  file: null
+  note: ingress default backend
+- host: https://app.xfactor.io
+  path: /.well-known/security.txt
+  status: 403
+  content_type: text/html
+  file: null
+  note: CloudFront SPA 403 shell — not a document
+- host: https://app.xfactor.io
+  path: /.well-known/openid-configuration
+  status: 403
+  content_type: text/html
+  file: null
+  note: CloudFront SPA 403 shell — not a document
+- host: https://app.xfactor.io
+  path: /.well-known/agent-card.json
+  status: 403
+  content_type: text/html
+  file: null
+  note: CloudFront SPA 403 shell — not a document
+- host: https://app.xfactor.io
+  path: /.well-known/agent.json
+  status: 403
+  content_type: text/html
+  file: null
+  note: CloudFront SPA 403 shell — not a document
+off_domain:
+- host: https://xf-prd.us.auth0.com
+  path: /.well-known/openid-configuration
+  status: 200
+  content_type: application/json
+  file: well-known/decisionlink-auth0-openid-configuration.json
+  note: A real OIDC discovery document for the company's dedicated production Auth0 tenant, named in the shipped
+    app.xfactor.io bundle. It is saved here as evidence for authentication/, but it is served by Auth0 on auth0.com
+    — NOT by a host Xfactor.io controls — so it does not earn a WellKnown pointer.
+- host: https://xf-prd.us.auth0.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: null
+- host: https://xf-prd.us.auth0.com
+  path: /.well-known/jwks.json
+  status: 200
+  content_type: application/json
+  file: null

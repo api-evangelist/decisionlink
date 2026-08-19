@@ -1,0 +1,67 @@
+generated: '2026-08-13'
+method: searched
+source: https://app.secureframe.com/ext/trust-center/xfactor-io/ + https://www.xfactor.io/data-processing-addendum/
+  + openapi/_original/*.json
+note: 'Standards and compliance posture for Xfactor.io (formerly DecisionLink). The compliance half is genuinely
+  published — a SecureFrame trust center naming SOC 2 Type II and a DPA describing GDPR measures. The API-standards
+  half is derived from the four service specs and is thin: FastAPI defaults, no RFC 9457, no pagination, no idempotency.'
+standards:
+- id: soc2-type-ii
+  conforms: true
+  evidence: Named on the SecureFrame trust center; annual external penetration testing by InGuardians. See security/decisionlink-trust-center.yml.
+  source: https://app.secureframe.com/ext/trust-center/xfactor-io/
+- id: gdpr
+  conforms: true
+  evidence: A published Data Processing Addendum with Article 32 technical and organizational measures, sub-processor
+    disclosure (AWS), and encryption commitments.
+  source: https://www.xfactor.io/data-processing-addendum/
+- id: oauth2
+  conforms: true
+  evidence: Auth0 tenant xf-prd.us.auth0.com advertises an RFC 8414 authorization-server metadata document and issues
+    the bearer JWTs the API accepts.
+  source: https://xf-prd.us.auth0.com/.well-known/oauth-authorization-server
+- id: oidc
+  conforms: true
+  evidence: OIDC discovery document served for the production tenant with authorization, token, userinfo, jwks and
+    end-session endpoints.
+  source: https://xf-prd.us.auth0.com/.well-known/openid-configuration
+- id: openapi-3.1
+  conforms: true
+  evidence: 'All four published service documents declare openapi: 3.1.0 and parse cleanly. 156 operations, all
+    with a summary and a tag.'
+  source: https://api.xfactor.io/v1/value-proposition/openapi.json
+- id: rfc9457
+  conforms: false
+  evidence: 'Errors use the FastAPI {"detail": ...} envelope with Content-Type application/json. No application/problem+json
+    appears in any spec.'
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key parameter or header in any of the 156 operations.
+- id: pagination
+  conforms: false
+  evidence: No limit/offset/page/cursor parameter in any of the 156 operations.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header; no deprecation policy published.
+- id: rfc9116
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every host the company controls.
+- id: asyncapi
+  conforms: false
+  evidence: A Socket.IO transport is mounted on the Value Chat service but no AsyncAPI document or channel documentation
+    is published.
+certifications:
+- SOC 2 Type II
+attestations:
+- name: External penetration testing
+  by: InGuardians
+  cadence: annual
+evidence:
+- url: https://app.secureframe.com/ext/trust-center/xfactor-io/
+  status: 200
+- url: https://www.xfactor.io/data-processing-addendum/
+  status: 200
+- url: https://xf-prd.us.auth0.com/.well-known/oauth-authorization-server
+  status: 200
+- url: https://api.xfactor.io/v1/value-proposition/openapi.json
+  status: 200

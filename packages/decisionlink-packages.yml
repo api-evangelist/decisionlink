@@ -1,0 +1,41 @@
+generated: '2026-08-13'
+method: searched
+source: npm, PyPI, RubyGems, crates.io, GitHub org listings
+package_count: 0
+official_sdk_count: 0
+note: No first-party SDK, client library or CLI exists in any public registry. Both GitHub organizations the company
+  owns are empty of public repositories, so there is no source distribution either. No SDKs pointer is emitted in
+  apis.yml.
+packages: []
+registries_checked:
+- registry: npm
+  query: xfactor / @xfactor-io/* / decisionlink
+  result: 404 / no match
+  url: https://registry.npmjs.org/xfactor
+  status: 404
+- registry: pypi
+  query: decisionlink
+  result: '404'
+  url: https://pypi.org/pypi/decisionlink/json
+  status: 404
+- registry: pypi
+  query: xfactor
+  result: 200 but NOT first-party
+  url: https://pypi.org/pypi/xfactor/json
+  status: 200
+  version: '0.4'
+  published: null
+  note: A matplotlib pgf/svg backend helper by Yu-Hang Tang. Unrelated to this company.
+source_repositories:
+- org: https://github.com/XFactor-IO
+  status: 200
+  public_repos: 0
+  created: '2023-02-09'
+  description: Revolutionizing Go-to-Market
+  blog: https://www.xfactor.io
+  note: Confirmed first-party by the blog field; zero public repositories.
+- org: https://github.com/decisionlink
+  status: 200
+  public_repos: 0
+  created: '2013-01-02'
+  note: The legacy DecisionLink organization. Zero public repositories, no profile metadata.

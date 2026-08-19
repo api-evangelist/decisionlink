@@ -1,0 +1,420 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Value Facts",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/healthz"
+          },
+          "docs": "Provides information about the health of the application"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "accrual_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all accrual types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/accrual-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all accrual types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "area_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all area types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/area-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all area types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "case_study_improvement_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all case study benefit improvement types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/case-study-improvement-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all case study benefit improvement types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "cost_categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all cost categories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/cost-categories",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all cost categories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "expense_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all expense types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/expense-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all expense types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "format_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all format types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/format-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all format types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "impact_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all impact types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/impact-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all impact types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "release_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get model release types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/release-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get model release types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "source_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get source types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/source-types",
+            "params": [
+              {
+                "name": "displayOnly",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get source types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "threshold_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get solution threshold types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/threshold-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get solution threshold types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "translations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all translations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/translations",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return translations joined with the components catalog, with the\nauthenticated account's overrides applied to each value."
+        },
+        {
+          "info": {
+            "name": "Get all translation components.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/translations/components",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return every row from translations_components."
+        },
+        {
+          "info": {
+            "name": "Get translations for a component and language with account overrides applied.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/translations/by-component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Translations component."
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Language code (e.g. 'en')."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return translations for the given component and language, merging\nthe authenticated account's overrides on top of the base\ntranslations."
+        },
+        {
+          "info": {
+            "name": "Save an account-specific inline translation override.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-facts/translations/override",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or update the authenticated account's override for a\ntranslation, scoped to the caller's account. Requires the account\nadministrator privilege."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "unique_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all unique types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/unique-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all unique types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "unit_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all unit types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-facts/unit-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all unit types."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

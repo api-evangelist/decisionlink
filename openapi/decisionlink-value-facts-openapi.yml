@@ -1,0 +1,865 @@
+openapi: 3.1.0
+info:
+  title: Value Facts
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+paths:
+  /healthz:
+    get:
+      tags:
+      - health
+      summary: Health
+      description: Provides information about the health of the application
+      operationId: health_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /v1/value-facts/accrual-types:
+    get:
+      tags:
+      - accrual_types
+      summary: Get all accrual types.
+      description: Get all accrual types.
+      operationId: get_accrual_types_v1_value_facts_accrual_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccrualType'
+                type: array
+                title: Response Get Accrual Types V1 Value Facts Accrual Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/area-types:
+    get:
+      tags:
+      - area_types
+      summary: Get all area types.
+      description: Get all area types.
+      operationId: get_area_types_v1_value_facts_area_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AreaType'
+                type: array
+                title: Response Get Area Types V1 Value Facts Area Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/case-study-improvement-types:
+    get:
+      tags:
+      - case_study_improvement_types
+      summary: Get all case study benefit improvement types.
+      description: Get all case study benefit improvement types.
+      operationId: get_case_study_improvement_types_v1_value_facts_case_study_improvement_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CaseStudyImprovementType'
+                type: array
+                title: Response Get Case Study Improvement Types V1 Value Facts Case Study Improvement Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/cost-categories:
+    get:
+      tags:
+      - cost_categories
+      summary: Get all cost categories.
+      description: Get all cost categories.
+      operationId: get_cost_categories_v1_value_facts_cost_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CostCategoryType'
+                type: array
+                title: Response Get Cost Categories V1 Value Facts Cost Categories Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/expense-types:
+    get:
+      tags:
+      - expense_types
+      summary: Get all expense types.
+      description: Get all expense types.
+      operationId: get_expense_types_v1_value_facts_expense_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExpenseType'
+                type: array
+                title: Response Get Expense Types V1 Value Facts Expense Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/format-types:
+    get:
+      tags:
+      - format_types
+      summary: Get all format types.
+      description: Get all format types.
+      operationId: get_format_types_v1_value_facts_format_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FormatType'
+                type: array
+                title: Response Get Format Types V1 Value Facts Format Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/impact-types:
+    get:
+      tags:
+      - impact_types
+      summary: Get all impact types.
+      description: Get all impact types.
+      operationId: get_impact_types_v1_value_facts_impact_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ImpactType'
+                type: array
+                title: Response Get Impact Types V1 Value Facts Impact Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/release-types:
+    get:
+      tags:
+      - release_types
+      summary: Get model release types.
+      description: Get model release types.
+      operationId: get_release_types_v1_value_facts_release_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReleaseType'
+                type: array
+                title: Response Get Release Types V1 Value Facts Release Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/source-types:
+    get:
+      tags:
+      - source_types
+      summary: Get source types.
+      description: Get source types.
+      operationId: get_source_types_v1_value_facts_source_types_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: displayOnly
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Displayonly
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceType'
+                title: Response Get Source Types V1 Value Facts Source Types Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-facts/threshold-types:
+    get:
+      tags:
+      - threshold_types
+      summary: Get solution threshold types.
+      description: Get solution threshold types.
+      operationId: get_threshold_types_v1_value_facts_threshold_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ThresholdType'
+                type: array
+                title: Response Get Threshold Types V1 Value Facts Threshold Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/translations:
+    get:
+      tags:
+      - translations
+      summary: Get all translations.
+      description: 'Return translations joined with the components catalog, with the
+
+        authenticated account''s overrides applied to each value.'
+      operationId: get_translations_v1_value_facts_translations_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation'
+                title: Response Get Translations V1 Value Facts Translations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-facts/translations/components:
+    get:
+      tags:
+      - translations
+      summary: Get all translation components.
+      description: Return every row from translations_components.
+      operationId: get_translation_components_v1_value_facts_translations_components_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationComponent'
+                title: Response Get Translation Components V1 Value Facts Translations Components Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-facts/translations/by-component:
+    get:
+      tags:
+      - translations
+      summary: Get translations for a component and language with account overrides applied.
+      description: 'Return translations for the given component and language, merging
+
+        the authenticated account''s overrides on top of the base
+
+        translations.'
+      operationId: get_translations_with_overrides_v1_value_facts_translations_by_component_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: component
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Translations component.
+          title: Component
+        description: Translations component.
+      - name: lang
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Language code (e.g. 'en').
+          title: Lang
+        description: Language code (e.g. 'en').
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationWithOverride'
+                title: Response Get Translations With Overrides V1 Value Facts Translations By Component Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-facts/translations/override:
+    post:
+      tags:
+      - translations
+      summary: Save an account-specific inline translation override.
+      description: 'Create or update the authenticated account''s override for a
+
+        translation, scoped to the caller''s account. Requires the account
+
+        administrator privilege.'
+      operationId: save_translation_override_route_v1_value_facts_translations_override_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTranslationOverride'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/unique-types:
+    get:
+      tags:
+      - unique_types
+      summary: Get all unique types.
+      description: Get all unique types.
+      operationId: get_unique_types_v1_value_facts_unique_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UniqueType'
+                type: array
+                title: Response Get Unique Types V1 Value Facts Unique Types Get
+      security:
+      - HTTPBearer: []
+  /v1/value-facts/unit-types:
+    get:
+      tags:
+      - unit_types
+      summary: Get all unit types.
+      description: Get all unit types.
+      operationId: get_unit_types_v1_value_facts_unit_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UnitType'
+                type: array
+                title: Response Get Unit Types V1 Value Facts Unit Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    AccrualType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the accrual type.
+        name:
+          type: string
+          title: Name
+          description: Name of the accrual type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the accrual type.
+      type: object
+      required:
+      - id
+      - name
+      title: AccrualType
+      description: Accrual type response model.
+    AreaType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the area type.
+        name:
+          type: string
+          title: Name
+          description: Name of the area type.
+      type: object
+      required:
+      - id
+      - name
+      title: AreaType
+      description: Area type response model.
+    CaseStudyImprovementType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Name of the improvement type.
+        abbr:
+          type: string
+          title: Abbr
+          description: Abbreviation of the improvement type.
+      type: object
+      required:
+      - id
+      - name
+      - abbr
+      title: CaseStudyImprovementType
+      description: Case study benefit improvement type response model.
+    CostCategoryType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost category.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost category.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost category.
+      type: object
+      required:
+      - id
+      - name
+      title: CostCategoryType
+      description: Cost category response model.
+    ExpenseType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the expense type.
+        name:
+          type: string
+          title: Name
+          description: Name of the expense type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the expense type.
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation for the expense type.
+      type: object
+      required:
+      - id
+      - name
+      title: ExpenseType
+      description: Expense type response model.
+    FormatType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the format type.
+        name:
+          type: string
+          title: Name
+          description: Name of the format type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the format type.
+      type: object
+      required:
+      - id
+      - name
+      title: FormatType
+      description: Format type response model.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthCheckResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          default: OK
+      type: object
+      title: HealthCheckResponse
+      description: Health check response
+    ImpactType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the impact type.
+        name:
+          type: string
+          title: Name
+          description: Name of the impact type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the impact type.
+      type: object
+      required:
+      - id
+      - name
+      title: ImpactType
+      description: Impact type response model.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    ReleaseType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Display name.
+      type: object
+      required:
+      - id
+      - name
+      title: ReleaseType
+      description: Model release status type response model.
+    SaveTranslationOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Base translation identifier to override.
+        value:
+          type: string
+          title: Value
+          description: New account-specific translation value.
+        version:
+          type: integer
+          title: Version
+          description: Translations components version (default 2).
+          default: 2
+      type: object
+      required:
+      - translation_id
+      - value
+      title: SaveTranslationOverride
+      description: Request body for saving an inline translation override.
+    SourceType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the source type.
+        name:
+          type: string
+          title: Name
+          description: Name of the source type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the source type.
+      type: object
+      required:
+      - id
+      - name
+      title: SourceType
+      description: Source type response model.
+    ThresholdType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Display name.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the threshold type.
+        keyword:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Keyword
+          description: Keyword identifier.
+        operation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Operation
+          description: Threshold operation.
+      type: object
+      required:
+      - id
+      - name
+      title: ThresholdType
+      description: Solution threshold type response model.
+    Translation:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Translation identifier.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        lang:
+          type: string
+          title: Lang
+          description: Two-letter language code.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        val:
+          type: string
+          title: Val
+          description: Resolved value (account override when set, else base).
+        is_override:
+          type: integer
+          title: Is Override
+          description: 1 when an account override was applied, 0 otherwise.
+          default: 0
+      type: object
+      required:
+      - id
+      - component
+      - lang
+      - key
+      - val
+      title: Translation
+      description: Translation string model.
+    TranslationComponent:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        display_name:
+          type: string
+          title: Display Name
+          description: Display name of the component.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        description:
+          type: string
+          title: Description
+          description: Description of the component.
+          default: ''
+      type: object
+      required:
+      - id
+      - display_name
+      - component
+      title: TranslationComponent
+      description: Translation component model.
+    TranslationWithOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Unique translation identifier.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        value:
+          type: string
+          title: Value
+          description: Resolved translation value (override or base).
+        is_override:
+          type: integer
+          title: Is Override
+          description: 1 when an account override was applied, 0 otherwise.
+      type: object
+      required:
+      - translation_id
+      - key
+      - value
+      - is_override
+      title: TranslationWithOverride
+      description: Translation row with optional account override applied.
+    UniqueType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the unique type.
+        name:
+          type: string
+          title: Name
+          description: Name of the unique type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the unique type.
+      type: object
+      required:
+      - id
+      - name
+      title: UniqueType
+      description: Unique type response model.
+    UnitType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the unit type.
+        name:
+          type: string
+          title: Name
+          description: Name of the unit type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the unit type.
+        abbr:
+          type: string
+          title: Abbr
+          description: Unit type abbreviation
+      type: object
+      required:
+      - id
+      - name
+      - abbr
+      title: UnitType
+      description: Unit type response model.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)

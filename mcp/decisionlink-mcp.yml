@@ -1,0 +1,1242 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/_original/*.json (four FastAPI OpenAPI 3.1 documents served at api.xfactor.io)
+note: Xfactor.io ships no MCP server. Searched the company site, sitemap, GitHub orgs (XFactor-IO and decisionlink,
+  both zero public repos), npm, PyPI, and probed api.xfactor.io/mcp and /sse — all miss. The tool list below is
+  a CANDIDATE derived from the four published OpenAPI documents so an agent can see what a server would expose;
+  it is not something the provider operates.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: derived
+  auth_note: Any real server would front Auth0 bearer tokens (or the customer-issued API keys described in the DPA);
+    no anonymous access exists to the underlying operations.
+probes:
+- url: https://api.xfactor.io/mcp
+  status: 404
+- url: https://api.xfactor.io/sse
+  status: 404
+- url: https://mcp.xfactor.io/
+  status: NXDOMAIN
+tool_count: 152
+tools:
+- name: get_value_proposition_list_v1_value_proposition_list
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/list
+  summary: Get the list of Value Propositions
+  operationId: get_value_proposition_list_v1_value_proposition_list_get
+  requires_auth: true
+  read_only: true
+- name: search_value_propositions_v1_value_proposition_search
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/search
+  summary: Search Value Propositions
+  operationId: search_value_propositions_v1_value_proposition_search_post
+  requires_auth: true
+  read_only: false
+- name: admin_validate_company_v1_value_proposition_companies_admin_vali
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/companies/admin-validate
+  summary: Validate a company
+  operationId: admin_validate_company_v1_value_proposition_companies_admin_validate_post
+  requires_auth: true
+  read_only: false
+- name: validate_company_v1_value_proposition_companies_validate
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/companies/validate
+  summary: Validate a company
+  operationId: validate_company_v1_value_proposition_companies_validate_post
+  requires_auth: true
+  read_only: false
+- name: search_companies_v1_value_proposition_companies_search
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/companies/search
+  summary: Search for a company
+  operationId: search_companies_v1_value_proposition_companies_search_post
+  requires_auth: true
+  read_only: false
+- name: create_company_v1_value_proposition_companies
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/companies
+  summary: Create a company new company
+  operationId: create_company_v1_value_proposition_companies_post
+  requires_auth: true
+  read_only: false
+- name: get_workflows_v1_value_proposition_workflows
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/workflows
+  summary: Return the workflows available to the user
+  operationId: get_workflows_v1_value_proposition_workflows_get
+  requires_auth: true
+  read_only: true
+- name: get_single_benefit_v1_value_proposition_valuePropId_benefits_ben
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/benefits/{benefitId}
+  summary: Get the details for a single benefit
+  operationId: get_single_benefit_v1_value_proposition__valuePropId__benefits__benefitId__get
+  requires_auth: true
+  read_only: true
+- name: update_benefit_phasing_v1_value_proposition_valuePropId_benefits
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/benefits/{benefitId}
+  summary: Update benefit phasing and factors
+  operationId: update_benefit_phasing_v1_value_proposition__valuePropId__benefits__benefitId__patch
+  requires_auth: true
+  read_only: false
+- name: get_benefits_v1_value_proposition_valuePropId_benefits
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/benefits
+  summary: Get the Benefits for a Value Proposition by Value Category
+  operationId: get_benefits_v1_value_proposition__valuePropId__benefits_get
+  requires_auth: true
+  read_only: true
+- name: update_benefit_active_status_v1_value_proposition_valuePropId_be
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/benefits-active
+  summary: Save the Benefit Active statuses for benefits
+  operationId: update_benefit_active_status_v1_value_proposition__valuePropId__benefits_active_patch
+  requires_auth: true
+  read_only: false
+- name: get_benefit_by_type_v1_value_proposition_valuePropId_benefits_by
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/benefits-by-type
+  summary: Returns the benefits by type(financial/non financial)
+  operationId: get_benefit_by_type_v1_value_proposition__valuePropId__benefits_by_type_get
+  requires_auth: true
+  read_only: true
+- name: update_benefit_fields_endpoint_v1_value_proposition_valuePropId_
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/benefit-fields/{benefitId}
+  summary: Update benefit fields
+  operationId: update_benefit_fields_endpoint_v1_value_proposition__valuePropId__benefit_fields__benefitId__patch
+  requires_auth: true
+  read_only: false
+- name: calculate_benefits_v1_value_proposition_valuePropId_benefits_cal
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/benefits/calculate
+  summary: Recalculate all benefits with phasing
+  operationId: calculate_benefits_v1_value_proposition__valuePropId__benefits_calculate_post
+  requires_auth: true
+  read_only: false
+- name: create_one_time_benefit_endpoint_v1_value_proposition_valuePropI
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/benefits/one-time
+  summary: Create a one-time (on-the-fly) benefit
+  operationId: create_one_time_benefit_endpoint_v1_value_proposition__valuePropId__benefits_one_time_post
+  requires_auth: true
+  read_only: false
+- name: update_one_time_benefit_endpoint_v1_value_proposition_valuePropI
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/benefits/one-time/{benefitId}
+  summary: Partially update a one-time benefit
+  operationId: update_one_time_benefit_endpoint_v1_value_proposition__valuePropId__benefits_one_time__benefitId__patch
+  requires_auth: true
+  read_only: false
+- name: get_all_factors_route_v1_value_proposition_valuePropId_all_facto
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/all-factors
+  summary: Get all factors for a Value Proposition
+  operationId: get_all_factors_route_v1_value_proposition__valuePropId__all_factors_get
+  requires_auth: true
+  read_only: true
+- name: get_key_factors_v1_value_proposition_valuePropId_key_factors
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/key-factors
+  summary: Get the Key Factors by Factor Group
+  operationId: get_key_factors_v1_value_proposition__valuePropId__key_factors_get
+  requires_auth: true
+  read_only: true
+- name: get_scalers_v1_value_proposition_valuePropId_scalers
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/scalers
+  summary: Get the scaling factors of Value Proposition
+  operationId: get_scalers_v1_value_proposition__valuePropId__scalers_get
+  requires_auth: true
+  read_only: true
+- name: update_factors_v1_value_proposition_valuePropId_factors
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/factors
+  summary: Save the values for factors
+  operationId: update_factors_v1_value_proposition__valuePropId__factors_patch
+  requires_auth: true
+  read_only: false
+- name: override_factor_name_v1_value_proposition_valuePropId_factor_ove
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/factor-override
+  summary: override factor name
+  operationId: override_factor_name_v1_value_proposition__valuePropId__factor_override_post
+  requires_auth: true
+  read_only: false
+- name: get_situations_v1_value_proposition_valuePropId_situations
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/situations
+  summary: Get the situations of Value Proposition
+  operationId: get_situations_v1_value_proposition__valuePropId__situations_get
+  requires_auth: true
+  read_only: true
+- name: update_situations_v1_value_proposition_valuePropId_situations
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/situations
+  summary: Save the values for situations
+  operationId: update_situations_v1_value_proposition__valuePropId__situations_post
+  requires_auth: true
+  read_only: false
+- name: select_solutions_v1_value_proposition_valuePropId_solutions
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/solutions
+  summary: Post selected solutions
+  operationId: select_solutions_v1_value_proposition__valuePropId__solutions_post
+  requires_auth: true
+  read_only: false
+- name: get_solutions_v1_value_proposition_valuePropId_solutions
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/solutions
+  summary: Get the solutions for a Value Proposition
+  operationId: get_solutions_v1_value_proposition__valuePropId__solutions_get
+  requires_auth: true
+  read_only: true
+- name: get_solution_categories_v1_value_proposition_valuePropId_solutio
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/solution-categories
+  summary: Get the solutions for a Value Proposition
+  operationId: get_solution_categories_v1_value_proposition__valuePropId__solution_categories_get
+  requires_auth: true
+  read_only: true
+- name: get_available_solutions_v1_value_proposition_available_solutions
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/available-solutions
+  summary: Get available solutions
+  operationId: get_available_solutions_v1_value_proposition_available_solutions_get
+  requires_auth: true
+  read_only: true
+- name: get_costs_v1_value_proposition_valuePropId_costs
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/costs
+  summary: Get the costs of Value Proposition
+  operationId: get_costs_v1_value_proposition__valuePropId__costs_get
+  requires_auth: true
+  read_only: true
+- name: store_cost_v1_value_proposition_valuePropId_costs
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/costs
+  summary: Save the values for costs
+  operationId: store_cost_v1_value_proposition__valuePropId__costs_post
+  requires_auth: true
+  read_only: false
+- name: get_available_costs_v1_value_proposition_valuePropId_available_c
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/available-costs
+  summary: Get the available costs of Value Proposition
+  operationId: get_available_costs_v1_value_proposition__valuePropId__available_costs_get
+  requires_auth: true
+  read_only: true
+- name: delete_cost_v1_value_proposition_valuePropId_costs_costId
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/{valuePropId}/costs/{costId}
+  summary: Delete a cost from the Value Proposition
+  operationId: delete_cost_v1_value_proposition__valuePropId__costs__costId__delete
+  requires_auth: true
+  read_only: false
+- name: update_cost_v1_value_proposition_valuePropId_costs_costId
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/costs/{costId}
+  summary: Update a cost in the Value Proposition
+  operationId: update_cost_v1_value_proposition__valuePropId__costs__costId__patch
+  requires_auth: true
+  read_only: false
+- name: update_cost_name_v1_value_proposition_valuePropId_costs_costId_n
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/costs/{costId}/name
+  summary: Update a cost name in the Value Proposition
+  operationId: update_cost_name_v1_value_proposition__valuePropId__costs__costId__name_patch
+  requires_auth: true
+  read_only: false
+- name: get_assets_v1_value_proposition_valuePropId_assets
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/assets
+  summary: Get the assets for a Value Proposition
+  operationId: get_assets_v1_value_proposition__valuePropId__assets_get
+  requires_auth: true
+  read_only: true
+- name: get_solutions_v1_value_proposition_valuePropId_logs
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/logs
+  summary: Get the logs for a Value Proposition
+  operationId: get_solutions_v1_value_proposition__valuePropId__logs_get
+  requires_auth: true
+  read_only: true
+- name: get_value_proposition_advance_v1_value_proposition_valuePropId_a
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/advanced
+  summary: Get the Value proposition advance details
+  operationId: get_value_proposition_advance_v1_value_proposition__valuePropId__advanced_get
+  requires_auth: true
+  read_only: true
+- name: update_value_prop_advanced_v1_value_proposition_valuePropId_adva
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/advanced
+  summary: Update the Value proposition advanced details
+  operationId: update_value_prop_advanced_v1_value_proposition__valuePropId__advanced_put
+  requires_auth: true
+  read_only: false
+- name: get_baseline_types_v1_value_proposition_valuePropId_baseline_typ
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/baseline-types
+  summary: Get the Value proposition advance details
+  operationId: get_baseline_types_v1_value_proposition__valuePropId__baseline_types_get
+  requires_auth: true
+  read_only: true
+- name: get_asset_languages_v1_value_proposition_valuePropId_asset_langu
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/asset-languages
+  summary: Get the Value proposition asset language
+  operationId: get_asset_languages_v1_value_proposition__valuePropId__asset_languages_get
+  requires_auth: true
+  read_only: true
+- name: get_available_terms_v1_value_proposition_valuePropId_available_t
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/available-terms
+  summary: Get the Value proposition available terms
+  operationId: get_available_terms_v1_value_proposition__valuePropId__available_terms_get
+  requires_auth: true
+  read_only: true
+- name: get_accrual_types_v1_value_proposition_accrual_types
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/accrual-types
+  summary: Get all accrual types.
+  operationId: get_accrual_types_v1_value_proposition_accrual_types_get
+  requires_auth: true
+  read_only: true
+- name: get_expense_types_v1_value_proposition_expense_types
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/expense-types
+  summary: Get all expense types.
+  operationId: get_expense_types_v1_value_proposition_expense_types_get
+  requires_auth: true
+  read_only: true
+- name: get_cost_categories_v1_value_proposition_cost_categories
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/cost-categories
+  summary: Get all cost categories.
+  operationId: get_cost_categories_v1_value_proposition_cost_categories_get
+  requires_auth: true
+  read_only: true
+- name: update_driver_phasing_v1_value_proposition_valuePropId_driver_ph
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/driver-phasing
+  summary: Update a Driver's Phasing
+  operationId: update_driver_phasing_v1_value_proposition__valuePropId__driver_phasing_put
+  requires_auth: true
+  read_only: false
+- name: get_scratchpad_v1_value_proposition_valuePropId_scratchpads_fact
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/scratchpads/{factorId}
+  summary: Get scratchpad by factor
+  operationId: get_scratchpad_v1_value_proposition__valuePropId__scratchpads__factorId__get
+  requires_auth: true
+  read_only: true
+- name: get_scratchpad_total_v1_value_proposition_valuePropId_scratchpad
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/scratchpads/total
+  summary: Endpoint to calculate scratchpad total
+  operationId: get_scratchpad_total_v1_value_proposition__valuePropId__scratchpads_total_post
+  requires_auth: true
+  read_only: false
+- name: get_value_proposition_roi_chart_v1_value_proposition_valuePropId
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/roi-chart
+  summary: Get the ROI chart of a Value Proposition
+  operationId: get_value_proposition_roi_chart_v1_value_proposition__valuePropId__roi_chart_get
+  requires_auth: true
+  read_only: true
+- name: get_baseline_types_v1_value_proposition_features
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/features
+  summary: Get the features by account id
+  operationId: get_baseline_types_v1_value_proposition_features_get
+  requires_auth: true
+  read_only: true
+- name: update_value_prop_done_v1_value_proposition_valuePropId_done
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/done
+  summary: Set value prop done flags
+  operationId: update_value_prop_done_v1_value_proposition__valuePropId__done_patch
+  requires_auth: true
+  read_only: false
+- name: delete_value_prop_group_v1_value_proposition_groups_valuePropGro
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/groups/{valuePropGroupId}
+  summary: Delete value prop group
+  operationId: delete_value_prop_group_v1_value_proposition_groups__valuePropGroupId__delete
+  requires_auth: true
+  read_only: false
+- name: groups_by_account_v1_value_proposition_groups_by_account
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/groups-by-account
+  summary: Get value prop groups for account
+  operationId: groups_by_account_v1_value_proposition_groups_by_account_get
+  requires_auth: true
+  read_only: true
+- name: value_props_by_account_v1_value_proposition_value_props_by_accou
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/value-props-by-account
+  summary: Get value props by account
+  operationId: value_props_by_account_v1_value_proposition_value_props_by_account_get
+  requires_auth: true
+  read_only: true
+- name: value_trackers_by_account_v1_value_proposition_value_trackers_by
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/value-trackers-by-account
+  summary: Get value trackers by account
+  operationId: value_trackers_by_account_v1_value_proposition_value_trackers_by_account_get
+  requires_auth: true
+  read_only: true
+- name: refresh_value_prop_group_v1_value_proposition_refresh_group
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/refresh/group
+  summary: Refresh value prop group
+  operationId: refresh_value_prop_group_v1_value_proposition_refresh_group_put
+  requires_auth: true
+  read_only: false
+- name: refresh_value_prop_v1_value_proposition_refresh
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/refresh
+  summary: Refresh value prop
+  operationId: refresh_value_prop_v1_value_proposition_refresh_put
+  requires_auth: true
+  read_only: false
+- name: refresh_value_tracker_v1_value_proposition_refresh_tracker
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/refresh/tracker
+  summary: Refresh value tracker
+  operationId: refresh_value_tracker_v1_value_proposition_refresh_tracker_put
+  requires_auth: true
+  read_only: false
+- name: refresh_value_prop_bulk_v1_value_proposition_refresh_bulk
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/refresh/bulk
+  summary: Refresh value prop in bulk
+  operationId: refresh_value_prop_bulk_v1_value_proposition_refresh_bulk_put
+  requires_auth: true
+  read_only: false
+- name: get_value_proposition_scorecard_v1_value_proposition_valuePropId
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/scorecard
+  summary: Get value proposition scorecard with threshold evaluations
+  operationId: get_value_proposition_scorecard_v1_value_proposition__valuePropId__scorecard_get
+  requires_auth: true
+  read_only: true
+- name: get_goals_v1_value_proposition_valuePropId_goals
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/goals
+  summary: Read goals
+  operationId: get_goals_v1_value_proposition__valuePropId__goals_get
+  requires_auth: true
+  read_only: true
+- name: update_goals_v1_value_proposition_valuePropId_goals
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/goals
+  summary: Update goals
+  operationId: update_goals_v1_value_proposition__valuePropId__goals_put
+  requires_auth: true
+  read_only: false
+- name: get_goal_groups_v1_value_proposition_valuePropId_goal_groups
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/goal-groups
+  summary: Read goal groups
+  operationId: get_goal_groups_v1_value_proposition__valuePropId__goal_groups_get
+  requires_auth: true
+  read_only: true
+- name: get_discovery_questions_v1_value_proposition_valuePropId_discove
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/discovery-questions
+  summary: Read value proposition discovery questions
+  operationId: get_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_get
+  requires_auth: true
+  read_only: true
+- name: update_discovery_questions_v1_value_proposition_valuePropId_disc
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/discovery-questions
+  summary: Update discovery question answers
+  operationId: update_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_post
+  requires_auth: true
+  read_only: false
+- name: get_value_prop_shares_v1_value_proposition_valuePropId_shares
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/shares
+  summary: List of people who have a share on the value prop
+  operationId: get_value_prop_shares_v1_value_proposition__valuePropId__shares_get
+  requires_auth: true
+  read_only: true
+- name: create_value_prop_share_v1_value_proposition_valuePropId_shares
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/shares
+  summary: Create new share for the user
+  operationId: create_value_prop_share_v1_value_proposition__valuePropId__shares_post
+  requires_auth: true
+  read_only: false
+- name: delete_value_prop_share_v1_value_proposition_valuePropId_shares_
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/{valuePropId}/shares/{shareId}
+  summary: Delete the sharedId from value prop
+  operationId: delete_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__delete
+  requires_auth: true
+  read_only: false
+- name: update_value_prop_share_v1_value_proposition_valuePropId_shares_
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/shares/{shareId}
+  summary: Update value prop share
+  operationId: update_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__patch
+  requires_auth: true
+  read_only: false
+- name: get_collaborations_v1_value_proposition_valuePropId_collaboratio
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/collaborations
+  summary: Read customer collaboration shares
+  operationId: get_collaborations_v1_value_proposition__valuePropId__collaborations_get
+  requires_auth: true
+  read_only: true
+- name: create_collaboration_share_v1_value_proposition_valuePropId_coll
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/collaborations
+  summary: Create collaboration shares
+  operationId: create_collaboration_share_v1_value_proposition__valuePropId__collaborations_post
+  requires_auth: true
+  read_only: false
+- name: update_customer_collaboration_v1_value_proposition_valuePropId_c
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/collaborations/{collaborationId}
+  summary: Update customer collaboration share
+  operationId: update_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__put
+  requires_auth: true
+  read_only: false
+- name: delete_customer_collaboration_v1_value_proposition_valuePropId_c
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/{valuePropId}/collaborations/{collaborationId}
+  summary: Delete customer collaboration share
+  operationId: delete_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__delete
+  requires_auth: true
+  read_only: false
+- name: get_products_v1_value_proposition_products
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/products
+  summary: List active products by account
+  operationId: get_products_v1_value_proposition_products_get
+  requires_auth: true
+  read_only: true
+- name: get_user_privileges_v1_value_proposition_privileges
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/privileges
+  summary: List user privileges
+  operationId: get_user_privileges_v1_value_proposition_privileges_get
+  requires_auth: true
+  read_only: true
+- name: update_value_proposition_grouping_override_v1_value_proposition_
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/grouping-override
+  summary: Update value proposition grouping override
+  operationId: update_value_proposition_grouping_override_v1_value_proposition__valuePropId__grouping_override_put
+  requires_auth: true
+  read_only: false
+- name: get_users_v1_value_proposition_users
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/users
+  summary: Get all users for the account of the requesting user
+  operationId: get_users_v1_value_proposition_users_get
+  requires_auth: true
+  read_only: true
+- name: get_current_user_v1_value_proposition_me
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/me
+  summary: Get the authenticated user info
+  operationId: get_current_user_v1_value_proposition_me_get
+  requires_auth: true
+  read_only: true
+- name: get_dynamic_discovery_account_solutions_v1_value_proposition_dyn
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/dynamic-discovery/account-solutions
+  summary: Read account solutions for an account
+  operationId: get_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_account_solutions_get
+  requires_auth: true
+  read_only: true
+- name: create_dynamic_discovery_account_solutions_v1_value_proposition_
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/dynamic-discovery/account-solutions
+  summary: Save default solutions for dynamic discovery
+  operationId: create_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_account_solutions_post
+  requires_auth: true
+  read_only: false
+- name: get_selected_dynamic_discovery_account_solutions_v1_value_propos
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/dynamic-discovery/selected-solutions
+  summary: Read default solutions for dynamic discovery
+  operationId: get_selected_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_selected_solutions_get
+  requires_auth: true
+  read_only: true
+- name: get_dynamic_discovery_privilege_v1_value_proposition_dynamic_dis
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/dynamic-discovery
+  summary: Determine if a user has Dynamic Discovery privilege
+  operationId: get_dynamic_discovery_privilege_v1_value_proposition_dynamic_discovery_get
+  requires_auth: true
+  read_only: true
+- name: get_trigger_settings_v1_value_proposition_dynamic_discovery_trig
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/dynamic-discovery/trigger-settings
+  summary: Read opportunity stage/type trigger settings
+  operationId: get_trigger_settings_v1_value_proposition_dynamic_discovery_trigger_settings_get
+  requires_auth: true
+  read_only: true
+- name: update_trigger_settings_v1_value_proposition_dynamic_discovery_t
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/dynamic-discovery/trigger-settings
+  summary: Update opportunity stage/type trigger settings
+  operationId: update_trigger_settings_v1_value_proposition_dynamic_discovery_trigger_settings_put
+  requires_auth: true
+  read_only: false
+- name: get_format_types_v1_value_proposition_format_types
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/format-types
+  summary: Get all format types.
+  operationId: get_format_types_v1_value_proposition_format_types_get
+  requires_auth: true
+  read_only: true
+- name: get_collaterals_v1_value_proposition_valuePropId_collateral
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/collateral
+  summary: Read collateral
+  operationId: get_collaterals_v1_value_proposition__valuePropId__collateral_get
+  requires_auth: true
+  read_only: true
+- name: add_collateral_v1_value_proposition_valuePropId_collateral
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/collateral
+  summary: Add collateral
+  operationId: add_collateral_v1_value_proposition__valuePropId__collateral_post
+  requires_auth: true
+  read_only: false
+- name: update_collateral_v1_value_proposition_valuePropId_collateral_co
+  service: Value Proposition
+  method: PUT
+  path: /v1/value-proposition/{valuePropId}/collateral/{collateralId}
+  summary: Update collateral
+  operationId: update_collateral_v1_value_proposition__valuePropId__collateral__collateralId__put
+  requires_auth: true
+  read_only: false
+- name: delete_collateral_v1_value_proposition_valuePropId_collateral_co
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/{valuePropId}/collateral/{collateralId}
+  summary: Delete collateral
+  operationId: delete_collateral_v1_value_proposition__valuePropId__collateral__collateralId__delete
+  requires_auth: true
+  read_only: false
+- name: save_value_prop_attributions_v1_value_proposition_valuePropId_at
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/attributions
+  summary: Save new value prop attributions
+  operationId: save_value_prop_attributions_v1_value_proposition__valuePropId__attributions_post
+  requires_auth: true
+  read_only: false
+- name: read_attributions_v1_value_proposition_valuePropId_attributions
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/attributions
+  summary: Read attributions for VP
+  operationId: read_attributions_v1_value_proposition__valuePropId__attributions_get
+  requires_auth: true
+  read_only: true
+- name: get_source_types_v1_value_proposition_source_types
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/source-types
+  summary: Get source types.
+  operationId: get_source_types_v1_value_proposition_source_types_get
+  requires_auth: true
+  read_only: true
+- name: get_translations_v1_value_proposition_translations
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/translations
+  summary: Get all translations.
+  operationId: get_translations_v1_value_proposition_translations_get
+  requires_auth: true
+  read_only: true
+- name: get_translation_components_v1_value_proposition_translations_com
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/translations/components
+  summary: Get all translation components.
+  operationId: get_translation_components_v1_value_proposition_translations_components_get
+  requires_auth: true
+  read_only: true
+- name: get_translations_with_overrides_v1_value_proposition_translation
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/translations/by-component
+  summary: Get translations for a component and language with account overrides applied.
+  operationId: get_translations_with_overrides_v1_value_proposition_translations_by_component_get
+  requires_auth: true
+  read_only: true
+- name: get_account_factors_v1_value_proposition_account_factors
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/account-factors
+  summary: Get account factors
+  operationId: get_account_factors_v1_value_proposition_account_factors_get
+  requires_auth: true
+  read_only: true
+- name: get_account_mappings_v1_value_proposition_account_mappings
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/account-mappings
+  summary: Get account mappings
+  operationId: get_account_mappings_v1_value_proposition_account_mappings_get
+  requires_auth: true
+  read_only: true
+- name: create_account_mapping_v1_value_proposition_account_mappings
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/account-mappings
+  summary: Create account mapping
+  operationId: create_account_mapping_v1_value_proposition_account_mappings_post
+  requires_auth: true
+  read_only: false
+- name: delete_account_mapping_v1_value_proposition_account_mappings_map
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/account-mappings/{mapping_id}
+  summary: Delete account mapping
+  operationId: delete_account_mapping_v1_value_proposition_account_mappings__mapping_id__delete
+  requires_auth: true
+  read_only: false
+- name: update_account_mapping_v1_value_proposition_account_mappings_map
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/account-mappings/{mapping_id}
+  summary: Update account mapping
+  operationId: update_account_mapping_v1_value_proposition_account_mappings__mapping_id__patch
+  requires_auth: true
+  read_only: false
+- name: get_value_proposition_cost_of_delay_v1_value_proposition_valuePr
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/cost-of-delay
+  summary: Get the cost of delay of a Value Proposition
+  operationId: get_value_proposition_cost_of_delay_v1_value_proposition__valuePropId__cost_of_delay_get
+  requires_auth: true
+  read_only: true
+- name: get_value_proposition_payback_chart_v1_value_proposition_valuePr
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/payback-chart
+  summary: Get the payback chart of a Value Proposition
+  operationId: get_value_proposition_payback_chart_v1_value_proposition__valuePropId__payback_chart_get
+  requires_auth: true
+  read_only: true
+- name: calculate_metrics_v1_value_proposition_valuePropId_calculate_met
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/calculate-metrics
+  summary: Calculate metrics for a value proposition
+  operationId: calculate_metrics_v1_value_proposition__valuePropId__calculate_metrics_post
+  requires_auth: true
+  read_only: false
+- name: get_value_proposition_v1_value_proposition_valuePropId
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}
+  summary: Get the details of a Value Proposition
+  operationId: get_value_proposition_v1_value_proposition__valuePropId__get
+  requires_auth: true
+  read_only: true
+- name: update_value_proposition_v1_value_proposition_valuePropId
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}
+  summary: Update a Value Proposition
+  operationId: update_value_proposition_v1_value_proposition__valuePropId__patch
+  requires_auth: true
+  read_only: false
+- name: delete_value_proposition_v1_value_proposition_valuePropId
+  service: Value Proposition
+  method: DELETE
+  path: /v1/value-proposition/{valuePropId}
+  summary: Delete a value proposition
+  operationId: delete_value_proposition_v1_value_proposition__valuePropId__delete
+  requires_auth: true
+  read_only: false
+- name: get_value_proposition_vc_chart_v1_value_proposition_valuePropId_
+  service: Value Proposition
+  method: GET
+  path: /v1/value-proposition/{valuePropId}/vc-chart
+  summary: Get the vc chart of a Value Proposition
+  operationId: get_value_proposition_vc_chart_v1_value_proposition__valuePropId__vc_chart_get
+  requires_auth: true
+  read_only: true
+- name: create_value_proposition_v1_value_proposition
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition
+  summary: Create a new Value Proposition
+  operationId: create_value_proposition_v1_value_proposition_post
+  requires_auth: true
+  read_only: false
+- name: clone_value_proposition_v1_value_proposition_valuePropId_clone
+  service: Value Proposition
+  method: POST
+  path: /v1/value-proposition/{valuePropId}/clone
+  summary: Create a Value Proposition clone
+  operationId: clone_value_proposition_v1_value_proposition__valuePropId__clone_post
+  requires_auth: true
+  read_only: false
+- name: reassign_value_proposition_v1_value_proposition_valuePropId_reas
+  service: Value Proposition
+  method: PATCH
+  path: /v1/value-proposition/{valuePropId}/reassign
+  summary: Reassign a Value Proposition
+  operationId: reassign_value_proposition_v1_value_proposition__valuePropId__reassign_patch
+  requires_auth: true
+  read_only: false
+- name: get_accrual_types_v1_value_facts_accrual_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/accrual-types
+  summary: Get all accrual types.
+  operationId: get_accrual_types_v1_value_facts_accrual_types_get
+  requires_auth: true
+  read_only: true
+- name: get_area_types_v1_value_facts_area_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/area-types
+  summary: Get all area types.
+  operationId: get_area_types_v1_value_facts_area_types_get
+  requires_auth: true
+  read_only: true
+- name: get_case_study_improvement_types_v1_value_facts_case_study_impro
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/case-study-improvement-types
+  summary: Get all case study benefit improvement types.
+  operationId: get_case_study_improvement_types_v1_value_facts_case_study_improvement_types_get
+  requires_auth: true
+  read_only: true
+- name: get_cost_categories_v1_value_facts_cost_categories
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/cost-categories
+  summary: Get all cost categories.
+  operationId: get_cost_categories_v1_value_facts_cost_categories_get
+  requires_auth: true
+  read_only: true
+- name: get_expense_types_v1_value_facts_expense_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/expense-types
+  summary: Get all expense types.
+  operationId: get_expense_types_v1_value_facts_expense_types_get
+  requires_auth: true
+  read_only: true
+- name: get_format_types_v1_value_facts_format_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/format-types
+  summary: Get all format types.
+  operationId: get_format_types_v1_value_facts_format_types_get
+  requires_auth: true
+  read_only: true
+- name: get_impact_types_v1_value_facts_impact_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/impact-types
+  summary: Get all impact types.
+  operationId: get_impact_types_v1_value_facts_impact_types_get
+  requires_auth: true
+  read_only: true
+- name: get_release_types_v1_value_facts_release_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/release-types
+  summary: Get model release types.
+  operationId: get_release_types_v1_value_facts_release_types_get
+  requires_auth: true
+  read_only: true
+- name: get_source_types_v1_value_facts_source_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/source-types
+  summary: Get source types.
+  operationId: get_source_types_v1_value_facts_source_types_get
+  requires_auth: true
+  read_only: true
+- name: get_threshold_types_v1_value_facts_threshold_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/threshold-types
+  summary: Get solution threshold types.
+  operationId: get_threshold_types_v1_value_facts_threshold_types_get
+  requires_auth: true
+  read_only: true
+- name: get_translations_v1_value_facts_translations
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/translations
+  summary: Get all translations.
+  operationId: get_translations_v1_value_facts_translations_get
+  requires_auth: true
+  read_only: true
+- name: get_translation_components_v1_value_facts_translations_component
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/translations/components
+  summary: Get all translation components.
+  operationId: get_translation_components_v1_value_facts_translations_components_get
+  requires_auth: true
+  read_only: true
+- name: get_translations_with_overrides_v1_value_facts_translations_by_c
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/translations/by-component
+  summary: Get translations for a component and language with account overrides applied.
+  operationId: get_translations_with_overrides_v1_value_facts_translations_by_component_get
+  requires_auth: true
+  read_only: true
+- name: save_translation_override_route_v1_value_facts_translations_over
+  service: Value Facts
+  method: POST
+  path: /v1/value-facts/translations/override
+  summary: Save an account-specific inline translation override.
+  operationId: save_translation_override_route_v1_value_facts_translations_override_post
+  requires_auth: true
+  read_only: false
+- name: get_unique_types_v1_value_facts_unique_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/unique-types
+  summary: Get all unique types.
+  operationId: get_unique_types_v1_value_facts_unique_types_get
+  requires_auth: true
+  read_only: true
+- name: get_unit_types_v1_value_facts_unit_types
+  service: Value Facts
+  method: GET
+  path: /v1/value-facts/unit-types
+  summary: Get all unit types.
+  operationId: get_unit_types_v1_value_facts_unit_types_get
+  requires_auth: true
+  read_only: true
+- name: get_chat_id_v1_value_chat_chat_id
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/chat/id
+  summary: 'generate a chat id '
+  operationId: get_chat_id_v1_value_chat_chat_id_post
+  requires_auth: true
+  read_only: false
+- name: get_chat_history_v1_value_chat_chat_chat_id_history
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/{chat_id}/history
+  summary: generate return chat history
+  operationId: get_chat_history_v1_value_chat_chat__chat_id__history_get
+  requires_auth: true
+  read_only: true
+- name: chat_status_v1_value_chat_chat_chat_id_status
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/{chat_id}/status
+  summary: Get chat status
+  operationId: chat_status_v1_value_chat_chat__chat_id__status_get
+  requires_auth: true
+  read_only: true
+- name: get_old_chat_ids_v1_value_chat_chat_history
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/history
+  summary: generate return chat history
+  operationId: get_old_chat_ids_v1_value_chat_chat_history_get
+  requires_auth: true
+  read_only: true
+- name: update_chat_title_v1_value_chat_chat_chat_id
+  service: Value Chat Server
+  method: PATCH
+  path: /v1/value-chat/chat/{chat_id}
+  summary: update chat title
+  operationId: update_chat_title_v1_value_chat_chat__chat_id__patch
+  requires_auth: true
+  read_only: false
+- name: delete_chat_v1_value_chat_chat_chat_id
+  service: Value Chat Server
+  method: DELETE
+  path: /v1/value-chat/chat/{chat_id}
+  summary: delete chat history
+  operationId: delete_chat_v1_value_chat_chat__chat_id__delete
+  requires_auth: true
+  read_only: false
+- name: get_chat_questions_v1_value_chat_chat_questions
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/questions
+  summary: get default questions
+  operationId: get_chat_questions_v1_value_chat_chat_questions_get
+  requires_auth: true
+  read_only: true
+- name: search_titles_route_v1_value_chat_chat_search_titles
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/search-titles/
+  summary: Search Titles Route
+  operationId: search_titles_route_v1_value_chat_chat_search_titles__get
+  requires_auth: true
+  read_only: true
+- name: search_history_route_v1_value_chat_chat_search_history
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/chat/search-history/
+  summary: Search History Route
+  operationId: search_history_route_v1_value_chat_chat_search_history__get
+  requires_auth: true
+  read_only: true
+- name: submit_chat_feedback_v1_value_chat_chat_feedback
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/chat/feedback
+  summary: Submit feedback for a specific chat message
+  operationId: submit_chat_feedback_v1_value_chat_chat_feedback_post
+  requires_auth: true
+  read_only: false
+- name: upload_chat_file_v1_value_chat_chat_chat_id_upload
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/chat/{chat_id}/upload
+  summary: Upload a document to a chat session
+  operationId: upload_chat_file_v1_value_chat_chat__chat_id__upload_post
+  requires_auth: true
+  read_only: false
+- name: start_generate_vp_v1_value_chat_generate_vp
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/generate-vp
+  summary: Start VP generation from a company and set of solutions
+  operationId: start_generate_vp_v1_value_chat_generate_vp_post
+  requires_auth: true
+  read_only: false
+- name: get_generate_vp_status_stream_generate_vp_job_id_status
+  service: Value Chat Server
+  method: GET
+  path: /stream/generate-vp/{job_id}/status
+  summary: Stream VP generation job status via Server-Sent Events
+  operationId: get_generate_vp_status_stream_generate_vp__job_id__status_get
+  requires_auth: true
+  read_only: true
+- name: start_generate_value_model_v1_value_chat_generate_value_model
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/generate-value-model
+  summary: Start value model generation from uploaded files
+  operationId: start_generate_value_model_v1_value_chat_generate_value_model_post
+  requires_auth: true
+  read_only: false
+- name: get_generate_value_model_status_stream_generate_value_model_job_
+  service: Value Chat Server
+  method: GET
+  path: /stream/generate-value-model/{job_id}/status
+  summary: Stream value model generation status via Server-Sent Events
+  operationId: get_generate_value_model_status_stream_generate_value_model__job_id__status_get
+  requires_auth: true
+  read_only: true
+- name: get_value_prompts_v1_value_chat_prompts
+  service: Value Chat Server
+  method: GET
+  path: /v1/value-chat/prompts
+  summary: Gets value prompts for user
+  operationId: get_value_prompts_v1_value_chat_prompts_get
+  requires_auth: true
+  read_only: true
+- name: create_value_prompt_route_v1_value_chat_prompts
+  service: Value Chat Server
+  method: POST
+  path: /v1/value-chat/prompts
+  summary: Create a value prompt
+  operationId: create_value_prompt_route_v1_value_chat_prompts_post
+  requires_auth: true
+  read_only: false
+- name: update_value_prompt_route_v1_value_chat_prompts_prompt_id
+  service: Value Chat Server
+  method: PUT
+  path: /v1/value-chat/prompts/{prompt_id}
+  summary: Update a value prompt
+  operationId: update_value_prompt_route_v1_value_chat_prompts__prompt_id__put
+  requires_auth: true
+  read_only: false
+- name: delete_value_prompt_route_v1_value_chat_prompts_prompt_id
+  service: Value Chat Server
+  method: DELETE
+  path: /v1/value-chat/prompts/{prompt_id}
+  summary: Delete a value prompt
+  operationId: delete_value_prompt_route_v1_value_chat_prompts__prompt_id__delete
+  requires_auth: true
+  read_only: false
+- name: create_collaboration_v1_collaboration
+  service: Collaboration Manager
+  method: POST
+  path: /v1/collaboration/
+  summary: Create a token for a new collaboration
+  operationId: create_collaboration_v1_collaboration__post
+  requires_auth: true
+  read_only: false
+- name: collaboration_login_v1_collaboration_login
+  service: Collaboration Manager
+  method: POST
+  path: /v1/collaboration/login
+  summary: Login a user for collaboration manager
+  operationId: collaboration_login_v1_collaboration_login_post
+  requires_auth: true
+  read_only: false
+- name: get_discovery_questions_v1_collaboration_valueProps_discovery
+  service: Collaboration Manager
+  method: GET
+  path: /v1/collaboration/valueProps/discovery
+  summary: Get the Discovery Questions for a Collaboration
+  operationId: get_discovery_questions_v1_collaboration_valueProps_discovery_get
+  requires_auth: true
+  read_only: true
+- name: create_discovery_questions_v1_collaboration_valueProps_discovery
+  service: Collaboration Manager
+  method: PATCH
+  path: /v1/collaboration/valueProps/discovery
+  summary: Save the Discovery Question Answers for a Collaboration
+  operationId: create_discovery_questions_v1_collaboration_valueProps_discovery_patch
+  requires_auth: true
+  read_only: false
+- name: get_benefits_v1_collaboration_valueProps_benefits
+  service: Collaboration Manager
+  method: GET
+  path: /v1/collaboration/valueProps/benefits
+  summary: Get the Benefits for a Collaboration organized by Value Category
+  operationId: get_benefits_v1_collaboration_valueProps_benefits_get
+  requires_auth: true
+  read_only: true
+- name: update_benefit_active_status_v1_collaboration_valueProps_benefit
+  service: Collaboration Manager
+  method: PATCH
+  path: /v1/collaboration/valueProps/benefits/active
+  summary: Save the Benefit Active statuses for Collaboration benefits
+  operationId: update_benefit_active_status_v1_collaboration_valueProps_benefits_active_patch
+  requires_auth: true
+  read_only: false
+- name: get_factors_v1_collaboration_valueProps_factors
+  service: Collaboration Manager
+  method: GET
+  path: /v1/collaboration/valueProps/factors
+  summary: Get the Factors for a Collaboration organized by Factor Group
+  operationId: get_factors_v1_collaboration_valueProps_factors_get
+  requires_auth: true
+  read_only: true
+- name: update_factors_v1_collaboration_valueProps_factors
+  service: Collaboration Manager
+  method: PATCH
+  path: /v1/collaboration/valueProps/factors
+  summary: Save the values for Collaboration factors
+  operationId: update_factors_v1_collaboration_valueProps_factors_patch
+  requires_auth: true
+  read_only: false
+- name: get_asset_v1_collaboration_valueProps_asset
+  service: Collaboration Manager
+  method: GET
+  path: /v1/collaboration/valueProps/asset
+  summary: Get the Asset associated with the Collaboration
+  operationId: get_asset_v1_collaboration_valueProps_asset_get
+  requires_auth: true
+  read_only: true

@@ -1,0 +1,463 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Value Chat Server",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "healthcheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform a Health Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/healthz"
+          },
+          "docs": "Perform a Health Check"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "generate a chat id ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/id",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a new unique chat ID"
+        },
+        {
+          "info": {
+            "name": "generate return chat history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/:chat_id/history",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve chat history for a specific chat ID"
+        },
+        {
+          "info": {
+            "name": "Get chat status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/:chat_id/status",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the status of a specific chat (e.g. in_progress, completed)"
+        },
+        {
+          "info": {
+            "name": "generate return chat history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/history",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all chat IDs for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "update chat title",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the title of a specific chat"
+        },
+        {
+          "info": {
+            "name": "delete chat history",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific chat's history"
+        },
+        {
+          "info": {
+            "name": "get default questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/questions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get default questions for the chat based on\nclient configuration and user roles."
+        },
+        {
+          "info": {
+            "name": "Search Titles Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/search-titles/",
+            "params": [
+              {
+                "name": "search_term",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search for chats with titles similar to the search term"
+        },
+        {
+          "info": {
+            "name": "Search History Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/search-history/",
+            "params": [
+              {
+                "name": "search_term",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search for specific text within chat message contents"
+        },
+        {
+          "info": {
+            "name": "Submit feedback for a specific chat message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/feedback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Insert chat feedback into the database"
+        },
+        {
+          "info": {
+            "name": "Upload a document to a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/chat/:chat_id/upload",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a document to a chat session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "generate-vp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start VP generation from a company and set of solutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/generate-vp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Kick off async VP analysis. Returns a job_id to poll progress."
+        },
+        {
+          "info": {
+            "name": "Stream VP generation job status via Server-Sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/stream/generate-vp/:job_id/status",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "SSE stream emitting job state once per second until done or error."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "generate-value-model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start value model generation from uploaded files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/generate-value-model",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Kick off async value model generation. Returns a job_id to poll."
+        },
+        {
+          "info": {
+            "name": "Stream value model generation status via Server-Sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/stream/generate-value-model/:job_id/status",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "SSE stream emitting job state once per second until done or error."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "value",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets value prompts for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-chat/prompts",
+            "params": [
+              {
+                "name": "section",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get value specific pills and prompts for value user"
+        },
+        {
+          "info": {
+            "name": "Create a value prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-chat/prompts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new value prompt (xfactor admins only)"
+        },
+        {
+          "info": {
+            "name": "Update a value prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-chat/prompts/:prompt_id",
+            "params": [
+              {
+                "name": "prompt_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing value prompt (xfactor admins only)"
+        },
+        {
+          "info": {
+            "name": "Delete a value prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-chat/prompts/:prompt_id",
+            "params": [
+              {
+                "name": "prompt_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a value prompt (xfactor admins only)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

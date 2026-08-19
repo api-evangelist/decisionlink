@@ -1,0 +1,97 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/*.json (four FastAPI OpenAPI 3.1 documents served at api.xfactor.io)
+format: vendor
+note: 'Xfactor.io does not publish an error reference. This catalog is derived from the 4xx/5xx responses declared
+  across the four service specs plus live unauthenticated probes. The services are FastAPI, so the envelope is FastAPI-standard:
+  a top-level "detail" field, not RFC 9457 application/problem+json. No Content-Type of application/problem+json
+  appears anywhere in the four specs.'
+rfc9457: false
+envelope:
+  media_type: application/json
+  field: detail
+  validation_shape: detail is an array of {loc[], msg, type} objects (FastAPI ValidationError)
+  message_shape: detail is a string for auth and message responses
+problem_types:
+- status: 409
+  title: Conflict
+  schema: MessageResponse
+  declared_on_operations: 1
+  services:
+  - Value Proposition
+  remediation: The resource already exists or conflicts with current state (for example a duplicate value proposition
+    or company). Re-read the resource before retrying.
+- status: 422
+  title: Validation Error
+  schema: HTTPValidationError
+  declared_on_operations: 119
+  services:
+  - Collaboration Manager
+  - Value Chat Server
+  - Value Facts
+  - Value Proposition
+  remediation: Request body or parameters failed schema validation. Read detail[].loc to find the offending field
+    and detail[].msg for the reason.
+- status: 500
+  title: Internal Server Error
+  schema: MessageResponse
+  declared_on_operations: 1
+  services:
+  - Value Proposition
+  remediation: Unhandled server error. Retry with backoff; the response carries only a message string, no error
+    code.
+- status: 401
+  title: Not authenticated
+  schema: null
+  declared_on_operations: 0
+  services:
+  - all
+  note: 'Not declared in any spec; observed live. Returned with WWW-Authenticate: Bearer.'
+  remediation: Present a valid Auth0-issued bearer JWT (or a customer-issued API key) on the Authorization header.
+- status: 403
+  title: Not authenticated
+  schema: null
+  declared_on_operations: 0
+  services:
+  - all
+  note: Not declared in any spec; observed live. Some routes answer 403 rather than 401 for a missing credential.
+  remediation: Present a valid Auth0-issued bearer JWT. A 403 here does not reliably mean "authenticated but forbidden".
+observed:
+- url: https://api.xfactor.io/v2/credentials/available-providers
+  status: 401
+  body: '{"detail":"Not authenticated"}'
+  headers:
+    www-authenticate: Bearer
+  method: probed
+- url: https://api.xfactor.io/v1/value-proposition/me
+  status: 403
+  body: '{"detail":"Not authenticated"}'
+  method: probed
+- url: https://api.xfactor.io/v1/value-facts/redoc
+  status: 404
+  body: '{"detail":"Not Found"}'
+  method: probed
+- url: https://api.xfactor.io/v1/insights
+  status: 404
+  body: default backend - 404 (text/plain, ingress default backend — not a service error)
+  method: probed
+schemas:
+  HTTPValidationError:
+    properties:
+      detail:
+        items:
+          $ref: '#/components/schemas/ValidationError'
+        type: array
+        title: Detail
+    type: object
+    title: HTTPValidationError
+  MessageResponse:
+    properties:
+      message:
+        type: string
+        title: Message
+    type: object
+    required:
+    - message
+    title: MessageResponse
+    description: Response model for simple message responses

@@ -1,0 +1,21 @@
+generated: '2026-08-13'
+method: probed
+source: live unauthenticated responses from api.xfactor.io + openapi/_original/*.json
+limit_count: 0
+note: 'No rate limits are published and none are signalled at runtime. Unauthenticated responses from api.xfactor.io
+  carry no X-RateLimit-*, RateLimit-* or Retry-After header, and no 429 response is declared on any of the 156 operations
+  in the four service specs. An honest zero: an agent integrating here has no runtime signal to back off on.'
+limits: []
+response_headers: []
+exhaustion_status: null
+evidence:
+- url: https://api.xfactor.io/v2/credentials/available-providers
+  status: 401
+  headers_present:
+  - www-authenticate
+  - content-type
+  - set-cookie
+  rate_limit_headers: []
+- url: https://api.xfactor.io/v1/value-proposition/openapi.json
+  status: 200
+  rate_limit_headers: []

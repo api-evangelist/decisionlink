@@ -1,0 +1,1018 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/*.json (four FastAPI OpenAPI 3.1 documents served at api.xfactor.io)
+note: Entity-relationship graph derived from $ref links and id-reference fields across the four Xfactor.io service
+  specs. Xfactor.io publishes no object reference, so no id prefixes, domains, or human descriptions could be searched
+  — every entity and edge below comes from the specs themselves.
+domains:
+- name: Value Proposition
+  service: Value Proposition
+  core: ValueProp
+  summary: 'The CVM core: a value proposition for an account, its benefits, costs, factors, situations, solutions,
+    products and workflows.'
+- name: Reference data
+  service: Value Facts
+  core: Translation
+  summary: Typed reference vocabulary for the value model — accrual, area, cost category, expense, format, impact
+    and case-study improvement types — plus translations.
+- name: Conversational generation
+  service: Value Chat Server
+  core: GenerateVPRequest
+  summary: Chat sessions, prompts and long-running generation jobs that produce value propositions and value models.
+- name: Buyer collaboration
+  service: Collaboration Manager
+  core: Collaboration
+  summary: 'The shared, buyer-facing view of a value proposition: discovery, benefits, factors and assets.'
+entity_count: 168
+relationship_count: 79
+hubs:
+- entity: User
+  edges: 13
+- entity: Factor
+  edges: 9
+- entity: Company
+  edges: 8
+- entity: ValueProp
+  edges: 5
+- entity: AvailableCost
+  edges: 3
+- entity: ValueCategory
+  edges: 3
+- entity: Category
+  edges: 3
+- entity: CostResponse
+  edges: 3
+- entity: DiscoveryAnswer
+  edges: 3
+- entity: DynamicDiscoveryResponse
+  edges: 3
+- entity: Element
+  edges: 3
+- entity: ScratchpadUnit
+  edges: 3
+- entity: CostCategoryType
+  edges: 2
+- entity: Situation
+  edges: 2
+- entity: BenefitCategory
+  edges: 2
+entities:
+- name: SingleBenefitDetail
+  service: Value Proposition
+  fields: 146
+  description: Single Benefit Detail model
+  identifier_fields:
+  - account_solution_metric_id
+  - benefit_type_id
+  - d_unit_type_id
+  - driver_factor_id
+  - f_unit_type_id
+  - financial_factor_id
+  - i_unit_type_id
+  - id
+  - improvement_factor_id
+  - value_category_id
+  - value_prop_id
+  - value_prop_metric_id
+- name: value_proposition__value_props__models__Benefit
+  service: Value Proposition
+  fields: 79
+  description: Benefit model
+  identifier_fields:
+  - account_solution_id
+  - account_solution_metric_id
+  - accrual_type_id
+  - benefit_type_id
+  - d_unit_type_id
+  - driver_factor_id
+  - expense_type_id
+  - f_unit_type_id
+  - financial_factor_id
+  - financial_source_type_id
+  - i_unit_type_id
+  - impact_source_type_id
+  - impact_type_id
+  - improvement_factor_id
+  - scale_type_id
+  - unique_type_id
+  - value_category_id
+  - value_prop_metric_id
+- name: ValueProp
+  service: Value Proposition
+  fields: 76
+  description: ValueProp model
+  identifier_fields:
+  - baseline_type_id
+  - company_id
+  - currency_type_id
+  - id
+  - language_type_id
+  - opportunity_id
+  - status_id
+  - user_id
+- name: AvailableCost
+  service: Value Proposition
+  fields: 54
+  description: Available Cost model
+  identifier_fields:
+  - account_competitor_id
+  - account_solution_id
+  - accrual_type_id
+  - cost_category_type_id
+  - dep_cost_id
+  - driver_factor_id
+  - expense_type_id
+  - id
+  - investment_situation_id
+  - scale_type_id
+  - situation_id
+  - unit_scale_type_id
+- name: ScratchpadUnit
+  service: Value Proposition
+  fields: 43
+  description: Scratchpad Unit model
+  identifier_fields:
+  - account_scratchpad_unit_id
+  - factor_id
+  - function_type_id
+  - id
+  - operand_source_type_id
+  - operator_id
+  - unit_type_id
+  - value_prop_scratchpad_id
+- name: ExternalVP
+  service: Value Proposition
+  fields: 39
+  description: ExternalVPGroup model
+  identifier_fields:
+  - company_id
+  - id
+- name: OneTimeBenefitCreate
+  service: Value Proposition
+  fields: 37
+  description: Payload for creating a one-time (on-the-fly) benefit.
+  identifier_fields:
+  - account_capability_id
+  - account_functional_objective_id
+  - account_operational_objective_id
+  - account_painpoint_id
+  - account_solution_id
+  - accrual_type_id
+  - area_type_id
+  - benefit_type_id
+  - driver_factor_id
+  - expense_type_id
+  - financial_factor_id
+  - impact_type_id
+  - improvement_factor_id
+  - project_id
+  - unique_type_id
+  - unit_type_id
+  - value_category_id
+  - value_survey_id
+- name: CostResponse
+  service: Value Proposition
+  fields: 36
+  description: Cost Response model
+  identifier_fields:
+  - id
+- name: ExternalTracker
+  service: Value Proposition
+  fields: 31
+  description: ValueTracker Model
+  identifier_fields:
+  - original_user_id
+  - original_value_prop_id
+  - value_prop_id
+- name: Company
+  service: Value Proposition
+  fields: 30
+  description: Company Model
+  identifier_fields:
+  - account_defined_id
+  - account_id
+  - country_id
+  - dl_sector_id
+  - id
+  - industry_id
+  - region_id
+  - user_id
+- name: AllFactor
+  service: Value Proposition
+  fields: 29
+  description: All-factors response model — one entry per unique factor
+  identifier_fields:
+  - factor_id
+  - source_type_id
+  - unit_type_id
+  - year10_source_type_id
+  - year1_source_type_id
+  - year2_source_type_id
+  - year3_source_type_id
+  - year4_source_type_id
+  - year5_source_type_id
+  - year6_source_type_id
+  - year7_source_type_id
+  - year8_source_type_id
+  - year9_source_type_id
+- name: value_proposition__benefits__models__Benefit
+  service: Value Proposition
+  fields: 28
+  description: Benefit model
+  identifier_fields:
+  - account_solution_id
+  - id
+- name: CostCreate
+  service: Value Proposition
+  fields: 24
+  description: Cost Create model
+  identifier_fields:
+  - accrual_type_id
+  - cost_category_type_id
+  - cost_type_id
+  - expense_type_id
+- name: OneTimeBenefitPatch
+  service: Value Proposition
+  fields: 23
+  description: Payload for partial update of a one-time benefit.
+  identifier_fields:
+  - accrual_type_id
+  - driver_factor_id
+  - financial_factor_id
+  - impact_type_id
+  - improvement_factor_id
+  - unit_type_id
+  - value_category_id
+- name: ValueRealizationGoal
+  service: Value Proposition
+  fields: 23
+  description: Detailed Value Realization Goal Model
+  identifier_fields:
+  - account_factor_id
+  - category_id
+  - function_type_id
+  - id
+  - source_type_id
+  - value_prop_id
+- name: Asset
+  service: Value Proposition
+  fields: 22
+  description: Asset model
+  identifier_fields:
+  - account_asset_id
+  - account_asset_template_id
+  - account_id
+  - account_solution_id
+  - dep_account_asset_template_id
+  - format_type_id
+  - id
+  - language_type_id
+- name: ChildElement
+  service: Value Proposition
+  fields: 20
+  description: Child Element model
+  identifier_fields:
+  - account_situation_type_id
+  - child_element_type_id
+  - dep_element_id
+  - dep_parent_id
+  - id
+  - parent_id
+  - situation_element_id
+  - situation_type_id
+- name: Factor
+  service: Value Proposition
+  fields: 20
+  description: Factor model
+  identifier_fields:
+  - id
+  - unit_type_id
+- name: DiscoveryQuestion
+  service: Value Proposition
+  fields: 19
+  description: DiscoveryQuestion Model
+  identifier_fields:
+  - account_discovery_question_id
+  - question_type_id
+  - tag_type_id
+  - value_prop_id
+- name: CollaborationShare
+  service: Value Proposition
+  fields: 18
+  description: Collaboration Model
+  identifier_fields:
+  - account_asset_template_id
+  - id
+  - user_id
+  - value_prop_id
+- name: LogEntry
+  service: Value Proposition
+  fields: 16
+  description: Class to represent a log entry
+  identifier_fields:
+  - action_type_id
+  - id
+  - object_id
+  - section_type_id
+  - user_id
+  - value_prop_id
+- name: Scratchpad
+  service: Value Proposition
+  fields: 16
+  description: Scratchpad Model
+  identifier_fields:
+  - account_scratchpad_id
+  - factor_id
+  - factor_type_id
+  - id
+  - unit_type_id
+  - value_prop_id
+  - value_prop_metric_id
+  - value_prop_scratchpad_id
+- name: ValueCategory
+  service: Value Proposition
+  fields: 16
+  description: ValueCategory model
+  identifier_fields:
+  - id
+- name: ExternalVPGroup
+  service: Value Proposition
+  fields: 15
+  description: ExternalVPGroup model
+  identifier_fields:
+  - company_id
+  - id
+- name: ValuePropAdvanced
+  service: Value Proposition
+  fields: 15
+  description: Model representing the advanced details of a value proposition.
+  identifier_fields:
+  - baseline_type_id
+  - currency_type_id
+  - language_type_id
+  - opportunity_id
+  - value_prop_id
+- name: Workflow
+  service: Value Proposition
+  fields: 15
+  description: Workflow Model
+  identifier_fields:
+  - account_id
+  - id
+  - user_id
+  - workflow_type_id
+- name: Element
+  service: Value Proposition
+  fields: 13
+  description: Element model
+  identifier_fields:
+  - child_element_type_id
+  - id
+  - situation_category_id
+- name: BenefitPhasingValue
+  service: Value Proposition
+  fields: 11
+  description: Benefit Phasing Value model
+- name: CreateCompanyPayload
+  service: Value Proposition
+  fields: 11
+  description: CreateCompanyPayload Model
+  identifier_fields:
+  - account_defined_id
+  - account_id
+  - country_id
+  - user_id
+- name: OneTimeBenefitResponse
+  service: Value Proposition
+  fields: 11
+  description: Response model for a created one-time benefit.
+  identifier_fields:
+  - account_solution_metric_id
+  - unit_type_id
+  - value_category_id
+  - value_prop_id
+  - value_prop_metric_id
+- name: Situation
+  service: Value Proposition
+  fields: 11
+  description: Situation model
+  identifier_fields:
+  - id
+- name: ThresholdStatus
+  service: Value Proposition
+  fields: 11
+  description: Threshold status response model
+  identifier_fields:
+  - id
+  - status_id
+- name: ValuePropAdvancedPayload
+  service: Value Proposition
+  fields: 11
+  description: Model representing the advanced details of a value proposition payload.
+  identifier_fields:
+  - baseline_type_id
+  - currency_type_id
+  - customer_type_id
+  - language_type_id
+  - opportunity_id
+- name: CollaborationMetadata
+  service: Collaboration Manager
+  fields: 10
+  description: CollaborationMetadata model
+  identifier_fields:
+  - account_asset_template_id
+  - currency_type_id
+  - user_id
+  - value_prop_id
+- name: DynamicDiscoveryResponse
+  service: Value Proposition
+  fields: 10
+  description: Model for dynamic discovery
+  identifier_fields:
+  - account_id
+  - user_id
+- name: Factor
+  service: Collaboration Manager
+  fields: 10
+  description: Factor model
+  identifier_fields:
+  - id
+  - unit_type_id
+- name: UpdateDriverPhasingPayload
+  service: Value Proposition
+  fields: 10
+  description: UpdateDriverPhasingPayload model
+  identifier_fields:
+  - value_prop_metric_id
+- name: ValuePropSolution
+  service: Value Proposition
+  fields: 10
+  description: ValueProp Solution model
+  identifier_fields:
+  - account_solution_id
+  - id
+  - value_prop_id
+- name: ConversationMember
+  service: Value Proposition
+  fields: 9
+  description: ConversationMember Model
+  identifier_fields:
+  - account_workflow_id
+  - account_workflow_section_id
+  - default_member_id
+  - id
+  - member_id
+  - workflow_data_source_id
+- name: CreateCollaboration
+  service: Value Proposition
+  fields: 9
+  description: Model for creating a collaboration
+  identifier_fields:
+  - account_asset_template_id
+- name: Validation
+  service: Value Proposition
+  fields: 9
+  description: Factor Validation Model
+  identifier_fields:
+  - account_factor_id
+  - id
+  - user_id
+  - value_prop_id
+- name: BenefitType
+  service: Value Proposition
+  fields: 8
+  description: BenefitType model
+  identifier_fields:
+  - id
+- name: Collateral
+  service: Value Proposition
+  fields: 8
+  description: Detailed Collateral Model
+  identifier_fields:
+  - account_solution_id
+  - format_type_id
+  - id
+  - value_prop_id
+- name: DiscoveryQuestion
+  service: Collaboration Manager
+  fields: 8
+  description: DiscoveryQuestion model
+  identifier_fields:
+  - id
+- name: ROIChart
+  service: Value Proposition
+  fields: 8
+  description: Model for ROI Chart data
+- name: value_proposition__solutions__models__Solution
+  service: Value Proposition
+  fields: 8
+  description: Solution Model
+  identifier_fields:
+  - account_solution_id
+  - id
+  - value_prop_id
+- name: BenefitFieldsPayload
+  service: Value Proposition
+  fields: 7
+  description: Benefit Fields Payload model
+- name: Done
+  service: Value Proposition
+  fields: 7
+  description: Done model
+- name: MappingResponse
+  service: Value Proposition
+  fields: 7
+  description: Mapping Response model
+  identifier_fields:
+  - account_id
+  - id
+  - value_object_id
+- name: SearchRequest
+  service: Value Proposition
+  fields: 7
+  description: Request model for searching value propositions.
+- name: ValuePropVCChart
+  service: Value Proposition
+  fields: 7
+  description: Overall VC chart model.
+- name: BenefitsByTypeResponse
+  service: Value Proposition
+  fields: 6
+  description: Benefits by Type Response Model
+- name: CollateralCreatePayload
+  service: Value Proposition
+  fields: 6
+  description: Detailed Collateral Create Payload Model
+  identifier_fields:
+  - account_solution_id
+  - format_type_id
+  - value_prop_id
+- name: CurrencyType
+  service: Value Proposition
+  fields: 6
+  description: Model representing a currency type.
+  identifier_fields:
+  - id
+- name: ExpenseType
+  service: Value Proposition
+  fields: 6
+  description: Expense Type model
+  identifier_fields:
+  - id
+- name: Mapping
+  service: Value Proposition
+  fields: 6
+  description: Mapping model
+  identifier_fields:
+  - account_id
+  - value_object_id
+- name: PaybackChart
+  service: Value Proposition
+  fields: 6
+  description: Payback chart data for a value proposition.
+- name: ScorecardResponse
+  service: Value Proposition
+  fields: 6
+  description: Complete scorecard response model
+- name: ScratchpadTotalPayload
+  service: Value Proposition
+  fields: 6
+  description: Scratchpad Total Payload
+  identifier_fields:
+  - factor_id
+  - operator_id
+  - scratchpad_factor_id
+- name: Shares
+  service: Value Proposition
+  fields: 6
+  description: Model for shares
+  identifier_fields:
+  - id
+  - share_role_type_id
+relationships:
+- from: AdminValidatePayload
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: AllFactor
+  to: Factor
+  via: factor_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: AvailableCost
+  to: CostCategoryType
+  via: cost_category_type
+  cardinality: has_one
+  service: Value Proposition
+- from: AvailableCost
+  to: ExpenseType
+  via: expense_type
+  cardinality: has_one
+  service: Value Proposition
+- from: AvailableCost
+  to: Situation
+  via: situation_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: BenefitActivePayload
+  to: BenefitActive
+  via: benefits
+  cardinality: has_many
+  service: Value Proposition
+- from: BenefitCategory
+  to: value_proposition__value_props__models__Benefit
+  via: metrics
+  cardinality: has_many
+  service: Value Proposition
+- from: BenefitPhasingAndFactorPayload
+  to: BenefitPhasingValue
+  via: benefit_phasing
+  cardinality: has_one
+  service: Value Proposition
+- from: BenefitPhasingAndFactorPayload
+  to: FactorValue
+  via: factors
+  cardinality: has_one
+  service: Value Proposition
+- from: BenefitType
+  to: ValueCategory
+  via: vcs
+  cardinality: has_many
+  service: Value Proposition
+- from: BenefitsByTypeResponse
+  to: BenefitType
+  via: benefit_types
+  cardinality: has_many
+  service: Value Proposition
+- from: Category
+  to: CategorySolution
+  via: solutions
+  cardinality: has_many
+  service: Value Proposition
+- from: CloneValuePropPayload
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CloneValuePropPayload
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CollaborationShare
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: Company
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CompanyValidateReturn
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CostResponse
+  to: AccrualType
+  via: accrual_type
+  cardinality: has_one
+  service: Value Proposition
+- from: CostResponse
+  to: CostCategoryType
+  via: cost_category_type
+  cardinality: has_one
+  service: Value Proposition
+- from: CostResponse
+  to: CostType
+  via: cost_type
+  cardinality: has_one
+  service: Value Proposition
+- from: CreateCollaborationResponse
+  to: CollaborationShare
+  via: share_details
+  cardinality: has_one
+  service: Value Proposition
+- from: CreateCompanyPayload
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CreateShare
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: CreateValuePropPayload
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: DiscoveryAnswer
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: DiscoveryAnswerPayload
+  to: DiscoveryAnswer
+  via: discovery_questions
+  cardinality: has_many
+  service: Value Proposition
+- from: DiscoveryAnswerPayload
+  to: DiscoveryAnswer
+  via: questions
+  cardinality: has_many
+  service: Collaboration Manager
+- from: DiscoveryQuestion
+  to: QuestionType
+  via: question_type
+  cardinality: has_one
+  service: Collaboration Manager
+- from: DiscoveryQuestion
+  to: DiscoveryQuestionSection
+  via: sections
+  cardinality: has_one
+  service: Value Proposition
+- from: DynamicDiscoveryResponse
+  to: value_proposition__dynamic_discovery__models__Solution
+  via: available_solutions
+  cardinality: has_one
+  service: Value Proposition
+- from: DynamicDiscoveryResponse
+  to: value_proposition__dynamic_discovery__models__Solution
+  via: solutions
+  cardinality: has_one
+  service: Value Proposition
+- from: DynamicDiscoveryResponse
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: Element
+  to: ChildElement
+  via: children
+  cardinality: has_one
+  service: Value Proposition
+- from: ExternalVP
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ExternalVPGroup
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: Factor
+  to: value_proposition__factors__models__SourceType
+  via: source_type
+  cardinality: has_one
+  service: Value Proposition
+- from: Factor
+  to: UnitType
+  via: unit_type
+  cardinality: has_one
+  service: Value Proposition
+- from: Factor
+  to: Validation
+  via: validation
+  cardinality: has_one
+  service: Value Proposition
+- from: FactorGroup
+  to: Factor
+  via: factors
+  cardinality: has_many
+  service: Value Proposition
+- from: FactorOverrideNamePayload
+  to: Factor
+  via: factor_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: FactorPayload
+  to: FactorValue
+  via: factors
+  cardinality: has_many
+  service: Value Proposition
+- from: FormattedResponse_VPGroupResult_
+  to: VPGroupResult
+  via: result
+  cardinality: has_one
+  service: Value Proposition
+- from: FormattedResponse_ValuePropResult_
+  to: ValuePropResult
+  via: result
+  cardinality: has_one
+  service: Value Proposition
+- from: FormattedResponse_list_ExternalTracker__
+  to: ExternalTracker
+  via: result
+  cardinality: has_many
+  service: Value Proposition
+- from: LogEntry
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ReassignValuePropPayload
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: SaveTranslationOverride
+  to: Translation
+  via: translation_id
+  cardinality: belongs_to
+  service: Value Facts
+  binding: id-reference
+- from: ScorecardResponse
+  to: ThresholdStatus
+  via: threshold_types
+  cardinality: has_many
+  service: Value Proposition
+- from: Scratchpad
+  to: Factor
+  via: factor_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ScratchpadResponse
+  to: Scratchpad
+  via: scratchpad
+  cardinality: has_one
+  service: Value Proposition
+- from: ScratchpadResponse
+  to: ScratchpadUnit
+  via: units
+  cardinality: has_many
+  service: Value Proposition
+- from: ScratchpadTotalPayload
+  to: Factor
+  via: factor_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ScratchpadUnit
+  to: Factor
+  via: factor_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ScratchpadUnit
+  to: ScratchpadUnitYear
+  via: years
+  cardinality: has_many
+  service: Value Proposition
+- from: SearchRequest
+  to: ListMode
+  via: mode
+  cardinality: has_one
+  service: Value Proposition
+- from: Situation
+  to: Element
+  via: elements
+  cardinality: has_many
+  service: Value Proposition
+- from: SituationPayload
+  to: SituationValue
+  via: situations
+  cardinality: has_many
+  service: Value Proposition
+- from: SituationValue
+  to: Element
+  via: element_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: TranslationWithOverride
+  to: Translation
+  via: translation_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: UpdateValuePropPayload
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: VPGroupResult
+  to: ExternalVPGroup
+  via: value_prop_groups
+  cardinality: has_many
+  service: Value Proposition
+- from: Validation
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ValueCategory
+  to: value_proposition__benefits__models__Benefit
+  via: benefits
+  cardinality: has_many
+  service: Value Proposition
+- from: ValueCategory
+  to: Benefit
+  via: benefits
+  cardinality: has_many
+  service: Collaboration Manager
+- from: ValueProp
+  to: Company
+  via: company_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ValueProp
+  to: CostOfDelay
+  via: cost_of_delay_data
+  cardinality: has_one
+  service: Value Proposition
+- from: ValueProp
+  to: PaybackChart
+  via: payback_data
+  cardinality: has_one
+  service: Value Proposition
+- from: ValueProp
+  to: ValuePropSolution
+  via: solutions
+  cardinality: has_one
+  service: Value Proposition
+- from: ValueProp
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ValuePropAdvanced
+  to: CurrencyType
+  via: currency_types
+  cardinality: has_one
+  service: Value Proposition
+- from: ValuePropAdvanced
+  to: NumberFormatType
+  via: number_format_types
+  cardinality: has_one
+  service: Value Proposition
+- from: ValuePropROIChart
+  to: ROIChart
+  via: roi_chart
+  cardinality: has_one
+  service: Value Proposition
+- from: ValuePropResult
+  to: ExternalVP
+  via: value_props
+  cardinality: has_many
+  service: Value Proposition
+- from: ValuePropVCChart
+  to: BenefitCategory
+  via: names
+  cardinality: has_many
+  service: Value Proposition
+- from: ValueRealizationGoal
+  to: Category
+  via: category_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ValueRealizationGoalGroup
+  to: Category
+  via: category_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference
+- from: ValueRealizationGoalGroup
+  to: ValueRealizationGoal
+  via: goals
+  cardinality: has_many
+  service: Value Proposition
+- from: Workflow
+  to: ConversationMember
+  via: conversations
+  cardinality: has_one
+  service: Value Proposition
+- from: Workflow
+  to: User
+  via: user_id
+  cardinality: belongs_to
+  service: Value Proposition
+  binding: id-reference

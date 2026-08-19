@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.xfactor.io/data-processing-addendum/
+docs: https://www.xfactor.io/data-processing-addendum/
+note: >-
+  DecisionLink now trades as Xfactor.io. There is no developer portal and no published
+  authentication guide. The only prose the company publishes about API authentication is in its
+  Data Processing Addendum; the machine-readable half was derived from the four FastAPI OpenAPI 3.1
+  documents served anonymously at api.xfactor.io and from the Auth0 tenant its own web application
+  bundle names as the issuer.
+summary:
+  types:
+  - http
+  - oauth2
+  - openIdConnect
+  - apiKey
+  primary: Auth0-issued OAuth 2.0 / OIDC bearer JWT for application access; hashed API keys for
+    API-based access issued to contracted customers.
+schemes:
+- name: HTTPBearer
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    Access token in the form of a JWT. Declared in every one of the four service specs and applied
+    to 146 of 156 operations. Unauthenticated calls return HTTP 401 or 403 with
+    {"detail":"Not authenticated"} and a WWW-Authenticate: Bearer challenge.
+  method: derived
+  sources:
+  - openapi/decisionlink-collaboration-openapi.yml
+  - openapi/decisionlink-value-chat-openapi.yml
+  - openapi/decisionlink-value-facts-openapi.yml
+  - openapi/decisionlink-value-proposition-openapi.yml
+- name: Auth0 OIDC (web application)
+  type: openIdConnect
+  openIdConnectUrl: https://xf-prd.us.auth0.com/.well-known/openid-configuration
+  description: >-
+    The Xfactor.io web application authenticates through a dedicated Auth0 tenant using
+    @auth0/auth0-spa-js and @auth0/auth0-react, then presents the resulting JWT as the bearer token
+    on api.xfactor.io. The token audience observed in the shipped application bundle is the API
+    host itself (https://api.<env>.xfactor.io/), so the API is registered as an Auth0 API resource
+    server.
+  method: probed
+  source: https://xf-prd.us.auth0.com/.well-known/openid-configuration
+  issuer: https://xf-prd.us.auth0.com/
+  authorization_endpoint: https://xf-prd.us.auth0.com/authorize
+  token_endpoint: https://xf-prd.us.auth0.com/oauth/token
+  userinfo_endpoint: https://xf-prd.us.auth0.com/userinfo
+  jwks_uri: https://xf-prd.us.auth0.com/.well-known/jwks.json
+  grant_types_supported:
+  - client_credentials
+  - authorization_code
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:ietf:params:oauth:grant-type:token-exchange
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  scopes_supported:
+  - openid
+  - profile
+  - offline_access
+  - email
+  note: >-
+    These are the standard OIDC scopes the Auth0 tenant advertises, not product scopes. No
+    Xfactor.io permission or scope reference is published, so scopes/ is not emitted.
+- name: API keys (API-based access)
+  type: apiKey
+  description: >-
+    "Authentication and authorization for API based access is performed through the use of API
+    keys. XFactor uses one-way hash functions (SHA256) and only stores the hashed version of those
+    keys." Quoted verbatim from the Data Processing Addendum. Key issuance, header name, rotation
+    and expiry are not published anywhere public; they are available to contracted customers only.
+  method: searched
+  source: https://www.xfactor.io/data-processing-addendum/
+  storage: SHA-256 one-way hash (provider statement)
+  header: unknown
+environments:
+- name: production
+  api_host: https://api.xfactor.io
+  issuer: https://xf-prd.us.auth0.com/
+- name: demo
+  api_host: https://api.demo.xfactor.io
+  issuer: https://xf-demo.us.auth0.com/
+- name: uat
+  api_host: https://api.uat.xfactor.io
+  issuer: https://xf-uat.us.auth0.com/
+- name: sandbox
+  api_host: https://api.snd.xfactor.io
+  issuer: https://xf-sandbox.us.auth0.com/
+- name: development
+  api_host: https://api.dev.xfactor.io
+  issuer: https://xf-dev.us.auth0.com/
+note_environments: >-
+  Non-production hosts are named in the public application bundle at app.xfactor.io. They are the
+  company's own internal environments, not a published developer sandbox — no test credentials,
+  fixtures, or self-service signup exist, so sandbox/ is not emitted.
+human_authentication:
+  web_app: passwordless authentication and SSO/SAML
+  source: https://www.xfactor.io/data-processing-addendum/
+  quote: >-
+    Authentication and authorization for webapp based access is performed through industry
+    best-practices including password less authentication and SSO/SAML.
+transport:
+  tls_minimum: TLS 1.2
+  source: https://www.xfactor.io/data-processing-addendum/
+evidence:
+- url: https://api.xfactor.io/v2/credentials/available-providers
+  status: 401
+  body: '{"detail":"Not authenticated"}'
+  headers:
+    www-authenticate: Bearer
+- url: https://api.xfactor.io/v1/value-proposition/me
+  status: 403
+  body: '{"detail":"Not authenticated"}'
+- url: https://xf-prd.us.auth0.com/.well-known/openid-configuration
+  status: 200
+- url: https://www.xfactor.io/data-processing-addendum/
+  status: 200

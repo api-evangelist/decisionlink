@@ -1,0 +1,3011 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Value Proposition",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/healthz"
+          },
+          "docs": "Provides information about the health of the application"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "list",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the list of Value Propositions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/list",
+            "params": [
+              {
+                "name": "include_calcs",
+                "value": "",
+                "type": "query",
+                "description": "Include calculator VPs"
+              },
+              {
+                "name": "skip_solutions",
+                "value": "",
+                "type": "query",
+                "description": "Skip loading solutions (0 or 1)"
+              },
+              {
+                "name": "sortby",
+                "value": "",
+                "type": "query",
+                "description": "Column to sort by"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (ASC or DESC)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit number of results"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "1=Hypothesis, 2=Value Prop, 3=All"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Propositions available to the user\n\nReturns\n-------\ndict\n    Returns the list of available Value Propositions and has_unfinished_vps"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Value Propositions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search value propositions accessible to the authenticated user.\n\nSupports text search on VP name and company name,\nsorting, and pagination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/companies/admin-validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Admin-only: Validate or create company.\n- Reads sfdc_account_id and user_id from JSON body.\n- If feature 83 is OFF: create shared company (account_id=0).\n- If feature 83 is ON:\n    * Try to find company by (account_id, account_defined_id = sfdc_account_id)\n    * If found -> return its id\n    * Else -> create company with (user's account_id, user_id, sfdc_account_id) and return id"
+        },
+        {
+          "info": {
+            "name": "Validate a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/companies/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for validating a company"
+        },
+        {
+          "info": {
+            "name": "Search for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/companies/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for searching companies database\n\nParameters\n-------\npayload\n    The SearchPayload needed to find company\n\nReturns\n-------\nList[Company]\n    Returns the list of matching companies"
+        },
+        {
+          "info": {
+            "name": "Create a company new company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for creating a new company\n\nParameters\n-------\npayload\n    The CompanyPayload needed to create the company\n\nReturns\n-------\nCompany\n    Returns the company, if created. Returns 409 if company exists"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the workflows available to the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/workflows",
+            "params": [
+              {
+                "name": "includeAll",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading user workflows\n\nParameters\n-------\nincludeAll\n    Include all account workflows or just the user's active workflows\n\nReturns\n-------\nList[Workflow]\n    Returns the list of workflows"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "benefits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the details for a single benefit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits/:benefitId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "benefitId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading a single benefit's details\n\nReturns\n-------\nSingleBenefitDetail\n    Returns the Benefit Details"
+        },
+        {
+          "info": {
+            "name": "Update benefit phasing and factors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits/:benefitId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "benefitId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for updating benefit phasing and factors\n\nParameters\n----------\npayload : BenefitPhasingAndFactorPayload\n    The payload containing phasing and factors updates\nrequest : Request\n    The FastAPI request object\nvalue_prop_id : int\n    The ID of the value proposition\nbenefit_id : int\n    The ID of the benefit to update\n\nReturns\n-------\nJSONResponse\n    Response with success message"
+        },
+        {
+          "info": {
+            "name": "Get the Benefits for a Value Proposition by Value Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "show_all",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "summed_benefits",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_flag",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter_by",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Benefits for a Value Proposition grouped by the\nrequested dimension (default: value_category).\n\nReturns a dict with ``vcs`` and grouping availability flags.\n\nReturns\n-------\ndict\n    Benefits response with vcs and grouping flags"
+        },
+        {
+          "info": {
+            "name": "Save the Benefit Active statuses for benefits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits-active",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+        },
+        {
+          "info": {
+            "name": "Returns the benefits by type(financial/non financial)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits-by-type",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "show_all",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "summed_benefits",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_flag",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "full_format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "legacy_format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns benefits grouped by type with configurable\nfiltering and ordering."
+        },
+        {
+          "info": {
+            "name": "Update benefit fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefit-fields/:benefitId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "benefitId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for updating benefit fields\n\nParameters\n----------\n- value_prop_id\n- benefit_id\n- payload : BenefitFieldsPayload\n    The fields to update\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "benefits-calculate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recalculate all benefits with phasing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits/calculate",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Trigger a full benefit recalculation for a value prop."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "benefits-one-time",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a one-time (on-the-fly) benefit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits/one-time",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new one-time benefit for a value proposition.\n\nInserts rows into account_solution_metrics (vp_specific=1) and\nvalue_prop_metrics (active=1), inserts optional link rows, writes\nan audit log entry, and triggers inline benefit recalculation.\nRequires privilege_id=6 (Benefit on the Fly)."
+        },
+        {
+          "info": {
+            "name": "Partially update a one-time benefit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/benefits/one-time/:benefitId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "benefitId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a one-time benefit.\n\nOnly updates fields present in the request payload. Validates ownership\nand one-time status via verify_one_time_benefit. Writes an audit log\nentry and triggers inline benefit recalculation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "factors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all factors for a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/all-factors",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ai_updatable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all factors for a Value Proposition"
+        },
+        {
+          "info": {
+            "name": "Get the Key Factors by Factor Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/key-factors",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ai_updatable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Key Factors by Factor group\n\nReturns\n-------\nList[FactorGroup]\n    Returns the Factors organized by Factor Group"
+        },
+        {
+          "info": {
+            "name": "Get the scaling factors of Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/scalers",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ai_updatable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition scalers\n\nReturns\n-------\nList[Factor]\n    Returns the Value Proposition scalers"
+        },
+        {
+          "info": {
+            "name": "Save the values for factors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/factors",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving Factors\n\nParameters\n----------\nfactors : FactorPayload\n    The Factors and their values\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+        },
+        {
+          "info": {
+            "name": "override factor name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/factor-override",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for overriding factors\n\nParameters\n----------\nfactor_override : FactorOverrideNamePayload\n    The factor override name and id\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "situations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the situations of Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/situations",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ai_updatable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition situations\n\nReturns\n-------\nList[Situation]\n    Returns the Value Proposition situations"
+        },
+        {
+          "info": {
+            "name": "Save the values for situations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/situations",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving situations\n\nParameters\n----------\nrequest\nvalue_prop_id\nsituations : SituationPayload\n    The situations and their elements to be saved\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "solutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the solutions for a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/solutions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to return all the solutions for the value prop."
+        },
+        {
+          "info": {
+            "name": "Post selected solutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/solutions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Passthrough endpoint to submit the selected solutions.\n\nThis endpoint forwards the selection to the Concierge API."
+        },
+        {
+          "info": {
+            "name": "Get the solutions for a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/solution-categories",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all solution categories"
+        },
+        {
+          "info": {
+            "name": "Get available solutions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/available-solutions",
+            "params": [
+              {
+                "name": "grouped",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all available solutions for the current user.\nWhen grouped=True, returns solutions grouped by category.\nWhen grouped=False (default), returns a flat list of solutions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "costs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the costs of Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/costs",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the saved costs of a value proposition."
+        },
+        {
+          "info": {
+            "name": "Save the values for costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/costs",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a cost for a value proposition and roll up its totals."
+        },
+        {
+          "info": {
+            "name": "Get the available costs of Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/available-costs",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the available (not yet added) costs of a VP."
+        },
+        {
+          "info": {
+            "name": "Update a cost in the Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/costs/:costId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "costId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a cost of a value proposition and roll up its totals."
+        },
+        {
+          "info": {
+            "name": "Delete a cost from the Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/costs/:costId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "costId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a cost from a value proposition and roll up its totals."
+        },
+        {
+          "info": {
+            "name": "Update a cost name in the Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/costs/:costId/name",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "costId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to update the name of a cost"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the assets for a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/assets",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includeDeletedTemplates",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accountWorkflowId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isValueTracker",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Parameters\n----------\n - value_prop_id: int - value proposition id\n - include_deleted_templates: bool - optional query param\n - account_workflow_id: int - optional query param\n - is_value_tracker: bool - optional query param\n\nReturns\n-------"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the logs for a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/logs",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to return the logs for the value prop."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "advanced",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Value proposition advance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/advanced",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Propositions advance details"
+        },
+        {
+          "info": {
+            "name": "Update the Value proposition advanced details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/advanced",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint sends the update payload to the backend and returns the update response directly."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "baseline_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Value proposition advance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/baseline-types",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Propositions baseline types and mark the selected baseline"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "asset_languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Value proposition asset language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/asset-languages",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Propositions asset languages and mark the selected asset language"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "available_terms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Value proposition available terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/available-terms",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition available terms and mark the selected baseline"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "accrual_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all accrual types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/accrual-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all accrual types.\n\nReturns\n-------\n - list[AccrualType]: List of all accrual types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "expense_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all expense types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/expense-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all expense types.\n\nReturns\n-------\n - list[ExpenseType]: List of all expense types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "cost_categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all cost categories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/cost-categories",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all cost categories.\n\nReturns\n-------\n - list[CostCategoryType]: List of all cost categories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "phasing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update a Driver's Phasing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/driver-phasing",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for updating a driver's phasing\n\nParameters\n----------\npayload : UpdateDriverPhasingPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "scratchpads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get scratchpad by factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/scratchpads/:factorId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "factorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for a factor's scratchpad\n\nParameters\n----------\nfactor_id : int\n    The factor whose scratchpad is being requested\n\nReturns\n-------\nScratchpadResponse\n    Returns the scratchpad and its units"
+        },
+        {
+          "info": {
+            "name": "Endpoint to calculate scratchpad total",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/scratchpads/total",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for getting scratchpad calculation total\n\nParameters\n----------\npayload : ScratchpadTotalPayload\n    The pieces of the scratchpad to calculate\n\nReturns\n-------\nScratchpadTotalResponse\n    Returns the scratchpad total"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "roi",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the ROI chart of a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/roi-chart",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition ROI chart\n\nReturns\n-------\nValuePropROIChart\n    Returns the Value Proposition ROI chart"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the features by account id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/features",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the feature by account id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "done",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set value prop done flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/done",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for setting value prop done flags"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete value prop group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/groups/:valuePropGroupId",
+            "params": [
+              {
+                "name": "valuePropGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for deleting a value prop group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "salesforce",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get value prop groups for account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/groups-by-account",
+            "params": [
+              {
+                "name": "account_defined_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "opportunity_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for getting value prop groups for an account"
+        },
+        {
+          "info": {
+            "name": "Get value props by account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/value-props-by-account",
+            "params": [
+              {
+                "name": "account_defined_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "opportunity_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for getting value props by account"
+        },
+        {
+          "info": {
+            "name": "Get value trackers by account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/value-trackers-by-account",
+            "params": [
+              {
+                "name": "account_defined_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for getting value trackers by account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "refresh",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Refresh value prop group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/refresh/group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for refreshing value prop group\n\nReturns\n-------\nJSONResponse\n    - On success (HTTP 200):\n        {\n          \"data\": [ <None> ]\n        }\n    - On failure (HTTP 500): returns\n        {\n          \"message\": \"Unable to refresh value prop group\"\n        }"
+        },
+        {
+          "info": {
+            "name": "Refresh value prop",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for refreshing value prop\n\nReturns\n-------\nJSONResponse\n    - On success (HTTP 200): returns\n        {\n          \"data\": [ <None> ]\n        }\n    - On failure (HTTP 500): returns\n        {\n          \"message\": \"Unable to refresh value prop\"\n        }"
+        },
+        {
+          "info": {
+            "name": "Refresh value tracker",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/refresh/tracker",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for refreshing value tracker\n\nReturns\n-------\nJSONResponse\n    - On success (200): a list of objects each containing a\n      `result` with:\n        • `success`: bool\n        • `data`: dict of tracker fields (e.g. name, benefits, timestamps)\n        • `value_prop_id`, `sfdc_vt_id`, etc.\n    - On failure (500): `{\"message\": \"Unable to refresh value tracker\"}`"
+        },
+        {
+          "info": {
+            "name": "Refresh value prop in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/refresh/bulk",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Refresh all value propositions in bulk.\n-------\nJSONResponse\n    - On success (200): a list of status objects, for example:\n        [{\"result\": \"Bulk upload process started\"}]\n    - On failure (500):\n        {\"message\": \"Unable to refresh value prop in bulk\"}"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "scorecard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get value proposition scorecard with threshold evaluations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/scorecard",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get scorecard for a value proposition\n\nThis endpoint evaluates the value proposition against configured thresholds\nand returns a traffic light status system (red/yellow/green) for each\nthreshold type, along with override metrics and phasing information.\n\nParameters\n----------\nvalue_prop_id : int\n    The ID of the value proposition to evaluate\n\nReturns\n-------\nScorecardResponse\n    Complete scorecard with threshold evaluations, status, and metrics\n\nRaises\n------\nHTTPException\n    404 if value pro"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "goals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read goals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/goals",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all value realization goals for a given Value Proposition.\n\nThis endpoint fetches every goal associated with the specified\n`value_prop_id` from the database. If no goals exist, it returns\nan empty list.\n\nArgs:\n    value_prop_id (int): The unique ID of the Value Proposition\n        whose goals should be returned.\n\nReturns:\n    List[ValueRealizationGoal]: A list of fully populated\n    `ValueRealizationGoal` models, encoded as JSON.\n\nRaises:\n    HTTPException: On any database error; will b"
+        },
+        {
+          "info": {
+            "name": "Update goals",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/goals",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk-update baseline, target, and active flags for multiple goals.\n\nAccepts a list of goal updates—each containing an `id`, and any\ncombination of `baseline_value`, `value` (target), and `active`.\nMissing numeric fields will default to 0 on update. After applying\nall updates, it re-queries the database and returns the fresh list\nof goals.\n\nArgs:\n    goals (List[ValueRealizationGoalUpdate]):\n        A list of updates, where each element includes:\n          - `id` (int): the goal’s primary key\n   "
+        },
+        {
+          "info": {
+            "name": "Read goal groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/goal-groups",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all value realization goals for a given Value Proposition\ngrouped by goal group\n\nArgs:\n    value_prop_id (int): The unique ID of the Value Proposition\n        whose goals should be returned.\n\nReturns:\n    List[ValueRealizationGoalGroup]: A list of fully populated\n    `ValueRealizationGoalGroup` models, encoded as JSON.\n\nRaises:\n    HTTPException: On any database error; will be caught and\n        re-reported as a 500 with an error message."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "discovery_questions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read value proposition discovery questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/discovery-questions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sectionTypeId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ai_updatable_only",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Parameters\n----------\nsection_type_id : int (Optional)\n    If sent, will only return discovery questions for this section\nai_updatable_only : bool (Optional)\n    If true, only return discovery questions that are AI updatable\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+        },
+        {
+          "info": {
+            "name": "Update discovery question answers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/discovery-questions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update answers to discovery questions\n\nParameters\n----------\npayload : DiscoveryAnswerPayload\n    List of answers to discovery questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "shares",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of people who have a share on the value prop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/shares",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to return a list of people who have a share on a value prop"
+        },
+        {
+          "info": {
+            "name": "Create new share for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/shares",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to create value prop share for user"
+        },
+        {
+          "info": {
+            "name": "Update value prop share",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/shares/:shareId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "shareId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to update share_role_type_id for a value prop share"
+        },
+        {
+          "info": {
+            "name": "Delete the sharedId from value prop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/shares/:shareId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "shareId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to delete a share from a value prop"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "collaborations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read customer collaboration shares",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collaborations",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch and return all collaboration shares for the given value proposition."
+        },
+        {
+          "info": {
+            "name": "Create collaboration shares",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collaborations",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to create collaboration shares for value prop"
+        },
+        {
+          "info": {
+            "name": "Update customer collaboration share",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collaborations/:collaborationId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collaborationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to update a collaboration share"
+        },
+        {
+          "info": {
+            "name": "Delete customer collaboration share",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collaborations/:collaborationId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collaborationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to delete a collaboration share"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List active products by account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/products",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to list active products by account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "privileges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user privileges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/privileges",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to list user privileges"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "grouping_override",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update value proposition grouping override",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/grouping-override",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for updating value proposition grouping override"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all users for the account of the requesting user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/users",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading all users for the account of the requesting user"
+        },
+        {
+          "info": {
+            "name": "Get the authenticated user info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading basic info of the currently authenticated user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "dynamic_discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read account solutions for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery/account-solutions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to read account solutions for dynamic discovery selection\n\nReturns\n-------\nThe list of solutions"
+        },
+        {
+          "info": {
+            "name": "Save default solutions for dynamic discovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery/account-solutions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to save account default solutions for dynamic discovery\n\nReturns\n-------\nThe list of solutions"
+        },
+        {
+          "info": {
+            "name": "Read default solutions for dynamic discovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery/selected-solutions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to read account default solutions for dynamic discovery\n\nReturns\n-------\nThe list of solutions"
+        },
+        {
+          "info": {
+            "name": "Determine if a user has Dynamic Discovery privilege",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to determine if a user has dynamic discovery privilege\n\nRequires\n--------\nAdmin privilege from user hitting endpoint\n\nReturns\n-------\nDynamicDiscoveryResponse determining if user has privilege"
+        },
+        {
+          "info": {
+            "name": "Read opportunity stage/type trigger settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery/trigger-settings",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to read which Salesforce opportunity stages and types trigger VP auto-generation\n\nReturns\n-------\nTriggerSettingsResponse with the configured trigger stages and types"
+        },
+        {
+          "info": {
+            "name": "Update opportunity stage/type trigger settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/dynamic-discovery/trigger-settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to set which Salesforce opportunity stages and types trigger VP auto-generation.\nEmpty lists mean VP is triggered on any opportunity creation (default behavior).\n\nReturns\n-------\nTriggerSettingsResponse with the updated trigger stages and types"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "format_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all format types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/format-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all format types.\n\nReturns\n-------\n - list[FormatType]: List of all format types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "collateral",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collateral",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all collateral records for a given value proposition.\n\nPath Parameters:\n- valuePropId (int): Identifier of the value proposition whose collateral items to fetch."
+        },
+        {
+          "info": {
+            "name": "Add collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collateral",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new collateral item under a given value proposition.\n\nPath Parameters:\n- valuePropId (int): Identifier of the value proposition to which this collateral belongs.\n\nBody:\n- CollateralCreatePayload: {\n    \"format_type_id\": \"1\",\n    \"name\": \"test12334\",\n    \"description\": \"test\",\n    \"url\": \"test123.com\"\n}"
+        },
+        {
+          "info": {
+            "name": "Update collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collateral/:collateralId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collateralId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing collateral record.\n\nPath Parameters:\n- valuePropId (int): Identifier of the parent value proposition.\n- collateralId (int): Identifier of the collateral to update.\n\nBody:\n- CollateralUpdatePayload:\n{\n    \"format_type_id\": \"1\",\n    \"name\": \"test12334\",\n    \"description\": \"test\",\n    \"url\": \"test123.com\"\n}"
+        },
+        {
+          "info": {
+            "name": "Delete collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/collateral/:collateralId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "collateralId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a collateral record.\n\nPath Parameters:\n- valuePropId (int): Identifier of the value proposition.\n- collateralId (int): Identifier of the collateral to delete."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "attributions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read attributions for VP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/attributions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sectionTypeId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to get attributions"
+        },
+        {
+          "info": {
+            "name": "Save new value prop attributions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/attributions",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to create value prop attributions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "source_types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get source types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/source-types",
+            "params": [
+              {
+                "name": "displayOnly",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get source types.\n\nParameters\n----------\ndisplayOnly: Optional[boolean]\n    Only return display options. Defaults to False\n\nReturns\n-------\n - list[SourceType]: List of source types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "translations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all translations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/translations",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return translations joined with the components catalog."
+        },
+        {
+          "info": {
+            "name": "Get all translation components.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/translations/components",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return every row from translations_components."
+        },
+        {
+          "info": {
+            "name": "Get translations for a component and language with account overrides applied.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/translations/by-component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "query",
+                "description": "Translations component."
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Language code (e.g. 'en')."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Translations components version (default 2)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return translations for the given component and language, merging the\nauthenticated account's overrides on top of the base translations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "account_factors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account factors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/account-factors",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to get account factors\n\nReturns\n-------\nThe list of account factors"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "account_mappings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/account-mappings",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to get account mappings\n\nReturns\n-------\nThe list of account factors"
+        },
+        {
+          "info": {
+            "name": "Create account mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/account-mappings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to create a new account mapping.\nIf a mapping exists for the same account_id, value_object_type,\nand value_object_id, it will return an error.\n\nParameters\n----------\nmapping : Mapping\n    Mapping to create\n\nReturns\n-------\nJSONResponse with success message"
+        },
+        {
+          "info": {
+            "name": "Update account mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/account-mappings/:mapping_id",
+            "params": [
+              {
+                "name": "mapping_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to update an account mapping by ID.\nChecks that the user has account admin privileges,\nthat the user's account_id matches the mapping's account_id,\nand that no other mapping exists with the same value_object_type\nand value_object_id for the account.\n\nParameters\n----------\nmapping_id : int\n    ID of the mapping to update\nmapping : Mapping\n    Mapping data to update\n\nReturns\n-------\nJSONResponse with success message"
+        },
+        {
+          "info": {
+            "name": "Delete account mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/account-mappings/:mapping_id",
+            "params": [
+              {
+                "name": "mapping_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to delete an account mapping by ID.\nFirst verifies that the mapping exists and belongs to the user's account.\n\nParameters\n----------\nmapping_id : int\n    ID of the mapping to delete\n\nReturns\n-------\nJSONResponse with success message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "charts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the cost of delay of a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/cost-of-delay",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read cost of delay data for a value proposition."
+        },
+        {
+          "info": {
+            "name": "Get the payback chart of a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/payback-chart",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read payback chart data for a value proposition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "value_props",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate metrics for a value proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/calculate-metrics",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for calculating metrics for a value proposition\n\nParameters\n----------\nvalue_prop_id : int\n    The value proposition ID\n\nReturns\n-------\nJSONResponse\n    Returns the calculated metrics response"
+        },
+        {
+          "info": {
+            "name": "Get the details of a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition details."
+        },
+        {
+          "info": {
+            "name": "Update a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for updating a value proposition\n\nParameters\n----------\npayload : UpdateValuePropPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+        },
+        {
+          "info": {
+            "name": "Delete a value proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for deleting a Value Proposition\n\nReturns\n-------\nMessageResponse\n    Response from delete action"
+        },
+        {
+          "info": {
+            "name": "Get the vc chart of a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/vc-chart",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading the Value Proposition vc charts\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition vc chart"
+        },
+        {
+          "info": {
+            "name": "Create a new Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for creating a Value Proposition\n\nParameters\n----------\npayload : CreateValuePropPayload\n    The initial details for creating the Value Proposition\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition details"
+        },
+        {
+          "info": {
+            "name": "Create a Value Proposition clone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/clone",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for creating a value proposition clone\n\nParameters\n----------\npayload : CloneValuePropPayload\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition clone details"
+        },
+        {
+          "info": {
+            "name": "Reassign a Value Proposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/value-proposition/:valuePropId/reassign",
+            "params": [
+              {
+                "name": "valuePropId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reassigning a value proposition"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

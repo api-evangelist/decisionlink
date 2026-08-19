@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Xfactor.io Value Facts
+  version: 1.0.0
+extends: openapi/_original/decisionlink-value-facts-openapi.json
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://api.xfactor.io/v1/value-facts/openapi.json
+x-note: 'The FastAPI document Xfactor.io serves declares no servers[], no contact, no license and no provenance.
+  This overlay records the enhancements API Evangelist applied to the copy in openapi/, so the harvested original
+  stays byte-identical to what the provider serves. The server URL is not invented: it is the host the document
+  was fetched from and the Auth0 token audience named in the provider''s own application bundle.'
+actions:
+- target: $
+  update:
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: Add the verified production server; the served document omits servers[] entirely.
+- target: $.info
+  update:
+    x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+  description: Record the exact URL the document was harvested from.

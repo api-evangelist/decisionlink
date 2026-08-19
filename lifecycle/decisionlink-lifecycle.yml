@@ -1,0 +1,72 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.xfactor.io/service-levels-support-services/
+note: Xfactor.io publishes a real, dated SLA and support policy as a contract document. It publishes no status page,
+  no API versioning policy, no deprecation or sunset policy, and no changelog. The SLA covers the Subscription Service
+  as a whole, not the API surface specifically.
+sla:
+  published: true
+  url: https://www.xfactor.io/service-levels-support-services/
+  publication_date: '2024-06-01'
+  availability_target: 99% of the time, 7 days a week, 24 hours per day, calculated over a calendar month, excluding
+    Scheduled Downtime or Outages
+  claim_threshold: Service Availability below 98% in a calendar month, customer-reported
+  service_credits:
+  - availability: 98.01% to 100%
+    credit: 0%
+  - availability: 90.01% to 98%
+    credit: 25% of monthly fees
+  - availability: 80% to 90%
+    credit: 35% of monthly fees
+  - availability: 0% to 79.9%
+    credit: 50% of monthly fees
+  termination_right: Customer may terminate if the availability target is missed in 2 of any 3 consecutive months,
+    with a pro-rata refund of prepaid fees
+  scheduled_maintenance: Typically weekends (Friday midnight to Sunday midnight) and outside normal business hours;
+    posted on the support portal
+support:
+  hours: 8:00 AM ET to 6:00 PM ET on weekdays, excluding US holidays
+  channels:
+  - support@xfactor.io
+  - https://www.xfactor.io/contact-us/
+  severities:
+  - priority: Priority 1
+    type: Major Impact
+    response: 4 business hours
+  - priority: Priority 2
+    type: Minor Impact
+    response: 2 business days
+  - priority: Priority 3
+    type: Service Inquiries
+    response: 2 business days
+status_page:
+  published: false
+  evidence: status.xfactor.io does not resolve (NXDOMAIN); no status, trust or uptime link appears anywhere in the
+    24-page site sitemap. Scheduled maintenance is posted inside the customer support portal, which is not publicly
+    reachable.
+versioning:
+  policy_published: false
+  observed: URI path versioning (/v1/, /v2/, /api/v1/), inconsistent across services
+  see: conventions/decisionlink-conventions.yml
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: 0
+  evidence: 'No operation in any of the four service specs carries deprecated: true, and no Sunset or Deprecation
+    response header is declared. The Subscription and Services Agreement reserves the right to modify the Services
+    with notice, but names no API-specific deprecation window.'
+changelog:
+  published: false
+  evidence: No /changelog, /releases or /whats-new page exists in the site sitemap, and none of the four specs carries
+    release notes. info.version is 0.1.0 on three services and 1.0 on Value Chat.
+evidence:
+- url: https://www.xfactor.io/service-levels-support-services/
+  status: 200
+- url: https://www.xfactor.io/subscription-and-services-agreement/
+  status: 200
+- url: https://status.xfactor.io/
+  status: NXDOMAIN
+- url: https://www.xfactor.io/page-sitemap.xml
+  status: 200

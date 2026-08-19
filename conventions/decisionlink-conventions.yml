@@ -1,0 +1,116 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/*.json + https://www.xfactor.io/data-processing-addendum/
+note: Xfactor.io publishes no API guide, so these conventions are read out of the four FastAPI OpenAPI 3.1 documents
+  served at api.xfactor.io and from live unauthenticated probes. Anything not observable from those sources is recorded
+  as unknown rather than guessed.
+auth:
+  style: bearer JWT (Auth0) on Authorization; API keys for API-based access
+  applied_to_operations: 146 of 156
+  see: authentication/decisionlink-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: No Idempotency-Key, Idempotency, or request-key parameter or header appears in any of the four specs,
+    and no idempotency guidance is published. Retrying a POST is unsafe.
+  note: Recorded as absent. No Idempotency pointer is emitted in apis.yml — the artifact records a gap, not a capability.
+pagination:
+  supported: false
+  style: null
+  evidence: No limit/offset/page/cursor/per_page parameter appears in any of the 156 operations. List endpoints
+    (for example /v1/value-proposition/list) return an unbounded array.
+  filtering_params_observed:
+  - filter_by
+  - order_flag
+  - show_all
+  - active_only
+  - displayOnly
+  - summed_benefits
+  - ai_updatable_only
+  - search_term
+  - version
+  - lang
+versioning:
+  style: URI path prefix
+  values:
+  - /v1/
+  - /v2/
+  - /api/v1/
+  note: 'Version is a path segment and it is inconsistent across services: Value Proposition and Value Facts answer
+    on both /v1/<service> and /api/v1/<service>; Value Chat and Collaboration Manager answer only on /api/v1/<service>;
+    credentials and insights are /v2/ only and require auth even for their OpenAPI document. info.version in the
+    specs is 0.1.0 for three services and 1.0 for Value Chat — it does not track the URI version.'
+  no_version_header: true
+error_envelope:
+  shape: '{"detail": ...}'
+  rfc9457: false
+  see: errors/decisionlink-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  headers_observed: []
+  evidence: No X-RateLimit-*, RateLimit-*, or Retry-After header was returned on any unauthenticated probe of api.xfactor.io,
+    and no 429 response is declared in any spec.
+  see: rate-limits/decisionlink-rate-limits.yml
+request_id_tracing:
+  supported: unknown
+  evidence: No request-id or correlation-id header was observed on unauthenticated responses; the only correlating
+    header is an AWS ALB session cookie.
+content_negotiation:
+  request: application/json
+  response: application/json
+  note: Every declared request body and response in all four specs is application/json. One multipart upload exists
+    (POST /v1/value-chat/chat/{chat_id}/upload).
+async_jobs:
+  pattern: submit-then-poll
+  evidence: POST /v1/value-chat/generate-vp and /v1/value-chat/generate-value-model return 202 and a job id; status
+    is polled at /stream/generate-vp/{job_id}/status and /stream/generate-value-model/{job_id}/status.
+realtime:
+  transport: Socket.IO / Engine.IO
+  evidence: GET https://api.xfactor.io/value-chat/ returns HTTP 400 with "The client is using an unsupported version
+    of the Socket.IO or Engine.IO protocol", so the Value Chat service also mounts a websocket transport. No AsyncAPI
+    or channel documentation is published, so no asyncapi/ artifact is emitted.
+  probed_url: https://api.xfactor.io/value-chat/
+  status: 400
+transport_security:
+  tls_minimum: TLS 1.2 (provider statement)
+  observed: TLSv1.3
+  hsts_on_api_host: false
+  see: security/decisionlink-domain-security.yml
+spec_content:
+  operations: 156
+  by_method:
+    get: 88
+    post: 31
+    patch: 16
+    delete: 9
+    put: 12
+  with_summary: 156
+  with_description: 153
+  with_tags: 156
+  unique_operation_ids: 154
+  duplicate_operation_ids: 1
+  note: 'FastAPI generates operationId from the function name plus path and method, so the ids are unique but long
+    and machine-shaped rather than hand-authored. Coverage is nonetheless high: all 156 operations carry a summary
+    and a tag, 153 carry a description, and 154 operationIds are unique (health_healthz_get repeats because every
+    service mounts its own /healthz). None of that is a deliberate documentation effort — it is what FastAPI emits
+    from typed route handlers and docstrings, which is exactly why the specs are usable despite there being no developer
+    program.'
+  distinct_tags: 69
+  top_tags:
+  - chat
+  - benefits
+  - value_props
+  - factors
+  - translations
+  - costs
+  - dynamic_discovery
+  - companies
+  - solutions
+  - refresh
+  - discovery_questions
+  - shares
+cross_links:
+  errors: errors/decisionlink-problem-types.yml
+  lifecycle: lifecycle/decisionlink-lifecycle.yml
+  authentication: authentication/decisionlink-authentication.yml
+  rate_limits: rate-limits/decisionlink-rate-limits.yml

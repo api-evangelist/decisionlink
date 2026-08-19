@@ -1,0 +1,24 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.xfactor.io/sitemap_index.xml
+docs: https://www.xfactor.io/get-a-demo/
+plan_count: 0
+note: Xfactor.io publishes no pricing page and no plans. The full page sitemap was walked (24 pages) and there is
+  no /pricing, /plans or /packages URL; the only commercial call to action on the site is "Get a Demo". The subscription
+  and services agreement is published but names no prices. Nothing here is redacted or gated — the tiers simply
+  do not exist publicly.
+plans: []
+commercial_model:
+  motion: contact-sales
+  self_serve_signup: false
+  free_tier: false
+  trial: false
+  published_prices: false
+evidence:
+- url: https://www.xfactor.io/page-sitemap.xml
+  status: 200
+  note: 24 pages, none of them pricing
+- url: https://www.xfactor.io/get-a-demo/
+  status: 200
+- url: https://www.xfactor.io/subscription-and-services-agreement/
+  status: 200

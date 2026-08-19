@@ -1,0 +1,757 @@
+openapi: 3.1.0
+info:
+  title: Value Chat Server
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+paths:
+  /healthz:
+    get:
+      tags:
+      - healthcheck
+      summary: Perform a Health Check
+      operationId: get_health_healthz_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /v1/value-chat/chat/id:
+    post:
+      tags:
+      - chat
+      - chat_id
+      summary: 'generate a chat id '
+      description: Generate a new unique chat ID
+      operationId: get_chat_id_v1_value_chat_chat_id_post
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}/history:
+    get:
+      tags:
+      - chat
+      - history
+      summary: generate return chat history
+      description: Retrieve chat history for a specific chat ID
+      operationId: get_chat_history_v1_value_chat_chat__chat_id__history_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/{chat_id}/status:
+    get:
+      tags:
+      - chat
+      - chat
+      summary: Get chat status
+      description: Get the status of a specific chat (e.g. in_progress, completed)
+      operationId: chat_status_v1_value_chat_chat__chat_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/history:
+    get:
+      tags:
+      - chat
+      - history
+      summary: generate return chat history
+      description: Retrieve all chat IDs for the authenticated user
+      operationId: get_old_chat_ids_v1_value_chat_chat_history_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}:
+    patch:
+      tags:
+      - chat
+      - title
+      summary: update chat title
+      description: Update the title of a specific chat
+      operationId: update_chat_title_v1_value_chat_chat__chat_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_update_chat_title_v1_value_chat_chat__chat_id__patch'
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chat
+      - title
+      summary: delete chat history
+      description: Delete a specific chat's history
+      operationId: delete_chat_v1_value_chat_chat__chat_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/questions:
+    get:
+      tags:
+      - chat
+      - questions
+      summary: get default questions
+      description: 'Get default questions for the chat based on
+
+        client configuration and user roles.'
+      operationId: get_chat_questions_v1_value_chat_chat_questions_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/search-titles/:
+    get:
+      tags:
+      - chat
+      summary: Search Titles Route
+      description: Search for chats with titles similar to the search term
+      operationId: search_titles_route_v1_value_chat_chat_search_titles__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: search_term
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Search Term
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/search-history/:
+    get:
+      tags:
+      - chat
+      summary: Search History Route
+      description: Search for specific text within chat message contents
+      operationId: search_history_route_v1_value_chat_chat_search_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: search_term
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Search Term
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/feedback:
+    post:
+      tags:
+      - chat
+      - feedback
+      summary: Submit feedback for a specific chat message
+      description: Insert chat feedback into the database
+      operationId: submit_chat_feedback_v1_value_chat_chat_feedback_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatFeedbackIn'
+        required: true
+      responses:
+        '200':
+          description: Returns the inserted feedback row
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}/upload:
+    post:
+      tags:
+      - chat
+      - files
+      summary: Upload a document to a chat session
+      operationId: upload_chat_file_v1_value_chat_chat__chat_id__upload_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/generate-vp:
+    post:
+      tags:
+      - generate-vp
+      summary: Start VP generation from a company and set of solutions
+      description: Kick off async VP analysis. Returns a job_id to poll progress.
+      operationId: start_generate_vp_v1_value_chat_generate_vp_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVPRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /stream/generate-vp/{job_id}/status:
+    get:
+      tags:
+      - generate-vp
+      summary: Stream VP generation job status via Server-Sent Events
+      description: SSE stream emitting job state once per second until done or error.
+      operationId: get_generate_vp_status_stream_generate_vp__job_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/generate-value-model:
+    post:
+      tags:
+      - generate-value-model
+      summary: Start value model generation from uploaded files
+      description: Kick off async value model generation. Returns a job_id to poll.
+      operationId: start_generate_value_model_v1_value_chat_generate_value_model_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateValueModelRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /stream/generate-value-model/{job_id}/status:
+    get:
+      tags:
+      - generate-value-model
+      summary: Stream value model generation status via Server-Sent Events
+      description: SSE stream emitting job state once per second until done or error.
+      operationId: get_generate_value_model_status_stream_generate_value_model__job_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/prompts:
+    get:
+      tags:
+      - value
+      - value-prompts
+      summary: Gets value prompts for user
+      description: Get value specific pills and prompts for value user
+      operationId: get_value_prompts_v1_value_chat_prompts_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: section
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Section
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Active Only
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - value
+      - value-prompts
+      summary: Create a value prompt
+      description: Create a new value prompt (xfactor admins only)
+      operationId: create_value_prompt_route_v1_value_chat_prompts_post
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValuePromptCreate'
+      responses:
+        '201':
+          description: Return HTTP Status Code 201 (Created)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/prompts/{prompt_id}:
+    put:
+      tags:
+      - value
+      - value-prompts
+      summary: Update a value prompt
+      description: Update an existing value prompt (xfactor admins only)
+      operationId: update_value_prompt_route_v1_value_chat_prompts__prompt_id__put
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: prompt_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Prompt Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValuePromptUpdate'
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - value
+      - value-prompts
+      summary: Delete a value prompt
+      description: Delete a value prompt (xfactor admins only)
+      operationId: delete_value_prompt_route_v1_value_chat_prompts__prompt_id__delete
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: prompt_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Prompt Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
+      properties:
+        title:
+          type: string
+          title: Title
+      type: object
+      required:
+      - title
+      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
+    Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post
+    ChatFeedbackIn:
+      properties:
+        chat_id:
+          type: string
+          title: Chat Id
+          description: The ID of the chat
+        message_index:
+          type: integer
+          title: Message Index
+          description: The index of the message
+        vote_score:
+          type: integer
+          title: Vote Score
+          description: The vote score
+        comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Comments
+          description: The comments
+      type: object
+      required:
+      - chat_id
+      - message_index
+      - vote_score
+      title: ChatFeedbackIn
+      description: Chat feedback input model
+    GenerateVPRequest:
+      properties:
+        company_id:
+          type: string
+          title: Company Id
+        solutions:
+          items:
+            type: string
+          type: array
+          title: Solutions
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      type: object
+      required:
+      - company_id
+      - solutions
+      title: GenerateVPRequest
+      description: Request body for starting VP generation.
+    GenerateValueModelRequest:
+      properties:
+        file_ids:
+          items:
+            type: string
+          type: array
+          title: File Ids
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      type: object
+      required:
+      - file_ids
+      title: GenerateValueModelRequest
+      description: Request body for starting value model generation.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthCheck:
+      properties:
+        status:
+          type: string
+          title: Status
+          default: OK
+      type: object
+      title: HealthCheck
+      description: Response model for health check.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValuePromptCreate:
+      properties:
+        sequence:
+          type: integer
+          title: Sequence
+          default: 0
+        active:
+          type: integer
+          title: Active
+          default: 0
+        display_name:
+          type: string
+          title: Display Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        prompt:
+          type: string
+          title: Prompt
+          default: ''
+        sections:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sections
+      type: object
+      required:
+      - display_name
+      title: ValuePromptCreate
+      description: Value Prompt Create Model
+    ValuePromptUpdate:
+      properties:
+        sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sequence
+        active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        sections:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sections
+      type: object
+      title: ValuePromptUpdate
+      description: Value Prompt Update Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)

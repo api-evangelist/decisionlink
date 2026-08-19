@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Collaboration Manager",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "collaboration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a token for a new collaboration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/collaboration/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for creating a JWT for a collaboration\n\nParameters\n----------\ncollaboration : Collaboration\n    The collaboration being created\n\nReturns\n-------\nJSONResponse\n    Returns success and access_token for collaboration"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "login",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login a user for collaboration manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xfactor.io/v1/collaboration/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for logging into the collaboration manager\n\nParameters\n----------\nlogin : Login\n    The login credentials\n\nReturns\n-------\nAccessToken\n    Returns access_token for collaboration manager"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "discovery_questions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Discovery Questions for a Collaboration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/discovery",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Discovery Questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    Returns the Discovery Questions"
+        },
+        {
+          "info": {
+            "name": "Save the Discovery Question Answers for a Collaboration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/discovery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving Discovery Question Answers\n\nParameters\n----------\nquestions : DiscoveryAnswerPayload\n    The answers to Discovery Questions\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "benefits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Benefits for a Collaboration organized by Value Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/benefits",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Benefits for a Collaboration organized by Value Category\n\nReturns\n-------\nList[ValueCategory]\n    Returns the Benefits organized by Value Category"
+        },
+        {
+          "info": {
+            "name": "Save the Benefit Active statuses for Collaboration benefits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/benefits/active",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "factors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Factors for a Collaboration organized by Factor Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/factors",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Factors for a Collaboration organized by Factor group\n\nReturns\n-------\nList[FactorGroup]\n    Returns the Factors organized by Factor Group"
+        },
+        {
+          "info": {
+            "name": "Save the values for Collaboration factors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/factors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for saving Factors\n\nParameters\n----------\nfactors : FactorPayload\n    The Factors and their values\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the Asset associated with the Collaboration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/v1/collaboration/valueProps/asset",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint for reading Asset associated with the Collaboration\n\nReturns\n-------\nAsset\n    Returns success and the asset_url"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xfactor.io/healthz"
+          },
+          "docs": "Provides information about the health of the application"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
