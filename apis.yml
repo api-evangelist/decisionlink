@@ -45,6 +45,17 @@ tags:
 - Revenue Operations
 - Customer Value Management
 - Artificial Intelligence
+- Go-To-Market
+- Sales
+- Analytics
+- Value Selling
+- Forecasting
+tags_raw:
+- Company
+- Cloud Saas
+- Revenue Operations
+- Customer Value Management
+- Artificial Intelligence
 - Go To Market
 - Sales
 - Analytics
@@ -61,6 +72,12 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Customer Value Management
+  - value-proposition
+  - Revenue Operations
+  - Sales
+  - B2B
+  tags_raw:
   - customer-value-management
   - value-proposition
   - revenue-operations
@@ -81,6 +98,11 @@ apis:
   humanURL: https://api.xfactor.io/api/v1/value-facts/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Customer Value Management
+  - Reference Data
+  - Localization
+  - Revenue Operations
+  tags_raw:
   - customer-value-management
   - reference-data
   - localization
@@ -101,6 +123,12 @@ apis:
   humanURL: https://api.xfactor.io/api/v1/value-chat/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Artificial Intelligence
+  - Conversational AI
+  - Generative AI
+  - Customer Value Management
+  - Async Jobs
+  tags_raw:
   - artificial-intelligence
   - conversational-ai
   - generative-ai
@@ -121,6 +149,11 @@ apis:
   humanURL: https://api.xfactor.io/api/v1/collaboration/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Collaboration
+  - Customer Value Management
+  - value-proposition
+  - B2B
+  tags_raw:
   - collaboration
   - customer-value-management
   - value-proposition
