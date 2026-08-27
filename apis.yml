@@ -62,105 +62,1616 @@ tags_raw:
 - Value Selling
 - Forecasting
 apis:
-- name: Xfactor.io Value Proposition API
-  description: The largest of the Xfactor.io platform services — 88 paths and 109 operations
-    covering value propositions, companies, accounts, solutions and products, benefits and value
-    drivers, workflows, discovery, privileges and users, plus account factors and mappings. This is
-    the CVM core DecisionLink was built on, now served as a FastAPI service behind Auth0 bearer
-    authentication. The OpenAPI 3.1 document and its Swagger UI are reachable anonymously; every
-    operation requires a token.
+- aid: decisionlink:decisionlink-account-factors-api
+  name: DecisionLink Account Factors API
+  description: The account_factors API from DecisionLink — 1 operation(s) for account_factors.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Customer Value Management
-  - value-proposition
-  - Revenue Operations
-  - Sales
-  - B2B
-  tags_raw:
-  - customer-value-management
-  - value-proposition
-  - revenue-operations
-  - sales
-  - b2b
+  - account_factors
   properties:
   - type: OpenAPI
-    url: openapi/decisionlink-value-proposition-openapi.yml
+    url: openapi/decisionlink-account-factors-api-openapi.yml
   - type: APIReference
     url: https://api.xfactor.io/v1/value-proposition/docs
   - type: Documentation
     url: https://api.xfactor.io/v1/value-proposition/docs
-- name: Xfactor.io Value Facts API
-  description: Reference-data service for the value model — accrual types, area types, case-study
-    improvement types, cost categories, expense types, format types, impact types, and the
-    translation/localization components used to render value propositions. 17 paths, 17 operations,
-    Auth0 bearer authentication.
-  humanURL: https://api.xfactor.io/api/v1/value-facts/docs
-  baseURL: https://api.xfactor.io
-  tags:
-  - Customer Value Management
-  - Reference Data
-  - Localization
-  - Revenue Operations
-  tags_raw:
-  - customer-value-management
-  - reference-data
-  - localization
-  - revenue-operations
-  properties:
-  - type: OpenAPI
-    url: openapi/decisionlink-value-facts-openapi.yml
   - type: APIReference
     url: https://api.xfactor.io/api/v1/value-facts/docs
   - type: Documentation
     url: https://api.xfactor.io/api/v1/value-facts/docs
-- name: Xfactor.io Value Chat API
-  description: The Growth AI conversational service — chat sessions and history, prompt management,
-    file upload, feedback, and long-running generation jobs for value propositions and value models
-    with a /stream/{job_id}/status polling surface. 17 paths, 20 operations, Auth0 bearer
-    authentication. The service root also answers Socket.IO/Engine.IO handshakes, indicating a
-    realtime transport alongside the REST surface.
-  humanURL: https://api.xfactor.io/api/v1/value-chat/docs
-  baseURL: https://api.xfactor.io
-  tags:
-  - Artificial Intelligence
-  - Conversational AI
-  - Generative AI
-  - Customer Value Management
-  - Async Jobs
-  tags_raw:
-  - artificial-intelligence
-  - conversational-ai
-  - generative-ai
-  - customer-value-management
-  - async-jobs
-  properties:
-  - type: OpenAPI
-    url: openapi/decisionlink-value-chat-openapi.yml
   - type: APIReference
     url: https://api.xfactor.io/api/v1/value-chat/docs
   - type: Documentation
     url: https://api.xfactor.io/api/v1/value-chat/docs
-- name: Xfactor.io Collaboration Manager API
-  description: The buyer-facing collaboration surface — a separate login, and read access to a
-    shared value proposition's discovery, benefits, factors and assets. 8 paths, 10 operations,
-    Auth0 bearer authentication. This is the service behind the shared value-proposition experience
-    a seller sends to a customer.
-  humanURL: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-account-mappings-api
+  name: DecisionLink Account Mappings API
+  description: The account_mappings API from DecisionLink — 2 operation(s) for account_mappings.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Collaboration
-  - Customer Value Management
-  - value-proposition
-  - B2B
-  tags_raw:
+  - account_mappings
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-account-mappings-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-accrual-types-api
+  name: DecisionLink Accrual Types API
+  description: The accrual_types API from DecisionLink — 2 operation(s) for accrual_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - accrual_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-accrual-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-advanced-api
+  name: DecisionLink Advanced API
+  description: The advanced API from DecisionLink — 1 operation(s) for advanced.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - advanced
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-advanced-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-area-types-api
+  name: DecisionLink Area Types API
+  description: The area_types API from DecisionLink — 1 operation(s) for area_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - area_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-area-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-asset-languages-api
+  name: DecisionLink Asset Languages API
+  description: The asset_languages API from DecisionLink — 1 operation(s) for asset_languages.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - asset_languages
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-asset-languages-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-assets-api
+  name: DecisionLink Assets API
+  description: The assets API from DecisionLink — 2 operation(s) for assets.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - assets
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-assets-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-attributions-api
+  name: DecisionLink Attributions API
+  description: The attributions API from DecisionLink — 1 operation(s) for attributions.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - attributions
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-attributions-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-available-terms-api
+  name: DecisionLink Available Terms API
+  description: The available_terms API from DecisionLink — 1 operation(s) for available_terms.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - available_terms
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-available-terms-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-baseline-types-api
+  name: DecisionLink Baseline Types API
+  description: The baseline_types API from DecisionLink — 1 operation(s) for baseline_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - baseline_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-baseline-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-benefits-api
+  name: DecisionLink Benefits API
+  description: The benefits API from DecisionLink — 7 operation(s) for benefits.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - benefits
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-benefits-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-benefits-calculate-api
+  name: DecisionLink Benefits Calculate API
+  description: The benefits-calculate API from DecisionLink — 1 operation(s) for benefits-calculate.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - benefits-calculate
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-benefits-calculate-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-benefits-one-time-api
+  name: DecisionLink Benefits One Time API
+  description: The benefits-one-time API from DecisionLink — 2 operation(s) for benefits-one-time.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - benefits-one-time
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-benefits-one-time-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-case-study-improvement-types-api
+  name: DecisionLink Case Study Improvement Types API
+  description: >-
+    The case_study_improvement_types API from DecisionLink — 1 operation(s) for case_study_improvement_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - case_study_improvement_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-case-study-improvement-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-charts-api
+  name: DecisionLink Charts API
+  description: The charts API from DecisionLink — 2 operation(s) for charts.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - charts
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-charts-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-chat-api
+  name: DecisionLink Chat API
+  description: The chat API from DecisionLink — 10 operation(s) for chat.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - chat
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-chat-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-collaboration-api
+  name: DecisionLink Collaboration API
+  description: The collaboration API from DecisionLink — 1 operation(s) for collaboration.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
   - collaboration
-  - customer-value-management
-  - value-proposition
-  - b2b
   properties:
   - type: OpenAPI
-    url: openapi/decisionlink-collaboration-openapi.yml
+    url: openapi/decisionlink-collaboration-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-collaborations-api
+  name: DecisionLink Collaborations API
+  description: The collaborations API from DecisionLink — 2 operation(s) for collaborations.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - collaborations
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-collaborations-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-collateral-api
+  name: DecisionLink Collateral API
+  description: The collateral API from DecisionLink — 2 operation(s) for collateral.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - collateral
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-collateral-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-companies-api
+  name: DecisionLink Companies API
+  description: The companies API from DecisionLink — 4 operation(s) for companies.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - companies
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-companies-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-cost-categories-api
+  name: DecisionLink Cost Categories API
+  description: The cost_categories API from DecisionLink — 2 operation(s) for cost_categories.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - cost_categories
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-cost-categories-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-costs-api
+  name: DecisionLink Costs API
+  description: The costs API from DecisionLink — 4 operation(s) for costs.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - costs
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-costs-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-discovery-questions-api
+  name: DecisionLink Discovery Questions API
+  description: The discovery_questions API from DecisionLink — 2 operation(s) for discovery_questions.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - discovery_questions
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-discovery-questions-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-done-api
+  name: DecisionLink Done API
+  description: The done API from DecisionLink — 1 operation(s) for done.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - done
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-done-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-dynamic-discovery-api
+  name: DecisionLink Dynamic Discovery API
+  description: The dynamic_discovery API from DecisionLink — 4 operation(s) for dynamic_discovery.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - dynamic_discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-dynamic-discovery-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-expense-types-api
+  name: DecisionLink Expense Types API
+  description: The expense_types API from DecisionLink — 2 operation(s) for expense_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - expense_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-expense-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-factors-api
+  name: DecisionLink Factors API
+  description: The factors API from DecisionLink — 6 operation(s) for factors.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - factors
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-factors-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-features-api
+  name: DecisionLink Features API
+  description: The features API from DecisionLink — 1 operation(s) for features.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - features
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-features-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-format-types-api
+  name: DecisionLink Format Types API
+  description: The format_types API from DecisionLink — 2 operation(s) for format_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - format_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-format-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-generate-value-model-api
+  name: DecisionLink Generate Value Model API
+  description: >-
+    The generate-value-model API from DecisionLink — 2 operation(s) for generate-value-model.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - generate-value-model
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-generate-value-model-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-generate-vp-api
+  name: DecisionLink Generate Vp API
+  description: The generate-vp API from DecisionLink — 2 operation(s) for generate-vp.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - generate-vp
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-generate-vp-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-goals-api
+  name: DecisionLink Goals API
+  description: The goals API from DecisionLink — 2 operation(s) for goals.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - goals
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-goals-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-grouping-override-api
+  name: DecisionLink Grouping Override API
+  description: The grouping_override API from DecisionLink — 1 operation(s) for grouping_override.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - grouping_override
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-grouping-override-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-groups-api
+  name: DecisionLink Groups API
+  description: The groups API from DecisionLink — 1 operation(s) for groups.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - groups
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-groups-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-health-api
+  name: DecisionLink Health API
+  description: The health API from DecisionLink — 1 operation(s) for health.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-health-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-healthcheck-api
+  name: DecisionLink Healthcheck API
+  description: The healthcheck API from DecisionLink — 1 operation(s) for healthcheck.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - healthcheck
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-healthcheck-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-impact-types-api
+  name: DecisionLink Impact Types API
+  description: The impact_types API from DecisionLink — 1 operation(s) for impact_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - impact_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-impact-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-list-api
+  name: DecisionLink List API
+  description: The list API from DecisionLink — 1 operation(s) for list.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - list
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-list-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-login-api
+  name: DecisionLink Login API
+  description: The login API from DecisionLink — 1 operation(s) for login.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - login
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-login-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-logs-api
+  name: DecisionLink Logs API
+  description: The logs API from DecisionLink — 1 operation(s) for logs.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - logs
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-logs-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-phasing-api
+  name: DecisionLink Phasing API
+  description: The phasing API from DecisionLink — 1 operation(s) for phasing.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - phasing
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-phasing-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-privileges-api
+  name: DecisionLink Privileges API
+  description: The privileges API from DecisionLink — 1 operation(s) for privileges.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - privileges
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-privileges-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-products-api
+  name: DecisionLink Products API
+  description: The products API from DecisionLink — 1 operation(s) for products.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-products-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-refresh-api
+  name: DecisionLink Refresh API
+  description: The refresh API from DecisionLink — 4 operation(s) for refresh.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - refresh
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-refresh-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-release-types-api
+  name: DecisionLink Release Types API
+  description: The release_types API from DecisionLink — 1 operation(s) for release_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - release_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-release-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-roi-api
+  name: DecisionLink Roi API
+  description: The roi API from DecisionLink — 1 operation(s) for roi.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - roi
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-roi-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-salesforce-api
+  name: DecisionLink Salesforce API
+  description: The salesforce API from DecisionLink — 3 operation(s) for salesforce.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - salesforce
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-salesforce-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-scorecard-api
+  name: DecisionLink Scorecard API
+  description: The scorecard API from DecisionLink — 1 operation(s) for scorecard.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - scorecard
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-scorecard-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-scratchpads-api
+  name: DecisionLink Scratchpads API
+  description: The scratchpads API from DecisionLink — 2 operation(s) for scratchpads.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - scratchpads
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-scratchpads-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-search-api
+  name: DecisionLink Search API
+  description: The search API from DecisionLink — 1 operation(s) for search.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-search-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-shares-api
+  name: DecisionLink Shares API
+  description: The shares API from DecisionLink — 2 operation(s) for shares.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - shares
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-shares-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-situations-api
+  name: DecisionLink Situations API
+  description: The situations API from DecisionLink — 1 operation(s) for situations.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - situations
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-situations-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-solutions-api
+  name: DecisionLink Solutions API
+  description: The solutions API from DecisionLink — 3 operation(s) for solutions.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - solutions
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-solutions-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-source-types-api
+  name: DecisionLink Source Types API
+  description: The source_types API from DecisionLink — 2 operation(s) for source_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - source_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-source-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-threshold-types-api
+  name: DecisionLink Threshold Types API
+  description: The threshold_types API from DecisionLink — 1 operation(s) for threshold_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - threshold_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-threshold-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-translations-api
+  name: DecisionLink Translations API
+  description: The translations API from DecisionLink — 7 operation(s) for translations.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - translations
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-translations-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-unique-types-api
+  name: DecisionLink Unique Types API
+  description: The unique_types API from DecisionLink — 1 operation(s) for unique_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - unique_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-unique-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-unit-types-api
+  name: DecisionLink Unit Types API
+  description: The unit_types API from DecisionLink — 1 operation(s) for unit_types.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - unit_types
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-unit-types-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-users-api
+  name: DecisionLink Users API
+  description: The users API from DecisionLink — 2 operation(s) for users.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-users-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-value-api
+  name: DecisionLink Value API
+  description: The value API from DecisionLink — 2 operation(s) for value.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - value
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-value-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-value-props-api
+  name: DecisionLink Value Props API
+  description: The value_props API from DecisionLink — 6 operation(s) for value_props.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - value_props
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-value-props-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-workflows-api
+  name: DecisionLink Workflows API
+  description: The workflows API from DecisionLink — 1 operation(s) for workflows.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-workflows-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
   - type: APIReference
     url: https://api.xfactor.io/api/v1/collaboration/docs
   - type: Documentation
