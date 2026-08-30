@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Available Terms API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: available_terms
+paths:
+  /v1/value-proposition/{valuePropId}/available-terms:
+    get:
+      tags:
+      - available_terms
+      summary: Get the Value proposition available terms
+      description: Endpoint for reading the Value Proposition available terms and mark the selected baseline
+      operationId: get_available_terms_v1_value_proposition__valuePropId__available_terms_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

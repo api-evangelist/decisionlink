@@ -1,0 +1,695 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Salesforce API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: salesforce
+paths:
+  /v1/value-proposition/groups-by-account:
+    get:
+      tags:
+      - salesforce
+      summary: Get value prop groups for account
+      description: Endpoint for getting value prop groups for an account
+      operationId: groups_by_account_v1_value_proposition_groups_by_account_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: account_defined_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Account Defined Id
+      - name: company_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Company Id
+      - name: opportunity_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormattedResponse_VPGroupResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/value-props-by-account:
+    get:
+      tags:
+      - salesforce
+      summary: Get value props by account
+      description: Endpoint for getting value props by account
+      operationId: value_props_by_account_v1_value_proposition_value_props_by_account_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: account_defined_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Account Defined Id
+      - name: company_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Company Id
+      - name: opportunity_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormattedResponse_ValuePropResult_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/value-trackers-by-account:
+    get:
+      tags:
+      - salesforce
+      summary: Get value trackers by account
+      description: Endpoint for getting value trackers by account
+      operationId: value_trackers_by_account_v1_value_proposition_value_trackers_by_account_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: account_defined_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Defined Id
+      - name: company_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Company Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormattedResponse_list_ExternalTracker__'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ExternalTracker:
+      properties:
+        value_prop_name:
+          type: string
+          title: Value Prop Name
+          description: Name of the value proposition
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: ID of the value proposition
+        company_name:
+          type: string
+          title: Company Name
+          description: Name of the company
+        original_user_id:
+          type: string
+          title: Original User Id
+          description: Original user ID
+        original_value_prop_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Value Prop Id
+          description: Original value proposition ID
+        current_benefits:
+          type: string
+          title: Current Benefits
+          description: Current benefits (formatted)
+        current_benefits_raw:
+          type: number
+          title: Current Benefits Raw
+          description: Current benefits (raw)
+        expected_benefits:
+          type: string
+          title: Expected Benefits
+          description: Expected benefits (formatted)
+        expected_benefits_raw:
+          type: number
+          title: Expected Benefits Raw
+          description: Expected benefits (raw)
+        achieved_benefits:
+          type: string
+          title: Achieved Benefits
+          description: Achieved benefits (formatted)
+        achieved_benefits_raw:
+          type: number
+          title: Achieved Benefits Raw
+          description: Achieved benefits (raw)
+        current_payback:
+          type: string
+          title: Current Payback
+          description: Current payback (formatted)
+        current_payback_raw:
+          type: number
+          title: Current Payback Raw
+          description: Current payback (raw)
+        expected_payback:
+          type: string
+          title: Expected Payback
+          description: Expected payback (formatted)
+        expected_payback_raw:
+          type: number
+          title: Expected Payback Raw
+          description: Expected payback (raw)
+        achieved_payback:
+          type: string
+          title: Achieved Payback
+          description: Achieved payback (formatted)
+        achieved_payback_raw:
+          type: number
+          title: Achieved Payback Raw
+          description: Achieved payback (raw)
+        expected_roi:
+          type: string
+          title: Expected Roi
+          description: Expected ROI (formatted)
+        expected_roi_raw:
+          type: number
+          title: Expected Roi Raw
+          description: Expected ROI (raw)
+        achieved_roi:
+          type: string
+          title: Achieved Roi
+          description: Achieved ROI (formatted)
+        achieved_roi_raw:
+          type: number
+          title: Achieved Roi Raw
+          description: Achieved ROI (raw)
+        expected_costs:
+          type: string
+          title: Expected Costs
+          description: Expected costs (formatted)
+        expected_costs_raw:
+          type: number
+          title: Expected Costs Raw
+          description: Expected costs (raw)
+        assigned_by:
+          type: string
+          title: Assigned By
+          description: User who assigned the value prop
+        created:
+          type: string
+          title: Created
+          description: Creation timestamp
+        valueprop_create_date_sfdc:
+          type: string
+          title: Valueprop Create Date Sfdc
+          description: Creation date in SFDC (added on 1/31/22)
+        creators_name:
+          type: string
+          title: Creators Name
+          description: Creator's name (added on 1/31/22)
+        last_modified_date:
+          type: string
+          title: Last Modified Date
+          description: Last modified date (added on 1/31/22)
+        last_modified_by_name:
+          type: string
+          title: Last Modified By Name
+          description: Last modified by (added on 1/31/22)
+        variance:
+          type: string
+          title: Variance
+          description: Variance value (formatted)(added on 7/18/2023)
+        variance_raw:
+          type: number
+          title: Variance Raw
+          description: Variance value (raw)(added on 7/18/2023)
+      type: object
+      required:
+      - value_prop_name
+      - value_prop_id
+      - company_name
+      - original_user_id
+      - current_benefits
+      - current_benefits_raw
+      - expected_benefits
+      - expected_benefits_raw
+      - achieved_benefits
+      - achieved_benefits_raw
+      - current_payback
+      - current_payback_raw
+      - expected_payback
+      - expected_payback_raw
+      - achieved_payback
+      - achieved_payback_raw
+      - expected_roi
+      - expected_roi_raw
+      - achieved_roi
+      - achieved_roi_raw
+      - expected_costs
+      - expected_costs_raw
+      - assigned_by
+      - created
+      - valueprop_create_date_sfdc
+      - creators_name
+      - last_modified_date
+      - last_modified_by_name
+      - variance
+      - variance_raw
+      title: ExternalTracker
+      description: ValueTracker Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ExternalVPGroup:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Id of the value proposition
+        name:
+          type: string
+          title: Name
+          description: Name of the value proposition
+        company_id:
+          type: string
+          title: Company Id
+          description: Id of the associated company
+        total_benefits_fmt:
+          type: string
+          title: Total Benefits Fmt
+          description: Formatted total benefits
+        total_costs_fmt:
+          type: string
+          title: Total Costs Fmt
+          description: Formatted total costs
+        npv:
+          type: string
+          title: Npv
+          description: Net Present Value
+        roi:
+          type: string
+          title: Roi
+          description: Return on Investment
+        tco:
+          type: string
+          title: Tco
+          description: Total Cost of Ownership
+        cost_of_delay:
+          type: string
+          title: Cost Of Delay
+          description: Cost of Delay
+        payback:
+          type: string
+          title: Payback
+          description: Payback period
+        benefits_per_transaction_fmt:
+          type: string
+          title: Benefits Per Transaction Fmt
+          description: Formatted benefits per transaction
+        created:
+          type: string
+          title: Created
+          description: Creation date of the record
+        vp_creator_name:
+          type: string
+          title: Vp Creator Name
+          description: Name of the VP creator
+        last_modified_date:
+          type: string
+          title: Last Modified Date
+          description: Date of last modification
+        last_modified_by_name:
+          type: string
+          title: Last Modified By Name
+          description: Name of person who last modified
+      type: object
+      required:
+      - id
+      - name
+      - company_id
+      - total_benefits_fmt
+      - total_costs_fmt
+      - npv
+      - roi
+      - tco
+      - cost_of_delay
+      - payback
+      - benefits_per_transaction_fmt
+      - created
+      - vp_creator_name
+      - last_modified_date
+      - last_modified_by_name
+      title: ExternalVPGroup
+      description: ExternalVPGroup model
+    ValuePropResult:
+      properties:
+        value_props:
+          items:
+            $ref: '#/components/schemas/ExternalVP'
+          type: array
+          title: Value Props
+      type: object
+      required:
+      - value_props
+      title: ValuePropResult
+    FormattedResponse_list_ExternalTracker__:
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/ExternalTracker'
+          type: array
+          title: Result
+      type: object
+      required:
+      - result
+      title: FormattedResponse[list[ExternalTracker]]
+    FormattedResponse_VPGroupResult_:
+      properties:
+        result:
+          $ref: '#/components/schemas/VPGroupResult'
+      type: object
+      required:
+      - result
+      title: FormattedResponse[VPGroupResult]
+    ExternalVP:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Id of the value proposition
+        name:
+          type: string
+          title: Name
+          description: Name of the value proposition
+        company_id:
+          type: string
+          title: Company Id
+          description: Id of the associated company
+        wacc:
+          type: string
+          title: Wacc
+          description: Weighted Average Cost of Capital
+        term:
+          type: string
+          title: Term
+          description: Term duration of the proposition
+        total_benefits:
+          type: string
+          title: Total Benefits
+          description: Formatted total benefits
+        total_benefits_raw:
+          type: number
+          title: Total Benefits Raw
+          description: Raw total benefits value
+        total_costs:
+          type: string
+          title: Total Costs
+          description: Formatted total costs
+        total_costs_raw:
+          type: number
+          title: Total Costs Raw
+          description: Raw total costs value
+        npv_fmt:
+          type: string
+          title: Npv Fmt
+          description: Formatted Net Present Value
+        roi_decorated:
+          type: string
+          title: Roi Decorated
+          description: Decorated Return on Investment
+        tco_fmt:
+          type: string
+          title: Tco Fmt
+          description: Formatted Total Cost of Ownership
+        three_month_cost_of_inaction_fmt:
+          type: string
+          title: Three Month Cost Of Inaction Fmt
+          description: Formatted 3-month cost of inaction
+        payback:
+          type: string
+          title: Payback
+          description: Payback period
+        vp_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Vp Status
+          description: Status of the value proposition
+          default: ''
+        created:
+          type: string
+          title: Created
+          description: Creation date
+        creators_name:
+          type: string
+          title: Creators Name
+          description: Creator's name
+        last_modified_date:
+          type: string
+          title: Last Modified Date
+          description: Date last modified
+        last_modified_by_name:
+          type: string
+          title: Last Modified By Name
+          description: Name of last modifier
+        DL_VC_Discovery_Question_1_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 1 C
+          description: Discovery Question 1
+        DL_VC_Discovery_Question_2_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 2 C
+          description: Discovery Question 2
+        DL_VC_Discovery_Question_3_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 3 C
+          description: Discovery Question 3
+        DL_VC_Discovery_Question_4_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 4 C
+          description: Discovery Question 4
+        DL_VC_Discovery_Question_5_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 5 C
+          description: Discovery Question 5
+        DL_VC_Discovery_Question_6_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 6 C
+          description: Discovery Question 6
+        DL_VC_Discovery_Question_7_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 7 C
+          description: Discovery Question 7
+        DL_VC_Discovery_Question_8_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 8 C
+          description: Discovery Question 8
+        DL_VC_Discovery_Question_9_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 9 C
+          description: Discovery Question 9
+        DL_VC_Discovery_Question_10_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Question 10 C
+          description: Discovery Question 10
+        DL_VC_Discovery_Answer_1_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 1 C
+          description: Discovery Answer 1
+        DL_VC_Discovery_Answer_2_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 2 C
+          description: Discovery Answer 2
+        DL_VC_Discovery_Answer_3_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 3 C
+          description: Discovery Answer 3
+        DL_VC_Discovery_Answer_4_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 4 C
+          description: Discovery Answer 4
+        DL_VC_Discovery_Answer_5_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 5 C
+          description: Discovery Answer 5
+        DL_VC_Discovery_Answer_6_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 6 C
+          description: Discovery Answer 6
+        DL_VC_Discovery_Answer_7_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 7 C
+          description: Discovery Answer 7
+        DL_VC_Discovery_Answer_8_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 8 C
+          description: Discovery Answer 8
+        DL_VC_Discovery_Answer_9_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 9 C
+          description: Discovery Answer 9
+        DL_VC_Discovery_Answer_10_c:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Vc Discovery Answer 10 C
+          description: Discovery Answer 10
+      type: object
+      required:
+      - id
+      - name
+      - company_id
+      - wacc
+      - term
+      - total_benefits
+      - total_benefits_raw
+      - total_costs
+      - total_costs_raw
+      - npv_fmt
+      - roi_decorated
+      - tco_fmt
+      - three_month_cost_of_inaction_fmt
+      - payback
+      - created
+      - creators_name
+      - last_modified_date
+      - last_modified_by_name
+      title: ExternalVP
+      description: ExternalVPGroup model
+    VPGroupResult:
+      properties:
+        value_prop_groups:
+          items:
+            $ref: '#/components/schemas/ExternalVPGroup'
+          type: array
+          title: Value Prop Groups
+      type: object
+      required:
+      - value_prop_groups
+      title: VPGroupResult
+    FormattedResponse_ValuePropResult_:
+      properties:
+        result:
+          $ref: '#/components/schemas/ValuePropResult'
+      type: object
+      required:
+      - result
+      title: FormattedResponse[ValuePropResult]
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

@@ -1,0 +1,177 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Scorecard API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: scorecard
+paths:
+  /v1/value-proposition/{valuePropId}/scorecard:
+    get:
+      tags:
+      - scorecard
+      summary: Get value proposition scorecard with threshold evaluations
+      description: "Get scorecard for a value proposition\n\nThis endpoint evaluates the value proposition against configured thresholds\nand returns a traffic light status system (red/yellow/green) for each\nthreshold type, along with override metrics and phasing information.\n\nParameters\n----------\nvalue_prop_id : int\n    The ID of the value proposition to evaluate\n\nReturns\n-------\nScorecardResponse\n    Complete scorecard with threshold evaluations, status, and metrics\n\nRaises\n------\nHTTPException\n    404 if value proposition not found\n    500 if calculation fails"
+      operationId: get_value_proposition_scorecard_v1_value_proposition__valuePropId__scorecard_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ThresholdStatus:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Threshold type ID
+        name:
+          type: string
+          title: Name
+          description: Threshold type name
+        description:
+          type: string
+          title: Description
+          description: Threshold type description
+        keyword:
+          type: string
+          title: Keyword
+          description: Keyword for value mapping
+        operation:
+          type: string
+          title: Operation
+          description: Operation type
+        status:
+          type: string
+          title: Status
+          description: Status name
+        status_id:
+          type: integer
+          title: Status Id
+          description: Status ID
+        min_threshold:
+          type: number
+          title: Min Threshold
+          description: Minimum threshold value
+        max_threshold:
+          type: number
+          title: Max Threshold
+          description: Maximum threshold value
+        margin_threshold:
+          type: number
+          title: Margin Threshold
+          description: Margin threshold value
+        current_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Value
+          description: Current calculated value
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - keyword
+      - operation
+      - status
+      - status_id
+      - min_threshold
+      - max_threshold
+      - margin_threshold
+      title: ThresholdStatus
+      description: Threshold status response model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ScorecardResponse:
+      properties:
+        value_prop_status:
+          type: integer
+          title: Value Prop Status
+          description: Overall value proposition status
+        threshold_types:
+          items:
+            $ref: '#/components/schemas/ThresholdStatus'
+          type: array
+          title: Threshold Types
+          description: List of threshold status evaluations
+        phasing_activated:
+          type: boolean
+          title: Phasing Activated
+          description: Whether phasing is activated
+        driver_override:
+          type: number
+          title: Driver Override
+          description: Driver override percentage
+        financial_override:
+          type: number
+          title: Financial Override
+          description: Financial override percentage
+        impact_override:
+          type: number
+          title: Impact Override
+          description: Impact override percentage
+      type: object
+      required:
+      - value_prop_status
+      - threshold_types
+      - phasing_activated
+      - driver_override
+      - financial_override
+      - impact_override
+      title: ScorecardResponse
+      description: Complete scorecard response model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

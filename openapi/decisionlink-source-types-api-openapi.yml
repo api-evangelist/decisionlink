@@ -1,0 +1,173 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Source Types API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged source_types across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: source_types
+paths:
+  /v1/value-facts/source-types:
+    get:
+      tags:
+      - source_types
+      summary: Get source types.
+      description: Get source types.
+      operationId: get_source_types_v1_value_facts_source_types_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: displayOnly
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Displayonly
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceType'
+                title: Response Get Source Types V1 Value Facts Source Types Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/source-types:
+    get:
+      tags:
+      - source_types
+      summary: Get source types.
+      description: "Get source types.\n\nParameters\n----------\ndisplayOnly: Optional[boolean]\n    Only return display options. Defaults to False\n\nReturns\n-------\n - list[SourceType]: List of source types."
+      operationId: get_source_types_v1_value_proposition_source_types_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: displayOnly
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Displayonly
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/value_proposition__facts__source_types__source_type__SourceType'
+                title: Response Get Source Types V1 Value Proposition Source Types Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SourceType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the source type.
+        name:
+          type: string
+          title: Name
+          description: Name of the source type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the source type.
+      type: object
+      required:
+      - id
+      - name
+      title: SourceType
+      description: Source type response model.
+    value_proposition__facts__source_types__source_type__SourceType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the source type.
+        name:
+          type: string
+          title: Name
+          description: Name of the source type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the source type.
+      type: object
+      required:
+      - id
+      - name
+      title: SourceType
+      description: Source Type Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

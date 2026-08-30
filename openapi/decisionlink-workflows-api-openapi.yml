@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Workflows API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: workflows
+paths:
+  /v1/value-proposition/workflows:
+    get:
+      tags:
+      - workflows
+      summary: Return the workflows available to the user
+      description: "Endpoint for reading user workflows\n\nParameters\n-------\nincludeAll\n    Include all account workflows or just the user's active workflows\n\nReturns\n-------\nList[Workflow]\n    Returns the list of workflows"
+      operationId: get_workflows_v1_value_proposition_workflows_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: includeAll
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Includeall
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workflow'
+                title: Response Get Workflows V1 Value Proposition Workflows Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ConversationMember:
+      properties:
+        account_workflow_id:
+          type: integer
+          title: Account Workflow Id
+          description: The ID of the workflow the ConversationMember belongs to
+        id:
+          type: integer
+          title: Id
+          description: The ID of the ConversationMember
+        account_workflow_section_id:
+          type: integer
+          title: Account Workflow Section Id
+          description: The workflow section of the ConversationMember
+        workflow_data_source_id:
+          type: integer
+          title: Workflow Data Source Id
+          description: The source of data for the workflow
+        member_id:
+          type: integer
+          title: Member Id
+          description: The member ID for the ConversationMember
+        name:
+          type: string
+          title: Name
+          description: The name of the ConversationMember
+        description:
+          type: string
+          title: Description
+          description: The description of the ConversationMember
+        default_member_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Default Member Id
+          description: The default member's ID, if applicable
+        is_default_member:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Default Member
+          description: A flag indicating whether the member is the default member in the ConversationMember
+          default: false
+      type: object
+      required:
+      - account_workflow_id
+      - id
+      - account_workflow_section_id
+      - workflow_data_source_id
+      - member_id
+      - name
+      - description
+      title: ConversationMember
+      description: ConversationMember Model
+    Workflow:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The ID of the workflow
+        account_id:
+          type: integer
+          title: Account Id
+          description: The account_id for the account of the workflow
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user who created the workflow
+          default: 0
+        sequence:
+          type: integer
+          title: Sequence
+          description: The sequence of the workflow
+        workflow_type_id:
+          type: integer
+          title: Workflow Type Id
+          description: The workflow type
+        name:
+          type: string
+          title: Name
+          description: The name of the workflow
+        description:
+          type: string
+          title: Description
+          description: The description of the workflow
+        icon:
+          type: string
+          title: Icon
+          description: The icon associated with the workflow
+        active:
+          type: integer
+          title: Active
+          description: A flag indicating whether the workflow is active or not
+        system_defined:
+          type: integer
+          title: System Defined
+          description: A flag indicating whether the workflow is system-defined or user-defined
+        all_templates:
+          type: integer
+          title: All Templates
+          description: A flag indicating whether all templates are included in the workflow
+        all_users:
+          type: integer
+          title: All Users
+          description: A flag indicating whether all users should have access to the workflow
+        default_assignment:
+          type: integer
+          title: Default Assignment
+          description: The default assignment for the workflow, if applicable
+        show_ai_pills:
+          type: integer
+          title: Show Ai Pills
+          description: A flag indicating whether AI pills should be shown
+          default: 0
+        conversations:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ConversationMember'
+            type: array
+          - type: 'null'
+          title: Conversations
+          description: A list of conversations associated with the workflow
+      type: object
+      required:
+      - id
+      - account_id
+      - sequence
+      - workflow_type_id
+      - name
+      - description
+      - icon
+      - active
+      - system_defined
+      - all_templates
+      - all_users
+      - default_assignment
+      title: Workflow
+      description: Workflow Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

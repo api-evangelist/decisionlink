@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Release Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: release_types
+paths:
+  /v1/value-facts/release-types:
+    get:
+      tags:
+      - release_types
+      summary: Get model release types.
+      description: Get model release types.
+      operationId: get_release_types_v1_value_facts_release_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReleaseType'
+                type: array
+                title: Response Get Release Types V1 Value Facts Release Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    ReleaseType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Display name.
+      type: object
+      required:
+      - id
+      - name
+      title: ReleaseType
+      description: Model release status type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

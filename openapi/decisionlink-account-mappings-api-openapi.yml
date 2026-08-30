@@ -1,0 +1,251 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Account Mappings API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: account_mappings
+paths:
+  /v1/value-proposition/account-mappings:
+    get:
+      tags:
+      - account_mappings
+      summary: Get account mappings
+      description: 'Endpoint to get account mappings
+
+
+        Returns
+
+        -------
+
+        The list of account factors'
+      operationId: get_account_mappings_v1_value_proposition_account_mappings_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MappingResponse'
+                type: array
+                title: Response Get Account Mappings V1 Value Proposition Account Mappings Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - account_mappings
+      summary: Create account mapping
+      description: "Endpoint to create a new account mapping.\nIf a mapping exists for the same account_id, value_object_type,\nand value_object_id, it will return an error.\n\nParameters\n----------\nmapping : Mapping\n    Mapping to create\n\nReturns\n-------\nJSONResponse with success message"
+      operationId: create_account_mapping_v1_value_proposition_account_mappings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mapping'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/account-mappings/{mapping_id}:
+    delete:
+      tags:
+      - account_mappings
+      summary: Delete account mapping
+      description: "Endpoint to delete an account mapping by ID.\nFirst verifies that the mapping exists and belongs to the user's account.\n\nParameters\n----------\nmapping_id : int\n    ID of the mapping to delete\n\nReturns\n-------\nJSONResponse with success message"
+      operationId: delete_account_mapping_v1_value_proposition_account_mappings__mapping_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: mapping_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Mapping Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - account_mappings
+      summary: Update account mapping
+      description: "Endpoint to update an account mapping by ID.\nChecks that the user has account admin privileges,\nthat the user's account_id matches the mapping's account_id,\nand that no other mapping exists with the same value_object_type\nand value_object_id for the account.\n\nParameters\n----------\nmapping_id : int\n    ID of the mapping to update\nmapping : Mapping\n    Mapping data to update\n\nReturns\n-------\nJSONResponse with success message"
+      operationId: update_account_mapping_v1_value_proposition_account_mappings__mapping_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: mapping_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Mapping Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mapping'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Mapping:
+      properties:
+        crm:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Crm
+          description: CRM for mapping
+          default: salesforce
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+          description: Account to which the mapping belongs
+        value_object_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Object Type
+          description: Type of Value object being mapped
+          default: factor
+        value_object_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Object Id
+          description: Value ID for the object being mapping
+          default: 0
+        crm_object_type:
+          type: string
+          title: Crm Object Type
+          description: CRM object being mapped
+        crm_object_field:
+          type: string
+          title: Crm Object Field
+          description: CRM object field being mapped
+      type: object
+      required:
+      - crm_object_type
+      - crm_object_field
+      title: Mapping
+      description: Mapping model
+    MappingResponse:
+      properties:
+        crm:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Crm
+          description: CRM for mapping
+          default: salesforce
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+          description: Account to which the mapping belongs
+        value_object_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Object Type
+          description: Type of Value object being mapped
+          default: factor
+        value_object_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Object Id
+          description: Value ID for the object being mapping
+          default: 0
+        crm_object_type:
+          type: string
+          title: Crm Object Type
+          description: CRM object being mapped
+        crm_object_field:
+          type: string
+          title: Crm Object Field
+          description: CRM object field being mapped
+        id:
+          type: integer
+          title: Id
+          description: ID for the account CRM mapping
+      type: object
+      required:
+      - crm_object_type
+      - crm_object_field
+      title: MappingResponse
+      description: Mapping Response model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

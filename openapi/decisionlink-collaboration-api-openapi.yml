@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Manager Collaboration API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/collaboration/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: collaboration
+paths:
+  /v1/collaboration/:
+    post:
+      tags:
+      - collaboration
+      summary: Create a token for a new collaboration
+      description: "Endpoint for creating a JWT for a collaboration\n\nParameters\n----------\ncollaboration : Collaboration\n    The collaboration being created\n\nReturns\n-------\nJSONResponse\n    Returns success and access_token for collaboration"
+      operationId: create_collaboration_v1_collaboration__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collaboration'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Collaboration:
+      properties:
+        hash:
+          type: string
+          title: Hash
+          description: Hash for external share
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+          description: Date when the share expires
+        email:
+          type: string
+          title: Email
+          description: The email of the user being collaborated with
+      type: object
+      required:
+      - hash
+      - expires
+      - email
+      title: Collaboration
+      description: Collaboration model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

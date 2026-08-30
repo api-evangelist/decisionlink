@@ -1,0 +1,347 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Advanced API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: advanced
+paths:
+  /v1/value-proposition/{valuePropId}/advanced:
+    get:
+      tags:
+      - advanced
+      summary: Get the Value proposition advance details
+      description: Endpoint for reading the Value Propositions advance details
+      operationId: get_value_proposition_advance_v1_value_proposition__valuePropId__advanced_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValuePropAdvanced'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - advanced
+      summary: Update the Value proposition advanced details
+      description: This endpoint sends the update payload to the backend and returns the update response directly.
+      operationId: update_value_prop_advanced_v1_value_proposition__valuePropId__advanced_put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValuePropAdvancedPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CurrencyType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the currency type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the currency type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A brief description of the currency type
+        abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbreviation
+          description: The abbreviation for the currency type
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: The exchange rate for the currency
+        decoration:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Decoration
+          description: The symbol or decoration for the currency
+      type: object
+      title: CurrencyType
+      description: Model representing a currency type.
+    NumberFormatType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the number format type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the number format type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A description of the number format type
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: The locale associated with the number format type
+      type: object
+      title: NumberFormatType
+      description: Model representing a number format type.
+    ValuePropAdvanced:
+      properties:
+        value_prop_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Id
+          description: The ID of the value proposition
+        baseline_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Baseline Type Id
+          description: The baseline type ID
+        baseline_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Baseline Type
+          description: The baseline type description
+        term:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Term
+          description: The term for the value proposition
+        conversion_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Conversion Rate
+          description: The conversion rate
+        roi_range:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Roi Range
+          description: The ROI range
+        currency_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Currency Type Id
+          description: The currency type ID
+        currency_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CurrencyType'
+            type: array
+          - type: 'null'
+          title: Currency Types
+          description: List of available currency types
+        number_format_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/NumberFormatType'
+            type: array
+          - type: 'null'
+          title: Number Format Types
+          description: List of available number format types
+        number_format:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Number Format
+          description: The selected number format
+        wacc:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Wacc
+          description: The weighted average cost of capital (WACC)
+        gross_profit:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Gross Profit
+          description: The gross profit
+        deployment_time:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deployment Time
+          description: Deployment time
+        opportunity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+          description: Opportunity ID
+        language_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Language Type Id
+          description: Language Type ID
+      type: object
+      title: ValuePropAdvanced
+      description: Model representing the advanced details of a value proposition.
+    ValuePropAdvancedPayload:
+      properties:
+        baseline_type_id:
+          type: integer
+          title: Baseline Type Id
+          description: The baseline type ID
+        customer_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Customer Type Id
+          description: The customer type ID
+          default: 1
+        deployment_time:
+          type: integer
+          title: Deployment Time
+          description: The deployment time
+        gross_profit:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Gross Profit
+          description: The gross profit
+          default: 0
+        currency_type_id:
+          type: number
+          title: Currency Type Id
+          description: The currency type ID
+        number_format:
+          type: integer
+          title: Number Format
+          description: The selected number format
+        conversion_rate:
+          type: number
+          title: Conversion Rate
+          description: The conversion rate
+        term:
+          type: integer
+          title: Term
+          description: The term duration
+        language_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Language Type Id
+          description: The language type ID
+        wacc:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Wacc
+          description: The weighted average cost of capital (WACC)
+        opportunity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+          description: The opportunity ID
+      type: object
+      required:
+      - baseline_type_id
+      - deployment_time
+      - currency_type_id
+      - number_format
+      - conversion_rate
+      - term
+      title: ValuePropAdvancedPayload
+      description: Model representing the advanced details of a value proposition payload.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

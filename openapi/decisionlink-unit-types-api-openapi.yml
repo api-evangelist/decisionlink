@@ -1,0 +1,64 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Unit Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: unit_types
+paths:
+  /v1/value-facts/unit-types:
+    get:
+      tags:
+      - unit_types
+      summary: Get all unit types.
+      description: Get all unit types.
+      operationId: get_unit_types_v1_value_facts_unit_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UnitType'
+                type: array
+                title: Response Get Unit Types V1 Value Facts Unit Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    UnitType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the unit type.
+        name:
+          type: string
+          title: Name
+          description: Name of the unit type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the unit type.
+        abbr:
+          type: string
+          title: Abbr
+          description: Unit type abbreviation
+      type: object
+      required:
+      - id
+      - name
+      - abbr
+      title: UnitType
+      description: Unit type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

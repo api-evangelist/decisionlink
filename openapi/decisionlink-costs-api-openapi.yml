@@ -1,0 +1,1064 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Costs API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: costs
+paths:
+  /v1/value-proposition/{valuePropId}/costs:
+    get:
+      tags:
+      - costs
+      summary: Get the costs of Value Proposition
+      description: Endpoint for reading the saved costs of a value proposition.
+      operationId: get_costs_v1_value_proposition__valuePropId__costs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CostResponse'
+                title: Response Get Costs V1 Value Proposition  Valuepropid  Costs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - costs
+      summary: Save the values for costs
+      description: Create a cost for a value proposition and roll up its totals.
+      operationId: store_cost_v1_value_proposition__valuePropId__costs_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCreate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/available-costs:
+    get:
+      tags:
+      - costs
+      summary: Get the available costs of Value Proposition
+      description: Endpoint for reading the available (not yet added) costs of a VP.
+      operationId: get_available_costs_v1_value_proposition__valuePropId__available_costs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AvailableCost'
+                title: Response Get Available Costs V1 Value Proposition  Valuepropid  Available Costs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/costs/{costId}:
+    delete:
+      tags:
+      - costs
+      summary: Delete a cost from the Value Proposition
+      description: Delete a cost from a value proposition and roll up its totals.
+      operationId: delete_cost_v1_value_proposition__valuePropId__costs__costId__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: costId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Costid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - costs
+      summary: Update a cost in the Value Proposition
+      description: Update a cost of a value proposition and roll up its totals.
+      operationId: update_cost_v1_value_proposition__valuePropId__costs__costId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: costId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Costid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCreate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/costs/{costId}/name:
+    patch:
+      tags:
+      - costs
+      summary: Update a cost name in the Value Proposition
+      description: Endpoint to update the name of a cost
+      operationId: update_cost_name_v1_value_proposition__valuePropId__costs__costId__name_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: costId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Costid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostNameUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CostResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the cost item.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost item.
+        alt_cost_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Cost Description
+          description: Alternative cost description.
+        quantity:
+          type: number
+          title: Quantity
+          description: Quantity of the cost item.
+        rate:
+          type: number
+          title: Rate
+          description: Rate per unit for the cost item.
+        cost:
+          type: number
+          title: Cost
+          description: Total cost for the item.
+        year1_costs:
+          type: number
+          title: Year1 Costs
+          description: Cost for year 1.
+        year2_costs:
+          type: number
+          title: Year2 Costs
+          description: Cost for year 2.
+        year3_costs:
+          type: number
+          title: Year3 Costs
+          description: Cost for year 3.
+        year4_costs:
+          type: number
+          title: Year4 Costs
+          description: Cost for year 4.
+        year5_costs:
+          type: number
+          title: Year5 Costs
+          description: Cost for year 5.
+        year6_costs:
+          type: number
+          title: Year6 Costs
+          description: Cost for year 6.
+        year7_costs:
+          type: number
+          title: Year7 Costs
+          description: Cost for year 7.
+        year8_costs:
+          type: number
+          title: Year8 Costs
+          description: Cost for year 8.
+        year9_costs:
+          type: number
+          title: Year9 Costs
+          description: Cost for year 9.
+        year10_costs:
+          type: number
+          title: Year10 Costs
+          description: Cost for year 10.
+        year1_quantity:
+          type: number
+          title: Year1 Quantity
+          description: Quantity for year 1.
+        year2_quantity:
+          type: number
+          title: Year2 Quantity
+          description: Quantity for year 2.
+        year3_quantity:
+          type: number
+          title: Year3 Quantity
+          description: Quantity for year 3.
+        year4_quantity:
+          type: number
+          title: Year4 Quantity
+          description: Quantity for year 4.
+        year5_quantity:
+          type: number
+          title: Year5 Quantity
+          description: Quantity for year 5.
+        year6_quantity:
+          type: number
+          title: Year6 Quantity
+          description: Quantity for year 6.
+        year7_quantity:
+          type: number
+          title: Year7 Quantity
+          description: Quantity for year 7.
+        year8_quantity:
+          type: number
+          title: Year8 Quantity
+          description: Quantity for year 8.
+        year9_quantity:
+          type: number
+          title: Year9 Quantity
+          description: Quantity for year 9.
+        year10_quantity:
+          type: number
+          title: Year10 Quantity
+          description: Quantity for year 10.
+        subtotal:
+          type: number
+          title: Subtotal
+          description: Subtotal cost before discounts.
+        discount:
+          type: number
+          title: Discount
+          description: Discount applied to the cost item.
+        grand_total:
+          type: number
+          title: Grand Total
+          description: Final cost after applying discounts.
+        term:
+          type: integer
+          title: Term
+          description: Term of the cost agreement.
+        created_at:
+          type: string
+          title: Created At
+          description: Timestamp when the cost item was created.
+        updated_at:
+          type: string
+          title: Updated At
+          description: Timestamp when the cost item was last updated.
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost item.
+        accrual_type:
+          $ref: '#/components/schemas/AccrualType'
+          description: Details of the accrual type.
+        cost_type:
+          $ref: '#/components/schemas/CostType'
+          description: Details of the cost type.
+        cost_category_type:
+          $ref: '#/components/schemas/CostCategoryType'
+          description: Details of the cost category type.
+      type: object
+      required:
+      - name
+      - quantity
+      - rate
+      - cost
+      - year1_costs
+      - year2_costs
+      - year3_costs
+      - year4_costs
+      - year5_costs
+      - year6_costs
+      - year7_costs
+      - year8_costs
+      - year9_costs
+      - year10_costs
+      - year1_quantity
+      - year2_quantity
+      - year3_quantity
+      - year4_quantity
+      - year5_quantity
+      - year6_quantity
+      - year7_quantity
+      - year8_quantity
+      - year9_quantity
+      - year10_quantity
+      - subtotal
+      - discount
+      - grand_total
+      - term
+      - created_at
+      - updated_at
+      - id
+      - accrual_type
+      - cost_type
+      - cost_category_type
+      title: CostResponse
+      description: Cost Response model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CostNameUpdate:
+      properties:
+        cost_name:
+          type: string
+          title: Cost Name
+      type: object
+      required:
+      - cost_name
+      title: CostNameUpdate
+      description: Cost Name Model
+    CostCreate:
+      properties:
+        accrual_type_id:
+          type: integer
+          title: Accrual Type Id
+          description: Accrual Type ID.
+        cost_category_type_id:
+          type: integer
+          title: Cost Category Type Id
+          description: Cost Category Type ID.
+        cost_type_id:
+          type: integer
+          title: Cost Type Id
+          description: Cost Type ID.
+        expense_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expense Type Id
+          description: Expense Type ID.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost item.
+        name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Name
+          description: Name of the cost item.
+        quantity:
+          type: number
+          title: Quantity
+          description: Quantity of the cost item.
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: Rate per unit for the cost item.
+        cost:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cost
+          description: Total cost for the item.
+        discount:
+          anyOf:
+          - type: number
+            maximum: 100.0
+            minimum: 0.0
+          - type: 'null'
+          title: Discount
+          description: Discount applied to the cost item.
+        lease_term:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lease Term
+          description: Lease term.
+        buyout_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Buyout Value
+          description: Buyout value.
+        present_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Present Value
+          description: Present value of the cost item.
+        residual_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Residual Value
+          description: Residual value of the cost item.
+        yr1_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr1 Costs
+          description: Cost for year 1.
+        yr2_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr2 Costs
+          description: Cost for year 2.
+        yr3_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr3 Costs
+          description: Cost for year 3.
+        yr4_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr4 Costs
+          description: Cost for year 4.
+        yr5_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr5 Costs
+          description: Cost for year 5.
+        yr6_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr6 Costs
+          description: Cost for year 6.
+        yr7_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr7 Costs
+          description: Cost for year 7.
+        yr8_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr8 Costs
+          description: Cost for year 8.
+        yr9_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr9 Costs
+          description: Cost for year 9.
+        yr10_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr10 Costs
+          description: Cost for year 10.
+      type: object
+      required:
+      - accrual_type_id
+      - cost_category_type_id
+      - cost_type_id
+      - quantity
+      title: CostCreate
+      description: Cost Create model
+    CostType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost type.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost type.
+      type: object
+      required:
+      - id
+      - name
+      title: CostType
+      description: Cost Type model
+    ExpenseType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the expense type.
+        name:
+          type: string
+          title: Name
+          description: Name of the expense type.
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation of the expense type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the expense type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the expense type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the expense type was last updated.
+      type: object
+      required:
+      - id
+      - name
+      title: ExpenseType
+      description: Expense Type model
+    AccrualType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the accrual type.
+        name:
+          type: string
+          title: Name
+          description: Name of the accrual type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the accrual type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the accrual type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the accrual type was last updated.
+      type: object
+      required:
+      - id
+      - name
+      title: AccrualType
+      description: Accrual Type model
+    AvailableCost:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost item.
+        account_solution_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Solution Id
+          description: Account solution ID.
+        cost_category_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Cost Category Type Id
+          description: Cost category type ID.
+        expense_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expense Type Id
+          description: Expense type ID.
+        driver_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Factor Id
+          description: Driver factor ID.
+        sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sequence
+          description: Sequence order.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost item.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost item.
+        accrual_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Accrual Type Id
+          description: Accrual type ID.
+        situation_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Situation Id
+          description: Situation ID.
+        investment_situation_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Investment Situation Id
+          description: Investment situation ID.
+        cost_baseline_answer:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cost Baseline Answer
+          description: Cost baseline answer.
+        scale_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scale Type Id
+          description: Scale type ID.
+        unit_scale_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Scale Type Id
+          description: Unit scale type ID.
+        account_competitor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Competitor Id
+          description: Account competitor ID.
+        cost_to_us:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Cost To Us
+          description: Cost to us flag.
+        default_include:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Default Include
+          description: Default include flag.
+        dep_cost_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Dep Cost Id
+          description: Dependent cost ID.
+        straight_scaling:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Straight Scaling
+          description: Straight scaling flag.
+        unit_straight_scaling:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Straight Scaling
+          description: Unit straight scaling flag.
+        ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ratio
+          description: Ratio value.
+        unit_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Unit Ratio
+          description: Unit ratio value.
+        formula:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Formula
+          description: Formula.
+        unit_formula:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit Formula
+          description: Unit formula.
+        yr1_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr1 Costs
+          description: Cost for year 1.
+        yr2_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr2 Costs
+          description: Cost for year 2.
+        yr3_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr3 Costs
+          description: Cost for year 3.
+        yr4_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr4 Costs
+          description: Cost for year 4.
+        yr5_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr5 Costs
+          description: Cost for year 5.
+        yr6_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr6 Costs
+          description: Cost for year 6.
+        yr7_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr7 Costs
+          description: Cost for year 7.
+        yr8_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr8 Costs
+          description: Cost for year 8.
+        yr9_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr9 Costs
+          description: Cost for year 9.
+        yr10_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr10 Costs
+          description: Cost for year 10.
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: Rate value.
+        present_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Present Value
+          description: Present value.
+        lease_term:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lease Term
+          description: Lease term.
+        residual_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Residual Value
+          description: Residual value.
+        buyout_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Buyout Value
+          description: Buyout value.
+        unit_cost_baseline_answer:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Unit Cost Baseline Answer
+          description: Unit cost baseline answer.
+        scale_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scale Type
+          description: Scale type label.
+        company_field:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company Field
+          description: Company field.
+        unit_scale_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit Scale Type
+          description: Unit scale type label.
+        unit_company_field:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit Company Field
+          description: Unit company field.
+        already_added:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Already Added
+          description: Whether the cost is already added.
+        quantity:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Quantity
+          description: Quantity.
+        cost:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cost
+          description: Cost value.
+        discount:
+          anyOf:
+          - type: string
+          - type: number
+          - type: 'null'
+          title: Discount
+          description: Discount applied.
+        grand_total:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Grand Total
+          description: Grand total.
+        subtotal:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Subtotal
+          description: Subtotal.
+        cost_category_type:
+          $ref: '#/components/schemas/CostCategoryType'
+          description: Details of the cost category type.
+        expense_type:
+          anyOf:
+          - $ref: '#/components/schemas/ExpenseType'
+          - type: 'null'
+          description: Expense type if available.
+        created_at:
+          type: string
+          title: Created At
+          description: Creation timestamp.
+        updated_at:
+          type: string
+          title: Updated At
+          description: Last updated timestamp.
+      type: object
+      required:
+      - id
+      - name
+      - cost_category_type
+      - created_at
+      - updated_at
+      title: AvailableCost
+      description: Available Cost model
+    CostCategoryType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost category type.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost category type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost category type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Creation timestamp.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Last updated timestamp.
+      type: object
+      required:
+      - id
+      - name
+      title: CostCategoryType
+      description: Cost Category Type model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

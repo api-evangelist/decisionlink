@@ -1,0 +1,455 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Discovery Questions API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged discovery_questions across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: discovery_questions
+paths:
+  /v1/collaboration/valueProps/discovery:
+    get:
+      tags:
+      - discovery_questions
+      summary: Get the Discovery Questions for a Collaboration
+      description: "Endpoint for reading Discovery Questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    Returns the Discovery Questions"
+      operationId: get_discovery_questions_v1_collaboration_valueProps_discovery_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DiscoveryQuestion'
+                type: array
+                title: Response Get Discovery Questions V1 Collaboration Valueprops Discovery Get
+      security:
+      - HTTPBearer: []
+    patch:
+      tags:
+      - discovery_questions
+      summary: Save the Discovery Question Answers for a Collaboration
+      description: "Endpoint for saving Discovery Question Answers\n\nParameters\n----------\nquestions : DiscoveryAnswerPayload\n    The answers to Discovery Questions\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      operationId: create_discovery_questions_v1_collaboration_valueProps_discovery_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoveryAnswerPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/discovery-questions:
+    get:
+      tags:
+      - discovery_questions
+      summary: Read value proposition discovery questions
+      description: "Parameters\n----------\nsection_type_id : int (Optional)\n    If sent, will only return discovery questions for this section\nai_updatable_only : bool (Optional)\n    If true, only return discovery questions that are AI updatable\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+      operationId: get_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: sectionTypeId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sectiontypeid
+      - name: ai_updatable_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Ai Updatable Only
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryQuestion_2'
+                title: Response Get Discovery Questions V1 Value Proposition  Valuepropid  Discovery Questions Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - discovery_questions
+      summary: Update discovery question answers
+      description: "Update answers to discovery questions\n\nParameters\n----------\npayload : DiscoveryAnswerPayload\n    List of answers to discovery questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+      operationId: update_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoveryAnswerPayload_2'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryQuestion_2'
+                title: Response Update Discovery Questions V1 Value Proposition  Valuepropid  Discovery Questions Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    QuestionType:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the question type
+        type:
+          type: string
+          title: Type
+          description: Question type
+      type: object
+      required:
+      - id
+      - type
+      title: QuestionType
+      description: QuestionType model
+    DiscoveryQuestion:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Discovery Question
+        sequence:
+          type: string
+          title: Sequence
+          description: Sequence for the Discovery Question
+        name:
+          type: string
+          title: Name
+          description: Name of the Discovery Question
+        description:
+          type: string
+          title: Description
+          description: Description of the Discovery Question
+        question_type:
+          $ref: '#/components/schemas/QuestionType'
+          description: Denotes the type of question, i.e, short text, long text, Yes/No, etc...
+        required:
+          type: boolean
+          title: Required
+          description: Denotes whether the question is required or not
+        answer:
+          type: string
+          title: Answer
+          description: The answer that has been given to the Discovery Question
+        placeholder:
+          type: string
+          title: Placeholder
+          description: Optional placeholder to show if no answer has been given
+      type: object
+      required:
+      - id
+      - sequence
+      - name
+      - description
+      - question_type
+      - required
+      - answer
+      - placeholder
+      title: DiscoveryQuestion
+      description: DiscoveryQuestion model
+    DiscoveryAnswer:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID for the Discovery Question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the Discovery Question
+      type: object
+      required:
+      - id
+      - answer
+      title: DiscoveryAnswer
+      description: DiscoveryAnswer model
+    DiscoveryAnswerPayload:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/DiscoveryAnswer'
+          type: array
+          title: Questions
+          description: The list of Discovery Question Answers to save
+      type: object
+      required:
+      - questions
+      title: DiscoveryAnswerPayload
+      description: DiscoveryAnswerPayload model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Response message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
+    DiscoveryQuestionSection:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The ID of the section
+        name:
+          type: string
+          title: Name
+          description: The name of the section
+      type: object
+      required:
+      - id
+      - name
+      title: DiscoveryQuestionSection
+      description: DiscoveryQuestionSection Model
+    DiscoveryQuestion_2:
+      properties:
+        account_discovery_question_id:
+          type: integer
+          title: Account Discovery Question Id
+          description: ID of the discovery question
+        name:
+          type: string
+          title: Name
+          description: The name of the question
+        description:
+          type: string
+          title: Description
+          description: A description of the question
+          default: ''
+        question_type_id:
+          type: integer
+          title: Question Type Id
+          description: The ID for the type of question
+        tag_type_id:
+          type: integer
+          title: Tag Type Id
+          description: The ID for the tag type
+        required:
+          type: boolean
+          title: Required
+          description: Indicates if the question is required
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: The ID for the value proposition
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the question, if provided
+        question_tag:
+          type: string
+          title: Question Tag
+          description: A tag associated with the question
+          default: ''
+        placeholder_text:
+          type: string
+          title: Placeholder Text
+          description: Text that can be used as a placeholder in the question
+          default: ''
+        sequence:
+          type: integer
+          title: Sequence
+          description: The sequence for the question
+        default_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Default Active
+          description: Indicates if the question is active by default
+          default: false
+        ai_updatable:
+          type: boolean
+          title: Ai Updatable
+          description: Indicates if the question is eligible for AI updates
+          default: true
+        sections:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/DiscoveryQuestionSection'
+            type: array
+          - type: 'null'
+          title: Sections
+          description: A list of sections the question belongs to
+        is_placeholder_text:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Placeholder Text
+          description: Indicates if the placeholder text is present or not
+          default: false
+        source_attribution:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Attribution
+        attribution_link:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Revert Value
+      type: object
+      required:
+      - account_discovery_question_id
+      - name
+      - question_type_id
+      - tag_type_id
+      - required
+      - value_prop_id
+      - answer
+      - sequence
+      title: DiscoveryQuestion
+      description: DiscoveryQuestion Model
+    DiscoveryAnswer_2:
+      properties:
+        account_discovery_question_id:
+          type: integer
+          title: Account Discovery Question Id
+          description: ID of the discovery question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the discovery question
+        value_prop_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Id
+          description: The value prop ID
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID updating the answer
+      type: object
+      required:
+      - account_discovery_question_id
+      - answer
+      title: DiscoveryAnswer
+      description: Discovery Question Answer Model
+    DiscoveryAnswerPayload_2:
+      properties:
+        discovery_questions:
+          items:
+            $ref: '#/components/schemas/DiscoveryAnswer_2'
+          type: array
+          title: Discovery Questions
+          description: List of answers to discovery questions
+      type: object
+      required:
+      - discovery_questions
+      title: DiscoveryAnswerPayload
+      description: Discovery Question Answer Payload Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-collaboration-openapi.yml
+- decisionlink-value-proposition-openapi.yml

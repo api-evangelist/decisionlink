@@ -1,0 +1,369 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Collaborations API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: collaborations
+paths:
+  /v1/value-proposition/{valuePropId}/collaborations:
+    get:
+      tags:
+      - collaborations
+      summary: Read customer collaboration shares
+      description: Fetch and return all collaboration shares for the given value proposition.
+      operationId: get_collaborations_v1_value_proposition__valuePropId__collaborations_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CollaborationShare'
+                title: Response Get Collaborations V1 Value Proposition  Valuepropid  Collaborations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - collaborations
+      summary: Create collaboration shares
+      description: Endpoint to create collaboration shares for value prop
+      operationId: create_collaboration_share_v1_value_proposition__valuePropId__collaborations_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCollaboration'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCollaborationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/collaborations/{collaborationId}:
+    put:
+      tags:
+      - collaborations
+      summary: Update customer collaboration share
+      description: Endpoint to update a collaboration share
+      operationId: update_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: collaborationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Collaborationid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCollaboration'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - collaborations
+      summary: Delete customer collaboration share
+      description: Endpoint to delete a collaboration share
+      operationId: delete_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: collaborationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Collaborationid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CollaborationShare:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for this collaboration share
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: ID of the associated Value Proposition
+        user_id:
+          type: integer
+          title: User Id
+          description: ID of the user who received the share
+        email:
+          type: string
+          title: Email
+          description: Email address of the collaborating user
+        first_name:
+          type: string
+          title: First Name
+          description: First name of the collaborating user
+        last_name:
+          type: string
+          title: Last Name
+          description: Last name of the collaborating user
+        value_prop_name:
+          type: string
+          title: Value Prop Name
+          description: Name of the shared Value Proposition
+        share_role:
+          type: string
+          title: Share Role
+          description: Role granted (e.g. view, edit) to the user
+        is_external:
+          type: boolean
+          title: Is External
+          description: Whether the collaborator is outside the organization
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT used to access the shared link
+        password:
+          type: string
+          title: Password
+          description: Password for the shared link
+        link:
+          type: string
+          title: Link
+          description: Fully-formed collaboration URL including token & code
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+          description: When the collaboration expires
+        created:
+          type: string
+          format: date-time
+          title: Created
+          description: When the collaboration was created
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Asset Template Id
+          default: 0
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - user_id
+      - email
+      - first_name
+      - last_name
+      - value_prop_name
+      - share_role
+      - is_external
+      - access_token
+      - password
+      - link
+      - expires
+      - created
+      - benefits_editable
+      - assumptions_editable
+      - discovery_questions_enabled
+      title: CollaborationShare
+      description: Collaboration Model
+    CreateCollaborationResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        share_details:
+          $ref: '#/components/schemas/CollaborationShare'
+      type: object
+      required:
+      - message
+      - share_details
+      title: CreateCollaborationResponse
+    CreateCollaboration:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Asset Template Id
+          default: 0
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - expires
+      - benefits_editable
+      - assumptions_editable
+      - discovery_questions_enabled
+      title: CreateCollaboration
+      description: Model for creating a collaboration
+    UpdateCollaboration:
+      properties:
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          type: integer
+          title: Account Asset Template Id
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
+      type: object
+      required:
+      - expires
+      - benefits_editable
+      - assumptions_editable
+      - account_asset_template_id
+      - discovery_questions_enabled
+      title: UpdateCollaboration
+      description: Model for updating a collaboration
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

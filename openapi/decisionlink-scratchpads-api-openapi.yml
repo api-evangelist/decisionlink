@@ -1,0 +1,512 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Scratchpads API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: scratchpads
+paths:
+  /v1/value-proposition/{valuePropId}/scratchpads/{factorId}:
+    get:
+      tags:
+      - scratchpads
+      summary: Get scratchpad by factor
+      description: "Endpoint for a factor's scratchpad\n\nParameters\n----------\nfactor_id : int\n    The factor whose scratchpad is being requested\n\nReturns\n-------\nScratchpadResponse\n    Returns the scratchpad and its units"
+      operationId: get_scratchpad_v1_value_proposition__valuePropId__scratchpads__factorId__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: factorId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Factorid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScratchpadResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/scratchpads/total:
+    post:
+      tags:
+      - scratchpads
+      summary: Endpoint to calculate scratchpad total
+      description: "Endpoint for getting scratchpad calculation total\n\nParameters\n----------\npayload : ScratchpadTotalPayload\n    The pieces of the scratchpad to calculate\n\nReturns\n-------\nScratchpadTotalResponse\n    Returns the scratchpad total"
+      operationId: get_scratchpad_total_v1_value_proposition__valuePropId__scratchpads_total_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScratchpadTotalPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScratchpadTotalResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ScratchpadResponse:
+      properties:
+        scratchpad:
+          $ref: '#/components/schemas/Scratchpad'
+          description: The scratchpad data
+        units:
+          items:
+            $ref: '#/components/schemas/ScratchpadUnit'
+          type: array
+          title: Units
+          description: List of units associated with the scratchpad
+      type: object
+      required:
+      - scratchpad
+      - units
+      title: ScratchpadResponse
+      description: Scratchpad Response Model
+    Scratchpad:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the scratchpad
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: ID for the associated value prop
+        account_scratchpad_id:
+          type: integer
+          title: Account Scratchpad Id
+          description: ID for the associated account scratchpad
+        factor_id:
+          type: integer
+          title: Factor Id
+          description: ID for the factor
+        factor_type_id:
+          type: integer
+          title: Factor Type Id
+          description: ID for the factor type
+        value_prop_metric_id:
+          type: integer
+          title: Value Prop Metric Id
+          description: ID for the value prop metric
+        is_current_effort:
+          type: string
+          title: Is Current Effort
+          description: Indicates if the effort is current (as a string)
+        formula:
+          type: string
+          title: Formula
+          description: Formula used for the calculation
+        total:
+          type: number
+          title: Total
+          description: Total value for the calculation
+        created:
+          type: string
+          title: Created
+          description: Creation timestamp
+        modified:
+          type: string
+          title: Modified
+          description: Last modified timestamp
+        value_prop_scratchpad_id:
+          type: integer
+          title: Value Prop Scratchpad Id
+          description: ID for the associated value prop scratchpad
+        factor_name:
+          type: string
+          title: Factor Name
+          description: Name of the factor
+        unit_type_id:
+          type: integer
+          title: Unit Type Id
+        unit_type:
+          type: string
+          title: Unit Type
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          default: ''
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_scratchpad_id
+      - factor_id
+      - factor_type_id
+      - value_prop_metric_id
+      - is_current_effort
+      - formula
+      - total
+      - created
+      - modified
+      - value_prop_scratchpad_id
+      - factor_name
+      - unit_type_id
+      - unit_type
+      title: Scratchpad
+      description: Scratchpad Model
+    ScratchpadUnit:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the unit
+        value_prop_scratchpad_id:
+          type: integer
+          title: Value Prop Scratchpad Id
+          description: ID for the associated value prop scratchpad
+        account_scratchpad_unit_id:
+          type: integer
+          title: Account Scratchpad Unit Id
+          description: ID for the associated account scratchpad unit
+        factor_id:
+          type: integer
+          title: Factor Id
+          description: ID for the factor
+        operand:
+          type: number
+          title: Operand
+          description: Operand for the calculation
+        operand_estimate:
+          type: number
+          title: Operand Estimate
+          description: Estimated operand value
+        operand_override:
+          type: number
+          title: Operand Override
+          description: Operand override value
+        operand_source_type_id:
+          type: integer
+          title: Operand Source Type Id
+          description: ID for the operand source type
+        operator_id:
+          type: integer
+          title: Operator Id
+          description: ID for the operator
+        open_paren:
+          type: integer
+          title: Open Paren
+          description: Open parentheses for the expression
+        close_paren:
+          type: integer
+          title: Close Paren
+          description: Close parentheses for the expression
+        name:
+          type: string
+          title: Name
+          description: Name of the unit
+        value_realization_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Realization Name
+          description: Name of the value realization, if any
+        description:
+          type: string
+          title: Description
+          description: Description of the unit
+        factor_precision:
+          type: integer
+          title: Factor Precision
+          description: Precision for the factor
+        abbreviation:
+          type: string
+          title: Abbreviation
+          description: Abbreviation for the unit
+        year1_value:
+          type: number
+          title: Year1 Value
+          description: Value for year 1
+        year1_value_override:
+          type: number
+          title: Year1 Value Override
+          description: Override value for year 1
+        year2_value:
+          type: number
+          title: Year2 Value
+          description: Value for year 2
+        year2_value_override:
+          type: number
+          title: Year2 Value Override
+          description: Override value for year 2
+        year3_value:
+          type: number
+          title: Year3 Value
+          description: Value for year 3
+        year3_value_override:
+          type: number
+          title: Year3 Value Override
+          description: Override value for year 3
+        year4_value:
+          type: number
+          title: Year4 Value
+          description: Value for year 4
+        year4_value_override:
+          type: number
+          title: Year4 Value Override
+          description: Override value for year 4
+        year5_value:
+          type: number
+          title: Year5 Value
+          description: Value for year 5
+        year5_value_override:
+          type: number
+          title: Year5 Value Override
+          description: Override value for year 5
+        year6_value:
+          type: number
+          title: Year6 Value
+          description: Value for year 6
+        year6_value_override:
+          type: number
+          title: Year6 Value Override
+          description: Override value for year 6
+        year7_value:
+          type: number
+          title: Year7 Value
+          description: Value for year 7
+        year7_value_override:
+          type: number
+          title: Year7 Value Override
+          description: Override value for year 7
+        year8_value:
+          type: number
+          title: Year8 Value
+          description: Value for year 8
+        year8_value_override:
+          type: number
+          title: Year8 Value Override
+          description: Override value for year 8
+        year9_value:
+          type: number
+          title: Year9 Value
+          description: Value for year 9
+        year9_value_override:
+          type: number
+          title: Year9 Value Override
+          description: Override value for year 9
+        year10_value:
+          type: number
+          title: Year10 Value
+          description: Value for year 10
+        year10_value_override:
+          type: number
+          title: Year10 Value Override
+          description: Override value for year 10
+        unit_type_id:
+          type: integer
+          title: Unit Type Id
+          description: ID for the unit type
+        literal_number:
+          type: integer
+          title: Literal Number
+          description: Literal number associated with the unit
+        unit_type:
+          type: string
+          title: Unit Type
+          description: Type of the unit
+        is_telemetry_data:
+          type: integer
+          title: Is Telemetry Data
+          description: Flag indicating if this is telemetry data
+        function_type_id:
+          type: integer
+          title: Function Type Id
+          description: ID for the function type
+        abbr:
+          type: string
+          title: Abbr
+          description: Abbreviation for the unit
+        years:
+          items:
+            $ref: '#/components/schemas/ScratchpadUnitYear'
+          type: array
+          title: Years
+          description: List of years with corresponding values and overrides
+      type: object
+      required:
+      - id
+      - value_prop_scratchpad_id
+      - account_scratchpad_unit_id
+      - factor_id
+      - operand
+      - operand_estimate
+      - operand_override
+      - operand_source_type_id
+      - operator_id
+      - open_paren
+      - close_paren
+      - name
+      - description
+      - factor_precision
+      - abbreviation
+      - year1_value
+      - year1_value_override
+      - year2_value
+      - year2_value_override
+      - year3_value
+      - year3_value_override
+      - year4_value
+      - year4_value_override
+      - year5_value
+      - year5_value_override
+      - year6_value
+      - year6_value_override
+      - year7_value
+      - year7_value_override
+      - year8_value
+      - year8_value_override
+      - year9_value
+      - year9_value_override
+      - year10_value
+      - year10_value_override
+      - unit_type_id
+      - literal_number
+      - unit_type
+      - is_telemetry_data
+      - function_type_id
+      - abbr
+      - years
+      title: ScratchpadUnit
+      description: Scratchpad Unit model
+    ScratchpadUnitYear:
+      properties:
+        value:
+          type: number
+          title: Value
+          description: The value for the given year
+        key:
+          type: string
+          title: Key
+          description: The key for the year (e.g., year1, year2)
+        override:
+          type: number
+          title: Override
+          description: Override value for the year, if any
+      type: object
+      required:
+      - value
+      - key
+      - override
+      title: ScratchpadUnitYear
+      description: Yearly date for scratchpad unit
+    ScratchpadTotalPayload:
+      properties:
+        factor_id:
+          type: string
+          title: Factor Id
+          description: Comma-separated string of factor IDs
+        operator_id:
+          type: string
+          title: Operator Id
+          description: Comma-separated string of operator IDs
+        operand:
+          type: string
+          title: Operand
+          description: Comma-separated string of operands
+        open_paren:
+          type: string
+          title: Open Paren
+          description: Comma-separated string for open parentheses
+        close_paren:
+          type: string
+          title: Close Paren
+          description: Comma-separated string for close parentheses
+        scratchpad_factor_id:
+          type: string
+          title: Scratchpad Factor Id
+          description: Scratchpad factor ID as a string
+      type: object
+      required:
+      - factor_id
+      - operator_id
+      - operand
+      - open_paren
+      - close_paren
+      - scratchpad_factor_id
+      title: ScratchpadTotalPayload
+      description: Scratchpad Total Payload
+    ScratchpadTotalResponse:
+      properties:
+        total:
+          type: number
+          title: Total
+          description: The calculated total for the scratchpad
+      type: object
+      required:
+      - total
+      title: ScratchpadTotalResponse
+      description: Scratchpad Total Response model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

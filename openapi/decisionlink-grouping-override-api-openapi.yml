@@ -1,0 +1,103 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Grouping Override API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: grouping_override
+paths:
+  /v1/value-proposition/{valuePropId}/grouping-override:
+    put:
+      tags:
+      - grouping_override
+      summary: Update value proposition grouping override
+      description: Endpoint for updating value proposition grouping override
+      operationId: update_value_proposition_grouping_override_v1_value_proposition__valuePropId__grouping_override_put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupingOverridePayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    GroupingOverridePayload:
+      properties:
+        grouping_id:
+          type: integer
+          title: Grouping Id
+          description: ID of the grouping to override.
+        name:
+          type: string
+          title: Name
+          description: New name for the grouping.
+        grouping_type:
+          type: string
+          title: Grouping Type
+          description: Type of the grouping (e.g., value_category, etc.)
+      type: object
+      required:
+      - grouping_id
+      - name
+      - grouping_type
+      title: GroupingOverridePayload
+      description: Payload model for grouping override endpoint.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

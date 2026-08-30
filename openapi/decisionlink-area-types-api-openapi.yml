@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Area Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: area_types
+paths:
+  /v1/value-facts/area-types:
+    get:
+      tags:
+      - area_types
+      summary: Get all area types.
+      description: Get all area types.
+      operationId: get_area_types_v1_value_facts_area_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AreaType'
+                type: array
+                title: Response Get Area Types V1 Value Facts Area Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    AreaType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the area type.
+        name:
+          type: string
+          title: Name
+          description: Name of the area type.
+      type: object
+      required:
+      - id
+      - name
+      title: AreaType
+      description: Area type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

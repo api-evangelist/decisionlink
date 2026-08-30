@@ -1,0 +1,192 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Refresh API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: refresh
+paths:
+  /v1/value-proposition/refresh/group:
+    put:
+      tags:
+      - refresh
+      summary: Refresh value prop group
+      description: "Endpoint for refreshing value prop group\n\nReturns\n-------\nJSONResponse\n    - On success (HTTP 200):\n        {\n          \"data\": [ <None> ]\n        }\n    - On failure (HTTP 500): returns\n        {\n          \"message\": \"Unable to refresh value prop group\"\n        }"
+      operationId: refresh_value_prop_group_v1_value_proposition_refresh_group_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshValuePropGroupPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/refresh:
+    put:
+      tags:
+      - refresh
+      summary: Refresh value prop
+      description: "Endpoint for refreshing value prop\n\nReturns\n-------\nJSONResponse\n    - On success (HTTP 200): returns\n        {\n          \"data\": [ <None> ]\n        }\n    - On failure (HTTP 500): returns\n        {\n          \"message\": \"Unable to refresh value prop\"\n        }"
+      operationId: refresh_value_prop_v1_value_proposition_refresh_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshValuePropPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/refresh/tracker:
+    put:
+      tags:
+      - refresh
+      summary: Refresh value tracker
+      description: "Endpoint for refreshing value tracker\n\nReturns\n-------\nJSONResponse\n    - On success (200): a list of objects each containing a\n      `result` with:\n        • `success`: bool\n        • `data`: dict of tracker fields (e.g. name, benefits, timestamps)\n        • `value_prop_id`, `sfdc_vt_id`, etc.\n    - On failure (500): `{\"message\": \"Unable to refresh value tracker\"}`"
+      operationId: refresh_value_tracker_v1_value_proposition_refresh_tracker_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshValueTrackerPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/refresh/bulk:
+    put:
+      tags:
+      - refresh
+      summary: Refresh value prop in bulk
+      description: "Refresh all value propositions in bulk.\n-------\nJSONResponse\n    - On success (200): a list of status objects, for example:\n        [{\"result\": \"Bulk upload process started\"}]\n    - On failure (500):\n        {\"message\": \"Unable to refresh value prop in bulk\"}"
+      operationId: refresh_value_prop_bulk_v1_value_proposition_refresh_bulk_put
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RefreshValuePropGroupPayload:
+      properties:
+        sfdc_vp_id:
+          type: string
+          title: Sfdc Vp Id
+          description: The sfdc value prop ID
+        value_prop_group_id:
+          type: string
+          title: Value Prop Group Id
+          description: The value prop group ID
+      type: object
+      required:
+      - sfdc_vp_id
+      - value_prop_group_id
+      title: RefreshValuePropGroupPayload
+      description: Model representing the refresh value proposition group payload.
+    RefreshValueTrackerPayload:
+      properties:
+        sfdc_vt_id:
+          type: string
+          title: Sfdc Vt Id
+          description: The sfdc value tracker ID
+        value_prop_id:
+          type: string
+          title: Value Prop Id
+          description: The value prop ID
+      type: object
+      required:
+      - sfdc_vt_id
+      - value_prop_id
+      title: RefreshValueTrackerPayload
+      description: Model representing the refresh value tracker payload.
+    RefreshValuePropPayload:
+      properties:
+        sfdc_vp_id:
+          type: string
+          title: Sfdc Vp Id
+          description: The sfdc value prop ID
+        value_prop_id:
+          type: string
+          title: Value Prop Id
+          description: The value prop ID
+      type: object
+      required:
+      - sfdc_vp_id
+      - value_prop_id
+      title: RefreshValuePropPayload
+      description: Model representing the refresh value proposition payload.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

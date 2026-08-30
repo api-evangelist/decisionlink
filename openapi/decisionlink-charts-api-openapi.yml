@@ -1,0 +1,164 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Charts API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: charts
+paths:
+  /v1/value-proposition/{valuePropId}/cost-of-delay:
+    get:
+      tags:
+      - charts
+      summary: Get the cost of delay of a Value Proposition
+      description: Read cost of delay data for a value proposition.
+      operationId: get_value_proposition_cost_of_delay_v1_value_proposition__valuePropId__cost_of_delay_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostOfDelay'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/payback-chart:
+    get:
+      tags:
+      - charts
+      summary: Get the payback chart of a Value Proposition
+      description: Read payback chart data for a value proposition.
+      operationId: get_value_proposition_payback_chart_v1_value_proposition__valuePropId__payback_chart_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaybackChart'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PaybackChart:
+      properties:
+        net:
+          items:
+            type: number
+          type: array
+          title: Net
+        net_fmt:
+          items:
+            type: string
+          type: array
+          title: Net Fmt
+        payback:
+          type: string
+          title: Payback
+        payback_formula:
+          type: string
+          title: Payback Formula
+        payback_formula_text:
+          type: string
+          title: Payback Formula Text
+        years:
+          items:
+            type: string
+          type: array
+          title: Years
+      type: object
+      required:
+      - net
+      - net_fmt
+      - payback
+      - payback_formula
+      - payback_formula_text
+      - years
+      title: PaybackChart
+      description: Payback chart data for a value proposition.
+    CostOfDelay:
+      properties:
+        formula:
+          type: string
+          title: Formula
+        formula_text:
+          type: string
+          title: Formula Text
+        three_months_cost_of_delay:
+          type: number
+          title: Three Months Cost Of Delay
+        three_months_cost_of_delay_fmt:
+          type: string
+          title: Three Months Cost Of Delay Fmt
+      type: object
+      required:
+      - formula
+      - formula_text
+      - three_months_cost_of_delay
+      - three_months_cost_of_delay_fmt
+      title: CostOfDelay
+      description: Cost of delay (cost of inaction) chart data.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

@@ -1,0 +1,59 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Unique Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: unique_types
+paths:
+  /v1/value-facts/unique-types:
+    get:
+      tags:
+      - unique_types
+      summary: Get all unique types.
+      description: Get all unique types.
+      operationId: get_unique_types_v1_value_facts_unique_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UniqueType'
+                type: array
+                title: Response Get Unique Types V1 Value Facts Unique Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    UniqueType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the unique type.
+        name:
+          type: string
+          title: Name
+          description: Name of the unique type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the unique type.
+      type: object
+      required:
+      - id
+      - name
+      title: UniqueType
+      description: Unique type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

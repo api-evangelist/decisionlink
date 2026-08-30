@@ -1,0 +1,522 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Companies API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: companies
+paths:
+  /v1/value-proposition/companies/admin-validate:
+    post:
+      tags:
+      - companies
+      summary: Validate a company
+      description: "Admin-only: Validate or create company.\n- Reads sfdc_account_id and user_id from JSON body.\n- If feature 83 is OFF: create shared company (account_id=0).\n- If feature 83 is ON:\n    * Try to find company by (account_id, account_defined_id = sfdc_account_id)\n    * If found -> return its id\n    * Else -> create company with (user's account_id, user_id, sfdc_account_id) and return id"
+      operationId: admin_validate_company_v1_value_proposition_companies_admin_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminValidatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+  /v1/value-proposition/companies/validate:
+    post:
+      tags:
+      - companies
+      summary: Validate a company
+      description: Endpoint for validating a company
+      operationId: validate_company_v1_value_proposition_companies_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyValidatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyValidateReturn'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/companies/search:
+    post:
+      tags:
+      - companies
+      summary: Search for a company
+      description: "Endpoint for searching companies database\n\nParameters\n-------\npayload\n    The SearchPayload needed to find company\n\nReturns\n-------\nList[Company]\n    Returns the list of matching companies"
+      operationId: search_companies_v1_value_proposition_companies_search_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Company'
+                type: array
+                title: Response Search Companies V1 Value Proposition Companies Search Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/companies:
+    post:
+      tags:
+      - companies
+      summary: Create a company new company
+      description: "Endpoint for creating a new company\n\nParameters\n-------\npayload\n    The CompanyPayload needed to create the company\n\nReturns\n-------\nCompany\n    Returns the company, if created. Returns 409 if company exists"
+      operationId: create_company_v1_value_proposition_companies_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCompanyPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    AdminValidatePayload:
+      properties:
+        sfdc_account_id:
+          type: string
+          title: Sfdc Account Id
+          description: Salesforce account id.
+        user_id:
+          type: integer
+          title: User Id
+          description: User id.
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - sfdc_account_id
+      - user_id
+      - name
+      title: AdminValidatePayload
+      description: Validate Admin Payload Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CompanyValidateReturn:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: If the validate company was a success or not
+        company_id:
+          type: integer
+          title: Company Id
+          description: ID of the company
+        acc_specific:
+          type: boolean
+          title: Acc Specific
+          description: Tells whether the account has account specific companies
+      type: object
+      required:
+      - success
+      - company_id
+      - acc_specific
+      title: CompanyValidateReturn
+      description: Validate Company Return Model
+    CompanyValidatePayload:
+      properties:
+        sf_account_id:
+          type: string
+          title: Sf Account Id
+          description: Salesforce account id.
+      type: object
+      required:
+      - sf_account_id
+      title: CompanyValidatePayload
+      description: Validate Company Payload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Company:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: ID of the Company
+          default: 0
+        account_id:
+          type: integer
+          title: Account Id
+          description: Account ID of the user who created the Company
+        account_defined_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Defined Id
+          description: Account Specific ID of the Company
+          default: ''
+        user_id:
+          type: integer
+          title: User Id
+          description: ID of the user who created the Company
+        name:
+          type: string
+          title: Name
+          description: Name of the Company
+        synopsis:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Synopsis
+          description: Synopsis of the Company
+          default: ''
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Company
+          default: ''
+        ticker:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ticker
+          description: Ticker of the Company
+          default: ''
+        industry_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Industry Id
+          description: Industry ID of the Company
+          default: 0
+        location_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Location Type
+          description: Location Type of the Company
+          default: ''
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: URL for the webste of the Company
+          default: ''
+        logo_path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Logo Path
+          description: Logo path for the logo of the Company
+          default: ''
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+          description: Phone Number of the Company
+          default: ''
+        address1:
+          type: string
+          title: Address1
+          description: Address1 of the Company
+        address2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address2
+          description: Address2 of the Company
+          default: ''
+        city:
+          type: string
+          title: City
+          description: City of the Company
+        state:
+          type: string
+          title: State
+          description: State of the Company
+        zip:
+          type: string
+          title: Zip
+          description: Zip of the Company
+        country:
+          type: string
+          title: Country
+          description: Country of the Company
+        country_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Country Id
+          description: Country ID of the Company
+          default: 0
+        region_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Region Id
+          description: Region ID of the Company
+          default: 0
+        market_area:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Market Area
+          description: Market Area of the Company
+          default: ''
+        from_calculator:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Calculator
+          description: Denotes whether the company is from a calculator Value Proposition
+          default: 0
+        revenue:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revenue
+          description: Revenue of the Company (in millions)
+        revenue_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Revenue Fmt
+          description: Revenue of the Company Formatted (in millions)
+        employees:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Employees
+          description: Employee Count of the Company
+        employees_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Employees Fmt
+          description: Employee Count of the Company Formatted
+        dl_sector_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Dl Sector Id
+          description: DandB Sector ID of the Company
+        dl_sector_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dl Sector Name
+          description: DandB Sector name of the Company
+        can_edit:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Can Edit
+          description: Denotes whether or not the user can edit this Company's info
+      type: object
+      required:
+      - account_id
+      - user_id
+      - name
+      - address1
+      - city
+      - state
+      - zip
+      - country
+      title: Company
+      description: Company Model
+    CreateCompanyPayload:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: The name of the Company
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID who created the Company
+          default: 0
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+          description: The account ID of the Company, if account specific
+          default: 0
+        address1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address1
+          description: The first line of the address of the Company
+          default: ''
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+          description: The city of the Company
+          default: ''
+        zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Zip
+          description: The ZIP code of the Company
+          default: ''
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+          description: The state of the Company
+          default: ''
+        country_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Country Id
+          description: The country ID of the Company
+          default: 0
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: The name of the country of the Company
+          default: ''
+        account_defined_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Defined Id
+          description: An account-defined ID associated with the Company
+          default: ''
+        from_calculator:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Calculator
+          description: Denotes whether the company is from a calculator Value Proposition
+          default: 0
+      type: object
+      required:
+      - name
+      title: CreateCompanyPayload
+      description: CreateCompanyPayload Model
+    SearchPayload:
+      properties:
+        search_term:
+          type: string
+          title: Search Term
+          description: The name of the company being searched for
+      type: object
+      required:
+      - search_term
+      title: SearchPayload
+      description: SearchPayload Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

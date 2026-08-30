@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Roi API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: roi
+paths:
+  /v1/value-proposition/{valuePropId}/roi-chart:
+    get:
+      tags:
+      - roi
+      summary: Get the ROI chart of a Value Proposition
+      description: "Endpoint for reading the Value Proposition ROI chart\n\nReturns\n-------\nValuePropROIChart\n    Returns the Value Proposition ROI chart"
+      operationId: get_value_proposition_roi_chart_v1_value_proposition__valuePropId__roi_chart_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValuePropROIChart'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValuePropROIChart:
+      properties:
+        roi_chart:
+          $ref: '#/components/schemas/ROIChart'
+      type: object
+      required:
+      - roi_chart
+      title: ValuePropROIChart
+      description: Model for Value Proposition ROI Chart
+    ROIChart:
+      properties:
+        years:
+          items:
+            type: string
+          type: array
+          title: Years
+        benefits:
+          items:
+            type: string
+          type: array
+          title: Benefits
+        benefits_fmt:
+          items:
+            type: string
+          type: array
+          title: Benefits Fmt
+        costs:
+          items:
+            type: string
+          type: array
+          title: Costs
+        costs_fmt:
+          items:
+            type: string
+          type: array
+          title: Costs Fmt
+        roi:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Roi
+        roi_fmt:
+          items:
+            type: string
+          type: array
+          title: Roi Fmt
+        roi_formula:
+          type: string
+          title: Roi Formula
+      type: object
+      required:
+      - years
+      - benefits
+      - benefits_fmt
+      - costs
+      - costs_fmt
+      - roi
+      - roi_fmt
+      - roi_formula
+      title: ROIChart
+      description: Model for ROI Chart data
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

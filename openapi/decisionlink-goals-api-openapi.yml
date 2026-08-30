@@ -1,0 +1,334 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Goals API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: goals
+paths:
+  /v1/value-proposition/{valuePropId}/goals:
+    get:
+      tags:
+      - goals
+      summary: Read goals
+      description: "Retrieve all value realization goals for a given Value Proposition.\n\nThis endpoint fetches every goal associated with the specified\n`value_prop_id` from the database. If no goals exist, it returns\nan empty list.\n\nArgs:\n    value_prop_id (int): The unique ID of the Value Proposition\n        whose goals should be returned.\n\nReturns:\n    List[ValueRealizationGoal]: A list of fully populated\n    `ValueRealizationGoal` models, encoded as JSON.\n\nRaises:\n    HTTPException: On any database error; will be caught and\n        re-reported as a 500 with an error message."
+      operationId: get_goals_v1_value_proposition__valuePropId__goals_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueRealizationGoal'
+                title: Response Get Goals V1 Value Proposition  Valuepropid  Goals Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - goals
+      summary: Update goals
+      description: "Bulk-update baseline, target, and active flags for multiple goals.\n\nAccepts a list of goal updates—each containing an `id`, and any\ncombination of `baseline_value`, `value` (target), and `active`.\nMissing numeric fields will default to 0 on update. After applying\nall updates, it re-queries the database and returns the fresh list\nof goals.\n\nArgs:\n    goals (List[ValueRealizationGoalUpdate]):\n        A list of updates, where each element includes:\n          - `id` (int): the goal’s primary key\n          - `baseline_value` (float): new baseline (defaults to 0)\n          - `value` (float): new target value (defaults to 0)\n          - `active` (int): active flag, 0 or 1 (defaults to 0)\n    value_prop_id (int): The Value Proposition ID under which\n        these goals are defined.\n\nReturns:\n    List[ValueRealizationGoal]: The updated full goal records,\n    each as a `ValueRealizationGoal` model, encoded as JSON. If\n    no goals remain, returns an empty list.\n\nRaises:\n    HTTPException: If any individual update or the final read\n        fails; re-reported as HTTP 500 with a JSON error payload."
+      operationId: update_goals_v1_value_proposition__valuePropId__goals_put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ValueRealizationGoalUpdate'
+              title: Goals
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueRealizationGoal'
+                title: Response Update Goals V1 Value Proposition  Valuepropid  Goals Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/goal-groups:
+    get:
+      tags:
+      - goals
+      summary: Read goal groups
+      description: "Retrieve all value realization goals for a given Value Proposition\ngrouped by goal group\n\nArgs:\n    value_prop_id (int): The unique ID of the Value Proposition\n        whose goals should be returned.\n\nReturns:\n    List[ValueRealizationGoalGroup]: A list of fully populated\n    `ValueRealizationGoalGroup` models, encoded as JSON.\n\nRaises:\n    HTTPException: On any database error; will be caught and\n        re-reported as a 500 with an error message."
+      operationId: get_goal_groups_v1_value_proposition__valuePropId__goal_groups_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueRealizationGoalGroup'
+                title: Response Get Goal Groups V1 Value Proposition  Valuepropid  Goal Groups Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValueRealizationGoal:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The Value Prop Goal ID
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: The Value Proposition ID
+        account_factor_id:
+          type: integer
+          title: Account Factor Id
+          description: The Account Factor ID
+        function_type_id:
+          type: integer
+          title: Function Type Id
+          description: The Function Type ID
+        factor_estimate:
+          type: number
+          title: Factor Estimate
+          description: Factor estimate value
+        factor_override:
+          type: number
+          title: Factor Override
+          description: Factor override value
+        situation_override:
+          type: number
+          title: Situation Override
+          description: Situation override value
+        value:
+          type: number
+          title: Value
+          description: The Goal's value
+        source_type_id:
+          type: integer
+          title: Source Type Id
+          description: The source of the Goal's value
+        baseline_value:
+          type: number
+          title: Baseline Value
+          description: The baseline value for the Goal
+        active:
+          type: integer
+          title: Active
+          description: Flag indicating whether the Goal is active
+        created:
+          type: string
+          format: date-time
+          title: Created
+          description: Timestamp when the record was created
+        modified:
+          type: string
+          format: date-time
+          title: Modified
+          description: Timestamp when the record was last modified
+        capture_baseline:
+          type: boolean
+          title: Capture Baseline
+          description: Flag indicating whether to capture baseline values
+        capture_target:
+          type: boolean
+          title: Capture Target
+          description: Flag indicating whether to capture target values
+        vr_normalized:
+          type: boolean
+          title: Vr Normalized
+          description: Flag indicating whether the Goal value should be normalized in Value Realizations
+        value_realization_name:
+          type: string
+          title: Value Realization Name
+          description: Fallback name from account aggregation
+        vr_override_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Vr Override Name
+          description: Override name if set
+        has_scratchpad:
+          type: boolean
+          title: Has Scratchpad
+          description: Flag indicating whether the Goal has a scratchpad
+        name:
+          type: string
+          title: Name
+          description: Final chosen name for this goal
+        category_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Category Id
+          default: 0
+        category_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category Name
+          default: ''
+        category_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category Description
+          default: ''
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_factor_id
+      - function_type_id
+      - factor_estimate
+      - factor_override
+      - situation_override
+      - value
+      - source_type_id
+      - baseline_value
+      - active
+      - created
+      - modified
+      - capture_baseline
+      - capture_target
+      - vr_normalized
+      - value_realization_name
+      - has_scratchpad
+      - name
+      title: ValueRealizationGoal
+      description: Detailed Value Realization Goal Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValueRealizationGoalGroup:
+      properties:
+        category_id:
+          type: integer
+          title: Category Id
+          description: Factor category ID
+        category_name:
+          type: string
+          title: Category Name
+          description: Factor category name
+        category_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category Description
+          description: Factor category description
+          default: ''
+        goals:
+          items:
+            $ref: '#/components/schemas/ValueRealizationGoal'
+          type: array
+          title: Goals
+      type: object
+      required:
+      - category_id
+      - category_name
+      - goals
+      title: ValueRealizationGoalGroup
+      description: Value Realization Group Group Model
+    ValueRealizationGoalUpdate:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The Value Prop Goal ID to update
+        baseline_value:
+          type: number
+          title: Baseline Value
+          description: New baseline value (defaults to 0)
+          default: 0
+        value:
+          type: number
+          title: Value
+          description: New target value (defaults to 0)
+          default: 0
+        active:
+          type: integer
+          title: Active
+          description: Whether this goal is active (0 or 1)
+          default: 0
+      type: object
+      required:
+      - id
+      title: ValueRealizationGoalUpdate
+      description: Value Realization Goal Update Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

@@ -1,0 +1,1864 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Benefits API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged benefits across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: benefits
+paths:
+  /v1/collaboration/valueProps/benefits:
+    get:
+      tags:
+      - benefits
+      summary: Get the Benefits for a Collaboration organized by Value Category
+      description: "Endpoint for reading Benefits for a Collaboration organized by Value Category\n\nReturns\n-------\nList[ValueCategory]\n    Returns the Benefits organized by Value Category"
+      operationId: get_benefits_v1_collaboration_valueProps_benefits_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValueCategory'
+                type: array
+                title: Response Get Benefits V1 Collaboration Valueprops Benefits Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/collaboration/valueProps/benefits/active:
+    patch:
+      tags:
+      - benefits
+      summary: Save the Benefit Active statuses for Collaboration benefits
+      description: "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      operationId: update_benefit_active_status_v1_collaboration_valueProps_benefits_active_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BenefitActivePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/benefits/{benefitId}:
+    get:
+      tags:
+      - benefits
+      summary: Get the details for a single benefit
+      description: "Endpoint for reading a single benefit's details\n\nReturns\n-------\nSingleBenefitDetail\n    Returns the Benefit Details"
+      operationId: get_single_benefit_v1_value_proposition__valuePropId__benefits__benefitId__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: benefitId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Benefitid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleBenefitDetail'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - benefits
+      summary: Update benefit phasing and factors
+      description: "Endpoint for updating benefit phasing and factors\n\nParameters\n----------\npayload : BenefitPhasingAndFactorPayload\n    The payload containing phasing and factors updates\nrequest : Request\n    The FastAPI request object\nvalue_prop_id : int\n    The ID of the value proposition\nbenefit_id : int\n    The ID of the benefit to update\n\nReturns\n-------\nJSONResponse\n    Response with success message"
+      operationId: update_benefit_phasing_v1_value_proposition__valuePropId__benefits__benefitId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: benefitId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Benefitid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BenefitPhasingAndFactorPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitPhasingUpdateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/benefits:
+    get:
+      tags:
+      - benefits
+      summary: Get the Benefits for a Value Proposition by Value Category
+      description: "Endpoint for reading Benefits for a Value Proposition grouped by the\nrequested dimension (default: value_category).\n\nReturns a dict with ``vcs`` and grouping availability flags.\n\nReturns\n-------\ndict\n    Benefits response with vcs and grouping flags"
+      operationId: get_benefits_v1_value_proposition__valuePropId__benefits_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: show_all
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Show All
+      - name: summed_benefits
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Summed Benefits
+      - name: order_flag
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Order Flag
+      - name: filter_by
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/FilterByOption'
+          default: value_category
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueCategory_2'
+                title: Response Get Benefits V1 Value Proposition  Valuepropid  Benefits Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/benefits-active:
+    patch:
+      tags:
+      - benefits
+      summary: Save the Benefit Active statuses for benefits
+      description: "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      operationId: update_benefit_active_status_v1_value_proposition__valuePropId__benefits_active_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BenefitActivePayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse_2'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/benefits-by-type:
+    get:
+      tags:
+      - benefits
+      summary: Returns the benefits by type(financial/non financial)
+      description: 'Returns benefits grouped by type with configurable
+
+        filtering and ordering.'
+      operationId: get_benefit_by_type_v1_value_proposition__valuePropId__benefits_by_type_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: show_all
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Show All
+      - name: summed_benefits
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Summed Benefits
+      - name: order_flag
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Order Flag
+      - name: filter_by
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/FilterByOption'
+          default: value_category
+      - name: full_format
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Full Format
+      - name: legacy_format
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Legacy Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitsByTypeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/{valuePropId}/benefit-fields/{benefitId}:
+    patch:
+      tags:
+      - benefits
+      summary: Update benefit fields
+      description: "Endpoint for updating benefit fields\n\nParameters\n----------\n- value_prop_id\n- benefit_id\n- payload : BenefitFieldsPayload\n    The fields to update\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      operationId: update_benefit_fields_endpoint_v1_value_proposition__valuePropId__benefit_fields__benefitId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: benefitId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Benefitid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BenefitFieldsPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse_2'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    BenefitActive:
+      properties:
+        value_prop_metric_id:
+          type: string
+          title: Value Prop Metric Id
+          description: The ID for the Benefit
+        active:
+          type: string
+          title: Active
+          description: The active status for the Benefit
+      type: object
+      required:
+      - value_prop_metric_id
+      - active
+      title: BenefitActive
+      description: BenefitActive model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValueCategory:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Value Category
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Category
+        description:
+          type: string
+          title: Description
+          description: Description of the Value Category
+        benefits:
+          items:
+            $ref: '#/components/schemas/Benefit'
+          type: array
+          title: Benefits
+          description: Benefits belonging to the Value Category
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - benefits
+      title: ValueCategory
+      description: ValueCategory model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Response message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
+    Benefit:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Benefit
+        name:
+          type: string
+          title: Name
+          description: Name of the Benefit
+        description:
+          type: string
+          title: Description
+          description: Description of the Benefit
+        active:
+          type: string
+          title: Active
+          description: Active status of the Benefit
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - active
+      title: Benefit
+      description: Benefit model
+    BenefitActivePayload:
+      properties:
+        benefits:
+          items:
+            $ref: '#/components/schemas/BenefitActive'
+          type: array
+          title: Benefits
+          description: The list of Benefit Active statuses to save
+      type: object
+      required:
+      - benefits
+      title: BenefitActivePayload
+      description: BenefitActivePayload model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BenefitPhasingValue:
+      properties:
+        metric_phase_0:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 0
+          description: Metric phasing at year 0
+        metric_phase_1:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 1
+          description: Metric phasing at year 1
+        metric_phase_2:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 2
+          description: Metric phasing at year 2
+        metric_phase_3:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 3
+          description: Metric phasing at year 3
+        metric_phase_4:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 4
+          description: Metric phasing at year 4
+        metric_phase_5:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 5
+          description: Metric phasing at year 5
+        metric_phase_6:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 6
+          description: Metric phasing at year 6
+        metric_phase_7:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 7
+          description: Metric phasing at year 7
+        metric_phase_8:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 8
+          description: Metric phasing at year 8
+        metric_phase_9:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 9
+          description: Metric phasing at year 9
+        metric_phase_10:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Metric Phase 10
+          description: Metric phasing at year 10
+      type: object
+      title: BenefitPhasingValue
+      description: Benefit Phasing Value model
+    SingleBenefitDetail:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The unique identifier for the metric
+        benefit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Benefit Type Id
+          description: Benefit type id
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: The unique identifier for the value proposition
+        account_solution_metric_id:
+          type: integer
+          title: Account Solution Metric Id
+          description: The ID of the solution metric
+        value_category_id:
+          type: integer
+          title: Value Category Id
+          description: The category ID for the value proposition
+        alt_metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Name
+          description: Alternative metric name
+        alt_metric_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Description
+          description: Alternative metric description
+        metric_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note
+          description: General note for the metric
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Second metric note
+        metric_note_2_cf:
+          type: integer
+          title: Metric Note 2 Cf
+          description: Should the note be customer facing
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Third metric note
+        metric_note_3_cf:
+          type: integer
+          title: Metric Note 3 Cf
+          description: Should the note be customer facing
+        driver_estimate:
+          type: number
+          title: Driver Estimate
+          description: Estimated driver value
+        driver_override:
+          type: number
+          title: Driver Override
+          description: Override for the driver value
+        driver_value:
+          type: number
+          title: Driver Value
+          description: Driver value used for the calculation
+        driver_phase_1:
+          type: integer
+          title: Driver Phase 1
+          description: Phase 1 driver value
+        driver_phase_2:
+          type: integer
+          title: Driver Phase 2
+          description: Phase 2 driver value
+        driver_phase_3:
+          type: integer
+          title: Driver Phase 3
+          description: Phase 3 driver value
+        driver_phase_4:
+          type: integer
+          title: Driver Phase 4
+          description: Phase 4 driver value
+        driver_phase_5:
+          type: integer
+          title: Driver Phase 5
+          description: Phase 5 driver value
+        driver_phase_6:
+          type: integer
+          title: Driver Phase 6
+          description: Phase 6 driver value
+        driver_phase_7:
+          type: integer
+          title: Driver Phase 7
+          description: Phase 7 driver value
+        driver_phase_8:
+          type: integer
+          title: Driver Phase 8
+          description: Phase 8 driver value
+        driver_phase_9:
+          type: integer
+          title: Driver Phase 9
+          description: Phase 9 driver value
+        driver_phase_10:
+          type: integer
+          title: Driver Phase 10
+          description: Phase 10 driver value
+        impact_override:
+          type: number
+          title: Impact Override
+          description: Override for the impact value
+        impact:
+          type: number
+          title: Impact
+          description: Impact value for the metric
+        financial_estimate:
+          type: number
+          title: Financial Estimate
+          description: Financial estimate for the solution
+        financial_override:
+          type: number
+          title: Financial Override
+          description: Override for the financial value
+        financial_value:
+          type: number
+          title: Financial Value
+          description: Final financial value after estimation
+        metric_phase_0:
+          type: number
+          title: Metric Phase 0
+          description: Metric phasing at year 0
+        metric_phase_1:
+          type: number
+          title: Metric Phase 1
+          description: Metric phasing at year 1
+        metric_phase_2:
+          type: number
+          title: Metric Phase 2
+          description: Metric phasing at year 2
+        metric_phase_3:
+          type: number
+          title: Metric Phase 3
+          description: Metric phasing at year 3
+        metric_phase_4:
+          type: number
+          title: Metric Phase 4
+          description: Metric phasing at year 4
+        metric_phase_5:
+          type: number
+          title: Metric Phase 5
+          description: Metric phasing at year 5
+        metric_phase_6:
+          type: number
+          title: Metric Phase 6
+          description: Metric phasing at year 6
+        metric_phase_7:
+          type: number
+          title: Metric Phase 7
+          description: Metric phasing at year 7
+        metric_phase_8:
+          type: number
+          title: Metric Phase 8
+          description: Metric phasing at year 8
+        metric_phase_9:
+          type: number
+          title: Metric Phase 9
+          description: Metric phasing at year 9
+        metric_phase_10:
+          type: number
+          title: Metric Phase 10
+          description: Metric phasing at year 10
+        active:
+          type: integer
+          title: Active
+          description: Flag indicating the active status
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features of the metric
+        year1_benefits:
+          type: number
+          title: Year1 Benefits
+          description: Benefits from the first year
+        year2_benefits:
+          type: number
+          title: Year2 Benefits
+          description: Benefits from the second year
+        year3_benefits:
+          type: number
+          title: Year3 Benefits
+          description: Benefits from the third year
+        year4_benefits:
+          type: number
+          title: Year4 Benefits
+          description: Benefits from the fourth year
+          default: 0
+        year5_benefits:
+          type: number
+          title: Year5 Benefits
+          description: Benefits from the fifth year
+          default: 0
+        year6_benefits:
+          type: number
+          title: Year6 Benefits
+          description: Benefits from the sixth year
+          default: 0
+        year7_benefits:
+          type: number
+          title: Year7 Benefits
+          description: Benefits from the seventh year
+          default: 0
+        year8_benefits:
+          type: number
+          title: Year8 Benefits
+          description: Benefits from the eighth year
+          default: 0
+        year9_benefits:
+          type: number
+          title: Year9 Benefits
+          description: Benefits from the ninth year
+          default: 0
+        year10_benefits:
+          type: number
+          title: Year10 Benefits
+          description: Benefits from the tenth year
+          default: 0
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total benefits from all years
+        metric_name:
+          type: string
+          title: Metric Name
+          description: Name of the metric
+        description:
+          type: string
+          title: Description
+          description: Description of the metric
+        improvement_factor_id:
+          type: integer
+          title: Improvement Factor Id
+          description: ID of the improvement factor
+        driver_factor_id:
+          type: integer
+          title: Driver Factor Id
+          description: ID of the driver factor
+        driver_baseline_answer:
+          type: number
+          title: Driver Baseline Answer
+          description: Baseline answer for the driver
+        financial_factor_id:
+          type: integer
+          title: Financial Factor Id
+          description: ID of the financial factor
+        financial_baseline_answer:
+          type: number
+          title: Financial Baseline Answer
+          description: Baseline answer for the financial factor
+        note_2_label:
+          type: string
+          title: Note 2 Label
+          description: Label for note 2
+        note_3_label:
+          type: string
+          title: Note 3 Label
+          description: Label for note 3
+        d_precision:
+          type: integer
+          title: D Precision
+          description: Precision of the driver factor
+        d_literal_number:
+          type: integer
+          title: D Literal Number
+          description: Is the driver factor a fixed number
+        f_precision:
+          type: integer
+          title: F Precision
+          description: Precision of the financial factor
+        f_literal_number:
+          type: integer
+          title: F Literal Number
+          description: Is the financial factor a fixed number
+        i_precision:
+          type: integer
+          title: I Precision
+          description: Precision of the impact factor
+        i_literal_number:
+          type: integer
+          title: I Literal Number
+          description: Is the improvement factor a fixed number
+        d_unit_type_id:
+          type: integer
+          title: D Unit Type Id
+          description: Unit type ID for the driver factor
+        f_unit_type_id:
+          type: integer
+          title: F Unit Type Id
+          description: Unit type ID for the financial factor
+        i_unit_type_id:
+          type: integer
+          title: I Unit Type Id
+          description: Unit type ID for the impact factor
+        d_abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: D Abbr
+          description: Abbreviation for the driver factor
+        f_abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: F Abbr
+          description: Abbreviation for the financial factor
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation for the metric
+        improvement_factor:
+          type: string
+          title: Improvement Factor
+          description: Description of the improvement factor
+        value_category:
+          type: string
+          title: Value Category
+          description: Category of the value proposition
+        driver_factor:
+          type: string
+          title: Driver Factor
+          description: Description of the driver factor
+        financial_factor:
+          type: string
+          title: Financial Factor
+          description: Description of the financial factor
+        i_abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: I Abbr
+          description: Abbreviation for the impact factor
+        driver_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Description
+          description: Description of the driver
+        financial_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Description
+          description: Description of the financial factor
+        value_prop_metric_id:
+          type: integer
+          title: Value Prop Metric Id
+          description: ID of the value proposition metric
+        vp_case_studies:
+          type: integer
+          title: Vp Case Studies
+          description: Denotes whether the metric has a case study
+        has_driver_scratchpad:
+          type: integer
+          title: Has Driver Scratchpad
+          description: Flag if the driver scratchpad is available
+        driver_scratchpad_used:
+          type: integer
+          title: Driver Scratchpad Used
+          description: Flag if the driver scratchpad is being used
+        has_financial_scratchpad:
+          type: integer
+          title: Has Financial Scratchpad
+          description: Flag if the financial scratchpad is available
+        financial_scratchpad_used:
+          type: integer
+          title: Financial Scratchpad Used
+          description: Flag if the financial scratchpad is being used
+        has_improvement_scratchpad:
+          type: integer
+          title: Has Improvement Scratchpad
+          description: Flag if the improvement scratchpad is available
+        improvement_scratchpad_used:
+          type: integer
+          title: Improvement Scratchpad Used
+          description: Flag if the improvement scratchpad is being used
+        impact_fmt:
+          type: string
+          title: Impact Fmt
+          description: Formatted impact value
+        driver_value_fmt:
+          type: string
+          title: Driver Value Fmt
+          description: Formatted driver value
+        driver_value_fr:
+          type: number
+          title: Driver Value Fr
+          description: Formatted driver value
+        financial_value_fmt:
+          type: string
+          title: Financial Value Fmt
+          description: Formatted financial value
+        financial_value_fr:
+          type: number
+          title: Financial Value Fr
+          description: Formatted financial value
+        year1_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year1 Driver
+          description: Driver value for the first year
+          default: 0
+        year1_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year1 Improvement
+          description: Improvement factor for the first year
+          default: 0
+        year1_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year1 Financial
+          description: Financial value for the first year
+          default: 0
+        year1_benefits_fmt:
+          type: string
+          title: Year1 Benefits Fmt
+          description: Formatted benefits for the first year
+        year1_benefits_fr:
+          type: number
+          title: Year1 Benefits Fr
+          description: Formatted benefits for the first year
+        monthly:
+          type: number
+          title: Monthly
+          description: Monthly benefits
+        year2_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year2 Driver
+          description: Driver value for the second year
+          default: 0
+        year2_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year2 Improvement
+          description: Improvement factor for the second year
+          default: 0
+        year2_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year2 Financial
+          description: Financial value for the second year
+          default: 0
+        year2_benefits_fmt:
+          type: string
+          title: Year2 Benefits Fmt
+          description: Formatted benefits for the second year
+        year2_benefits_fr:
+          type: number
+          title: Year2 Benefits Fr
+          description: Formatted benefits for the second year
+        year3_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year3 Driver
+          description: Driver value for the third year
+          default: 0
+        year3_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year3 Improvement
+          description: Improvement factor for the third year
+          default: 0
+        year3_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year3 Financial
+          description: Financial value for the third year
+          default: 0
+        year3_benefits_fmt:
+          type: string
+          title: Year3 Benefits Fmt
+          description: Formatted benefits for the third year
+        year3_benefits_fr:
+          type: number
+          title: Year3 Benefits Fr
+          description: Formatted benefits for the third year
+        year4_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year4 Driver
+          description: Driver value for the fourth year
+          default: 0
+        year4_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year4 Improvement
+          description: Improvement factor for the fourth year
+          default: 0
+        year4_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year4 Financial
+          description: Financial value for the fourth year
+          default: 0
+        year4_benefits_fmt:
+          type: string
+          title: Year4 Benefits Fmt
+          description: Formatted benefits for the fourth year
+          default: 0
+        year4_benefits_fr:
+          type: number
+          title: Year4 Benefits Fr
+          description: Formatted benefits for the fourth year
+          default: 0
+        year5_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year5 Driver
+          description: Driver value for the fifth year
+          default: 0
+        year5_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year5 Improvement
+          description: Improvement factor for the fifth year
+          default: 0
+        year5_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year5 Financial
+          description: Financial value for the fifth year
+          default: 0
+        year5_benefits_fmt:
+          type: string
+          title: Year5 Benefits Fmt
+          description: Formatted benefits for the fifth year
+          default: 0
+        year5_benefits_fr:
+          type: number
+          title: Year5 Benefits Fr
+          description: Formatted benefits for the fifth year
+          default: 0
+        year6_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year6 Driver
+          description: Driver value for the sixth year
+          default: 0
+        year6_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year6 Improvement
+          description: Improvement factor for the sixth year
+          default: 0
+        year6_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year6 Financial
+          description: Financial value for the sixth year
+          default: 0
+        year6_benefits_fmt:
+          type: string
+          title: Year6 Benefits Fmt
+          description: Formatted benefits for the sixth year
+          default: 0
+        year6_benefits_fr:
+          type: number
+          title: Year6 Benefits Fr
+          description: Formatted benefits for the sixth year
+          default: 0
+        year7_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year7 Driver
+          description: Driver value for the seventh year
+          default: 0
+        year7_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year7 Improvement
+          description: Improvement factor for the seventh year
+          default: 0
+        year7_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year7 Financial
+          description: Financial value for the seventh year
+          default: 0
+        year7_benefits_fmt:
+          type: string
+          title: Year7 Benefits Fmt
+          description: Formatted benefits for the seventh year
+          default: 0
+        year7_benefits_fr:
+          type: number
+          title: Year7 Benefits Fr
+          description: Formatted benefits for the seventh year
+          default: 0
+        year8_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year8 Driver
+          description: Driver value for the eighth year
+          default: 0
+        year8_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year8 Improvement
+          description: Improvement factor for the eighth year
+          default: 0
+        year8_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year8 Financial
+          description: Financial value for the eighth year
+          default: 0
+        year8_benefits_fmt:
+          type: string
+          title: Year8 Benefits Fmt
+          description: Formatted benefits for the eighth year
+          default: 0
+        year8_benefits_fr:
+          type: number
+          title: Year8 Benefits Fr
+          description: Formatted benefits for the eighth year
+          default: 0
+        year9_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year9 Driver
+          description: Driver value for the ninth year
+          default: 0
+        year9_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year9 Improvement
+          description: Improvement factor for the ninth year
+          default: 0
+        year9_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year9 Financial
+          description: Financial value for the ninth year
+          default: 0
+        year9_benefits_fmt:
+          type: string
+          title: Year9 Benefits Fmt
+          description: Formatted benefits for the ninth year
+          default: 0
+        year9_benefits_fr:
+          type: number
+          title: Year9 Benefits Fr
+          description: Formatted benefits for the ninth year
+          default: 0
+        year10_driver:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year10 Driver
+          description: Driver value for the tenth year
+          default: 0
+        year10_improvement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year10 Improvement
+          description: Improvement factor for the tenth year
+          default: 0
+        year10_financial:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year10 Financial
+          description: Financial value for the tenth year
+          default: 0
+        year10_benefits_fmt:
+          type: string
+          title: Year10 Benefits Fmt
+          description: Formatted benefits for the tenth year
+          default: 0
+        year10_benefits_fr:
+          type: number
+          title: Year10 Benefits Fr
+          description: Formatted benefits for the tenth year
+          default: 0
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_solution_metric_id
+      - value_category_id
+      - metric_note_2_cf
+      - metric_note_3_cf
+      - driver_estimate
+      - driver_override
+      - driver_value
+      - driver_phase_1
+      - driver_phase_2
+      - driver_phase_3
+      - driver_phase_4
+      - driver_phase_5
+      - driver_phase_6
+      - driver_phase_7
+      - driver_phase_8
+      - driver_phase_9
+      - driver_phase_10
+      - impact_override
+      - impact
+      - financial_estimate
+      - financial_override
+      - financial_value
+      - metric_phase_0
+      - metric_phase_1
+      - metric_phase_2
+      - metric_phase_3
+      - metric_phase_4
+      - metric_phase_5
+      - metric_phase_6
+      - metric_phase_7
+      - metric_phase_8
+      - metric_phase_9
+      - metric_phase_10
+      - active
+      - year1_benefits
+      - year2_benefits
+      - year3_benefits
+      - total_benefits
+      - metric_name
+      - description
+      - improvement_factor_id
+      - driver_factor_id
+      - driver_baseline_answer
+      - financial_factor_id
+      - financial_baseline_answer
+      - note_2_label
+      - note_3_label
+      - d_precision
+      - d_literal_number
+      - f_precision
+      - f_literal_number
+      - i_precision
+      - i_literal_number
+      - d_unit_type_id
+      - f_unit_type_id
+      - i_unit_type_id
+      - improvement_factor
+      - value_category
+      - driver_factor
+      - financial_factor
+      - value_prop_metric_id
+      - vp_case_studies
+      - has_driver_scratchpad
+      - driver_scratchpad_used
+      - has_financial_scratchpad
+      - financial_scratchpad_used
+      - has_improvement_scratchpad
+      - improvement_scratchpad_used
+      - impact_fmt
+      - driver_value_fmt
+      - driver_value_fr
+      - financial_value_fmt
+      - financial_value_fr
+      - year1_benefits_fmt
+      - year1_benefits_fr
+      - monthly
+      - year2_benefits_fmt
+      - year2_benefits_fr
+      - year3_benefits_fmt
+      - year3_benefits_fr
+      title: SingleBenefitDetail
+      description: Single Benefit Detail model
+    BenefitPhasingAndFactorPayload:
+      properties:
+        benefit_phasing:
+          anyOf:
+          - $ref: '#/components/schemas/BenefitPhasingValue'
+          - type: 'null'
+          description: containing metric_phase_0 through metric_phase_10
+        factors:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/FactorValue'
+            type: array
+          - type: 'null'
+          title: Factors
+          description: The factors and values being saved
+        apply_all:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Apply All
+          description: 'Apply strategy: 0=single metric, 1=all metrics, 2=value category, 3=models, 4=accrual type'
+          default: 0
+      type: object
+      title: BenefitPhasingAndFactorPayload
+      description: Payload for updating benefit phasing and factors
+    BenefitPhasingUpdateResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Outcome of each requested update
+        warning:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Warning
+          description: Set when the write succeeded but totals may be stale
+      type: object
+      required:
+      - message
+      title: BenefitPhasingUpdateResponse
+      description: Response model for the benefit phasing and factors update
+    FilterByOption:
+      type: string
+      enum:
+      - value_category
+      - functional_objectives
+      - painpoints
+      - capabilities
+      - operational_objectives
+      - impact_types
+      - accrual_types
+      title: FilterByOption
+      description: Filter options for benefits-by-type grouping
+    ValueCategory_2:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Value Category
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Category
+        description:
+          type: string
+          title: Description
+          description: Description of the Value Category
+        benefits:
+          items:
+            $ref: '#/components/schemas/value_proposition__benefits__models__Benefit'
+          type: array
+          title: Benefits
+          description: Benefits belonging to the Value Category
+        year1_benefits:
+          type: number
+          title: Year1 Benefits
+          description: Year 1 benefits
+        year2_benefits:
+          type: number
+          title: Year2 Benefits
+          description: Year 2 benefits
+        year3_benefits:
+          type: number
+          title: Year3 Benefits
+          description: Year 3 benefits
+        year4_benefits:
+          type: number
+          title: Year4 Benefits
+          description: Year 4 benefits
+        year5_benefits:
+          type: number
+          title: Year5 Benefits
+          description: Year 5 benefits
+        year6_benefits:
+          type: number
+          title: Year6 Benefits
+          description: Year 6 benefits
+        year7_benefits:
+          type: number
+          title: Year7 Benefits
+          description: Year 7 benefits
+        year8_benefits:
+          type: number
+          title: Year8 Benefits
+          description: Year 8 benefits
+        year9_benefits:
+          type: number
+          title: Year9 Benefits
+          description: Year 9 benefits
+        year10_benefits:
+          type: number
+          title: Year10 Benefits
+          description: Year 10 benefits
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total benefits
+        vc_dif_total:
+          type: number
+          title: Vc Dif Total
+          description: Sum of year-1 differential (driver_value * impact * financial_value) across active metrics in this group
+          default: 0.0
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - benefits
+      - year1_benefits
+      - year2_benefits
+      - year3_benefits
+      - year4_benefits
+      - year5_benefits
+      - year6_benefits
+      - year7_benefits
+      - year8_benefits
+      - year9_benefits
+      - year10_benefits
+      - total_benefits
+      title: ValueCategory
+      description: ValueCategory model
+    BenefitType:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Value Category
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Category
+        description:
+          type: string
+          title: Description
+          description: Description of the Value Category
+        active_count:
+          type: integer
+          title: Active Count
+        soft_count:
+          type: integer
+          title: Soft Count
+        na_count:
+          type: integer
+          title: Na Count
+        top_vc_total:
+          type: string
+          title: Top Vc Total
+        vcs:
+          items:
+            $ref: '#/components/schemas/ValueCategory_2'
+          type: array
+          title: Vcs
+          description: Value Category with benefits
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - vcs
+      title: BenefitType
+      description: BenefitType model
+    BenefitFieldsPayload:
+      properties:
+        alt_metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Name
+          description: Alternative metric name
+        alt_metric_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Description
+          description: Alternative metric description
+        metric_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note
+          description: General note for the metric
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Second metric note
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Third metric note
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features of the metric
+        tco_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tco Name
+          description: TCO Name
+      type: object
+      title: BenefitFieldsPayload
+      description: Benefit Fields Payload model
+    FactorValue:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the Factor being saved
+        source_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Source Type Id
+          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
+          default: '4'
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          title: Value
+          description: Value of the Factor being saved
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+          description: Year in the factor
+          default: 1
+        validating_user_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Validating User Name
+      type: object
+      required:
+      - id
+      - value
+      title: FactorValue
+      description: FactorValue model
+    BenefitsByTypeResponse:
+      properties:
+        has_pain_points:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Pain Points
+          description: Denotes whether the Value Prop has pain points
+          default: false
+        has_functional_objectives:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Functional Objectives
+          description: Denotes whether the Value Prop has functional objectives
+          default: false
+        has_capabilities:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Capabilities
+          description: Denotes whether the Value Prop has capabilities
+          default: false
+        has_operational_objectives:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Operational Objectives
+          description: Denotes whether the Value Prop has operational objectives
+          default: false
+        has_sequence:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Sequence
+          description: Denotes whether the Value Prop has sequenced metrics
+          default: false
+        benefit_types:
+          items:
+            $ref: '#/components/schemas/BenefitType'
+          type: array
+          title: Benefit Types
+          description: The metrics grouped by benefit type
+      type: object
+      required:
+      - benefit_types
+      title: BenefitsByTypeResponse
+      description: Benefits by Type Response Model
+    value_proposition__benefits__models__Benefit:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Benefit
+        name:
+          type: string
+          title: Name
+          description: Name of the Benefit
+        description:
+          type: string
+          title: Description
+          description: Description of the Benefit
+        active:
+          type: string
+          title: Active
+          description: Active status of the Benefit
+        tracker_active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Tracker Active
+          description: Active status of benefit tracker
+        driver_value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: 'null'
+          title: Driver Value
+          description: Formatted driver value
+        financial_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value
+          description: Formatted driver value
+        impact:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: 'null'
+          title: Impact
+          description: Formatted driver value
+        driver_value_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value Fmt
+          description: Formatted driver value
+        driver_value_p2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value P2
+          description: Formatted driver value
+        driver_value_fr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value Fr
+          description: Formatted driver value
+        financial_value_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value Fmt
+          description: Formatted financial value
+        financial_value_p2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value P2
+          description: Formatted financial value
+        financial_value_fr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value Fr
+          description: Formatted financial value
+        year1_benefits:
+          type: number
+          title: Year1 Benefits
+          description: Year 1 benefits
+        year2_benefits:
+          type: number
+          title: Year2 Benefits
+          description: Year 2 benefits
+        year3_benefits:
+          type: number
+          title: Year3 Benefits
+          description: Year 3 benefits
+        year4_benefits:
+          type: number
+          title: Year4 Benefits
+          description: Year 4 benefits
+        year5_benefits:
+          type: number
+          title: Year5 Benefits
+          description: Year 5 benefits
+        year6_benefits:
+          type: number
+          title: Year6 Benefits
+          description: Year 6 benefits
+        year7_benefits:
+          type: number
+          title: Year7 Benefits
+          description: Year 7 benefits
+        year8_benefits:
+          type: number
+          title: Year8 Benefits
+          description: Year 8 benefits
+        year9_benefits:
+          type: number
+          title: Year9 Benefits
+          description: Year 9 benefits
+        year10_benefits:
+          type: number
+          title: Year10 Benefits
+          description: Year 10 benefits
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total benefits
+        account_solution_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Solution Id
+          description: Account solution ID
+        solution_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Solution Name
+          description: Solution name
+        vp_specific:
+          type: integer
+          title: Vp Specific
+          description: Was this metric created for one VP?
+          default: 0
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - active
+      - year1_benefits
+      - year2_benefits
+      - year3_benefits
+      - year4_benefits
+      - year5_benefits
+      - year6_benefits
+      - year7_benefits
+      - year8_benefits
+      - year9_benefits
+      - year10_benefits
+      - total_benefits
+      title: Benefit
+      description: Benefit model
+    MessageResponse_2:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-collaboration-openapi.yml
+- decisionlink-value-proposition-openapi.yml

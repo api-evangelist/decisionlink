@@ -1,0 +1,160 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Phasing API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: phasing
+paths:
+  /v1/value-proposition/{valuePropId}/driver-phasing:
+    put:
+      tags:
+      - phasing
+      summary: Update a Driver's Phasing
+      description: "Endpoint for updating a driver's phasing\n\nParameters\n----------\npayload : UpdateDriverPhasingPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+      operationId: update_driver_phasing_v1_value_proposition__valuePropId__driver_phasing_put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDriverPhasingPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UpdateDriverPhasingPayload:
+      properties:
+        value_prop_metric_id:
+          anyOf:
+          - type: integer
+          - type: string
+          title: Value Prop Metric Id
+          description: The ID for the value proposition metric
+        driver_phase_2:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 2
+          description: The value for driver phase 2
+        driver_phase_3:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 3
+          description: The value for driver phase 3
+        driver_phase_4:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 4
+          description: The value for driver phase 4
+        driver_phase_5:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 5
+          description: The value for driver phase 5
+        driver_phase_6:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 6
+          description: The value for driver phase 6
+        driver_phase_7:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 7
+          description: The value for driver phase 7
+        driver_phase_8:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 8
+          description: The value for driver phase 8
+        driver_phase_9:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 9
+          description: The value for driver phase 9
+        driver_phase_10:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Phase 10
+          description: The value for driver phase 10
+      type: object
+      required:
+      - value_prop_metric_id
+      title: UpdateDriverPhasingPayload
+      description: UpdateDriverPhasingPayload model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

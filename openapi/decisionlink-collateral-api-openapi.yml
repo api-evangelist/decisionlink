@@ -1,0 +1,328 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Collateral API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: collateral
+paths:
+  /v1/value-proposition/{valuePropId}/collateral:
+    get:
+      tags:
+      - collateral
+      summary: Read collateral
+      description: 'Retrieve all collateral records for a given value proposition.
+
+
+        Path Parameters:
+
+        - valuePropId (int): Identifier of the value proposition whose collateral items to fetch.'
+      operationId: get_collaterals_v1_value_proposition__valuePropId__collateral_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collateral'
+                title: Response Get Collaterals V1 Value Proposition  Valuepropid  Collateral Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - collateral
+      summary: Add collateral
+      description: "Create a new collateral item under a given value proposition.\n\nPath Parameters:\n- valuePropId (int): Identifier of the value proposition to which this collateral belongs.\n\nBody:\n- CollateralCreatePayload: {\n    \"format_type_id\": \"1\",\n    \"name\": \"test12334\",\n    \"description\": \"test\",\n    \"url\": \"test123.com\"\n}"
+      operationId: add_collateral_v1_value_proposition__valuePropId__collateral_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollateralCreatePayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/collateral/{collateralId}:
+    put:
+      tags:
+      - collateral
+      summary: Update collateral
+      description: "Update an existing collateral record.\n\nPath Parameters:\n- valuePropId (int): Identifier of the parent value proposition.\n- collateralId (int): Identifier of the collateral to update.\n\nBody:\n- CollateralUpdatePayload:\n{\n    \"format_type_id\": \"1\",\n    \"name\": \"test12334\",\n    \"description\": \"test\",\n    \"url\": \"test123.com\"\n}"
+      operationId: update_collateral_v1_value_proposition__valuePropId__collateral__collateralId__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: collateralId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Collateralid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollateralUpdatePayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - collateral
+      summary: Delete collateral
+      description: 'Delete a collateral record.
+
+
+        Path Parameters:
+
+        - valuePropId (int): Identifier of the value proposition.
+
+        - collateralId (int): Identifier of the collateral to delete.'
+      operationId: delete_collateral_v1_value_proposition__valuePropId__collateral__collateralId__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: collateralId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Collateralid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CollateralUpdatePayload:
+      properties:
+        format_type_id:
+          type: integer
+          title: Format Type Id
+          description: Foreign key to fact_format_types
+        name:
+          type: string
+          title: Name
+          description: Name of the asset
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Detailed description of the asset
+          default: ''
+        url:
+          type: string
+          title: Url
+          description: URL where this asset can be accessed
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Identifier for the related value proposition (defaults to 0)
+          default: 0
+      type: object
+      required:
+      - format_type_id
+      - name
+      - url
+      title: CollateralUpdatePayload
+      description: Detailed Collateral Update Payload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Collateral:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the collateral
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Identifier for the associated account solution
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Identifier for the related value proposition
+        format_type_id:
+          type: integer
+          title: Format Type Id
+          description: Identifier for the format type
+        name:
+          type: string
+          title: Name
+          description: Name of the collateral
+        description:
+          type: string
+          title: Description
+          description: Detailed description of the collateral
+        url:
+          type: string
+          title: Url
+          description: URL to access the collateral
+        format:
+          type: string
+          title: Format
+          description: Format of the collateral (e.g., Website)
+      type: object
+      required:
+      - id
+      - account_solution_id
+      - value_prop_id
+      - format_type_id
+      - name
+      - description
+      - url
+      - format
+      title: Collateral
+      description: Detailed Collateral Model
+    CollateralCreatePayload:
+      properties:
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: ID of the account_solution this asset belongs to
+        format_type_id:
+          type: integer
+          title: Format Type Id
+          description: Foreign key to fact_format_types
+        name:
+          type: string
+          title: Name
+          description: Human-readable name of the asset
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Detailed description of the asset
+          default: ''
+        url:
+          type: string
+          title: Url
+          description: URL where this asset can be accessed
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Identifier for the related value proposition (defaults to 0)
+          default: 0
+      type: object
+      required:
+      - account_solution_id
+      - format_type_id
+      - name
+      - url
+      title: CollateralCreatePayload
+      description: Detailed Collateral Create Payload Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

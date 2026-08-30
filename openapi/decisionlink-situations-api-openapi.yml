@@ -1,0 +1,421 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Situations API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: situations
+paths:
+  /v1/value-proposition/{valuePropId}/situations:
+    get:
+      tags:
+      - situations
+      summary: Get the situations of Value Proposition
+      description: "Endpoint for reading the Value Proposition situations\n\nReturns\n-------\nList[Situation]\n    Returns the Value Proposition situations"
+      operationId: get_situations_v1_value_proposition__valuePropId__situations_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: ai_updatable_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Ai Updatable Only
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Situation'
+                title: Response Get Situations V1 Value Proposition  Valuepropid  Situations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - situations
+      summary: Save the values for situations
+      description: "Endpoint for saving situations\n\nParameters\n----------\nrequest\nvalue_prop_id\nsituations : SituationPayload\n    The situations and their elements to be saved\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+      operationId: update_situations_v1_value_proposition__valuePropId__situations_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SituationPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SituationPayload:
+      properties:
+        situations:
+          items:
+            $ref: '#/components/schemas/SituationValue'
+          type: array
+          title: Situations
+          description: The list of situations to being saved
+      type: object
+      required:
+      - situations
+      title: SituationPayload
+      description: SituationPayload model
+    SituationValue:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Situation ID
+        element_id:
+          type: string
+          title: Element Id
+          description: Situation Element ID
+      type: object
+      required:
+      - id
+      - element_id
+      title: SituationValue
+      description: SituationValue model
+    Situation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Situation
+        name:
+          type: string
+          title: Name
+          description: Name of the Situation
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Situation
+          default: ''
+        multi_select:
+          type: boolean
+          title: Multi Select
+          description: Multi-select status of the Situation
+        question_type:
+          type: string
+          title: Question Type
+          description: Question type of the Situation
+        required:
+          type: boolean
+          title: Required
+          description: Required status of the Situation
+        elements:
+          items:
+            $ref: '#/components/schemas/Element'
+          type: array
+          title: Elements
+          description: Elements of the Situation
+        source_attribution:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Attribution
+        attribution_link:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Revert Value
+      type: object
+      required:
+      - id
+      - name
+      - multi_select
+      - question_type
+      - required
+      - elements
+      title: Situation
+      description: Situation model
+    ChildElement:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Child Element
+        account_situation_type_id:
+          type: string
+          title: Account Situation Type Id
+          description: Account Situation Type ID
+        name:
+          type: string
+          title: Name
+          description: Name of the Child Element
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Child Element
+        box_label:
+          type: string
+          title: Box Label
+          description: Box Label of the Child Element
+          default: ''
+        parent_id:
+          type: string
+          title: Parent Id
+          description: Parent ID of the Child Element
+        child_element_type_id:
+          type: string
+          title: Child Element Type Id
+          description: Child Element Type ID
+        created:
+          type: string
+          title: Created
+          description: Date when the Child Element was created
+        modified:
+          type: string
+          title: Modified
+          description: Date when the Child Element was modified
+        dep_element_id:
+          type: string
+          title: Dep Element Id
+          description: Dependency Element ID
+        dep_parent_id:
+          type: string
+          title: Dep Parent Id
+          description: Dependency Parent ID
+        situation_element_id:
+          type: string
+          title: Situation Element Id
+          description: Situation Element ID
+        value:
+          type: string
+          title: Value
+          description: Value of the Child Element
+        situation_type_id:
+          type: string
+          title: Situation Type Id
+          description: Situation Type ID
+        name_override:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name Override
+          description: Name Override of the Child Element
+        description_override:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description Override
+          description: Description Override of the Child Element
+        guided_default_active:
+          anyOf:
+          - type: string
+          - type: integer
+          title: Guided Default Active
+          description: Guided Default Active status
+        selected:
+          type: boolean
+          title: Selected
+          description: Selected status of the Child Element
+        children:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ChildElement'
+            type: array
+          - type: 'null'
+          title: Children
+          description: Children of the Child Element
+        can_set_child_element:
+          type: boolean
+          title: Can Set Child Element
+          description: Can Set Child Element status
+      type: object
+      required:
+      - id
+      - account_situation_type_id
+      - name
+      - parent_id
+      - child_element_type_id
+      - created
+      - modified
+      - dep_element_id
+      - dep_parent_id
+      - situation_element_id
+      - value
+      - situation_type_id
+      - guided_default_active
+      - selected
+      - can_set_child_element
+      title: ChildElement
+      description: Child Element model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    Element:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Element
+        sequence:
+          anyOf:
+          - type: string
+          - type: integer
+          title: Sequence
+          description: Sequence of the Element
+        name:
+          type: string
+          title: Name
+          description: Name of the Element
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Element
+          default: ''
+        situation_category_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Situation Category Id
+          description: Situation Category ID
+        selected:
+          type: boolean
+          title: Selected
+          description: Selected status of the Element
+        child_element_type_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Child Element Type Id
+          description: Select-type for this element's children (maps to fact_situation_element_types)
+        can_set_child_element:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Can Set Child Element
+          description: Whether the element accepts child elements
+        child_multi_select:
+          type: boolean
+          title: Child Multi Select
+          description: 'Derived: children allow multi-select (type 2 or 4)'
+          default: false
+        child_question_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Child Question Type
+          description: Derived label for the children sub-list control (Radio Button / Check Box / Drop Down)
+        children:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ChildElement'
+            type: array
+          - type: 'null'
+          title: Children
+          description: Children of the Element
+        created_at:
+          type: string
+          title: Created At
+          description: Date when the Element was created
+        updated_at:
+          type: string
+          title: Updated At
+          description: Date when the Element was updated
+      type: object
+      required:
+      - id
+      - sequence
+      - name
+      - selected
+      - created_at
+      - updated_at
+      title: Element
+      description: Element model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

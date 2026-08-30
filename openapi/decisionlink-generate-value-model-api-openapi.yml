@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  title: Value Chat Server Generate Value Model API
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: generate-value-model
+paths:
+  /v1/value-chat/generate-value-model:
+    post:
+      tags:
+      - generate-value-model
+      summary: Start value model generation from uploaded files
+      description: Kick off async value model generation. Returns a job_id to poll.
+      operationId: start_generate_value_model_v1_value_chat_generate_value_model_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateValueModelRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /stream/generate-value-model/{job_id}/status:
+    get:
+      tags:
+      - generate-value-model
+      summary: Stream value model generation status via Server-Sent Events
+      description: SSE stream emitting job state once per second until done or error.
+      operationId: get_generate_value_model_status_stream_generate_value_model__job_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    GenerateValueModelRequest:
+      properties:
+        file_ids:
+          items:
+            type: string
+          type: array
+          title: File Ids
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      type: object
+      required:
+      - file_ids
+      title: GenerateValueModelRequest
+      description: Request body for starting value model generation.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

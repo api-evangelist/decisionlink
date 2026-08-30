@@ -1,0 +1,162 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Attributions API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: attributions
+paths:
+  /v1/value-proposition/{valuePropId}/attributions:
+    post:
+      tags:
+      - attributions
+      summary: Save new value prop attributions
+      description: Endpoint to create value prop attributions
+      operationId: save_value_prop_attributions_v1_value_proposition__valuePropId__attributions_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAttribution'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - attributions
+      summary: Read attributions for VP
+      description: Endpoint to get attributions
+      operationId: read_attributions_v1_value_proposition__valuePropId__attributions_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: sectionTypeId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sectiontypeid
+      - name: objectId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Objectid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CreateAttribution:
+      properties:
+        section_type_id:
+          type: integer
+          title: Section Type Id
+        object_id:
+          type: integer
+          title: Object Id
+        source_type:
+          type: string
+          title: Source Type
+        source:
+          type: string
+          title: Source
+        suggested_value_text:
+          type: string
+          title: Suggested Value Text
+      type: object
+      required:
+      - section_type_id
+      - object_id
+      - source_type
+      - source
+      - suggested_value_text
+      title: CreateAttribution
+      description: Attribution Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

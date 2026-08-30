@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Done API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: done
+paths:
+  /v1/value-proposition/{valuePropId}/done:
+    patch:
+      tags:
+      - done
+      summary: Set value prop done flags
+      description: Endpoint for setting value prop done flags
+      operationId: update_value_prop_done_v1_value_proposition__valuePropId__done_patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Done'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Done:
+      properties:
+        done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Done
+          description: Done flag
+        scenario_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scenario Done
+          description: Scenario done flag
+        situation_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Situation Done
+          description: Situation done flag
+        scalers_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scalers Done
+          description: Scalers done flag
+        key_data_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Key Data Done
+          description: Key Data done flag
+        review_benefits_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Review Benefits Done
+          description: Review Benefits data done flag
+        customer_investment_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Customer Investment Done
+          description: Customer Investment done flag
+      type: object
+      title: Done
+      description: Done model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

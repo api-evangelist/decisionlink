@@ -1,0 +1,246 @@
+openapi: 3.2.0
+info:
+  title: Chat Server Value API
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: value
+paths:
+  /v1/value-chat/prompts:
+    get:
+      tags:
+      - value
+      summary: Gets value prompts for user
+      description: Get value specific pills and prompts for value user
+      operationId: get_value_prompts_v1_value_chat_prompts_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: section
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Section
+      - name: active_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Active Only
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - value
+      summary: Create a value prompt
+      description: Create a new value prompt (xfactor admins only)
+      operationId: create_value_prompt_route_v1_value_chat_prompts_post
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValuePromptCreate'
+      responses:
+        '201':
+          description: Return HTTP Status Code 201 (Created)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/prompts/{prompt_id}:
+    put:
+      tags:
+      - value
+      summary: Update a value prompt
+      description: Update an existing value prompt (xfactor admins only)
+      operationId: update_value_prompt_route_v1_value_chat_prompts__prompt_id__put
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: prompt_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Prompt Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValuePromptUpdate'
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - value
+      summary: Delete a value prompt
+      description: Delete a value prompt (xfactor admins only)
+      operationId: delete_value_prompt_route_v1_value_chat_prompts__prompt_id__delete
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: prompt_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Prompt Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValuePromptUpdate:
+      properties:
+        sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sequence
+        active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        sections:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sections
+      type: object
+      title: ValuePromptUpdate
+      description: Value Prompt Update Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValuePromptCreate:
+      properties:
+        sequence:
+          type: integer
+          title: Sequence
+          default: 0
+        active:
+          type: integer
+          title: Active
+          default: 0
+        display_name:
+          type: string
+          title: Display Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        prompt:
+          type: string
+          title: Prompt
+          default: ''
+        sections:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sections
+      type: object
+      required:
+      - display_name
+      title: ValuePromptCreate
+      description: Value Prompt Create Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

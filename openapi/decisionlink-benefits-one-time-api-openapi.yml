@@ -1,0 +1,612 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Benefits One Time API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: benefits-one-time
+paths:
+  /v1/value-proposition/{valuePropId}/benefits/one-time:
+    post:
+      tags:
+      - benefits-one-time
+      summary: Create a one-time (on-the-fly) benefit
+      description: 'Create a new one-time benefit for a value proposition.
+
+
+        Inserts rows into account_solution_metrics (vp_specific=1) and
+
+        value_prop_metrics (active=1), inserts optional link rows, writes
+
+        an audit log entry, and triggers inline benefit recalculation.
+
+        Requires privilege_id=6 (Benefit on the Fly).'
+      operationId: create_one_time_benefit_endpoint_v1_value_proposition__valuePropId__benefits_one_time_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OneTimeBenefitCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimeBenefitResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/benefits/one-time/{benefitId}:
+    patch:
+      tags:
+      - benefits-one-time
+      summary: Partially update a one-time benefit
+      description: 'Partially update a one-time benefit.
+
+
+        Only updates fields present in the request payload. Validates ownership
+
+        and one-time status via verify_one_time_benefit. Writes an audit log
+
+        entry and triggers inline benefit recalculation.'
+      operationId: update_one_time_benefit_endpoint_v1_value_proposition__valuePropId__benefits_one_time__benefitId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: benefitId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Benefitid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OneTimeBenefitPatch'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OneTimeBenefitCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Benefit name stored as metric_name
+        description:
+          type: string
+          title: Description
+          description: Benefit description
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Solution this benefit belongs to
+        value_category_id:
+          type: integer
+          title: Value Category Id
+          description: Value category for this benefit
+        accrual_type_id:
+          type: integer
+          title: Accrual Type Id
+          description: Accrual type for benefit phasing
+        driver_factor_id:
+          type: integer
+          title: Driver Factor Id
+          description: Driver factor (aggregated) ID
+        improvement_factor_id:
+          type: integer
+          title: Improvement Factor Id
+          description: Improvement factor (aggregated) ID
+        financial_factor_id:
+          type: integer
+          title: Financial Factor Id
+          description: Financial factor (aggregated) ID
+        driver_value:
+          type: number
+          title: Driver Value
+          description: Driver baseline answer / estimate value
+        improvement_value:
+          type: number
+          title: Improvement Value
+          description: Improvement value stored as conservative/probable/aggressive
+        financial_value:
+          type: number
+          title: Financial Value
+          description: Financial baseline answer / estimate value
+        impact_type_id:
+          type: integer
+          title: Impact Type Id
+          description: Impact type ID (default 1)
+          default: 1
+        unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Type Id
+          description: Unit type override; used when improvement_factor_id == 1
+        unique_type_id:
+          type: integer
+          title: Unique Type Id
+          description: Unique type ID (default 1)
+          default: 1
+        current_effort:
+          type: number
+          title: Current Effort
+          description: Current effort value (normalized if percent unit)
+          default: 0
+        features:
+          type: string
+          title: Features
+          description: Features text
+          default: ''
+        area_type_id:
+          items:
+            type: integer
+          type: array
+          title: Area Type Id
+          description: List of area type IDs to link
+        default_na:
+          type: integer
+          title: Default Na
+          description: Default N/A flag
+          default: 0
+        sequence:
+          type: integer
+          title: Sequence
+          description: Display sequence order
+          default: 0
+        expense_type_id:
+          type: integer
+          title: Expense Type Id
+          description: Expense type ID
+          default: 0
+        quantified:
+          type: integer
+          title: Quantified
+          description: Quantified flag
+          default: 1
+        soft:
+          type: integer
+          title: Soft
+          description: Soft benefit flag
+          default: 0
+        benefit_type_id:
+          type: integer
+          title: Benefit Type Id
+          description: Benefit type ID
+          default: 1
+        tco_name:
+          type: string
+          title: Tco Name
+          description: TCO name text
+          default: ''
+        value_statement:
+          type: string
+          title: Value Statement
+          description: Value statement text
+          default: ''
+        course_correction:
+          type: string
+          title: Course Correction
+          description: Course correction text
+          default: ''
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Metric note 2 text
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Metric note 3 text
+        metric_note_2_cf:
+          type: integer
+          title: Metric Note 2 Cf
+          description: Metric note 2 carry-forward flag
+          default: 1
+        metric_note_3_cf:
+          type: integer
+          title: Metric Note 3 Cf
+          description: Metric note 3 carry-forward flag
+          default: 1
+        project_id:
+          type: integer
+          title: Project Id
+          description: Project ID
+          default: 0
+        account_functional_objective_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Functional Objective Id
+          description: Functional objective to link
+        account_operational_objective_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Operational Objective Id
+          description: Operational objective to link
+        account_capability_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Capability Id
+          description: Capability to link
+        account_painpoint_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Painpoint Id
+          description: Pain point to link
+        value_survey_benefit:
+          type: integer
+          title: Value Survey Benefit
+          description: Flag to insert value survey metric links
+          default: 0
+        value_survey_id:
+          items:
+            type: integer
+          type: array
+          title: Value Survey Id
+          description: Survey IDs to link when value_survey_benefit is 1
+      type: object
+      required:
+      - name
+      - description
+      - account_solution_id
+      - value_category_id
+      - accrual_type_id
+      - driver_factor_id
+      - improvement_factor_id
+      - financial_factor_id
+      - driver_value
+      - improvement_value
+      - financial_value
+      title: OneTimeBenefitCreate
+      description: Payload for creating a one-time (on-the-fly) benefit.
+      examples:
+      - summary: required only
+        value:
+          account_solution_id: 42
+          accrual_type_id: 1
+          description: Automate invoice processing to cut manual effort
+          driver_factor_id: 100
+          driver_value: 1200.0
+          financial_factor_id: 300
+          financial_value: 85.0
+          improvement_factor_id: 200
+          improvement_value: 25.0
+          name: Reduce manual processing time
+          value_category_id: 20
+      - summary: all fields
+        value:
+          account_capability_id: 33
+          account_functional_objective_id: 11
+          account_operational_objective_id: 22
+          account_painpoint_id: 44
+          account_solution_id: 42
+          accrual_type_id: 1
+          area_type_id:
+          - 1
+          - 3
+          benefit_type_id: 1
+          course_correction: Review monthly against FTE hours saved
+          current_effort: 480.0
+          default_na: 0
+          description: Automate invoice processing to cut manual effort
+          driver_factor_id: 100
+          driver_value: 1200.0
+          expense_type_id: 2
+          features: Automation, AI-assisted routing
+          financial_factor_id: 300
+          financial_value: 85.0
+          impact_type_id: 2
+          improvement_factor_id: 200
+          improvement_value: 25.0
+          metric_note_2: Assumes 80% straight-through processing
+          metric_note_2_cf: 1
+          metric_note_3: Excludes exception handling cost
+          metric_note_3_cf: 1
+          name: Reduce manual processing time
+          project_id: 7
+          quantified: 1
+          sequence: 5
+          soft: 0
+          tco_name: Process Automation TCO
+          unique_type_id: 1
+          unit_type_id: 17
+          value_category_id: 20
+          value_statement: Reduce manual invoice processing by 25% over 12 months
+          value_survey_benefit: 1
+          value_survey_id:
+          - 55
+          - 66
+    OneTimeBenefitPatch:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Benefit name stored as metric_name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Benefit description
+        value_category_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Category Id
+          description: Value category for this benefit
+        accrual_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Accrual Type Id
+          description: Accrual type for benefit phasing
+        driver_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Factor Id
+          description: Driver factor (aggregated) ID
+        improvement_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Improvement Factor Id
+          description: Improvement factor (aggregated) ID
+        financial_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Financial Factor Id
+          description: Financial factor (aggregated) ID
+        driver_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Driver Value
+          description: Driver baseline answer / estimate value
+        improvement_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Improvement Value
+          description: Improvement value stored as conservative/probable/aggressive
+        financial_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Value
+          description: Financial baseline answer / estimate value
+        impact_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Impact Type Id
+          description: Impact type ID
+        unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Type Id
+          description: Unit type override
+        current_effort:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Effort
+          description: Current effort value
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features text
+        quantified:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quantified
+          description: Quantified flag
+        soft:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Soft
+          description: Soft benefit flag
+        tco_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tco Name
+          description: TCO name text
+        value_statement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Statement
+          description: Value statement text
+        course_correction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Course Correction
+          description: Course correction text
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Metric note 2 text
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Metric note 3 text
+        metric_note_2_cf:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Metric Note 2 Cf
+          description: Metric note 2 carry-forward flag
+        metric_note_3_cf:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Metric Note 3 Cf
+          description: Metric note 3 carry-forward flag
+      type: object
+      title: OneTimeBenefitPatch
+      description: Payload for partial update of a one-time benefit.
+    OneTimeBenefitResponse:
+      properties:
+        value_prop_metric_id:
+          type: integer
+          title: Value Prop Metric Id
+          description: ID of the created value_prop_metrics row
+        account_solution_metric_id:
+          type: integer
+          title: Account Solution Metric Id
+          description: ID of the created account_solution_metrics row
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value prop ID
+        value_category_id:
+          type: integer
+          title: Value Category Id
+          description: Value category ID
+        name:
+          type: string
+          title: Name
+          description: Benefit name
+        driver_value:
+          type: number
+          title: Driver Value
+          description: Normalized driver value stored
+        improvement_value:
+          type: number
+          title: Improvement Value
+          description: Normalized improvement value stored
+        financial_value:
+          type: number
+          title: Financial Value
+          description: Normalized financial value stored
+        current_effort:
+          type: number
+          title: Current Effort
+          description: Normalized current effort stored
+        unit_type_id:
+          type: integer
+          title: Unit Type Id
+          description: Resolved unit type ID stored
+        warning:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Warning
+          description: Present when the benefit was persisted but a post-commit step (links or recalculation) failed; totals may be stale until benefits are recalculated
+      type: object
+      required:
+      - value_prop_metric_id
+      - account_solution_metric_id
+      - value_prop_id
+      - value_category_id
+      - name
+      - driver_value
+      - improvement_value
+      - financial_value
+      - current_effort
+      - unit_type_id
+      title: OneTimeBenefitResponse
+      description: Response model for a created one-time benefit.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

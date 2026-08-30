@@ -1,0 +1,59 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Impact Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: impact_types
+paths:
+  /v1/value-facts/impact-types:
+    get:
+      tags:
+      - impact_types
+      summary: Get all impact types.
+      description: Get all impact types.
+      operationId: get_impact_types_v1_value_facts_impact_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ImpactType'
+                type: array
+                title: Response Get Impact Types V1 Value Facts Impact Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    ImpactType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the impact type.
+        name:
+          type: string
+          title: Name
+          description: Name of the impact type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the impact type.
+      type: object
+      required:
+      - id
+      - name
+      title: ImpactType
+      description: Impact type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

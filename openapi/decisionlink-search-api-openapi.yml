@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Search API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: search
+paths:
+  /v1/value-proposition/search:
+    post:
+      tags:
+      - search
+      summary: Search Value Propositions
+      description: 'Search value propositions accessible to the authenticated user.
+
+
+        Supports text search on VP name and company name,
+
+        sorting, and pagination.'
+      operationId: search_value_propositions_v1_value_proposition_search_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SearchRequest:
+      properties:
+        search_term:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          title: Search Term
+          description: Text to search in VP name and company name
+        include_calcs:
+          type: boolean
+          title: Include Calcs
+          description: Include calculator VPs
+          default: false
+        sort_by:
+          type: string
+          title: Sort By
+          description: Column to sort by
+          default: modified
+        order:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          title: Order
+          description: Sort order (ASC or DESC)
+          default: DESC
+        limit:
+          type: integer
+          maximum: 200.0
+          minimum: 1.0
+          title: Limit
+          description: Max results to return
+          default: 25
+        offset:
+          type: integer
+          minimum: 0.0
+          title: Offset
+          description: Number of results to skip
+          default: 0
+        mode:
+          $ref: '#/components/schemas/ListMode'
+          description: 1=Hypothesis, 2=Value Prop, 3=All
+          default: 3
+      type: object
+      title: SearchRequest
+      description: Request model for searching value propositions.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

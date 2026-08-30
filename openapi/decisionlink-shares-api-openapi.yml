@@ -1,0 +1,274 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Shares API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: shares
+paths:
+  /v1/value-proposition/{valuePropId}/shares:
+    get:
+      tags:
+      - shares
+      summary: List of people who have a share on the value prop
+      description: Endpoint to return a list of people who have a share on a value prop
+      operationId: get_value_prop_shares_v1_value_proposition__valuePropId__shares_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shares'
+                title: Response Get Value Prop Shares V1 Value Proposition  Valuepropid  Shares Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - shares
+      summary: Create new share for the user
+      description: Endpoint to create value prop share for user
+      operationId: create_value_prop_share_v1_value_proposition__valuePropId__shares_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShare'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/shares/{shareId}:
+    delete:
+      tags:
+      - shares
+      summary: Delete the sharedId from value prop
+      description: Endpoint to delete a share from a value prop
+      operationId: delete_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: shareId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Shareid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - shares
+      summary: Update value prop share
+      description: Endpoint to update share_role_type_id for a value prop share
+      operationId: update_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: shareId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Shareid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateShare'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateShare:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+          description: Id of user the share is for
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+        from_crm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Crm
+          description: If created from crm
+          default: 0
+      type: object
+      required:
+      - user_id
+      - share_role_type_id
+      title: CreateShare
+      description: Model for creating a share
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Shares:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID of the value prop share
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+          description: First name of user
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+          description: Last name of user
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+          description: Email name of user
+        share_role_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Share Role Type Id
+          description: ID of share role.
+        share_role:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Share Role
+          description: User role for the share.
+      type: object
+      required:
+      - id
+      title: Shares
+      description: Model for shares
+    UpdateShare:
+      properties:
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+      type: object
+      required:
+      - share_role_type_id
+      title: UpdateShare
+      description: Model for updating a share
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

@@ -1,0 +1,41 @@
+openapi: 3.2.0
+info:
+  title: Value Chat Server Healthcheck API
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: healthcheck
+paths:
+  /healthz:
+    get:
+      tags:
+      - healthcheck
+      summary: Perform a Health Check
+      operationId: get_health_healthz_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+components:
+  schemas:
+    HealthCheck:
+      properties:
+        status:
+          type: string
+          title: Status
+          default: OK
+      type: object
+      title: HealthCheck
+      description: Response model for health check.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

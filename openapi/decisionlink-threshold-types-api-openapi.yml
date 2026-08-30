@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Threshold Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: threshold_types
+paths:
+  /v1/value-facts/threshold-types:
+    get:
+      tags:
+      - threshold_types
+      summary: Get solution threshold types.
+      description: Get solution threshold types.
+      operationId: get_threshold_types_v1_value_facts_threshold_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ThresholdType'
+                type: array
+                title: Response Get Threshold Types V1 Value Facts Threshold Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    ThresholdType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Display name.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the threshold type.
+        keyword:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Keyword
+          description: Keyword identifier.
+        operation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Operation
+          description: Threshold operation.
+      type: object
+      required:
+      - id
+      - name
+      title: ThresholdType
+      description: Solution threshold type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

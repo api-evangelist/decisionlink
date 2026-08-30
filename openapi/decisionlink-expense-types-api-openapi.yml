@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Expense Types API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged expense_types across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: expense_types
+paths:
+  /v1/value-facts/expense-types:
+    get:
+      tags:
+      - expense_types
+      summary: Get all expense types.
+      description: Get all expense types.
+      operationId: get_expense_types_v1_value_facts_expense_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExpenseType'
+                type: array
+                title: Response Get Expense Types V1 Value Facts Expense Types Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/expense-types:
+    get:
+      tags:
+      - expense_types
+      summary: Get all expense types.
+      description: "Get all expense types.\n\nReturns\n-------\n - list[ExpenseType]: List of all expense types."
+      operationId: get_expense_types_v1_value_proposition_expense_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExpenseType_2'
+                type: array
+                title: Response Get Expense Types V1 Value Proposition Expense Types Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    ExpenseType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the expense type.
+        name:
+          type: string
+          title: Name
+          description: Name of the expense type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the expense type.
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation for the expense type.
+      type: object
+      required:
+      - id
+      - name
+      title: ExpenseType
+      description: Expense type response model.
+    ExpenseType_2:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the expense type.
+        name:
+          type: string
+          title: Name
+          description: Name of the expense type.
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation of the expense type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the expense type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the expense type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the expense type was last updated.
+      type: object
+      required:
+      - id
+      - name
+      title: ExpenseType
+      description: Expense Type model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

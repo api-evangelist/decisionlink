@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Solutions API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: solutions
+paths:
+  /v1/value-proposition/{valuePropId}/solutions:
+    post:
+      tags:
+      - solutions
+      summary: Post selected solutions
+      description: 'Passthrough endpoint to submit the selected solutions.
+
+
+        This endpoint forwards the selection to the Concierge API.'
+      operationId: select_solutions_v1_value_proposition__valuePropId__solutions_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SolutionSelection'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/value_proposition__solutions__models__Solution'
+                title: Response Select Solutions V1 Value Proposition  Valuepropid  Solutions Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - solutions
+      summary: Get the solutions for a Value Proposition
+      description: Endpoint to return all the solutions for the value prop.
+      operationId: get_solutions_v1_value_proposition__valuePropId__solutions_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/value_proposition__solutions__models__Solution'
+                title: Response Get Solutions V1 Value Proposition  Valuepropid  Solutions Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/solution-categories:
+    get:
+      tags:
+      - solutions
+      summary: Get the solutions for a Value Proposition
+      description: Retrieve all solution categories
+      operationId: get_solution_categories_v1_value_proposition__valuePropId__solution_categories_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+                title: Response Get Solution Categories V1 Value Proposition  Valuepropid  Solution Categories Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/available-solutions:
+    get:
+      tags:
+      - solutions
+      summary: Get available solutions
+      description: 'Retrieve all available solutions for the current user.
+
+        When grouped=True, returns solutions grouped by category.
+
+        When grouped=False (default), returns a flat list of solutions.'
+      operationId: get_available_solutions_v1_value_proposition_available_solutions_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: grouped
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Grouped
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/Category'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/CategorySolution'
+                title: Response Get Available Solutions V1 Value Proposition Available Solutions Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    value_proposition__solutions__models__Solution:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Solution ID
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value Proposition ID
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        quantity:
+          type: integer
+          title: Quantity
+          description: Quantity
+        deployment_time:
+          type: number
+          title: Deployment Time
+          description: Deployment Time
+        name:
+          type: string
+          title: Name
+          description: Name of the solution
+        description:
+          type: string
+          title: Description
+          description: Description of the solution
+        quantity_enabled:
+          type: integer
+          title: Quantity Enabled
+          description: Indicates if quantity is enabled
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_solution_id
+      - quantity
+      - deployment_time
+      - name
+      - description
+      - quantity_enabled
+      title: Solution
+      description: Solution Model
+    CategorySolution:
+      properties:
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        account_solution_name:
+          type: string
+          title: Account Solution Name
+          description: Name of the solution
+        account_solution_description:
+          type: string
+          title: Account Solution Description
+          description: Account Solution Description
+        selected:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Selected
+          description: Indicates if the solution is selected
+      type: object
+      required:
+      - account_solution_id
+      - account_solution_name
+      - account_solution_description
+      title: CategorySolution
+      description: Solutions grouped by categories
+    Category:
+      properties:
+        category_id:
+          type: integer
+          title: Category Id
+          description: Category ID
+        category_name:
+          type: string
+          title: Category Name
+          description: Category Name
+        category_description:
+          type: string
+          title: Category Description
+          description: Category Description
+        solutions:
+          items:
+            $ref: '#/components/schemas/CategorySolution'
+          type: array
+          title: Solutions
+          description: List of solutions under this category
+      type: object
+      required:
+      - category_id
+      - category_name
+      - category_description
+      - solutions
+      title: Category
+      description: Solution Categories
+    SolutionSelection:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+          description: List of selected solution IDs
+      type: object
+      required:
+      - solutions
+      title: SolutionSelection
+      description: SolutionSelection model for submitting selected solutions.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

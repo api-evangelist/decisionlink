@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: Value Chat Server Generate Vp API
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: generate-vp
+paths:
+  /v1/value-chat/generate-vp:
+    post:
+      tags:
+      - generate-vp
+      summary: Start VP generation from a company and set of solutions
+      description: Kick off async VP analysis. Returns a job_id to poll progress.
+      operationId: start_generate_vp_v1_value_chat_generate_vp_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVPRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /stream/generate-vp/{job_id}/status:
+    get:
+      tags:
+      - generate-vp
+      summary: Stream VP generation job status via Server-Sent Events
+      description: SSE stream emitting job state once per second until done or error.
+      operationId: get_generate_vp_status_stream_generate_vp__job_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GenerateVPRequest:
+      properties:
+        company_id:
+          type: string
+          title: Company Id
+        solutions:
+          items:
+            type: string
+          type: array
+          title: Solutions
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      type: object
+      required:
+      - company_id
+      - solutions
+      title: GenerateVPRequest
+      description: Request body for starting VP generation.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

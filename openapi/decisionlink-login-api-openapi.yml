@@ -1,0 +1,161 @@
+openapi: 3.2.0
+info:
+  title: Collaboration Manager Login API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/collaboration/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: login
+paths:
+  /v1/collaboration/login:
+    post:
+      tags:
+      - login
+      summary: Login a user for collaboration manager
+      description: "Endpoint for logging into the collaboration manager\n\nParameters\n----------\nlogin : Login\n    The login credentials\n\nReturns\n-------\nAccessToken\n    Returns access_token for collaboration manager"
+      operationId: collaboration_login_v1_collaboration_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollaborationMetadata'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    Login:
+      properties:
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+          description: Password for the collaboration
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+          description: The hash for the collaboration
+        ac:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ac
+          description: Access Code to access the collaboration
+      type: object
+      title: Login
+      description: Login model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CollaborationMetadata:
+      properties:
+        access_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Token
+          description: The access token for authenicating with collaboration manager
+        account_asset_template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Asset Template Id
+          description: The selected asset for the customer to download
+        assumptions_editable:
+          type: string
+          title: Assumptions Editable
+          description: Denotes whether or not the assumptions should be shown and editable
+        benefits_editable:
+          type: string
+          title: Benefits Editable
+          description: Denotes whether or not the benefits should be shown and editable
+        discovery_questions_enabled:
+          type: string
+          title: Discovery Questions Enabled
+          description: Denotes whether or not the discovery questions should be shown and editable
+        user_id:
+          type: string
+          title: User Id
+          description: The Value Execution user_id for the collaboration user
+        value_prop_id:
+          type: string
+          title: Value Prop Id
+          description: The ID for the Value Proposition being collaborated on
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: The features active on the host account
+          default: ''
+        currency_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Currency Type Id
+          description: The currency type ID for the collaboration
+        currency_abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Currency Abbreviation
+          description: The currency abbreviation for the collaboration
+      type: object
+      required:
+      - assumptions_editable
+      - benefits_editable
+      - discovery_questions_enabled
+      - user_id
+      - value_prop_id
+      title: CollaborationMetadata
+      description: CollaborationMetadata model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

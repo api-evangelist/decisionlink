@@ -1,0 +1,188 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Logs API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: logs
+paths:
+  /v1/value-proposition/{valuePropId}/logs:
+    get:
+      tags:
+      - logs
+      summary: Get the logs for a Value Proposition
+      description: Endpoint to return the logs for the value prop.
+      operationId: get_solutions_v1_value_proposition__valuePropId__logs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      - name: userId
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Userid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+                title: Response Get Solutions V1 Value Proposition  Valuepropid  Logs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LogEntry:
+      properties:
+        action:
+          type: string
+          title: Action
+          description: The action performed (e.g., Update)
+        action_type_id:
+          type: integer
+          title: Action Type Id
+          description: The ID of the action type
+        first_name:
+          type: string
+          title: First Name
+          description: The first name of the user performing the action
+        id:
+          type: integer
+          title: Id
+          description: The ID associated with the log entry
+        last_name:
+          type: string
+          title: Last Name
+          description: The last name of the user performing the action
+        log_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Log Text
+          description: A description of the action or event
+          default: ''
+        modified:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Modified
+          description: The timestamp of when the action was performed
+        new_val:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: New Val
+          description: The new value after the action (if any)
+          default: ''
+        object_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Object Id
+          description: The ID of the object being updated
+          default: ''
+        object_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Object Name
+          description: The name of the object being updated
+          default: ''
+        previous_val:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous Val
+          description: The previous value before the action (if any)
+          default: ''
+        section:
+          type: string
+          title: Section
+          description: The section or area where the update occurred
+        section_type_id:
+          type: integer
+          title: Section Type Id
+          description: The ID of the section type
+        user_id:
+          type: integer
+          title: User Id
+          description: The user ID of the person performing the action
+        user_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Name
+          description: The username of the person performing the action
+          default: ''
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: The ID of the value proposition being updated
+      type: object
+      required:
+      - action
+      - action_type_id
+      - first_name
+      - id
+      - last_name
+      - section
+      - section_type_id
+      - user_id
+      - value_prop_id
+      title: LogEntry
+      description: Class to represent a log entry
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

@@ -1,0 +1,1510 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Value Props API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: value_props
+paths:
+  /v1/value-proposition/{valuePropId}/calculate-metrics:
+    post:
+      tags:
+      - value_props
+      summary: Calculate metrics for a value proposition
+      description: "Endpoint for calculating metrics for a value proposition\n\nParameters\n----------\nvalue_prop_id : int\n    The value proposition ID\n\nReturns\n-------\nJSONResponse\n    Returns the calculated metrics response"
+      operationId: calculate_metrics_v1_value_proposition__valuePropId__calculate_metrics_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}:
+    get:
+      tags:
+      - value_props
+      summary: Get the details of a Value Proposition
+      description: Endpoint for reading the Value Proposition details.
+      operationId: get_value_proposition_v1_value_proposition__valuePropId__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueProp'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - value_props
+      summary: Update a Value Proposition
+      description: "Endpoint for updating a value proposition\n\nParameters\n----------\npayload : UpdateValuePropPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+      operationId: update_value_proposition_v1_value_proposition__valuePropId__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateValuePropPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - value_props
+      summary: Delete a value proposition
+      description: "Endpoint for deleting a Value Proposition\n\nReturns\n-------\nMessageResponse\n    Response from delete action"
+      operationId: delete_value_proposition_v1_value_proposition__valuePropId__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/vc-chart:
+    get:
+      tags:
+      - value_props
+      summary: Get the vc chart of a Value Proposition
+      description: "Endpoint for reading the Value Proposition vc charts\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition vc chart"
+      operationId: get_value_proposition_vc_chart_v1_value_proposition__valuePropId__vc_chart_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValuePropVCChart'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition:
+    post:
+      tags:
+      - value_props
+      summary: Create a new Value Proposition
+      description: "Endpoint for creating a Value Proposition\n\nParameters\n----------\npayload : CreateValuePropPayload\n    The initial details for creating the Value Proposition\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition details"
+      operationId: create_value_proposition_v1_value_proposition_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateValuePropPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueProp'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/{valuePropId}/clone:
+    post:
+      tags:
+      - value_props
+      summary: Create a Value Proposition clone
+      description: "Endpoint for creating a value proposition clone\n\nParameters\n----------\npayload : CloneValuePropPayload\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition clone details"
+      operationId: clone_value_proposition_v1_value_proposition__valuePropId__clone_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneValuePropPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValueProp'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/{valuePropId}/reassign:
+    patch:
+      tags:
+      - value_props
+      summary: Reassign a Value Proposition
+      description: Endpoint for reassigning a value proposition
+      operationId: reassign_value_proposition_v1_value_proposition__valuePropId__reassign_patch
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: valuePropId
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Valuepropid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReassignValuePropPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PaybackChart:
+      properties:
+        net:
+          items:
+            type: number
+          type: array
+          title: Net
+        net_fmt:
+          items:
+            type: string
+          type: array
+          title: Net Fmt
+        payback:
+          type: string
+          title: Payback
+        payback_formula:
+          type: string
+          title: Payback Formula
+        payback_formula_text:
+          type: string
+          title: Payback Formula Text
+        years:
+          items:
+            type: string
+          type: array
+          title: Years
+      type: object
+      required:
+      - net
+      - net_fmt
+      - payback
+      - payback_formula
+      - payback_formula_text
+      - years
+      title: PaybackChart
+      description: Payback chart data for a value proposition.
+    ReassignValuePropPayload:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+          description: ID of the user to take over the value prop
+      type: object
+      required:
+      - user_id
+      title: ReassignValuePropPayload
+      description: ReassignValuePropPayload model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValueProp:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID of the ValueProp
+        name:
+          type: string
+          title: Name
+          description: Name of the ValueProp
+        company_id:
+          type: string
+          title: Company Id
+          description: CompanyID of the ValueProp
+        company_name:
+          type: string
+          title: Company Name
+          description: Company Name of the ValueProp
+        opportunity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+          description: Opportunity ID of the ValueProp
+        term:
+          type: integer
+          title: Term
+          description: Term of the ValueProp in Years
+        baseline_type_id:
+          type: integer
+          title: Baseline Type Id
+          description: Baseline Type of the ValueProp
+        currency_type_id:
+          type: integer
+          title: Currency Type Id
+          description: Currency Type of the ValueProp
+        language_type_id:
+          type: integer
+          title: Language Type Id
+          description: Language Type of the ValueProp
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total Benefits of the ValueProp
+        total_benefits_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Benefits Fmt
+        total_costs:
+          type: number
+          title: Total Costs
+          description: Total Costs of the ValueProp
+        total_costs_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Costs Fmt
+        cost_of_delay:
+          type: number
+          title: Cost Of Delay
+          description: Cost of Delay for the ValueProp
+        cost_of_delay_fmt:
+          type: string
+          title: Cost Of Delay Fmt
+          description: Formatted Cost of Delay for the ValueProp
+        net_cashflow_fmt:
+          type: string
+          title: Net Cashflow Fmt
+          description: Formatted net cash flow
+        gross_profit:
+          type: number
+          title: Gross Profit
+          description: Gross Profit of the ValueProp
+        irr:
+          type: number
+          title: Irr
+          description: IRR of the ValueProp
+        npv:
+          type: number
+          title: Npv
+          description: Net Present Value of the ValueProp
+        npv_fmt:
+          type: string
+          title: Npv Fmt
+          description: Formatted Net Present Value of the ValueProp
+        payback:
+          type: number
+          title: Payback
+          description: Payback Period of the ValueProp
+        roi:
+          type: number
+          title: Roi
+          description: Return on Investment of the ValueProp
+        roi_range:
+          type: number
+          title: Roi Range
+          description: Return on Investment Range of the ValueProp
+        roi_decorated:
+          type: string
+          title: Roi Decorated
+          description: Return on decorated Investment Range of the ValueProp
+        tco:
+          type: number
+          title: Tco
+          description: Total Cost of Ownership of the ValueProp
+        wacc:
+          type: number
+          title: Wacc
+          description: Weighted Average Cost of Capital of the ValueProp
+        closed:
+          type: integer
+          title: Closed
+          description: Closed Status of the ValueProp
+        status:
+          type: string
+          title: Status
+          description: Status of the ValueProp
+        status_id:
+          type: integer
+          title: Status Id
+          description: Status ID of the ValueProp
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: URL of the ValueProp
+        solutions_display:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Solutions Display
+          description: Original display of ValueProp Solutions
+        xf_solutions_display:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Xf Solutions Display
+          description: XF specific display of ValueProp Solutions
+        created_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created At
+          description: Date when the ValueProp was created
+        created_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created By
+          description: Name of User who created the ValueProp
+        created_by_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created By Email
+          description: Email of User who created the ValueProp
+        updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated At
+          description: Date when the ValueProp was last updated
+        updated_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated By
+          description: Name of User who last updated the ValueProp
+        updated_by_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Updated By Email
+          description: Email of User who last updated the ValueProp
+        done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Done
+          description: Done flag
+          default: 0
+        scenario_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scenario Done
+          description: Scenario done flag
+          default: 0
+        situation_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Situation Done
+          description: Situation done flag
+          default: 0
+        scalers_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scalers Done
+          description: Scalers done flag
+          default: 0
+        key_data_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Key Data Done
+          description: Key Data done flag
+        review_benefits_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Review Benefits Done
+          description: Review Benefits data done flag
+        customer_investment_done:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Customer Investment Done
+          description: Customer Investment done flag
+        custom_value_realized_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Custom Value Realized Date
+          description: Custom value realized date
+        npv_formula:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npv Formula
+          description: Formula with values for npv
+        npv_formula_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Npv Formula Text
+          description: Formula with names for npv
+        net_cashflow_formula:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Net Cashflow Formula
+          description: Formula with values for net cashflow
+        net_cashflow_formula_text:
+          type: string
+          title: Net Cashflow Formula Text
+          description: Formula with names for net cashflow
+        payback_data:
+          anyOf:
+          - $ref: '#/components/schemas/PaybackChart'
+          - type: 'null'
+        cost_of_delay_data:
+          anyOf:
+          - $ref: '#/components/schemas/CostOfDelay'
+          - type: 'null'
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        solutions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ValuePropSolution'
+            type: array
+          - type: 'null'
+          title: Solutions
+          description: List of solutions
+        year1_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year1 Benefits
+          description: Year 1 benefits
+        year2_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year2 Benefits
+          description: Year 2 benefits
+        year3_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year3 Benefits
+          description: Year 3 benefits
+        year4_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year4 Benefits
+          description: Year 4 benefits
+        year5_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year5 Benefits
+          description: Year 5 benefits
+        year6_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year6 Benefits
+          description: Year 6 benefits
+        year7_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year7 Benefits
+          description: Year 7 benefits
+        year8_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year8 Benefits
+          description: Year 8 benefits
+        year9_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year9 Benefits
+          description: Year 9 benefits
+        year10_benefits:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year10 Benefits
+          description: Year 10 benefits
+        year1_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year1 Costs
+          description: Year 1 costs
+        year2_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year2 Costs
+          description: Year 2 costs
+        year3_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year3 Costs
+          description: Year 3 costs
+        year4_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year4 Costs
+          description: Year 4 costs
+        year5_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year5 Costs
+          description: Year 5 costs
+        year6_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year6 Costs
+          description: Year 6 costs
+        year7_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year7 Costs
+          description: Year 7 costs
+        year8_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year8 Costs
+          description: Year 8 costs
+        year9_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year9 Costs
+          description: Year 9 costs
+        year10_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Year10 Costs
+          description: Year 10 costs
+        value_prop_status:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Status
+          description: Value proposition status
+        creation_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Creation Source
+          description: Source that originated the Value Proposition creation
+          default: user
+      type: object
+      required:
+      - id
+      - name
+      - company_id
+      - company_name
+      - term
+      - baseline_type_id
+      - currency_type_id
+      - language_type_id
+      - total_benefits
+      - total_costs
+      - cost_of_delay
+      - cost_of_delay_fmt
+      - net_cashflow_fmt
+      - gross_profit
+      - irr
+      - npv
+      - npv_fmt
+      - payback
+      - roi
+      - roi_range
+      - roi_decorated
+      - tco
+      - wacc
+      - closed
+      - status
+      - status_id
+      title: ValueProp
+      description: ValueProp model
+    CreateValuePropPayload:
+      properties:
+        company_id:
+          anyOf:
+          - type: integer
+          - type: string
+          title: Company Id
+          description: ID of the Company for the ValueProp
+        sfoide:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sfoide
+          description: SFDC Opportunity ID Encoded from Salesforce
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Name of the Value Proposition
+        user_id_for_sfdc:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id For Sfdc
+        creation_source:
+          type: string
+          enum:
+          - user
+          - dynamic_discovery
+          - autovp
+          - chat
+          - ai
+          title: Creation Source
+          description: 'Source that originated the Value Proposition creation. One of: user, dynamic_discovery, autovp, chat, ai.'
+          default: user
+      type: object
+      required:
+      - company_id
+      title: CreateValuePropPayload
+      description: CreateValuePropPayload model
+    BenefitCategory:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the benefit category
+        name:
+          type: string
+          title: Name
+          description: Name of the benefit category
+        description:
+          type: string
+          title: Description
+          description: Description of the benefit category
+        metrics:
+          items:
+            $ref: '#/components/schemas/value_proposition__value_props__models__Benefit'
+          type: array
+          title: Metrics
+          description: List of benefit metrics within this category
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - metrics
+      title: BenefitCategory
+      description: Represents a category grouping of benefits.
+    CloneValuePropPayload:
+      properties:
+        company_id:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Company Id
+          description: ID of the Company for the ValueProp
+        opportunity_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Opportunity Id
+          description: Opportunity ID
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Proposition
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: User id who is the owner of value proposition
+      type: object
+      required:
+      - company_id
+      title: CloneValuePropPayload
+      description: CloneValuePropPayload model
+    UpdateValuePropPayload:
+      properties:
+        company_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Company Id
+          description: ID of the Company for the ValueProp
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Name of the Value Proposition
+      type: object
+      title: UpdateValuePropPayload
+      description: UpdateValuePropPayload model
+    ValuePropSolution:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID of the Solution
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value Prop ID of the Solution
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID of the Solution
+        quantity:
+          type: integer
+          title: Quantity
+          description: Quantity of the Solution
+        deployment_time:
+          type: integer
+          title: Deployment Time
+          description: Deployment time of the Solution
+        created:
+          type: string
+          title: Created
+          description: Creation date of the Solution
+        modified:
+          type: string
+          title: Modified
+          description: Modification date of the Solution
+        name:
+          type: string
+          title: Name
+          description: Name of the Solution
+        description:
+          type: string
+          title: Description
+          description: Description of the Solution
+        quantity_enabled:
+          type: integer
+          title: Quantity Enabled
+          description: Quantity enabled flag of the Solution
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_solution_id
+      - quantity
+      - deployment_time
+      - created
+      - modified
+      - name
+      - description
+      - quantity_enabled
+      title: ValuePropSolution
+      description: ValueProp Solution model
+    CostOfDelay:
+      properties:
+        formula:
+          type: string
+          title: Formula
+        formula_text:
+          type: string
+          title: Formula Text
+        three_months_cost_of_delay:
+          type: number
+          title: Three Months Cost Of Delay
+        three_months_cost_of_delay_fmt:
+          type: string
+          title: Three Months Cost Of Delay Fmt
+      type: object
+      required:
+      - formula
+      - formula_text
+      - three_months_cost_of_delay
+      - three_months_cost_of_delay_fmt
+      title: CostOfDelay
+      description: Cost of delay (cost of inaction) chart data.
+    value_proposition__value_props__models__Benefit:
+      properties:
+        value_prop_metric_id:
+          type: string
+          title: Value Prop Metric Id
+          description: Value proposition metric id
+        driver_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Driver Value
+          description: Driver value
+        impact_conservative:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Impact Conservative
+          description: Conservative impact
+        act_impact_conservative:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Act Impact Conservative
+          description: Actual conservative impact
+        impact_probable:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Impact Probable
+          description: Probable impact
+        act_impact_probable:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Act Impact Probable
+          description: Actual probable impact
+        impact_aggressive:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Impact Aggressive
+          description: Aggressive impact
+        act_impact_aggressive:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Act Impact Aggressive
+          description: Actual aggressive impact
+        impact:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Impact
+          description: Overall impact
+        financial_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Value
+          description: Financial value
+        value_category_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Category Id
+          description: Value category ID
+        current_effort:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Effort
+          description: Current effort
+        term:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Term
+          description: Term
+        driver_factor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Factor
+          description: Driver factor
+        driver_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Description
+          description: Driver description
+        d_precision:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: D Precision
+          description: Driver precision
+        f_precision:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: F Precision
+          description: Financial precision
+        i_precision:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: I Precision
+          description: Impact precision
+        account_solution_metric_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Solution Metric Id
+          description: Account solution metric ID
+        account_solution_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Solution Id
+          description: Account solution ID
+        solution_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Solution Name
+          description: Solution name
+        sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sequence
+          description: Sequence number
+        metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Name
+          description: Metric name
+        original_metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Metric Name
+          description: Original metric name
+        alt_metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Name
+          description: Alternate metric name
+        quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quantity
+          description: Quantity
+        deployment_time:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deployment Time
+          description: Deployment time
+        expense_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expense Type Id
+          description: Expense type ID
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the benefit
+        scale_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scale Type Id
+          description: Scale type ID
+        unique_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unique Type Id
+          description: Unique type ID
+        driver_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Factor Id
+          description: Driver factor ID
+        financial_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Financial Factor Id
+          description: Financial factor ID
+        quantified:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quantified
+          description: Quantified flag
+        soft:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Soft
+          description: Soft flag
+        unique_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unique Type
+          description: Unique type
+        unique_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unique Description
+          description: Unique description
+        impact_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Impact Type
+          description: Impact type
+        impact_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Impact Description
+          description: Impact description
+        driver_factor_vr_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Factor Vr Name
+          description: Driver factor VR name
+        financial_factor_vr_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Factor Vr Name
+          description: Financial factor VR name
+        improvement_factor_vr_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Improvement Factor Vr Name
+          description: Improvement factor VR name
+        financial_factor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Factor
+          description: Financial factor
+        financial_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Description
+          description: Financial description
+        d_unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: D Unit Type Id
+          description: Driver unit type ID
+        f_unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: F Unit Type Id
+          description: Financial unit type ID
+        i_unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: I Unit Type Id
+          description: Impact unit type ID
+        accrual_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Accrual Type
+          description: Accrual type
+        accrual_type_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Accrual Type Description
+          description: Accrual type description
+        impact_override:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Impact Override
+          description: Impact override
+        impact_source_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Impact Source Type Id
+          description: Impact source type ID
+        subtypes_enabled:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Subtypes Enabled
+          description: Subtypes enabled flag
+        vp_specific:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vp Specific
+          description: Value proposition specific flag
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features description
+        financial_estimate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Estimate
+          description: Financial estimate
+        financial_override:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Override
+          description: Financial override
+        financial_baseline_answer:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Baseline Answer
+          description: Financial baseline answer
+        financial_source_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Financial Source Type Id
+          description: Financial source type ID
+        percent_driven:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Percent Driven
+          description: Percent driven
+        value_category:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Category
+          description: Value category
+        vc_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Vc Description
+          description: VC description
+        is_financial:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Is Financial
+          description: Is financial flag
+        fastfill_enabled:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Fastfill Enabled
+          description: Fastfill enabled flag
+        vc_sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vc Sequence
+          description: VC sequence
+        straight_scaling:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Straight Scaling
+          description: Straight scaling flag
+        benefit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Benefit Type Id
+          description: Benefit type ID
+        benefit_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Benefit Type
+          description: Benefit type
+        benefit_type_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Benefit Type Description
+          description: Benefit type description
+        accrual_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Accrual Type Id
+          description: Accrual type ID
+        active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active
+          description: Active flag
+        impact_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Impact Type Id
+          description: Impact type ID
+        improvement_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Improvement Factor Id
+          description: Improvement factor ID
+        improvement_factor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Improvement Factor
+          description: Improvement factor
+        improvement_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Improvement Description
+          description: Improvement description
+        future_effort:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Future Effort
+          description: Future effort
+        total_benefits_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Benefits Fmt
+          description: Formatted total benefits
+        total_benefits_fr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Benefits Fr
+          description: Total benefits
+        impact_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Impact Fmt
+          description: Formatted impact
+        total_benefits_p2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Benefits P2
+          description: Total benefits P2
+      type: object
+      required:
+      - value_prop_metric_id
+      title: Benefit
+      description: Benefit model
+    ValuePropVCChart:
+      properties:
+        names:
+          items:
+            $ref: '#/components/schemas/BenefitCategory'
+          type: array
+          title: Names
+          description: Benefit categories with their associated metrics
+        total_benefits:
+          items:
+            type: string
+          type: array
+          title: Total Benefits
+          description: List of total benefits values (raw)
+        total_benefits_fmt:
+          items:
+            type: string
+          type: array
+          title: Total Benefits Fmt
+          description: List of formatted total benefits values
+        total_benefits_fr:
+          items:
+            type: string
+          type: array
+          title: Total Benefits Fr
+          description: List of total benefits values in French format
+        percents:
+          items:
+            type: number
+          type: array
+          title: Percents
+          description: List of percentage values
+        total_annual_benefits:
+          type: string
+          title: Total Annual Benefits
+          description: Total annual benefits (raw)
+        total_annual_benefits_fmt:
+          type: string
+          title: Total Annual Benefits Fmt
+          description: Formatted total annual benefits
+      type: object
+      required:
+      - names
+      - total_benefits
+      - total_benefits_fmt
+      - total_benefits_fr
+      - percents
+      - total_annual_benefits
+      - total_annual_benefits_fmt
+      title: ValuePropVCChart
+      description: Overall VC chart model.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

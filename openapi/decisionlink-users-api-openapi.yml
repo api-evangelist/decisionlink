@@ -1,0 +1,110 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Users API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: users
+paths:
+  /v1/value-proposition/users:
+    get:
+      tags:
+      - users
+      summary: Get all users for the account of the requesting user
+      description: Endpoint for reading all users for the account of the requesting user
+      operationId: get_users_v1_value_proposition_users_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+                title: Response Get Users V1 Value Proposition Users Get
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/me:
+    get:
+      tags:
+      - users
+      summary: Get the authenticated user info
+      description: Endpoint for reading basic info of the currently authenticated user
+      operationId: get_current_user_v1_value_proposition_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the user
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+        first_name:
+          type: string
+          title: First Name
+          description: First name of the user
+        last_name:
+          type: string
+          title: Last Name
+          description: Last name of the user
+      type: object
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      title: User
+      description: User Response Model
+    CurrentUser:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Internal value_user_id of the authenticated user
+        email:
+          type: string
+          title: Email
+          description: Email of the authenticated user
+        name:
+          type: string
+          title: Name
+          description: Full name of the authenticated user
+        account_id:
+          type: integer
+          title: Account Id
+          description: Account id of the authenticated user
+        language_type_id:
+          type: integer
+          title: Language Type Id
+          description: Language preference id of the authenticated user
+      type: object
+      required:
+      - id
+      - email
+      - name
+      - account_id
+      - language_type_id
+      title: CurrentUser
+      description: Authenticated user response model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

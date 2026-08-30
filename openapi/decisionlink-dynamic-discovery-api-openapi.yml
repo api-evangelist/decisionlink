@@ -1,0 +1,374 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Dynamic Discovery API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: dynamic_discovery
+paths:
+  /v1/value-proposition/dynamic-discovery/account-solutions:
+    get:
+      tags:
+      - dynamic_discovery
+      summary: Read account solutions for an account
+      description: 'Endpoint to read account solutions for dynamic discovery selection
+
+
+        Returns
+
+        -------
+
+        The list of solutions'
+      operationId: get_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_account_solutions_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/value_proposition__dynamic_discovery__models__Solution'
+                type: array
+                title: Response Get Dynamic Discovery Account Solutions V1 Value Proposition Dynamic Discovery Account Solutions Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - dynamic_discovery
+      summary: Save default solutions for dynamic discovery
+      description: 'Endpoint to save account default solutions for dynamic discovery
+
+
+        Returns
+
+        -------
+
+        The list of solutions'
+      operationId: create_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_account_solutions_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SolutionsPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/value_proposition__dynamic_discovery__models__Solution'
+                type: array
+                title: Response Create Dynamic Discovery Account Solutions V1 Value Proposition Dynamic Discovery Account Solutions Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/dynamic-discovery/selected-solutions:
+    get:
+      tags:
+      - dynamic_discovery
+      summary: Read default solutions for dynamic discovery
+      description: 'Endpoint to read account default solutions for dynamic discovery
+
+
+        Returns
+
+        -------
+
+        The list of solutions'
+      operationId: get_selected_dynamic_discovery_account_solutions_v1_value_proposition_dynamic_discovery_selected_solutions_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/value_proposition__dynamic_discovery__models__Solution'
+                type: array
+                title: Response Get Selected Dynamic Discovery Account Solutions V1 Value Proposition Dynamic Discovery Selected Solutions Get
+      security:
+      - HTTPBearer: []
+  /v1/value-proposition/dynamic-discovery:
+    get:
+      tags:
+      - dynamic_discovery
+      summary: Determine if a user has Dynamic Discovery privilege
+      description: 'Endpoint to determine if a user has dynamic discovery privilege
+
+
+        Requires
+
+        --------
+
+        Admin privilege from user hitting endpoint
+
+
+        Returns
+
+        -------
+
+        DynamicDiscoveryResponse determining if user has privilege'
+      operationId: get_dynamic_discovery_privilege_v1_value_proposition_dynamic_discovery_get
+      security:
+      - HTTPBearer: []
+      - HTTPBearer: []
+      parameters:
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Email
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicDiscoveryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-proposition/dynamic-discovery/trigger-settings:
+    get:
+      tags:
+      - dynamic_discovery
+      summary: Read opportunity stage/type trigger settings
+      description: 'Endpoint to read which Salesforce opportunity stages and types trigger VP auto-generation
+
+
+        Returns
+
+        -------
+
+        TriggerSettingsResponse with the configured trigger stages and types'
+      operationId: get_trigger_settings_v1_value_proposition_dynamic_discovery_trigger_settings_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerSettingsResponse'
+      security:
+      - HTTPBearer: []
+    put:
+      tags:
+      - dynamic_discovery
+      summary: Update opportunity stage/type trigger settings
+      description: 'Endpoint to set which Salesforce opportunity stages and types trigger VP auto-generation.
+
+        Empty lists mean VP is triggered on any opportunity creation (default behavior).
+
+
+        Returns
+
+        -------
+
+        TriggerSettingsResponse with the updated trigger stages and types'
+      operationId: update_trigger_settings_v1_value_proposition_dynamic_discovery_trigger_settings_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerSettingsPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerSettingsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    value_proposition__dynamic_discovery__models__Solution:
+      properties:
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          default: ''
+      type: object
+      required:
+      - account_solution_id
+      - name
+      title: Solution
+      description: Solutions model
+    SolutionsPayload:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+      type: object
+      required:
+      - solutions
+      title: SolutionsPayload
+      description: SolutionsPayload Model
+    TriggerSettingsResponse:
+      properties:
+        trigger_stages:
+          items:
+            type: string
+          type: array
+          title: Trigger Stages
+        trigger_types:
+          items:
+            type: string
+          type: array
+          title: Trigger Types
+          default: []
+      type: object
+      required:
+      - trigger_stages
+      title: TriggerSettingsResponse
+      description: Response for trigger stage and type settings
+    DynamicDiscoveryResponse:
+      properties:
+        has_permission:
+          type: boolean
+          title: Has Permission
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+        solutions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/value_proposition__dynamic_discovery__models__Solution'
+            type: array
+          - type: 'null'
+          title: Solutions
+          default: []
+        available_solutions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/value_proposition__dynamic_discovery__models__Solution'
+            type: array
+          - type: 'null'
+          title: Available Solutions
+          default: []
+        salesforce_field:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Salesforce Field
+        trigger_stages:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Trigger Stages
+          default: []
+        trigger_types:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Trigger Types
+          default: []
+        trigger_enabled_since:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Trigger Enabled Since
+        category_updates:
+          type: boolean
+          title: Category Updates
+          default: false
+      type: object
+      required:
+      - has_permission
+      title: DynamicDiscoveryResponse
+      description: Model for dynamic discovery
+    TriggerSettingsPayload:
+      properties:
+        trigger_stages:
+          items:
+            type: string
+          type: array
+          title: Trigger Stages
+          default: []
+        trigger_types:
+          items:
+            type: string
+          type: array
+          title: Trigger Types
+          default: []
+      type: object
+      title: TriggerSettingsPayload
+      description: Payload for updating trigger stage and type settings
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

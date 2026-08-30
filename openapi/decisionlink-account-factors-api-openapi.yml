@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition Account Factors API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: account_factors
+paths:
+  /v1/value-proposition/account-factors:
+    get:
+      tags:
+      - account_factors
+      summary: Get account factors
+      description: 'Endpoint to get account factors
+
+
+        Returns
+
+        -------
+
+        The list of account factors'
+      operationId: get_account_factors_v1_value_proposition_account_factors_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountFactor'
+                type: array
+                title: Response Get Account Factors V1 Value Proposition Account Factors Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    AccountFactor:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the factor
+        account_id:
+          type: integer
+          title: Account Id
+          description: ID of the account associated with the factor
+        name:
+          type: string
+          title: Name
+          description: Name of the factor
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description for the factor
+        sequence:
+          type: integer
+          title: Sequence
+          description: Sequence for the factor
+      type: object
+      required:
+      - id
+      - account_id
+      - name
+      - sequence
+      title: AccountFactor
+      description: AccountFactor model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

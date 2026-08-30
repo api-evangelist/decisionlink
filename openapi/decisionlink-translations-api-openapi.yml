@@ -1,0 +1,506 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Translations API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged translations across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: translations
+paths:
+  /v1/value-facts/translations:
+    get:
+      tags:
+      - translations
+      summary: Get all translations.
+      description: 'Return translations joined with the components catalog, with the
+
+        authenticated account''s overrides applied to each value.'
+      operationId: get_translations_v1_value_facts_translations_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation'
+                title: Response Get Translations V1 Value Facts Translations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-facts/translations/components:
+    get:
+      tags:
+      - translations
+      summary: Get all translation components.
+      description: Return every row from translations_components.
+      operationId: get_translation_components_v1_value_facts_translations_components_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationComponent'
+                title: Response Get Translation Components V1 Value Facts Translations Components Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-facts/translations/by-component:
+    get:
+      tags:
+      - translations
+      summary: Get translations for a component and language with account overrides applied.
+      description: 'Return translations for the given component and language, merging
+
+        the authenticated account''s overrides on top of the base
+
+        translations.'
+      operationId: get_translations_with_overrides_v1_value_facts_translations_by_component_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: component
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Translations component.
+          title: Component
+        description: Translations component.
+      - name: lang
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Language code (e.g. 'en').
+          title: Lang
+        description: Language code (e.g. 'en').
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationWithOverride'
+                title: Response Get Translations With Overrides V1 Value Facts Translations By Component Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-facts/translations/override:
+    post:
+      tags:
+      - translations
+      summary: Save an account-specific inline translation override.
+      description: 'Create or update the authenticated account''s override for a
+
+        translation, scoped to the caller''s account. Requires the account
+
+        administrator privilege.'
+      operationId: save_translation_override_route_v1_value_facts_translations_override_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTranslationOverride'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/translations:
+    get:
+      tags:
+      - translations
+      summary: Get all translations.
+      description: Return translations joined with the components catalog.
+      operationId: get_translations_v1_value_proposition_translations_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation_2'
+                title: Response Get Translations V1 Value Proposition Translations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/translations/components:
+    get:
+      tags:
+      - translations
+      summary: Get all translation components.
+      description: Return every row from translations_components.
+      operationId: get_translation_components_v1_value_proposition_translations_components_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationComponent'
+                title: Response Get Translation Components V1 Value Proposition Translations Components Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/translations/by-component:
+    get:
+      tags:
+      - translations
+      summary: Get translations for a component and language with account overrides applied.
+      description: 'Return translations for the given component and language, merging the
+
+        authenticated account''s overrides on top of the base translations.'
+      operationId: get_translations_with_overrides_v1_value_proposition_translations_by_component_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: component
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Translations component.
+          title: Component
+        description: Translations component.
+      - name: lang
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Language code (e.g. 'en').
+          title: Lang
+        description: Language code (e.g. 'en').
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Translations components version (default 2).
+          default: 2
+          title: Version
+        description: Translations components version (default 2).
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslationWithOverride'
+                title: Response Get Translations With Overrides V1 Value Proposition Translations By Component Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TranslationComponent:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        display_name:
+          type: string
+          title: Display Name
+          description: Display name of the component.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        description:
+          type: string
+          title: Description
+          description: Description of the component.
+          default: ''
+      type: object
+      required:
+      - id
+      - display_name
+      - component
+      title: TranslationComponent
+      description: Translation component model.
+    SaveTranslationOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Base translation identifier to override.
+        value:
+          type: string
+          title: Value
+          description: New account-specific translation value.
+        version:
+          type: integer
+          title: Version
+          description: Translations components version (default 2).
+          default: 2
+      type: object
+      required:
+      - translation_id
+      - value
+      title: SaveTranslationOverride
+      description: Request body for saving an inline translation override.
+    Translation:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Translation identifier.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        lang:
+          type: string
+          title: Lang
+          description: Two-letter language code.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        val:
+          type: string
+          title: Val
+          description: Resolved value (account override when set, else base).
+        is_override:
+          type: integer
+          title: Is Override
+          description: 1 when an account override was applied, 0 otherwise.
+          default: 0
+      type: object
+      required:
+      - id
+      - component
+      - lang
+      - key
+      - val
+      title: Translation
+      description: Translation string model.
+    TranslationWithOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Unique translation identifier.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        value:
+          type: string
+          title: Value
+          description: Resolved translation value (override or base).
+        is_override:
+          type: integer
+          title: Is Override
+          description: 1 when an account override was applied, 0 otherwise.
+      type: object
+      required:
+      - translation_id
+      - key
+      - value
+      - is_override
+      title: TranslationWithOverride
+      description: Translation row with optional account override applied.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    Translation_2:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Translation identifier.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        lang:
+          type: string
+          title: Lang
+          description: Two-letter language code.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        val:
+          type: string
+          title: Val
+          description: Translated value.
+      type: object
+      required:
+      - id
+      - component
+      - lang
+      - key
+      - val
+      title: Translation
+      description: Translation string model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

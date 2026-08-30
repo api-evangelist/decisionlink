@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Format Types API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged format_types across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: format_types
+paths:
+  /v1/value-facts/format-types:
+    get:
+      tags:
+      - format_types
+      summary: Get all format types.
+      description: Get all format types.
+      operationId: get_format_types_v1_value_facts_format_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FormatType'
+                type: array
+                title: Response Get Format Types V1 Value Facts Format Types Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/format-types:
+    get:
+      tags:
+      - format_types
+      summary: Get all format types.
+      description: "Get all format types.\n\nReturns\n-------\n - list[FormatType]: List of all format types."
+      operationId: get_format_types_v1_value_proposition_format_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FormatType_2'
+                type: array
+                title: Response Get Format Types V1 Value Proposition Format Types Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    FormatType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the format type.
+        name:
+          type: string
+          title: Name
+          description: Name of the format type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the format type.
+      type: object
+      required:
+      - id
+      - name
+      title: FormatType
+      description: Format type response model.
+    FormatType_2:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the format type.
+        name:
+          type: string
+          title: Name
+          description: Name of the format type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the format type.
+      type: object
+      required:
+      - id
+      - name
+      title: FormatType
+      description: Detailed Format Model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

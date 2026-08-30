@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Cost Categories API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged cost_categories across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: cost_categories
+paths:
+  /v1/value-facts/cost-categories:
+    get:
+      tags:
+      - cost_categories
+      summary: Get all cost categories.
+      description: Get all cost categories.
+      operationId: get_cost_categories_v1_value_facts_cost_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CostCategoryType'
+                type: array
+                title: Response Get Cost Categories V1 Value Facts Cost Categories Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+  /v1/value-proposition/cost-categories:
+    get:
+      tags:
+      - cost_categories
+      summary: Get all cost categories.
+      description: "Get all cost categories.\n\nReturns\n-------\n - list[CostCategoryType]: List of all cost categories."
+      operationId: get_cost_categories_v1_value_proposition_cost_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CostCategoryType_2'
+                type: array
+                title: Response Get Cost Categories V1 Value Proposition Cost Categories Get
+      security:
+      - HTTPBearer: []
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    CostCategoryType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost category.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost category.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost category.
+      type: object
+      required:
+      - id
+      - name
+      title: CostCategoryType
+      description: Cost category response model.
+    CostCategoryType_2:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost category type.
+        name:
+          type: string
+          title: Name
+          description: Name of the cost category type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost category type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Creation timestamp.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Last updated timestamp.
+      type: object
+      required:
+      - id
+      - name
+      title: CostCategoryType
+      description: Cost Category Type model
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

@@ -1,0 +1,50 @@
+openapi: 3.2.0
+info:
+  title: Decisionlink Health API
+  version: 0.1.0
+  x-refined-note:
+  - x-api-evangelist-source differs across the merged source definitions and was not carried
+  description: 'Operations tagged health across 3 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: health
+paths:
+  /healthz:
+    get:
+      tags:
+      - health
+      summary: Health
+      description: Provides information about the health of the application
+      operationId: health_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+    servers:
+    - url: https://api.xfactor.io
+      description: Production API host (Auth0 audience of the Xfactor.io web application)
+components:
+  schemas:
+    HealthCheckResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          default: OK
+      type: object
+      title: HealthCheckResponse
+      description: Health check response
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
+x-refined-from:
+- decisionlink-collaboration-openapi.yml
+- decisionlink-value-facts-openapi.yml
+- decisionlink-value-proposition-openapi.yml

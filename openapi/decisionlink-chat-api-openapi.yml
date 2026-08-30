@@ -1,0 +1,377 @@
+openapi: 3.2.0
+info:
+  title: Value Server Chat API
+  description: Value chat service
+  version: '1.0'
+  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: chat
+paths:
+  /v1/value-chat/chat/id:
+    post:
+      tags:
+      - chat
+      summary: 'generate a chat id '
+      description: Generate a new unique chat ID
+      operationId: get_chat_id_v1_value_chat_chat_id_post
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}/history:
+    get:
+      tags:
+      - chat
+      summary: generate return chat history
+      description: Retrieve chat history for a specific chat ID
+      operationId: get_chat_history_v1_value_chat_chat__chat_id__history_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/{chat_id}/status:
+    get:
+      tags:
+      - chat
+      summary: Get chat status
+      description: Get the status of a specific chat (e.g. in_progress, completed)
+      operationId: chat_status_v1_value_chat_chat__chat_id__status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/history:
+    get:
+      tags:
+      - chat
+      summary: generate return chat history
+      description: Retrieve all chat IDs for the authenticated user
+      operationId: get_old_chat_ids_v1_value_chat_chat_history_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}:
+    patch:
+      tags:
+      - chat
+      summary: update chat title
+      description: Update the title of a specific chat
+      operationId: update_chat_title_v1_value_chat_chat__chat_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_update_chat_title_v1_value_chat_chat__chat_id__patch'
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chat
+      summary: delete chat history
+      description: Delete a specific chat's history
+      operationId: delete_chat_v1_value_chat_chat__chat_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/questions:
+    get:
+      tags:
+      - chat
+      summary: get default questions
+      description: 'Get default questions for the chat based on
+
+        client configuration and user roles.'
+      operationId: get_chat_questions_v1_value_chat_chat_questions_get
+      responses:
+        '200':
+          description: Return HTTP Status Code 200 (OK)
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/search-titles/:
+    get:
+      tags:
+      - chat
+      summary: Search Titles Route
+      description: Search for chats with titles similar to the search term
+      operationId: search_titles_route_v1_value_chat_chat_search_titles__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: search_term
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Search Term
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/search-history/:
+    get:
+      tags:
+      - chat
+      summary: Search History Route
+      description: Search for specific text within chat message contents
+      operationId: search_history_route_v1_value_chat_chat_search_history__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: search_term
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Search Term
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/value-chat/chat/feedback:
+    post:
+      tags:
+      - chat
+      summary: Submit feedback for a specific chat message
+      description: Insert chat feedback into the database
+      operationId: submit_chat_feedback_v1_value_chat_chat_feedback_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatFeedbackIn'
+        required: true
+      responses:
+        '200':
+          description: Returns the inserted feedback row
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/value-chat/chat/{chat_id}/upload:
+    post:
+      tags:
+      - chat
+      summary: Upload a document to a chat session
+      operationId: upload_chat_file_v1_value_chat_chat__chat_id__upload_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
+      properties:
+        title:
+          type: string
+          title: Title
+      type: object
+      required:
+      - title
+      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
+    ChatFeedbackIn:
+      properties:
+        chat_id:
+          type: string
+          title: Chat Id
+          description: The ID of the chat
+        message_index:
+          type: integer
+          title: Message Index
+          description: The index of the message
+        vote_score:
+          type: integer
+          title: Vote Score
+          description: The vote score
+        comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Comments
+          description: The comments
+      type: object
+      required:
+      - chat_id
+      - message_index
+      - vote_score
+      title: ChatFeedbackIn
+      description: Chat feedback input model
+    Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

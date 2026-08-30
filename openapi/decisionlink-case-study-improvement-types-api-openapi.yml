@@ -1,0 +1,58 @@
+openapi: 3.2.0
+info:
+  title: Value Facts Case Study Improvement Types API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: case_study_improvement_types
+paths:
+  /v1/value-facts/case-study-improvement-types:
+    get:
+      tags:
+      - case_study_improvement_types
+      summary: Get all case study benefit improvement types.
+      description: Get all case study benefit improvement types.
+      operationId: get_case_study_improvement_types_v1_value_facts_case_study_improvement_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CaseStudyImprovementType'
+                type: array
+                title: Response Get Case Study Improvement Types V1 Value Facts Case Study Improvement Types Get
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    CaseStudyImprovementType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        name:
+          type: string
+          title: Name
+          description: Name of the improvement type.
+        abbr:
+          type: string
+          title: Abbr
+          description: Abbreviation of the improvement type.
+      type: object
+      required:
+      - id
+      - name
+      - abbr
+      title: CaseStudyImprovementType
+      description: Case study benefit improvement type response model.
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer

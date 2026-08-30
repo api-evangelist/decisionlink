@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  title: Value Proposition List API
+  version: 0.1.0
+  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
+servers:
+- url: https://api.xfactor.io
+  description: Production API host (Auth0 audience of the Xfactor.io web application)
+tags:
+- name: list
+paths:
+  /v1/value-proposition/list:
+    get:
+      tags:
+      - list
+      summary: Get the list of Value Propositions
+      description: "Endpoint for reading the Value Propositions available to the user\n\nReturns\n-------\ndict\n    Returns the list of available Value Propositions and has_unfinished_vps"
+      operationId: get_value_proposition_list_v1_value_proposition_list_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: include_calcs
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Include calculator VPs
+          default: false
+          title: Include Calcs
+        description: Include calculator VPs
+      - name: skip_solutions
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Skip loading solutions (0 or 1)
+          default: 0
+          title: Skip Solutions
+        description: Skip loading solutions (0 or 1)
+      - name: sortby
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Column to sort by
+          default: v.modified
+          title: Sortby
+        description: Column to sort by
+      - name: order
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Sort order (ASC or DESC)
+          default: DESC
+          title: Order
+        description: Sort order (ASC or DESC)
+      - name: limit
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Limit number of results
+          default: all
+          title: Limit
+        description: Limit number of results
+      - name: mode
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListMode'
+          description: 1=Hypothesis, 2=Value Prop, 3=All
+          default: 3
+        description: 1=Hypothesis, 2=Value Prop, 3=All
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      description: Access token in the form of a JWT
+      scheme: bearer
