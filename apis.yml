@@ -79,7 +79,8 @@ apis:
   description: The account_factors API from DecisionLink — 1 operation(s) for account_factors.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - account_factors
   properties:
   - type: OpenAPI
@@ -105,7 +106,8 @@ apis:
   description: The account_mappings API from DecisionLink — 2 operation(s) for account_mappings.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - account_mappings
   properties:
   - type: OpenAPI
@@ -131,7 +133,8 @@ apis:
   description: The accrual_types API from DecisionLink — 2 operation(s) for accrual_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - accrual_types
   properties:
   - type: OpenAPI
@@ -158,6 +161,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Advanced
+  tags_raw:
   - advanced
   properties:
   - type: OpenAPI
@@ -183,7 +188,8 @@ apis:
   description: The area_types API from DecisionLink — 1 operation(s) for area_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - area_types
   properties:
   - type: OpenAPI
@@ -209,7 +215,8 @@ apis:
   description: The asset_languages API from DecisionLink — 1 operation(s) for asset_languages.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - asset_languages
   properties:
   - type: OpenAPI
@@ -236,6 +243,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Assets
+  tags_raw:
   - assets
   properties:
   - type: OpenAPI
@@ -262,6 +271,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Attributions
+  tags_raw:
   - attributions
   properties:
   - type: OpenAPI
@@ -287,7 +298,8 @@ apis:
   description: The available_terms API from DecisionLink — 1 operation(s) for available_terms.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - available_terms
   properties:
   - type: OpenAPI
@@ -313,7 +325,8 @@ apis:
   description: The baseline_types API from DecisionLink — 1 operation(s) for baseline_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - baseline_types
   properties:
   - type: OpenAPI
@@ -340,6 +353,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Benefits
+  tags_raw:
   - benefits
   properties:
   - type: OpenAPI
@@ -418,7 +433,8 @@ apis:
     The case_study_improvement_types API from DecisionLink — 1 operation(s) for case_study_improvement_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - case_study_improvement_types
   properties:
   - type: OpenAPI
@@ -445,6 +461,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Charts
+  tags_raw:
   - charts
   properties:
   - type: OpenAPI
@@ -471,6 +489,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Chat
+  tags_raw:
   - chat
   properties:
   - type: OpenAPI
@@ -497,6 +517,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Collaboration
+  tags_raw:
   - collaboration
   properties:
   - type: OpenAPI
@@ -523,6 +545,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Collaborations
+  tags_raw:
   - collaborations
   properties:
   - type: OpenAPI
@@ -549,6 +573,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Collateral
+  tags_raw:
   - collateral
   properties:
   - type: OpenAPI
@@ -575,6 +601,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Companies
+  tags_raw:
   - companies
   properties:
   - type: OpenAPI
@@ -601,6 +629,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Cost Categories
+  tags_raw:
   - cost_categories
   properties:
   - type: OpenAPI
@@ -627,6 +657,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Costs
+  tags_raw:
   - costs
   properties:
   - type: OpenAPI
@@ -652,7 +684,8 @@ apis:
   description: The discovery_questions API from DecisionLink — 2 operation(s) for discovery_questions.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - discovery_questions
   properties:
   - type: OpenAPI
@@ -704,7 +737,8 @@ apis:
   description: The dynamic_discovery API from DecisionLink — 4 operation(s) for dynamic_discovery.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - dynamic_discovery
   properties:
   - type: OpenAPI
@@ -731,6 +765,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - ExpenseTypes
+  tags_raw:
   - expense_types
   properties:
   - type: OpenAPI
@@ -757,6 +793,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Factors
+  tags_raw:
   - factors
   properties:
   - type: OpenAPI
@@ -783,6 +821,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Features
+  tags_raw:
   - features
   properties:
   - type: OpenAPI
@@ -808,7 +848,8 @@ apis:
   description: The format_types API from DecisionLink — 2 operation(s) for format_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - format_types
   properties:
   - type: OpenAPI
@@ -888,6 +929,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Goals
+  tags_raw:
   - goals
   properties:
   - type: OpenAPI
@@ -913,7 +956,8 @@ apis:
   description: The grouping_override API from DecisionLink — 1 operation(s) for grouping_override.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - grouping_override
   properties:
   - type: OpenAPI
@@ -940,6 +984,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Group
+  tags_raw:
   - groups
   properties:
   - type: OpenAPI
@@ -966,6 +1012,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -992,6 +1040,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Health Check
+  tags_raw:
   - healthcheck
   properties:
   - type: OpenAPI
@@ -1017,7 +1067,8 @@ apis:
   description: The impact_types API from DecisionLink — 1 operation(s) for impact_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - impact_types
   properties:
   - type: OpenAPI
@@ -1044,6 +1095,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - List
+  tags_raw:
   - list
   properties:
   - type: OpenAPI
@@ -1070,6 +1123,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Login
+  tags_raw:
   - login
   properties:
   - type: OpenAPI
@@ -1096,6 +1151,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Logs
+  tags_raw:
   - logs
   properties:
   - type: OpenAPI
@@ -1148,6 +1205,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Privileges
+  tags_raw:
   - privileges
   properties:
   - type: OpenAPI
@@ -1174,6 +1233,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -1200,6 +1261,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Refresh
+  tags_raw:
   - refresh
   properties:
   - type: OpenAPI
@@ -1225,7 +1288,8 @@ apis:
   description: The release_types API from DecisionLink — 1 operation(s) for release_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - release_types
   properties:
   - type: OpenAPI
@@ -1252,6 +1316,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - ROI
+  tags_raw:
   - roi
   properties:
   - type: OpenAPI
@@ -1278,6 +1344,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Salesforce
+  tags_raw:
   - salesforce
   properties:
   - type: OpenAPI
@@ -1304,6 +1372,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Scorecard
+  tags_raw:
   - scorecard
   properties:
   - type: OpenAPI
@@ -1356,6 +1426,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -1382,6 +1454,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Shares
+  tags_raw:
   - shares
   properties:
   - type: OpenAPI
@@ -1434,6 +1508,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Solutions
+  tags_raw:
   - solutions
   properties:
   - type: OpenAPI
@@ -1460,6 +1536,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Source Types
+  tags_raw:
   - source_types
   properties:
   - type: OpenAPI
@@ -1485,7 +1563,8 @@ apis:
   description: The threshold_types API from DecisionLink — 1 operation(s) for threshold_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - threshold_types
   properties:
   - type: OpenAPI
@@ -1512,6 +1591,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Translations
+  tags_raw:
   - translations
   properties:
   - type: OpenAPI
@@ -1537,7 +1618,8 @@ apis:
   description: The unique_types API from DecisionLink — 1 operation(s) for unique_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - unique_types
   properties:
   - type: OpenAPI
@@ -1563,7 +1645,8 @@ apis:
   description: The unit_types API from DecisionLink — 1 operation(s) for unit_types.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - unit_types
   properties:
   - type: OpenAPI
@@ -1590,6 +1673,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -1641,7 +1726,8 @@ apis:
   description: The value_props API from DecisionLink — 6 operation(s) for value_props.
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
-  tags:
+  tags: []
+  tags_raw:
   - value_props
   properties:
   - type: OpenAPI
@@ -1668,6 +1754,8 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
+  - Workflows
+  tags_raw:
   - workflows
   properties:
   - type: OpenAPI
