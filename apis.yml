@@ -271,7 +271,7 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Attributions
+  - attributions
   tags_raw:
   - attributions
   properties:
