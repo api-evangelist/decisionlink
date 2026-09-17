@@ -1034,34 +1034,6 @@ apis:
     url: https://api.xfactor.io/api/v1/collaboration/docs
   - type: Documentation
     url: https://api.xfactor.io/api/v1/collaboration/docs
-- aid: decisionlink:decisionlink-healthcheck-api
-  name: DecisionLink Healthcheck API
-  description: The healthcheck API from DecisionLink — 1 operation(s) for healthcheck.
-  humanURL: https://api.xfactor.io/v1/value-proposition/docs
-  baseURL: https://api.xfactor.io
-  tags:
-  - Health Check
-  tags_raw:
-  - healthcheck
-  properties:
-  - type: OpenAPI
-    url: openapi/decisionlink-healthcheck-api-openapi.yml
-  - type: APIReference
-    url: https://api.xfactor.io/v1/value-proposition/docs
-  - type: Documentation
-    url: https://api.xfactor.io/v1/value-proposition/docs
-  - type: APIReference
-    url: https://api.xfactor.io/api/v1/value-facts/docs
-  - type: Documentation
-    url: https://api.xfactor.io/api/v1/value-facts/docs
-  - type: APIReference
-    url: https://api.xfactor.io/api/v1/value-chat/docs
-  - type: Documentation
-    url: https://api.xfactor.io/api/v1/value-chat/docs
-  - type: APIReference
-    url: https://api.xfactor.io/api/v1/collaboration/docs
-  - type: Documentation
-    url: https://api.xfactor.io/api/v1/collaboration/docs
 - aid: decisionlink:decisionlink-impact-types-api
   name: DecisionLink Impact Types API
   description: The impact_types API from DecisionLink — 1 operation(s) for impact_types.
@@ -1760,6 +1732,32 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/decisionlink-workflows-api-openapi.yml
+  - type: APIReference
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: Documentation
+    url: https://api.xfactor.io/v1/value-proposition/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-facts/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/value-chat/docs
+  - type: APIReference
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+  - type: Documentation
+    url: https://api.xfactor.io/api/v1/collaboration/docs
+- aid: decisionlink:decisionlink-health-check-api
+  name: DecisionLink Health Check API
+  description: The Health Check API from DecisionLink — 1 operation(s) for health check.
+  humanURL: https://api.xfactor.io/v1/value-proposition/docs
+  baseURL: https://api.xfactor.io
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/decisionlink-health-check-api-openapi.yml
   - type: APIReference
     url: https://api.xfactor.io/v1/value-proposition/docs
   - type: Documentation
