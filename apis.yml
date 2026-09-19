@@ -765,7 +765,7 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - ExpenseTypes
+  - Expense Types
   tags_raw:
   - expense_types
   properties:
@@ -1344,7 +1344,7 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Scorecard
+  - Scorecards
   tags_raw:
   - scorecard
   properties:
@@ -1426,7 +1426,7 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Shares
+  - Share
   tags_raw:
   - shares
   properties:
@@ -1563,7 +1563,7 @@ apis:
   humanURL: https://api.xfactor.io/v1/value-proposition/docs
   baseURL: https://api.xfactor.io
   tags:
-  - Translations
+  - Translation
   tags_raw:
   - translations
   properties:
