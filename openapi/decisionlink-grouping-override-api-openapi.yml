@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Grouping Override API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: grouping_override
 paths:
@@ -45,6 +41,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     GroupingOverridePayload:
       properties:
         grouping_id:
@@ -75,27 +92,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

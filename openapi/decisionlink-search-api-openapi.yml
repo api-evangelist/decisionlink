@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Search API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: search
+- name: Search
 paths:
   /v1/value-proposition/search:
     post:
       tags:
-      - search
+      - Search
       summary: Search Value Propositions
       description: 'Search value propositions accessible to the authenticated user.
 
@@ -43,14 +39,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    ListMode:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      title: ListMode
-      description: Mode for filtering value propositions by status.
     ValidationError:
       properties:
         loc:
@@ -72,15 +60,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     SearchRequest:
       properties:
         search_term:
@@ -128,6 +107,23 @@ components:
       type: object
       title: SearchRequest
       description: Request model for searching value propositions.
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

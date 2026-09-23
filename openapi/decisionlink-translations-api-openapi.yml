@@ -2,20 +2,15 @@ openapi: 3.2.0
 info:
   title: Decisionlink Translations API
   version: 0.1.0
-  x-refined-note:
-  - x-api-evangelist-source differs across the merged source definitions and was not carried
-  description: 'Operations tagged translations across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: 'Operations tagged translations across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.json, decisionlink-value-proposition-openapi.json. Each path carries the servers of the definition it was published in.'
 tags:
-- name: translations
+- name: Translations
 paths:
   /v1/value-facts/translations:
     get:
       tags:
-      - translations
-      summary: Get all translations.
+      - Translations
+      summary: Get all translations
       description: 'Return translations joined with the components catalog, with the
 
         authenticated account''s overrides applied to each value.'
@@ -48,14 +43,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-facts/translations/components:
     get:
       tags:
-      - translations
-      summary: Get all translation components.
+      - Translations
+      summary: Get all translation components
       description: Return every row from translations_components.
       operationId: get_translation_components_v1_value_facts_translations_components_get
       security:
@@ -86,14 +78,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-facts/translations/by-component:
     get:
       tags:
-      - translations
-      summary: Get translations for a component and language with account overrides applied.
+      - Translations
+      summary: Get translations for a component and language with account overrides applied
       description: 'Return translations for the given component and language, merging
 
         the authenticated account''s overrides on top of the base
@@ -144,14 +133,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-facts/translations/override:
     post:
       tags:
-      - translations
-      summary: Save an account-specific inline translation override.
+      - Translations
+      summary: Save an account-specific inline translation override
       description: 'Create or update the authenticated account''s override for a
 
         translation, scoped to the caller''s account. Requires the account
@@ -179,14 +165,11 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/translations:
     get:
       tags:
-      - translations
-      summary: Get all translations.
+      - Translations
+      summary: Get all translations
       description: Return translations joined with the components catalog.
       operationId: get_translations_v1_value_proposition_translations_get
       security:
@@ -217,14 +200,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/translations/components:
     get:
       tags:
-      - translations
-      summary: Get all translation components.
+      - Translations
+      summary: Get all translation components
       description: Return every row from translations_components.
       operationId: get_translation_components_v1_value_proposition_translations_components_get
       security:
@@ -255,14 +235,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/translations/by-component:
     get:
       tags:
-      - translations
-      summary: Get translations for a component and language with account overrides applied.
+      - Translations
+      summary: Get translations for a component and language with account overrides applied
       description: 'Return translations for the given component and language, merging the
 
         authenticated account''s overrides on top of the base translations.'
@@ -311,88 +288,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TranslationComponent:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: Unique identifier.
-        display_name:
-          type: string
-          title: Display Name
-          description: Display name of the component.
-        component:
-          type: string
-          title: Component
-          description: Component key.
-        description:
-          type: string
-          title: Description
-          description: Description of the component.
-          default: ''
-      type: object
-      required:
-      - id
-      - display_name
-      - component
-      title: TranslationComponent
-      description: Translation component model.
-    SaveTranslationOverride:
-      properties:
-        translation_id:
-          type: integer
-          title: Translation Id
-          description: Base translation identifier to override.
-        value:
-          type: string
-          title: Value
-          description: New account-specific translation value.
-        version:
-          type: integer
-          title: Version
-          description: Translations components version (default 2).
-          default: 2
-      type: object
-      required:
-      - translation_id
-      - value
-      title: SaveTranslationOverride
-      description: Request body for saving an inline translation override.
     Translation:
       properties:
         id:
@@ -465,6 +362,83 @@ components:
       - message
       title: MessageResponse
       description: Response model for simple message responses
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SaveTranslationOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Base translation identifier to override.
+        value:
+          type: string
+          title: Value
+          description: New account-specific translation value.
+        version:
+          type: integer
+          title: Version
+          description: Translations components version (default 2).
+          default: 2
+      type: object
+      required:
+      - translation_id
+      - value
+      title: SaveTranslationOverride
+      description: Request body for saving an inline translation override.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TranslationComponent:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier.
+        display_name:
+          type: string
+          title: Display Name
+          description: Display name of the component.
+        component:
+          type: string
+          title: Component
+          description: Component key.
+        description:
+          type: string
+          title: Description
+          description: Description of the component.
+          default: ''
+      type: object
+      required:
+      - id
+      - display_name
+      - component
+      title: TranslationComponent
+      description: Translation component model.
     Translation_2:
       properties:
         id:
@@ -502,5 +476,5 @@ components:
       description: Access token in the form of a JWT
       scheme: bearer
 x-refined-from:
-- decisionlink-value-facts-openapi.yml
-- decisionlink-value-proposition-openapi.yml
+- decisionlink-value-facts-openapi.json
+- decisionlink-value-proposition-openapi.json

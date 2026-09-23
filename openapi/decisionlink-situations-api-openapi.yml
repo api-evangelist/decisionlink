@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Situations API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: situations
 paths:
@@ -14,7 +10,16 @@ paths:
       tags:
       - situations
       summary: Get the situations of Value Proposition
-      description: "Endpoint for reading the Value Proposition situations\n\nReturns\n-------\nList[Situation]\n    Returns the Value Proposition situations"
+      description: 'Endpoint for reading the Value Proposition situations
+
+
+        Returns
+
+        -------
+
+        List[Situation]
+
+        Returns the Value Proposition situations'
       operationId: get_situations_v1_value_proposition__valuePropId__situations_get
       security:
       - HTTPBearer: []
@@ -52,7 +57,29 @@ paths:
       tags:
       - situations
       summary: Save the values for situations
-      description: "Endpoint for saving situations\n\nParameters\n----------\nrequest\nvalue_prop_id\nsituations : SituationPayload\n    The situations and their elements to be saved\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+      description: 'Endpoint for saving situations
+
+
+        Parameters
+
+        ----------
+
+        request
+
+        value_prop_id
+
+        situations : SituationPayload
+
+        The situations and their elements to be saved
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns status code and success message'
       operationId: update_situations_v1_value_proposition__valuePropId__situations_post
       security:
       - HTTPBearer: []
@@ -84,28 +111,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SituationPayload:
-      properties:
-        situations:
-          items:
-            $ref: '#/components/schemas/SituationValue'
-          type: array
-          title: Situations
-          description: The list of situations to being saved
-      type: object
-      required:
-      - situations
-      title: SituationPayload
-      description: SituationPayload model
     SituationValue:
       properties:
         id:
@@ -122,71 +127,50 @@ components:
       - element_id
       title: SituationValue
       description: SituationValue model
-    Situation:
+    MessageResponse:
       properties:
-        id:
+        message:
           type: string
-          title: Id
-          description: ID for the Situation
-        name:
-          type: string
-          title: Name
-          description: Name of the Situation
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the Situation
-          default: ''
-        multi_select:
-          type: boolean
-          title: Multi Select
-          description: Multi-select status of the Situation
-        question_type:
-          type: string
-          title: Question Type
-          description: Question type of the Situation
-        required:
-          type: boolean
-          title: Required
-          description: Required status of the Situation
-        elements:
-          items:
-            $ref: '#/components/schemas/Element'
-          type: array
-          title: Elements
-          description: Elements of the Situation
-        source_attribution:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Attribution
-        attribution_link:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Link
-        attribution_tooltip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Tooltip
-        revert_value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Revert Value
+          title: Message
       type: object
       required:
-      - id
-      - name
-      - multi_select
-      - question_type
-      - required
-      - elements
-      title: Situation
-      description: Situation model
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    SituationPayload:
+      properties:
+        situations:
+          items:
+            $ref: '#/components/schemas/SituationValue'
+          type: array
+          title: Situations
+          description: The list of situations to being saved
+      type: object
+      required:
+      - situations
+      title: SituationPayload
+      description: SituationPayload model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ChildElement:
       properties:
         id:
@@ -301,16 +285,6 @@ components:
       - can_set_child_element
       title: ChildElement
       description: Child Element model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
     Element:
       properties:
         id:
@@ -393,27 +367,80 @@ components:
       - updated_at
       title: Element
       description: Element model
-    ValidationError:
+    Situation:
       properties:
-        loc:
+        id:
+          type: string
+          title: Id
+          description: ID for the Situation
+        name:
+          type: string
+          title: Name
+          description: Name of the Situation
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Situation
+          default: ''
+        multi_select:
+          type: boolean
+          title: Multi Select
+          description: Multi-select status of the Situation
+        question_type:
+          type: string
+          title: Question Type
+          description: Question type of the Situation
+        required:
+          type: boolean
+          title: Required
+          description: Required status of the Situation
+        elements:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/Element'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Elements
+          description: Elements of the Situation
+        source_attribution:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Attribution
+        attribution_link:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Revert Value
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - id
+      - name
+      - multi_select
+      - question_type
+      - required
+      - elements
+      title: Situation
+      description: Situation model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

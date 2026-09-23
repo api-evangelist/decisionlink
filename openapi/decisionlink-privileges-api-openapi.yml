@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Privileges API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: privileges
+- name: Privileges
 paths:
   /v1/value-proposition/privileges:
     get:
       tags:
-      - privileges
+      - Privileges
       summary: List user privileges
       description: Endpoint to list user privileges
       operationId: get_user_privileges_v1_value_proposition_privileges_get

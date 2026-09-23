@@ -3,10 +3,6 @@ info:
   title: Value Chat Server Generate Vp API
   description: Value chat service
   version: '1.0'
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: generate-vp
 paths:

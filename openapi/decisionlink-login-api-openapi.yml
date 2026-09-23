@@ -2,19 +2,33 @@ openapi: 3.2.0
 info:
   title: Collaboration Manager Login API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/collaboration/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: login
+- name: Login
 paths:
   /v1/collaboration/login:
     post:
       tags:
-      - login
+      - Login
       summary: Login a user for collaboration manager
-      description: "Endpoint for logging into the collaboration manager\n\nParameters\n----------\nlogin : Login\n    The login credentials\n\nReturns\n-------\nAccessToken\n    Returns access_token for collaboration manager"
+      description: 'Endpoint for logging into the collaboration manager
+
+
+        Parameters
+
+        ----------
+
+        login : Login
+
+        The login credentials
+
+
+        Returns
+
+        -------
+
+        AccessToken
+
+        Returns access_token for collaboration manager'
       operationId: collaboration_login_v1_collaboration_login_post
       requestBody:
         content:
@@ -39,29 +53,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    Login:
-      properties:
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-          description: Password for the collaboration
-        hash:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hash
-          description: The hash for the collaboration
-        ac:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ac
-          description: Access Code to access the collaboration
-      type: object
-      title: Login
-      description: Login model
     HTTPValidationError:
       properties:
         detail:
@@ -133,6 +124,29 @@ components:
       - value_prop_id
       title: CollaborationMetadata
       description: CollaborationMetadata model
+    Login:
+      properties:
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+          description: Password for the collaboration
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+          description: The hash for the collaboration
+        ac:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ac
+          description: Access Code to access the collaboration
+      type: object
+      title: Login
+      description: Login model
     ValidationError:
       properties:
         loc:

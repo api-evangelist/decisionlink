@@ -2,19 +2,33 @@ openapi: 3.2.0
 info:
   title: Manager Collaboration API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/collaboration/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: collaboration
+- name: Collaboration
 paths:
   /v1/collaboration/:
     post:
       tags:
-      - collaboration
+      - Collaboration
       summary: Create a token for a new collaboration
-      description: "Endpoint for creating a JWT for a collaboration\n\nParameters\n----------\ncollaboration : Collaboration\n    The collaboration being created\n\nReturns\n-------\nJSONResponse\n    Returns success and access_token for collaboration"
+      description: 'Endpoint for creating a JWT for a collaboration
+
+
+        Parameters
+
+        ----------
+
+        collaboration : Collaboration
+
+        The collaboration being created
+
+
+        Returns
+
+        -------
+
+        JSONResponse
+
+        Returns success and access_token for collaboration'
       operationId: create_collaboration_v1_collaboration__post
       requestBody:
         content:

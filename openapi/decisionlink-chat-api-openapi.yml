@@ -3,18 +3,14 @@ info:
   title: Value Server Chat API
   description: Value chat service
   version: '1.0'
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: chat
+- name: Chat
 paths:
   /v1/value-chat/chat/id:
     post:
       tags:
-      - chat
-      summary: 'generate a chat id '
+      - Chat
+      summary: generate a chat id
       description: Generate a new unique chat ID
       operationId: get_chat_id_v1_value_chat_chat_id_post
       responses:
@@ -28,7 +24,7 @@ paths:
   /v1/value-chat/chat/{chat_id}/history:
     get:
       tags:
-      - chat
+      - Chat
       summary: generate return chat history
       description: Retrieve chat history for a specific chat ID
       operationId: get_chat_history_v1_value_chat_chat__chat_id__history_get
@@ -56,7 +52,7 @@ paths:
   /v1/value-chat/chat/{chat_id}/status:
     get:
       tags:
-      - chat
+      - Chat
       summary: Get chat status
       description: Get the status of a specific chat (e.g. in_progress, completed)
       operationId: chat_status_v1_value_chat_chat__chat_id__status_get
@@ -84,7 +80,7 @@ paths:
   /v1/value-chat/chat/history:
     get:
       tags:
-      - chat
+      - Chat
       summary: generate return chat history
       description: Retrieve all chat IDs for the authenticated user
       operationId: get_old_chat_ids_v1_value_chat_chat_history_get
@@ -99,7 +95,7 @@ paths:
   /v1/value-chat/chat/{chat_id}:
     patch:
       tags:
-      - chat
+      - Chat
       summary: update chat title
       description: Update the title of a specific chat
       operationId: update_chat_title_v1_value_chat_chat__chat_id__patch
@@ -132,7 +128,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - chat
+      - Chat
       summary: delete chat history
       description: Delete a specific chat's history
       operationId: delete_chat_v1_value_chat_chat__chat_id__delete
@@ -160,7 +156,7 @@ paths:
   /v1/value-chat/chat/questions:
     get:
       tags:
-      - chat
+      - Chat
       summary: get default questions
       description: 'Get default questions for the chat based on
 
@@ -177,7 +173,7 @@ paths:
   /v1/value-chat/chat/search-titles/:
     get:
       tags:
-      - chat
+      - Chat
       summary: Search Titles Route
       description: Search for chats with titles similar to the search term
       operationId: search_titles_route_v1_value_chat_chat_search_titles__get
@@ -206,7 +202,7 @@ paths:
   /v1/value-chat/chat/search-history/:
     get:
       tags:
-      - chat
+      - Chat
       summary: Search History Route
       description: Search for specific text within chat message contents
       operationId: search_history_route_v1_value_chat_chat_search_history__get
@@ -235,7 +231,7 @@ paths:
   /v1/value-chat/chat/feedback:
     post:
       tags:
-      - chat
+      - Chat
       summary: Submit feedback for a specific chat message
       description: Insert chat feedback into the database
       operationId: submit_chat_feedback_v1_value_chat_chat_feedback_post
@@ -262,7 +258,7 @@ paths:
   /v1/value-chat/chat/{chat_id}/upload:
     post:
       tags:
-      - chat
+      - Chat
       summary: Upload a document to a chat session
       operationId: upload_chat_file_v1_value_chat_chat__chat_id__upload_post
       security:
@@ -294,15 +290,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
       properties:
         title:
@@ -312,33 +299,6 @@ components:
       required:
       - title
       title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
-    ChatFeedbackIn:
-      properties:
-        chat_id:
-          type: string
-          title: Chat Id
-          description: The ID of the chat
-        message_index:
-          type: integer
-          title: Message Index
-          description: The index of the message
-        vote_score:
-          type: integer
-          title: Vote Score
-          description: The vote score
-        comments:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Comments
-          description: The comments
-      type: object
-      required:
-      - chat_id
-      - message_index
-      - vote_score
-      title: ChatFeedbackIn
-      description: Chat feedback input model
     Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
       properties:
         file:
@@ -370,6 +330,42 @@ components:
       - msg
       - type
       title: ValidationError
+    ChatFeedbackIn:
+      properties:
+        chat_id:
+          type: string
+          title: Chat Id
+          description: The ID of the chat
+        message_index:
+          type: integer
+          title: Message Index
+          description: The index of the message
+        vote_score:
+          type: integer
+          title: Vote Score
+          description: The vote score
+        comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Comments
+          description: The comments
+      type: object
+      required:
+      - chat_id
+      - message_index
+      - vote_score
+      title: ChatFeedbackIn
+      description: Chat feedback input model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

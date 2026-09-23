@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Account Factors API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: account_factors
 paths:

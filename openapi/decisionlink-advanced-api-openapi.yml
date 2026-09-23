@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Advanced API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: advanced
+- name: Advanced
 paths:
   /v1/value-proposition/{valuePropId}/advanced:
     get:
       tags:
-      - advanced
+      - Advanced
       summary: Get the Value proposition advance details
       description: Endpoint for reading the Value Propositions advance details
       operationId: get_value_proposition_advance_v1_value_proposition__valuePropId__advanced_get
@@ -40,7 +36,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       tags:
-      - advanced
+      - Advanced
       summary: Update the Value proposition advanced details
       description: This endpoint sends the update payload to the backend and returns the update response directly.
       operationId: update_value_prop_advanced_v1_value_proposition__valuePropId__advanced_put
@@ -73,85 +69,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CurrencyType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the currency type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the currency type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A brief description of the currency type
-        abbreviation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbreviation
-          description: The abbreviation for the currency type
-        rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Rate
-          description: The exchange rate for the currency
-        decoration:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Decoration
-          description: The symbol or decoration for the currency
-      type: object
-      title: CurrencyType
-      description: Model representing a currency type.
-    NumberFormatType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the number format type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the number format type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A description of the number format type
-        locale:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locale
-          description: The locale associated with the number format type
-      type: object
-      title: NumberFormatType
-      description: Model representing a number format type.
     ValuePropAdvanced:
       properties:
         value_prop_id:
@@ -251,6 +168,56 @@ components:
       type: object
       title: ValuePropAdvanced
       description: Model representing the advanced details of a value proposition.
+    NumberFormatType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the number format type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the number format type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A description of the number format type
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: The locale associated with the number format type
+      type: object
+      title: NumberFormatType
+      description: Model representing a number format type.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ValuePropAdvancedPayload:
       properties:
         baseline_type_id:
@@ -319,27 +286,56 @@ components:
       - term
       title: ValuePropAdvancedPayload
       description: Model representing the advanced details of a value proposition payload.
-    ValidationError:
+    CurrencyType:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the currency type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the currency type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A brief description of the currency type
+        abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbreviation
+          description: The abbreviation for the currency type
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: The exchange rate for the currency
+        decoration:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Decoration
+          description: The symbol or decoration for the currency
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: CurrencyType
+      description: Model representing a currency type.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

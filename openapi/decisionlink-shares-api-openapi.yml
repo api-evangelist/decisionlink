@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Shares API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: shares
+- name: Shares
 paths:
   /v1/value-proposition/{valuePropId}/shares:
     get:
       tags:
-      - shares
+      - Shares
       summary: List of people who have a share on the value prop
       description: Endpoint to return a list of people who have a share on a value prop
       operationId: get_value_prop_shares_v1_value_proposition__valuePropId__shares_get
@@ -43,7 +39,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - shares
+      - Shares
       summary: Create new share for the user
       description: Endpoint to create value prop share for user
       operationId: create_value_prop_share_v1_value_proposition__valuePropId__shares_post
@@ -78,7 +74,7 @@ paths:
   /v1/value-proposition/{valuePropId}/shares/{shareId}:
     delete:
       tags:
-      - shares
+      - Shares
       summary: Delete the sharedId from value prop
       description: Endpoint to delete a share from a value prop
       operationId: delete_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__delete
@@ -112,7 +108,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - shares
+      - Shares
       summary: Update value prop share
       description: Endpoint to update share_role_type_id for a value prop share
       operationId: update_value_prop_share_v1_value_proposition__valuePropId__shares__shareId__patch
@@ -152,59 +148,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    MessageResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateShare:
-      properties:
-        user_id:
-          type: integer
-          title: User Id
-          description: Id of user the share is for
-        share_role_type_id:
-          type: integer
-          title: Share Role Type Id
-          description: Id for the share role type
-        from_crm:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: From Crm
-          description: If created from crm
-          default: 0
-      type: object
-      required:
-      - user_id
-      - share_role_type_id
-      title: CreateShare
-      description: Model for creating a share
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        message:
           type: string
           title: Message
-        type:
-          type: string
-          title: Error Type
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     Shares:
       properties:
         id:
@@ -246,6 +199,29 @@ components:
       - id
       title: Shares
       description: Model for shares
+    CreateShare:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+          description: Id of user the share is for
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+        from_crm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Crm
+          description: If created from crm
+          default: 0
+      type: object
+      required:
+      - user_id
+      - share_role_type_id
+      title: CreateShare
+      description: Model for creating a share
     UpdateShare:
       properties:
         share_role_type_id:
@@ -257,16 +233,36 @@ components:
       - share_role_type_id
       title: UpdateShare
       description: Model for updating a share
-    MessageResponse:
+    ValidationError:
       properties:
-        message:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
           title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

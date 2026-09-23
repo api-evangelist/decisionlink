@@ -2,19 +2,24 @@ openapi: 3.2.0
 info:
   title: Value Proposition List API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: list
+- name: List
 paths:
   /v1/value-proposition/list:
     get:
       tags:
-      - list
+      - List
       summary: Get the list of Value Propositions
-      description: "Endpoint for reading the Value Propositions available to the user\n\nReturns\n-------\ndict\n    Returns the list of available Value Propositions and has_unfinished_vps"
+      description: 'Endpoint for reading the Value Propositions available to the user
+
+
+        Returns
+
+        -------
+
+        dict
+
+        Returns the list of available Value Propositions and has_unfinished_vps'
       operationId: get_value_proposition_list_v1_value_proposition_list_get
       security:
       - HTTPBearer: []
@@ -96,23 +101,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ListMode:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      title: ListMode
-      description: Mode for filtering value propositions by status.
     ValidationError:
       properties:
         loc:
@@ -134,6 +122,23 @@ components:
       - msg
       - type
       title: ValidationError
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

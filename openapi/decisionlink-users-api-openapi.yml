@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Users API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: users
+- name: Users
 paths:
   /v1/value-proposition/users:
     get:
       tags:
-      - users
+      - Users
       summary: Get all users for the account of the requesting user
       description: Endpoint for reading all users for the account of the requesting user
       operationId: get_users_v1_value_proposition_users_get
@@ -31,7 +27,7 @@ paths:
   /v1/value-proposition/me:
     get:
       tags:
-      - users
+      - Users
       summary: Get the authenticated user info
       description: Endpoint for reading basic info of the currently authenticated user
       operationId: get_current_user_v1_value_proposition_me_get

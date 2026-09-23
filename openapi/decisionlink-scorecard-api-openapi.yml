@@ -2,19 +2,51 @@ openapi: 3.2.0
 info:
   title: Value Proposition Scorecard API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: scorecard
+- name: Scorecard
 paths:
   /v1/value-proposition/{valuePropId}/scorecard:
     get:
       tags:
-      - scorecard
+      - Scorecard
       summary: Get value proposition scorecard with threshold evaluations
-      description: "Get scorecard for a value proposition\n\nThis endpoint evaluates the value proposition against configured thresholds\nand returns a traffic light status system (red/yellow/green) for each\nthreshold type, along with override metrics and phasing information.\n\nParameters\n----------\nvalue_prop_id : int\n    The ID of the value proposition to evaluate\n\nReturns\n-------\nScorecardResponse\n    Complete scorecard with threshold evaluations, status, and metrics\n\nRaises\n------\nHTTPException\n    404 if value proposition not found\n    500 if calculation fails"
+      description: 'Get scorecard for a value proposition
+
+
+        This endpoint evaluates the value proposition against configured thresholds
+
+        and returns a traffic light status system (red/yellow/green) for each
+
+        threshold type, along with override metrics and phasing information.
+
+
+        Parameters
+
+        ----------
+
+        value_prop_id : int
+
+        The ID of the value proposition to evaluate
+
+
+        Returns
+
+        -------
+
+        ScorecardResponse
+
+        Complete scorecard with threshold evaluations, status, and metrics
+
+
+        Raises
+
+        ------
+
+        HTTPException
+
+        404 if value proposition not found
+
+        500 if calculation fails'
       operationId: get_value_proposition_scorecard_v1_value_proposition__valuePropId__scorecard_get
       security:
       - HTTPBearer: []
@@ -40,6 +72,65 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ScorecardResponse:
+      properties:
+        value_prop_status:
+          type: integer
+          title: Value Prop Status
+          description: Overall value proposition status
+        threshold_types:
+          items:
+            $ref: '#/components/schemas/ThresholdStatus'
+          type: array
+          title: Threshold Types
+          description: List of threshold status evaluations
+        phasing_activated:
+          type: boolean
+          title: Phasing Activated
+          description: Whether phasing is activated
+        driver_override:
+          type: number
+          title: Driver Override
+          description: Driver override percentage
+        financial_override:
+          type: number
+          title: Financial Override
+          description: Financial override percentage
+        impact_override:
+          type: number
+          title: Impact Override
+          description: Impact override percentage
+      type: object
+      required:
+      - value_prop_status
+      - threshold_types
+      - phasing_activated
+      - driver_override
+      - financial_override
+      - impact_override
+      title: ScorecardResponse
+      description: Complete scorecard response model
     ThresholdStatus:
       properties:
         id:
@@ -111,65 +202,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ScorecardResponse:
-      properties:
-        value_prop_status:
-          type: integer
-          title: Value Prop Status
-          description: Overall value proposition status
-        threshold_types:
-          items:
-            $ref: '#/components/schemas/ThresholdStatus'
-          type: array
-          title: Threshold Types
-          description: List of threshold status evaluations
-        phasing_activated:
-          type: boolean
-          title: Phasing Activated
-          description: Whether phasing is activated
-        driver_override:
-          type: number
-          title: Driver Override
-          description: Driver override percentage
-        financial_override:
-          type: number
-          title: Financial Override
-          description: Financial override percentage
-        impact_override:
-          type: number
-          title: Impact Override
-          description: Impact override percentage
-      type: object
-      required:
-      - value_prop_status
-      - threshold_types
-      - phasing_activated
-      - driver_override
-      - financial_override
-      - impact_override
-      title: ScorecardResponse
-      description: Complete scorecard response model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

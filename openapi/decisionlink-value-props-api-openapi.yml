@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Value Props API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: value_props
 paths:
@@ -14,7 +10,25 @@ paths:
       tags:
       - value_props
       summary: Calculate metrics for a value proposition
-      description: "Endpoint for calculating metrics for a value proposition\n\nParameters\n----------\nvalue_prop_id : int\n    The value proposition ID\n\nReturns\n-------\nJSONResponse\n    Returns the calculated metrics response"
+      description: 'Endpoint for calculating metrics for a value proposition
+
+
+        Parameters
+
+        ----------
+
+        value_prop_id : int
+
+        The value proposition ID
+
+
+        Returns
+
+        -------
+
+        JSONResponse
+
+        Returns the calculated metrics response'
       operationId: calculate_metrics_v1_value_proposition__valuePropId__calculate_metrics_post
       security:
       - HTTPBearer: []
@@ -70,7 +84,23 @@ paths:
       tags:
       - value_props
       summary: Update a Value Proposition
-      description: "Endpoint for updating a value proposition\n\nParameters\n----------\npayload : UpdateValuePropPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+      description: 'Endpoint for updating a value proposition
+
+
+        Parameters
+
+        ----------
+
+        payload : UpdateValuePropPayload
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns the success message'
       operationId: update_value_proposition_v1_value_proposition__valuePropId__patch
       security:
       - HTTPBearer: []
@@ -104,7 +134,16 @@ paths:
       tags:
       - value_props
       summary: Delete a value proposition
-      description: "Endpoint for deleting a Value Proposition\n\nReturns\n-------\nMessageResponse\n    Response from delete action"
+      description: 'Endpoint for deleting a Value Proposition
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Response from delete action'
       operationId: delete_value_proposition_v1_value_proposition__valuePropId__delete
       security:
       - HTTPBearer: []
@@ -133,7 +172,16 @@ paths:
       tags:
       - value_props
       summary: Get the vc chart of a Value Proposition
-      description: "Endpoint for reading the Value Proposition vc charts\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition vc chart"
+      description: 'Endpoint for reading the Value Proposition vc charts
+
+
+        Returns
+
+        -------
+
+        ValueProp
+
+        Returns the Value Proposition vc chart'
       operationId: get_value_proposition_vc_chart_v1_value_proposition__valuePropId__vc_chart_get
       security:
       - HTTPBearer: []
@@ -162,7 +210,25 @@ paths:
       tags:
       - value_props
       summary: Create a new Value Proposition
-      description: "Endpoint for creating a Value Proposition\n\nParameters\n----------\npayload : CreateValuePropPayload\n    The initial details for creating the Value Proposition\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition details"
+      description: 'Endpoint for creating a Value Proposition
+
+
+        Parameters
+
+        ----------
+
+        payload : CreateValuePropPayload
+
+        The initial details for creating the Value Proposition
+
+
+        Returns
+
+        -------
+
+        ValueProp
+
+        Returns the Value Proposition details'
       operationId: create_value_proposition_v1_value_proposition_post
       requestBody:
         content:
@@ -190,7 +256,23 @@ paths:
       tags:
       - value_props
       summary: Create a Value Proposition clone
-      description: "Endpoint for creating a value proposition clone\n\nParameters\n----------\npayload : CloneValuePropPayload\n\nReturns\n-------\nValueProp\n    Returns the Value Proposition clone details"
+      description: 'Endpoint for creating a value proposition clone
+
+
+        Parameters
+
+        ----------
+
+        payload : CloneValuePropPayload
+
+
+        Returns
+
+        -------
+
+        ValueProp
+
+        Returns the Value Proposition clone details'
       operationId: clone_value_proposition_v1_value_proposition__valuePropId__clone_post
       security:
       - HTTPBearer: []
@@ -258,83 +340,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PaybackChart:
-      properties:
-        net:
-          items:
-            type: number
-          type: array
-          title: Net
-        net_fmt:
-          items:
-            type: string
-          type: array
-          title: Net Fmt
-        payback:
-          type: string
-          title: Payback
-        payback_formula:
-          type: string
-          title: Payback Formula
-        payback_formula_text:
-          type: string
-          title: Payback Formula Text
-        years:
-          items:
-            type: string
-          type: array
-          title: Years
-      type: object
-      required:
-      - net
-      - net_fmt
-      - payback
-      - payback_formula
-      - payback_formula_text
-      - years
-      title: PaybackChart
-      description: Payback chart data for a value proposition.
-    ReassignValuePropPayload:
-      properties:
-        user_id:
-          type: integer
-          title: User Id
-          description: ID of the user to take over the value prop
-      type: object
-      required:
-      - user_id
-      title: ReassignValuePropPayload
-      description: ReassignValuePropPayload model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ValueProp:
       properties:
         id:
@@ -769,6 +774,152 @@ components:
       - status_id
       title: ValueProp
       description: ValueProp model
+    ValuePropVCChart:
+      properties:
+        names:
+          items:
+            $ref: '#/components/schemas/BenefitCategory'
+          type: array
+          title: Names
+          description: Benefit categories with their associated metrics
+        total_benefits:
+          items:
+            type: string
+          type: array
+          title: Total Benefits
+          description: List of total benefits values (raw)
+        total_benefits_fmt:
+          items:
+            type: string
+          type: array
+          title: Total Benefits Fmt
+          description: List of formatted total benefits values
+        total_benefits_fr:
+          items:
+            type: string
+          type: array
+          title: Total Benefits Fr
+          description: List of total benefits values in French format
+        percents:
+          items:
+            type: number
+          type: array
+          title: Percents
+          description: List of percentage values
+        total_annual_benefits:
+          type: string
+          title: Total Annual Benefits
+          description: Total annual benefits (raw)
+        total_annual_benefits_fmt:
+          type: string
+          title: Total Annual Benefits Fmt
+          description: Formatted total annual benefits
+      type: object
+      required:
+      - names
+      - total_benefits
+      - total_benefits_fmt
+      - total_benefits_fr
+      - percents
+      - total_annual_benefits
+      - total_annual_benefits_fmt
+      title: ValuePropVCChart
+      description: Overall VC chart model.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    BenefitCategory:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the benefit category
+        name:
+          type: string
+          title: Name
+          description: Name of the benefit category
+        description:
+          type: string
+          title: Description
+          description: Description of the benefit category
+        metrics:
+          items:
+            $ref: '#/components/schemas/value_proposition__value_props__models__Benefit'
+          type: array
+          title: Metrics
+          description: List of benefit metrics within this category
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - metrics
+      title: BenefitCategory
+      description: Represents a category grouping of benefits.
+    PaybackChart:
+      properties:
+        net:
+          items:
+            type: number
+          type: array
+          title: Net
+        net_fmt:
+          items:
+            type: string
+          type: array
+          title: Net Fmt
+        payback:
+          type: string
+          title: Payback
+        payback_formula:
+          type: string
+          title: Payback Formula
+        payback_formula_text:
+          type: string
+          title: Payback Formula Text
+        years:
+          items:
+            type: string
+          type: array
+          title: Years
+      type: object
+      required:
+      - net
+      - net_fmt
+      - payback
+      - payback_formula
+      - payback_formula_text
+      - years
+      title: PaybackChart
+      description: Payback chart data for a value proposition.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     CreateValuePropPayload:
       properties:
         company_id:
@@ -810,64 +961,6 @@ components:
       - company_id
       title: CreateValuePropPayload
       description: CreateValuePropPayload model
-    BenefitCategory:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID of the benefit category
-        name:
-          type: string
-          title: Name
-          description: Name of the benefit category
-        description:
-          type: string
-          title: Description
-          description: Description of the benefit category
-        metrics:
-          items:
-            $ref: '#/components/schemas/value_proposition__value_props__models__Benefit'
-          type: array
-          title: Metrics
-          description: List of benefit metrics within this category
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - metrics
-      title: BenefitCategory
-      description: Represents a category grouping of benefits.
-    CloneValuePropPayload:
-      properties:
-        company_id:
-          anyOf:
-          - type: integer
-          - type: string
-          - type: 'null'
-          title: Company Id
-          description: ID of the Company for the ValueProp
-        opportunity_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Opportunity Id
-          description: Opportunity ID
-        name:
-          type: string
-          title: Name
-          description: Name of the Value Proposition
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-          description: User id who is the owner of value proposition
-      type: object
-      required:
-      - company_id
-      title: CloneValuePropPayload
-      description: CloneValuePropPayload model
     UpdateValuePropPayload:
       properties:
         company_id:
@@ -885,84 +978,6 @@ components:
       type: object
       title: UpdateValuePropPayload
       description: UpdateValuePropPayload model
-    ValuePropSolution:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: ID of the Solution
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-          description: Value Prop ID of the Solution
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-          description: Account Solution ID of the Solution
-        quantity:
-          type: integer
-          title: Quantity
-          description: Quantity of the Solution
-        deployment_time:
-          type: integer
-          title: Deployment Time
-          description: Deployment time of the Solution
-        created:
-          type: string
-          title: Created
-          description: Creation date of the Solution
-        modified:
-          type: string
-          title: Modified
-          description: Modification date of the Solution
-        name:
-          type: string
-          title: Name
-          description: Name of the Solution
-        description:
-          type: string
-          title: Description
-          description: Description of the Solution
-        quantity_enabled:
-          type: integer
-          title: Quantity Enabled
-          description: Quantity enabled flag of the Solution
-      type: object
-      required:
-      - id
-      - value_prop_id
-      - account_solution_id
-      - quantity
-      - deployment_time
-      - created
-      - modified
-      - name
-      - description
-      - quantity_enabled
-      title: ValuePropSolution
-      description: ValueProp Solution model
-    CostOfDelay:
-      properties:
-        formula:
-          type: string
-          title: Formula
-        formula_text:
-          type: string
-          title: Formula Text
-        three_months_cost_of_delay:
-          type: number
-          title: Three Months Cost Of Delay
-        three_months_cost_of_delay_fmt:
-          type: string
-          title: Three Months Cost Of Delay Fmt
-      type: object
-      required:
-      - formula
-      - formula_text
-      - three_months_cost_of_delay
-      - three_months_cost_of_delay_fmt
-      title: CostOfDelay
-      description: Cost of delay (cost of inaction) chart data.
     value_proposition__value_props__models__Benefit:
       properties:
         value_prop_metric_id:
@@ -1442,67 +1457,134 @@ components:
       - value_prop_metric_id
       title: Benefit
       description: Benefit model
-    ValuePropVCChart:
+    ReassignValuePropPayload:
       properties:
-        names:
-          items:
-            $ref: '#/components/schemas/BenefitCategory'
-          type: array
-          title: Names
-          description: Benefit categories with their associated metrics
-        total_benefits:
-          items:
-            type: string
-          type: array
-          title: Total Benefits
-          description: List of total benefits values (raw)
-        total_benefits_fmt:
-          items:
-            type: string
-          type: array
-          title: Total Benefits Fmt
-          description: List of formatted total benefits values
-        total_benefits_fr:
-          items:
-            type: string
-          type: array
-          title: Total Benefits Fr
-          description: List of total benefits values in French format
-        percents:
-          items:
-            type: number
-          type: array
-          title: Percents
-          description: List of percentage values
-        total_annual_benefits:
-          type: string
-          title: Total Annual Benefits
-          description: Total annual benefits (raw)
-        total_annual_benefits_fmt:
-          type: string
-          title: Total Annual Benefits Fmt
-          description: Formatted total annual benefits
+        user_id:
+          type: integer
+          title: User Id
+          description: ID of the user to take over the value prop
       type: object
       required:
-      - names
-      - total_benefits
-      - total_benefits_fmt
-      - total_benefits_fr
-      - percents
-      - total_annual_benefits
-      - total_annual_benefits_fmt
-      title: ValuePropVCChart
-      description: Overall VC chart model.
-    MessageResponse:
+      - user_id
+      title: ReassignValuePropPayload
+      description: ReassignValuePropPayload model
+    HTTPValidationError:
       properties:
-        message:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValuePropSolution:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID of the Solution
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value Prop ID of the Solution
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID of the Solution
+        quantity:
+          type: integer
+          title: Quantity
+          description: Quantity of the Solution
+        deployment_time:
+          type: integer
+          title: Deployment Time
+          description: Deployment time of the Solution
+        created:
           type: string
-          title: Message
+          title: Created
+          description: Creation date of the Solution
+        modified:
+          type: string
+          title: Modified
+          description: Modification date of the Solution
+        name:
+          type: string
+          title: Name
+          description: Name of the Solution
+        description:
+          type: string
+          title: Description
+          description: Description of the Solution
+        quantity_enabled:
+          type: integer
+          title: Quantity Enabled
+          description: Quantity enabled flag of the Solution
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - id
+      - value_prop_id
+      - account_solution_id
+      - quantity
+      - deployment_time
+      - created
+      - modified
+      - name
+      - description
+      - quantity_enabled
+      title: ValuePropSolution
+      description: ValueProp Solution model
+    CloneValuePropPayload:
+      properties:
+        company_id:
+          anyOf:
+          - type: integer
+          - type: string
+          - type: 'null'
+          title: Company Id
+          description: ID of the Company for the ValueProp
+        opportunity_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Opportunity Id
+          description: Opportunity ID
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Proposition
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: User id who is the owner of value proposition
+      type: object
+      required:
+      - company_id
+      title: CloneValuePropPayload
+      description: CloneValuePropPayload model
+    CostOfDelay:
+      properties:
+        formula:
+          type: string
+          title: Formula
+        formula_text:
+          type: string
+          title: Formula Text
+        three_months_cost_of_delay:
+          type: number
+          title: Three Months Cost Of Delay
+        three_months_cost_of_delay_fmt:
+          type: string
+          title: Three Months Cost Of Delay Fmt
+      type: object
+      required:
+      - formula
+      - formula_text
+      - three_months_cost_of_delay
+      - three_months_cost_of_delay_fmt
+      title: CostOfDelay
+      description: Cost of delay (cost of inaction) chart data.
   securitySchemes:
     HTTPBearer:
       type: http

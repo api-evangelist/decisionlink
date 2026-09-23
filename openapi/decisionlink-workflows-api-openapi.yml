@@ -2,19 +2,33 @@ openapi: 3.2.0
 info:
   title: Value Proposition Workflows API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: workflows
+- name: Workflows
 paths:
   /v1/value-proposition/workflows:
     get:
       tags:
-      - workflows
+      - Workflows
       summary: Return the workflows available to the user
-      description: "Endpoint for reading user workflows\n\nParameters\n-------\nincludeAll\n    Include all account workflows or just the user's active workflows\n\nReturns\n-------\nList[Workflow]\n    Returns the list of workflows"
+      description: 'Endpoint for reading user workflows
+
+
+        Parameters
+
+        -------
+
+        includeAll
+
+        Include all account workflows or just the user''s active workflows
+
+
+        Returns
+
+        -------
+
+        List[Workflow]
+
+        Returns the list of workflows'
       operationId: get_workflows_v1_value_proposition_workflows_get
       security:
       - HTTPBearer: []
@@ -46,15 +60,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ConversationMember:
       properties:
         account_workflow_id:
@@ -109,6 +135,15 @@ components:
       - description
       title: ConversationMember
       description: ConversationMember Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Workflow:
       properties:
         id:
@@ -195,27 +230,6 @@ components:
       - default_assignment
       title: Workflow
       description: Workflow Model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

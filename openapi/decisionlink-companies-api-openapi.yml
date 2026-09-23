@@ -2,19 +2,27 @@ openapi: 3.2.0
 info:
   title: Value Proposition Companies API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: companies
+- name: Companies
 paths:
   /v1/value-proposition/companies/admin-validate:
     post:
       tags:
-      - companies
+      - Companies
       summary: Validate a company
-      description: "Admin-only: Validate or create company.\n- Reads sfdc_account_id and user_id from JSON body.\n- If feature 83 is OFF: create shared company (account_id=0).\n- If feature 83 is ON:\n    * Try to find company by (account_id, account_defined_id = sfdc_account_id)\n    * If found -> return its id\n    * Else -> create company with (user's account_id, user_id, sfdc_account_id) and return id"
+      description: 'Admin-only: Validate or create company.
+
+        - Reads sfdc_account_id and user_id from JSON body.
+
+        - If feature 83 is OFF: create shared company (account_id=0).
+
+        - If feature 83 is ON:
+
+        * Try to find company by (account_id, account_defined_id = sfdc_account_id)
+
+        * If found -> return its id
+
+        * Else -> create company with (user''s account_id, user_id, sfdc_account_id) and return id'
       operationId: admin_validate_company_v1_value_proposition_companies_admin_validate_post
       requestBody:
         content:
@@ -40,7 +48,7 @@ paths:
   /v1/value-proposition/companies/validate:
     post:
       tags:
-      - companies
+      - Companies
       summary: Validate a company
       description: Endpoint for validating a company
       operationId: validate_company_v1_value_proposition_companies_validate_post
@@ -68,9 +76,27 @@ paths:
   /v1/value-proposition/companies/search:
     post:
       tags:
-      - companies
+      - Companies
       summary: Search for a company
-      description: "Endpoint for searching companies database\n\nParameters\n-------\npayload\n    The SearchPayload needed to find company\n\nReturns\n-------\nList[Company]\n    Returns the list of matching companies"
+      description: 'Endpoint for searching companies database
+
+
+        Parameters
+
+        -------
+
+        payload
+
+        The SearchPayload needed to find company
+
+
+        Returns
+
+        -------
+
+        List[Company]
+
+        Returns the list of matching companies'
       operationId: search_companies_v1_value_proposition_companies_search_post
       requestBody:
         content:
@@ -99,9 +125,27 @@ paths:
   /v1/value-proposition/companies:
     post:
       tags:
-      - companies
+      - Companies
       summary: Create a company new company
-      description: "Endpoint for creating a new company\n\nParameters\n-------\npayload\n    The CompanyPayload needed to create the company\n\nReturns\n-------\nCompany\n    Returns the company, if created. Returns 409 if company exists"
+      description: 'Endpoint for creating a new company
+
+
+        Parameters
+
+        -------
+
+        payload
+
+        The CompanyPayload needed to create the company
+
+
+        Returns
+
+        -------
+
+        Company
+
+        Returns the company, if created. Returns 409 if company exists'
       operationId: create_company_v1_value_proposition_companies_post
       requestBody:
         content:
@@ -158,68 +202,6 @@ components:
       - name
       title: AdminValidatePayload
       description: Validate Admin Payload Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CompanyValidateReturn:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: If the validate company was a success or not
-        company_id:
-          type: integer
-          title: Company Id
-          description: ID of the company
-        acc_specific:
-          type: boolean
-          title: Acc Specific
-          description: Tells whether the account has account specific companies
-      type: object
-      required:
-      - success
-      - company_id
-      - acc_specific
-      title: CompanyValidateReturn
-      description: Validate Company Return Model
-    CompanyValidatePayload:
-      properties:
-        sf_account_id:
-          type: string
-          title: Sf Account Id
-          description: Salesforce account id.
-      type: object
-      required:
-      - sf_account_id
-      title: CompanyValidatePayload
-      description: Validate Company Payload Model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     Company:
       properties:
         id:
@@ -413,6 +395,16 @@ components:
       - country
       title: Company
       description: Company Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     CreateCompanyPayload:
       properties:
         name:
@@ -494,6 +486,47 @@ components:
       - name
       title: CreateCompanyPayload
       description: CreateCompanyPayload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CompanyValidatePayload:
+      properties:
+        sf_account_id:
+          type: string
+          title: Sf Account Id
+          description: Salesforce account id.
+      type: object
+      required:
+      - sf_account_id
+      title: CompanyValidatePayload
+      description: Validate Company Payload Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     SearchPayload:
       properties:
         search_term:
@@ -505,16 +538,27 @@ components:
       - search_term
       title: SearchPayload
       description: SearchPayload Model
-    MessageResponse:
+    CompanyValidateReturn:
       properties:
-        message:
-          type: string
-          title: Message
+        success:
+          type: boolean
+          title: Success
+          description: If the validate company was a success or not
+        company_id:
+          type: integer
+          title: Company Id
+          description: ID of the company
+        acc_specific:
+          type: boolean
+          title: Acc Specific
+          description: Tells whether the account has account specific companies
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - success
+      - company_id
+      - acc_specific
+      title: CompanyValidateReturn
+      description: Validate Company Return Model
   securitySchemes:
     HTTPBearer:
       type: http

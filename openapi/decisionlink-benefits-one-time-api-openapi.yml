@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Benefits One Time API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: benefits-one-time
 paths:
@@ -103,36 +99,78 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    OneTimeBenefitResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        value_prop_metric_id:
+          type: integer
+          title: Value Prop Metric Id
+          description: ID of the created value_prop_metrics row
+        account_solution_metric_id:
+          type: integer
+          title: Account Solution Metric Id
+          description: ID of the created account_solution_metrics row
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value prop ID
+        value_category_id:
+          type: integer
+          title: Value Category Id
+          description: Value category ID
+        name:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Name
+          description: Benefit name
+        driver_value:
+          type: number
+          title: Driver Value
+          description: Normalized driver value stored
+        improvement_value:
+          type: number
+          title: Improvement Value
+          description: Normalized improvement value stored
+        financial_value:
+          type: number
+          title: Financial Value
+          description: Normalized financial value stored
+        current_effort:
+          type: number
+          title: Current Effort
+          description: Normalized current effort stored
+        unit_type_id:
+          type: integer
+          title: Unit Type Id
+          description: Resolved unit type ID stored
+        warning:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Warning
+          description: Present when the benefit was persisted but a post-commit step (links or recalculation) failed; totals may be stale until benefits are recalculated
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - value_prop_metric_id
+      - account_solution_metric_id
+      - value_prop_id
+      - value_category_id
+      - name
+      - driver_value
+      - improvement_value
+      - financial_value
+      - current_effort
+      - unit_type_id
+      title: OneTimeBenefitResponse
+      description: Response model for a created one-time benefit.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     OneTimeBenefitCreate:
       properties:
         name:
@@ -390,6 +428,27 @@ components:
           value_survey_id:
           - 55
           - 66
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     OneTimeBenefitPatch:
       properties:
         name:
@@ -533,78 +592,15 @@ components:
       type: object
       title: OneTimeBenefitPatch
       description: Payload for partial update of a one-time benefit.
-    OneTimeBenefitResponse:
+    HTTPValidationError:
       properties:
-        value_prop_metric_id:
-          type: integer
-          title: Value Prop Metric Id
-          description: ID of the created value_prop_metrics row
-        account_solution_metric_id:
-          type: integer
-          title: Account Solution Metric Id
-          description: ID of the created account_solution_metrics row
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-          description: Value prop ID
-        value_category_id:
-          type: integer
-          title: Value Category Id
-          description: Value category ID
-        name:
-          type: string
-          title: Name
-          description: Benefit name
-        driver_value:
-          type: number
-          title: Driver Value
-          description: Normalized driver value stored
-        improvement_value:
-          type: number
-          title: Improvement Value
-          description: Normalized improvement value stored
-        financial_value:
-          type: number
-          title: Financial Value
-          description: Normalized financial value stored
-        current_effort:
-          type: number
-          title: Current Effort
-          description: Normalized current effort stored
-        unit_type_id:
-          type: integer
-          title: Unit Type Id
-          description: Resolved unit type ID stored
-        warning:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Warning
-          description: Present when the benefit was persisted but a post-commit step (links or recalculation) failed; totals may be stale until benefits are recalculated
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - value_prop_metric_id
-      - account_solution_metric_id
-      - value_prop_id
-      - value_category_id
-      - name
-      - driver_value
-      - improvement_value
-      - financial_value
-      - current_effort
-      - unit_type_id
-      title: OneTimeBenefitResponse
-      description: Response model for a created one-time benefit.
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

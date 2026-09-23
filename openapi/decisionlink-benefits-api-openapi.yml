@@ -2,21 +2,25 @@ openapi: 3.2.0
 info:
   title: Decisionlink Benefits API
   version: 0.1.0
-  x-refined-note:
-  - x-api-evangelist-source differs across the merged source definitions and was not carried
-  description: 'Operations tagged benefits across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: 'Operations tagged benefits across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.json, decisionlink-value-proposition-openapi.json. Each path carries the servers of the definition it was published in.'
 tags:
-- name: benefits
+- name: Benefits
 paths:
   /v1/collaboration/valueProps/benefits:
     get:
       tags:
-      - benefits
+      - Benefits
       summary: Get the Benefits for a Collaboration organized by Value Category
-      description: "Endpoint for reading Benefits for a Collaboration organized by Value Category\n\nReturns\n-------\nList[ValueCategory]\n    Returns the Benefits organized by Value Category"
+      description: 'Endpoint for reading Benefits for a Collaboration organized by Value Category
+
+
+        Returns
+
+        -------
+
+        List[ValueCategory]
+
+        Returns the Benefits organized by Value Category'
       operationId: get_benefits_v1_collaboration_valueProps_benefits_get
       responses:
         '200':
@@ -30,15 +34,30 @@ paths:
                 title: Response Get Benefits V1 Collaboration Valueprops Benefits Get
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/collaboration/valueProps/benefits/active:
     patch:
       tags:
-      - benefits
+      - Benefits
       summary: Save the Benefit Active statuses for Collaboration benefits
-      description: "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      description: 'Endpoint for saving Benefit Active statuses
+
+
+        Parameters
+
+        ----------
+
+        benefits : BenefitActivePayload
+
+        The Benefits and their Active statuses
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns success and message'
       operationId: update_benefit_active_status_v1_collaboration_valueProps_benefits_active_patch
       requestBody:
         content:
@@ -61,15 +80,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/benefits/{benefitId}:
     get:
       tags:
-      - benefits
+      - Benefits
       summary: Get the details for a single benefit
-      description: "Endpoint for reading a single benefit's details\n\nReturns\n-------\nSingleBenefitDetail\n    Returns the Benefit Details"
+      description: 'Endpoint for reading a single benefit''s details
+
+
+        Returns
+
+        -------
+
+        SingleBenefitDetail
+
+        Returns the Benefit Details'
       operationId: get_single_benefit_v1_value_proposition__valuePropId__benefits__benefitId__get
       security:
       - HTTPBearer: []
@@ -101,9 +126,39 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - benefits
+      - Benefits
       summary: Update benefit phasing and factors
-      description: "Endpoint for updating benefit phasing and factors\n\nParameters\n----------\npayload : BenefitPhasingAndFactorPayload\n    The payload containing phasing and factors updates\nrequest : Request\n    The FastAPI request object\nvalue_prop_id : int\n    The ID of the value proposition\nbenefit_id : int\n    The ID of the benefit to update\n\nReturns\n-------\nJSONResponse\n    Response with success message"
+      description: 'Endpoint for updating benefit phasing and factors
+
+
+        Parameters
+
+        ----------
+
+        payload : BenefitPhasingAndFactorPayload
+
+        The payload containing phasing and factors updates
+
+        request : Request
+
+        The FastAPI request object
+
+        value_prop_id : int
+
+        The ID of the value proposition
+
+        benefit_id : int
+
+        The ID of the benefit to update
+
+
+        Returns
+
+        -------
+
+        JSONResponse
+
+        Response with success message'
       operationId: update_benefit_phasing_v1_value_proposition__valuePropId__benefits__benefitId__patch
       security:
       - HTTPBearer: []
@@ -139,15 +194,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/benefits:
     get:
       tags:
-      - benefits
+      - Benefits
       summary: Get the Benefits for a Value Proposition by Value Category
-      description: "Endpoint for reading Benefits for a Value Proposition grouped by the\nrequested dimension (default: value_category).\n\nReturns a dict with ``vcs`` and grouping availability flags.\n\nReturns\n-------\ndict\n    Benefits response with vcs and grouping flags"
+      description: 'Endpoint for reading Benefits for a Value Proposition grouped by the
+
+        requested dimension (default: value_category).
+
+
+        Returns a dict with ``vcs`` and grouping availability flags.
+
+
+        Returns
+
+        -------
+
+        dict
+
+        Benefits response with vcs and grouping flags'
       operationId: get_benefits_v1_value_proposition__valuePropId__benefits_get
       security:
       - HTTPBearer: []
@@ -201,15 +267,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/benefits-active:
     patch:
       tags:
-      - benefits
+      - Benefits
       summary: Save the Benefit Active statuses for benefits
-      description: "Endpoint for saving Benefit Active statuses\n\nParameters\n----------\nbenefits : BenefitActivePayload\n    The Benefits and their Active statuses\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      description: 'Endpoint for saving Benefit Active statuses
+
+
+        Parameters
+
+        ----------
+
+        benefits : BenefitActivePayload
+
+        The Benefits and their Active statuses
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns success and message'
       operationId: update_benefit_active_status_v1_value_proposition__valuePropId__benefits_active_patch
       security:
       - HTTPBearer: []
@@ -239,13 +320,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/benefits-by-type:
     get:
       tags:
-      - benefits
+      - Benefits
       summary: Returns the benefits by type(financial/non financial)
       description: 'Returns benefits grouped by type with configurable
 
@@ -314,15 +392,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/benefit-fields/{benefitId}:
     patch:
       tags:
-      - benefits
+      - Benefits
       summary: Update benefit fields
-      description: "Endpoint for updating benefit fields\n\nParameters\n----------\n- value_prop_id\n- benefit_id\n- payload : BenefitFieldsPayload\n    The fields to update\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      description: 'Endpoint for updating benefit fields
+
+
+        Parameters
+
+        ----------
+
+        - value_prop_id
+
+        - benefit_id
+
+        - payload : BenefitFieldsPayload
+
+        The fields to update
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns success and message'
       operationId: update_benefit_fields_endpoint_v1_value_proposition__valuePropId__benefit_fields__benefitId__patch
       security:
       - HTTPBearer: []
@@ -358,36 +455,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
 components:
   schemas:
-    BenefitActive:
+    MessageResponse:
       properties:
-        value_prop_metric_id:
+        message:
           type: string
-          title: Value Prop Metric Id
-          description: The ID for the Benefit
-        active:
-          type: string
-          title: Active
-          description: The active status for the Benefit
+          title: Message
+          description: Response message
       type: object
       required:
-      - value_prop_metric_id
-      - active
-      title: BenefitActive
-      description: BenefitActive model
-    HTTPValidationError:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ValueCategory:
       properties:
         id:
@@ -416,17 +517,6 @@ components:
       - benefits
       title: ValueCategory
       description: ValueCategory model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Response message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: MessageResponse model
     Benefit:
       properties:
         id:
@@ -453,6 +543,31 @@ components:
       - active
       title: Benefit
       description: Benefit model
+    BenefitActive:
+      properties:
+        value_prop_metric_id:
+          type: string
+          title: Value Prop Metric Id
+          description: The ID for the Benefit
+        active:
+          type: string
+          title: Active
+          description: The active status for the Benefit
+      type: object
+      required:
+      - value_prop_metric_id
+      - active
+      title: BenefitActive
+      description: BenefitActive model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     BenefitActivePayload:
       properties:
         benefits:
@@ -466,27 +581,53 @@ components:
       - benefits
       title: BenefitActivePayload
       description: BenefitActivePayload model
-    ValidationError:
+    MessageResponse_2:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        message:
           type: string
           title: Message
-        type:
-          type: string
-          title: Error Type
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    FilterByOption:
+      type: string
+      enum:
+      - value_category
+      - functional_objectives
+      - painpoints
+      - capabilities
+      - operational_objectives
+      - impact_types
+      - accrual_types
+      title: FilterByOption
+      description: Filter options for benefits-by-type grouping
+    BenefitPhasingAndFactorPayload:
+      properties:
+        benefit_phasing:
+          anyOf:
+          - $ref: '#/components/schemas/BenefitPhasingValue'
+          - type: 'null'
+          description: containing metric_phase_0 through metric_phase_10
+        factors:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/FactorValue'
+            type: array
+          - type: 'null'
+          title: Factors
+          description: The factors and values being saved
+        apply_all:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Apply All
+          description: 'Apply strategy: 0=single metric, 1=all metrics, 2=value category, 3=models, 4=accrual type'
+          default: 0
+      type: object
+      title: BenefitPhasingAndFactorPayload
+      description: Payload for updating benefit phasing and factors
     BenefitPhasingValue:
       properties:
         metric_phase_0:
@@ -558,6 +699,446 @@ components:
       type: object
       title: BenefitPhasingValue
       description: Benefit Phasing Value model
+    BenefitFieldsPayload:
+      properties:
+        alt_metric_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Name
+          description: Alternative metric name
+        alt_metric_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Metric Description
+          description: Alternative metric description
+        metric_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note
+          description: General note for the metric
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Second metric note
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Third metric note
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features of the metric
+        tco_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tco Name
+          description: TCO Name
+      type: object
+      title: BenefitFieldsPayload
+      description: Benefit Fields Payload model
+    BenefitsByTypeResponse:
+      properties:
+        has_pain_points:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Pain Points
+          description: Denotes whether the Value Prop has pain points
+          default: false
+        has_functional_objectives:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Functional Objectives
+          description: Denotes whether the Value Prop has functional objectives
+          default: false
+        has_capabilities:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Capabilities
+          description: Denotes whether the Value Prop has capabilities
+          default: false
+        has_operational_objectives:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Operational Objectives
+          description: Denotes whether the Value Prop has operational objectives
+          default: false
+        has_sequence:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Sequence
+          description: Denotes whether the Value Prop has sequenced metrics
+          default: false
+        benefit_types:
+          items:
+            $ref: '#/components/schemas/BenefitType'
+          type: array
+          title: Benefit Types
+          description: The metrics grouped by benefit type
+      type: object
+      required:
+      - benefit_types
+      title: BenefitsByTypeResponse
+      description: Benefits by Type Response Model
+    FactorValue:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the Factor being saved
+        source_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Source Type Id
+          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
+          default: '4'
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          title: Value
+          description: Value of the Factor being saved
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+          description: Year in the factor
+          default: 1
+        validating_user_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Validating User Name
+      type: object
+      required:
+      - id
+      - value
+      title: FactorValue
+      description: FactorValue model
+    ValueCategory_2:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Value Category
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Category
+        description:
+          type: string
+          title: Description
+          description: Description of the Value Category
+        benefits:
+          items:
+            $ref: '#/components/schemas/value_proposition__benefits__models__Benefit'
+          type: array
+          title: Benefits
+          description: Benefits belonging to the Value Category
+        year1_benefits:
+          type: number
+          title: Year1 Benefits
+          description: Year 1 benefits
+        year2_benefits:
+          type: number
+          title: Year2 Benefits
+          description: Year 2 benefits
+        year3_benefits:
+          type: number
+          title: Year3 Benefits
+          description: Year 3 benefits
+        year4_benefits:
+          type: number
+          title: Year4 Benefits
+          description: Year 4 benefits
+        year5_benefits:
+          type: number
+          title: Year5 Benefits
+          description: Year 5 benefits
+        year6_benefits:
+          type: number
+          title: Year6 Benefits
+          description: Year 6 benefits
+        year7_benefits:
+          type: number
+          title: Year7 Benefits
+          description: Year 7 benefits
+        year8_benefits:
+          type: number
+          title: Year8 Benefits
+          description: Year 8 benefits
+        year9_benefits:
+          type: number
+          title: Year9 Benefits
+          description: Year 9 benefits
+        year10_benefits:
+          type: number
+          title: Year10 Benefits
+          description: Year 10 benefits
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total benefits
+        vc_dif_total:
+          type: number
+          title: Vc Dif Total
+          description: Sum of year-1 differential (driver_value * impact * financial_value) across active metrics in this group
+          default: 0.0
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - benefits
+      - year1_benefits
+      - year2_benefits
+      - year3_benefits
+      - year4_benefits
+      - year5_benefits
+      - year6_benefits
+      - year7_benefits
+      - year8_benefits
+      - year9_benefits
+      - year10_benefits
+      - total_benefits
+      title: ValueCategory
+      description: ValueCategory model
+    value_proposition__benefits__models__Benefit:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Benefit
+        name:
+          type: string
+          title: Name
+          description: Name of the Benefit
+        description:
+          type: string
+          title: Description
+          description: Description of the Benefit
+        active:
+          type: string
+          title: Active
+          description: Active status of the Benefit
+        tracker_active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Tracker Active
+          description: Active status of benefit tracker
+        driver_value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: 'null'
+          title: Driver Value
+          description: Formatted driver value
+        financial_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value
+          description: Formatted driver value
+        impact:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: 'null'
+          title: Impact
+          description: Formatted driver value
+        driver_value_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value Fmt
+          description: Formatted driver value
+        driver_value_p2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value P2
+          description: Formatted driver value
+        driver_value_fr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Driver Value Fr
+          description: Formatted driver value
+        financial_value_fmt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value Fmt
+          description: Formatted financial value
+        financial_value_p2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value P2
+          description: Formatted financial value
+        financial_value_fr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Financial Value Fr
+          description: Formatted financial value
+        year1_benefits:
+          type: number
+          title: Year1 Benefits
+          description: Year 1 benefits
+        year2_benefits:
+          type: number
+          title: Year2 Benefits
+          description: Year 2 benefits
+        year3_benefits:
+          type: number
+          title: Year3 Benefits
+          description: Year 3 benefits
+        year4_benefits:
+          type: number
+          title: Year4 Benefits
+          description: Year 4 benefits
+        year5_benefits:
+          type: number
+          title: Year5 Benefits
+          description: Year 5 benefits
+        year6_benefits:
+          type: number
+          title: Year6 Benefits
+          description: Year 6 benefits
+        year7_benefits:
+          type: number
+          title: Year7 Benefits
+          description: Year 7 benefits
+        year8_benefits:
+          type: number
+          title: Year8 Benefits
+          description: Year 8 benefits
+        year9_benefits:
+          type: number
+          title: Year9 Benefits
+          description: Year 9 benefits
+        year10_benefits:
+          type: number
+          title: Year10 Benefits
+          description: Year 10 benefits
+        total_benefits:
+          type: number
+          title: Total Benefits
+          description: Total benefits
+        account_solution_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Solution Id
+          description: Account solution ID
+        solution_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Solution Name
+          description: Solution name
+        vp_specific:
+          type: integer
+          title: Vp Specific
+          description: Was this metric created for one VP?
+          default: 0
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - active
+      - year1_benefits
+      - year2_benefits
+      - year3_benefits
+      - year4_benefits
+      - year5_benefits
+      - year6_benefits
+      - year7_benefits
+      - year8_benefits
+      - year9_benefits
+      - year10_benefits
+      - total_benefits
+      title: Benefit
+      description: Benefit model
+    BenefitPhasingUpdateResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Outcome of each requested update
+        warning:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Warning
+          description: Set when the write succeeded but totals may be stale
+      type: object
+      required:
+      - message
+      title: BenefitPhasingUpdateResponse
+      description: Response model for the benefit phasing and factors update
+    BenefitType:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Value Category
+        name:
+          type: string
+          title: Name
+          description: Name of the Value Category
+        description:
+          type: string
+          title: Description
+          description: Description of the Value Category
+        active_count:
+          type: integer
+          title: Active Count
+        soft_count:
+          type: integer
+          title: Soft Count
+        na_count:
+          type: integer
+          title: Na Count
+        top_vc_total:
+          type: string
+          title: Top Vc Total
+        vcs:
+          items:
+            $ref: '#/components/schemas/ValueCategory_2'
+          type: array
+          title: Vcs
+          description: Value Category with benefits
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - vcs
+      title: BenefitType
+      description: BenefitType model
     SingleBenefitDetail:
       properties:
         id:
@@ -1367,498 +1948,11 @@ components:
       - year3_benefits_fr
       title: SingleBenefitDetail
       description: Single Benefit Detail model
-    BenefitPhasingAndFactorPayload:
-      properties:
-        benefit_phasing:
-          anyOf:
-          - $ref: '#/components/schemas/BenefitPhasingValue'
-          - type: 'null'
-          description: containing metric_phase_0 through metric_phase_10
-        factors:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/FactorValue'
-            type: array
-          - type: 'null'
-          title: Factors
-          description: The factors and values being saved
-        apply_all:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Apply All
-          description: 'Apply strategy: 0=single metric, 1=all metrics, 2=value category, 3=models, 4=accrual type'
-          default: 0
-      type: object
-      title: BenefitPhasingAndFactorPayload
-      description: Payload for updating benefit phasing and factors
-    BenefitPhasingUpdateResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Outcome of each requested update
-        warning:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Warning
-          description: Set when the write succeeded but totals may be stale
-      type: object
-      required:
-      - message
-      title: BenefitPhasingUpdateResponse
-      description: Response model for the benefit phasing and factors update
-    FilterByOption:
-      type: string
-      enum:
-      - value_category
-      - functional_objectives
-      - painpoints
-      - capabilities
-      - operational_objectives
-      - impact_types
-      - accrual_types
-      title: FilterByOption
-      description: Filter options for benefits-by-type grouping
-    ValueCategory_2:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the Value Category
-        name:
-          type: string
-          title: Name
-          description: Name of the Value Category
-        description:
-          type: string
-          title: Description
-          description: Description of the Value Category
-        benefits:
-          items:
-            $ref: '#/components/schemas/value_proposition__benefits__models__Benefit'
-          type: array
-          title: Benefits
-          description: Benefits belonging to the Value Category
-        year1_benefits:
-          type: number
-          title: Year1 Benefits
-          description: Year 1 benefits
-        year2_benefits:
-          type: number
-          title: Year2 Benefits
-          description: Year 2 benefits
-        year3_benefits:
-          type: number
-          title: Year3 Benefits
-          description: Year 3 benefits
-        year4_benefits:
-          type: number
-          title: Year4 Benefits
-          description: Year 4 benefits
-        year5_benefits:
-          type: number
-          title: Year5 Benefits
-          description: Year 5 benefits
-        year6_benefits:
-          type: number
-          title: Year6 Benefits
-          description: Year 6 benefits
-        year7_benefits:
-          type: number
-          title: Year7 Benefits
-          description: Year 7 benefits
-        year8_benefits:
-          type: number
-          title: Year8 Benefits
-          description: Year 8 benefits
-        year9_benefits:
-          type: number
-          title: Year9 Benefits
-          description: Year 9 benefits
-        year10_benefits:
-          type: number
-          title: Year10 Benefits
-          description: Year 10 benefits
-        total_benefits:
-          type: number
-          title: Total Benefits
-          description: Total benefits
-        vc_dif_total:
-          type: number
-          title: Vc Dif Total
-          description: Sum of year-1 differential (driver_value * impact * financial_value) across active metrics in this group
-          default: 0.0
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - benefits
-      - year1_benefits
-      - year2_benefits
-      - year3_benefits
-      - year4_benefits
-      - year5_benefits
-      - year6_benefits
-      - year7_benefits
-      - year8_benefits
-      - year9_benefits
-      - year10_benefits
-      - total_benefits
-      title: ValueCategory
-      description: ValueCategory model
-    BenefitType:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the Value Category
-        name:
-          type: string
-          title: Name
-          description: Name of the Value Category
-        description:
-          type: string
-          title: Description
-          description: Description of the Value Category
-        active_count:
-          type: integer
-          title: Active Count
-        soft_count:
-          type: integer
-          title: Soft Count
-        na_count:
-          type: integer
-          title: Na Count
-        top_vc_total:
-          type: string
-          title: Top Vc Total
-        vcs:
-          items:
-            $ref: '#/components/schemas/ValueCategory_2'
-          type: array
-          title: Vcs
-          description: Value Category with benefits
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - vcs
-      title: BenefitType
-      description: BenefitType model
-    BenefitFieldsPayload:
-      properties:
-        alt_metric_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Alt Metric Name
-          description: Alternative metric name
-        alt_metric_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Alt Metric Description
-          description: Alternative metric description
-        metric_note:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Metric Note
-          description: General note for the metric
-        metric_note_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Metric Note 2
-          description: Second metric note
-        metric_note_3:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Metric Note 3
-          description: Third metric note
-        features:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Features
-          description: Features of the metric
-        tco_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Tco Name
-          description: TCO Name
-      type: object
-      title: BenefitFieldsPayload
-      description: Benefit Fields Payload model
-    FactorValue:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID of the Factor being saved
-        source_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Source Type Id
-          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
-          default: '4'
-        value:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: number
-          title: Value
-          description: Value of the Factor being saved
-        year:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Year
-          description: Year in the factor
-          default: 1
-        validating_user_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Validating User Name
-      type: object
-      required:
-      - id
-      - value
-      title: FactorValue
-      description: FactorValue model
-    BenefitsByTypeResponse:
-      properties:
-        has_pain_points:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Pain Points
-          description: Denotes whether the Value Prop has pain points
-          default: false
-        has_functional_objectives:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Functional Objectives
-          description: Denotes whether the Value Prop has functional objectives
-          default: false
-        has_capabilities:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Capabilities
-          description: Denotes whether the Value Prop has capabilities
-          default: false
-        has_operational_objectives:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Operational Objectives
-          description: Denotes whether the Value Prop has operational objectives
-          default: false
-        has_sequence:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Sequence
-          description: Denotes whether the Value Prop has sequenced metrics
-          default: false
-        benefit_types:
-          items:
-            $ref: '#/components/schemas/BenefitType'
-          type: array
-          title: Benefit Types
-          description: The metrics grouped by benefit type
-      type: object
-      required:
-      - benefit_types
-      title: BenefitsByTypeResponse
-      description: Benefits by Type Response Model
-    value_proposition__benefits__models__Benefit:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the Benefit
-        name:
-          type: string
-          title: Name
-          description: Name of the Benefit
-        description:
-          type: string
-          title: Description
-          description: Description of the Benefit
-        active:
-          type: string
-          title: Active
-          description: Active status of the Benefit
-        tracker_active:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Tracker Active
-          description: Active status of benefit tracker
-        driver_value:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: number
-          - type: 'null'
-          title: Driver Value
-          description: Formatted driver value
-        financial_value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Financial Value
-          description: Formatted driver value
-        impact:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: number
-          - type: 'null'
-          title: Impact
-          description: Formatted driver value
-        driver_value_fmt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Driver Value Fmt
-          description: Formatted driver value
-        driver_value_p2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Driver Value P2
-          description: Formatted driver value
-        driver_value_fr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Driver Value Fr
-          description: Formatted driver value
-        financial_value_fmt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Financial Value Fmt
-          description: Formatted financial value
-        financial_value_p2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Financial Value P2
-          description: Formatted financial value
-        financial_value_fr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Financial Value Fr
-          description: Formatted financial value
-        year1_benefits:
-          type: number
-          title: Year1 Benefits
-          description: Year 1 benefits
-        year2_benefits:
-          type: number
-          title: Year2 Benefits
-          description: Year 2 benefits
-        year3_benefits:
-          type: number
-          title: Year3 Benefits
-          description: Year 3 benefits
-        year4_benefits:
-          type: number
-          title: Year4 Benefits
-          description: Year 4 benefits
-        year5_benefits:
-          type: number
-          title: Year5 Benefits
-          description: Year 5 benefits
-        year6_benefits:
-          type: number
-          title: Year6 Benefits
-          description: Year 6 benefits
-        year7_benefits:
-          type: number
-          title: Year7 Benefits
-          description: Year 7 benefits
-        year8_benefits:
-          type: number
-          title: Year8 Benefits
-          description: Year 8 benefits
-        year9_benefits:
-          type: number
-          title: Year9 Benefits
-          description: Year 9 benefits
-        year10_benefits:
-          type: number
-          title: Year10 Benefits
-          description: Year 10 benefits
-        total_benefits:
-          type: number
-          title: Total Benefits
-          description: Total benefits
-        account_solution_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Account Solution Id
-          description: Account solution ID
-        solution_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Solution Name
-          description: Solution name
-        vp_specific:
-          type: integer
-          title: Vp Specific
-          description: Was this metric created for one VP?
-          default: 0
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - active
-      - year1_benefits
-      - year2_benefits
-      - year3_benefits
-      - year4_benefits
-      - year5_benefits
-      - year6_benefits
-      - year7_benefits
-      - year8_benefits
-      - year9_benefits
-      - year10_benefits
-      - total_benefits
-      title: Benefit
-      description: Benefit model
-    MessageResponse_2:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http
       description: Access token in the form of a JWT
       scheme: bearer
 x-refined-from:
-- decisionlink-collaboration-openapi.yml
-- decisionlink-value-proposition-openapi.yml
+- decisionlink-collaboration-openapi.json
+- decisionlink-value-proposition-openapi.json

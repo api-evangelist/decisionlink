@@ -2,21 +2,25 @@ openapi: 3.2.0
 info:
   title: Decisionlink Factors API
   version: 0.1.0
-  x-refined-note:
-  - x-api-evangelist-source differs across the merged source definitions and was not carried
-  description: 'Operations tagged factors across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: 'Operations tagged factors across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.json, decisionlink-value-proposition-openapi.json. Each path carries the servers of the definition it was published in.'
 tags:
-- name: factors
+- name: Factors
 paths:
   /v1/collaboration/valueProps/factors:
     get:
       tags:
-      - factors
+      - Factors
       summary: Get the Factors for a Collaboration organized by Factor Group
-      description: "Endpoint for reading Factors for a Collaboration organized by Factor group\n\nReturns\n-------\nList[FactorGroup]\n    Returns the Factors organized by Factor Group"
+      description: 'Endpoint for reading Factors for a Collaboration organized by Factor group
+
+
+        Returns
+
+        -------
+
+        List[FactorGroup]
+
+        Returns the Factors organized by Factor Group'
       operationId: get_factors_v1_collaboration_valueProps_factors_get
       responses:
         '200':
@@ -32,9 +36,27 @@ paths:
       - HTTPBearer: []
     patch:
       tags:
-      - factors
+      - Factors
       summary: Save the values for Collaboration factors
-      description: "Endpoint for saving Factors\n\nParameters\n----------\nfactors : FactorPayload\n    The Factors and their values\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      description: 'Endpoint for saving Factors
+
+
+        Parameters
+
+        ----------
+
+        factors : FactorPayload
+
+        The Factors and their values
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns success and message'
       operationId: update_factors_v1_collaboration_valueProps_factors_patch
       requestBody:
         content:
@@ -57,13 +79,10 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/all-factors:
     get:
       tags:
-      - factors
+      - Factors
       summary: Get all factors for a Value Proposition
       operationId: get_all_factors_route_v1_value_proposition__valuePropId__all_factors_get
       security:
@@ -98,15 +117,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/key-factors:
     get:
       tags:
-      - factors
+      - Factors
       summary: Get the Key Factors by Factor Group
-      description: "Endpoint for reading Key Factors by Factor group\n\nReturns\n-------\nList[FactorGroup]\n    Returns the Factors organized by Factor Group"
+      description: 'Endpoint for reading Key Factors by Factor group
+
+
+        Returns
+
+        -------
+
+        List[FactorGroup]
+
+        Returns the Factors organized by Factor Group'
       operationId: get_key_factors_v1_value_proposition__valuePropId__key_factors_get
       security:
       - HTTPBearer: []
@@ -140,15 +165,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/scalers:
     get:
       tags:
-      - factors
+      - Factors
       summary: Get the scaling factors of Value Proposition
-      description: "Endpoint for reading the Value Proposition scalers\n\nReturns\n-------\nList[Factor]\n    Returns the Value Proposition scalers"
+      description: 'Endpoint for reading the Value Proposition scalers
+
+
+        Returns
+
+        -------
+
+        List[Factor]
+
+        Returns the Value Proposition scalers'
       operationId: get_scalers_v1_value_proposition__valuePropId__scalers_get
       security:
       - HTTPBearer: []
@@ -182,15 +213,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/factors:
     patch:
       tags:
-      - factors
+      - Factors
       summary: Save the values for factors
-      description: "Endpoint for saving Factors\n\nParameters\n----------\nfactors : FactorPayload\n    The Factors and their values\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+      description: 'Endpoint for saving Factors
+
+
+        Parameters
+
+        ----------
+
+        factors : FactorPayload
+
+        The Factors and their values
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns status code and success message'
       operationId: update_factors_v1_value_proposition__valuePropId__factors_patch
       security:
       - HTTPBearer: []
@@ -220,15 +266,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/factor-override:
     post:
       tags:
-      - factors
+      - Factors
       summary: override factor name
-      description: "Endpoint for overriding factors\n\nParameters\n----------\nfactor_override : FactorOverrideNamePayload\n    The factor override name and id\n\nReturns\n-------\nMessageResponse\n    Returns status code and success message"
+      description: 'Endpoint for overriding factors
+
+
+        Parameters
+
+        ----------
+
+        factor_override : FactorOverrideNamePayload
+
+        The factor override name and id
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns status code and success message'
       operationId: override_factor_name_v1_value_proposition__valuePropId__factor_override_post
       security:
       - HTTPBearer: []
@@ -258,64 +319,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
 components:
   schemas:
-    UnitType:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: ID for the Unit Type
-        name:
-          type: string
-          title: Name
-          description: Name of the Unit Type
-        abbreviation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbreviation
-          description: Abbreviation for the Unit Type
-      type: object
-      required:
-      - id
-      - name
-      - abbreviation
-      title: UnitType
-      description: UnitType model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     Factor:
       properties:
         id:
@@ -380,6 +385,110 @@ components:
       - value
       title: Factor
       description: Factor model
+    UnitType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID for the Unit Type
+        name:
+          type: string
+          title: Name
+          description: Name of the Unit Type
+        abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbreviation
+          description: Abbreviation for the Unit Type
+      type: object
+      required:
+      - id
+      - name
+      - abbreviation
+      title: UnitType
+      description: UnitType model
+    FactorPayload:
+      properties:
+        factors:
+          items:
+            $ref: '#/components/schemas/FactorValue'
+          type: array
+          title: Factors
+          description: The factors and values being saved
+      type: object
+      required:
+      - factors
+      title: FactorPayload
+      description: FactorPayload model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Response message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
+    FactorValue:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID of the Factor being saved
+        source_type_id:
+          anyOf:
+          - type: string
+            const: '4'
+          - type: 'null'
+          title: Source Type Id
+          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
+          default: '4'
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          title: Value
+          description: Value of the Factor being saved
+      type: object
+      required:
+      - id
+      - value
+      title: FactorValue
+      description: FactorValue model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     FactorGroup:
       properties:
         id:
@@ -408,79 +517,127 @@ components:
       - factors
       title: FactorGroup
       description: FactorGroup model
-    FactorValue:
+    Factor_2:
       properties:
         id:
           type: string
           title: Id
-          description: ID of the Factor being saved
-        source_type_id:
-          anyOf:
-          - type: string
-            const: '4'
-          - type: 'null'
-          title: Source Type Id
-          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
-          default: '4'
+          description: ID for the Factor
+        sequence:
+          type: string
+          title: Sequence
+          description: Sequence of the Factor
+        name:
+          type: string
+          title: Name
+          description: Name of the Factor
+        description:
+          type: string
+          title: Description
+          description: Description of the Factor
+        unit_type_id:
+          type: string
+          title: Unit Type Id
+          description: Unit type of the Factor
+        unit_type:
+          $ref: '#/components/schemas/UnitType'
+          description: Unit Type object for the Factor Unit Type
+        precision:
+          type: string
+          title: Precision
+          description: Decimal precision for the Factor
         value:
           anyOf:
           - type: string
           - type: integer
           - type: number
           title: Value
-          description: Value of the Factor being saved
-      type: object
-      required:
-      - id
-      - value
-      title: FactorValue
-      description: FactorValue model
-    FactorPayload:
-      properties:
-        factors:
-          items:
-            $ref: '#/components/schemas/FactorValue'
-          type: array
-          title: Factors
-          description: The factors and values being saved
-      type: object
-      required:
-      - factors
-      title: FactorPayload
-      description: FactorPayload model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Response message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: MessageResponse model
-    value_proposition__factors__models__SourceType:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: ID for the Source Type
-        name:
-          type: string
-          title: Name
-          description: Name of the Source Type
-        description:
+          description: Value of the Factor
+        value_fr:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Value Fr
+          description: Value of the Factor
+          default: 0
+        value_fmt:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Value Fmt
+          description: Value of the Factor
+          default: 0
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/value_proposition__factors__models__SourceType'
+          - type: 'null'
+          description: SourceType of the Factor
+        has_scratchpad:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Has Scratchpad
+          description: Denotes if the factor has a scratchpad
+          default: 0
+        scratchpad_used:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scratchpad Used
+          description: Denotes if factor scratchpad is in use
+          default: 0
+        literal_number:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Literal Number
+          description: Denotes whether the factor should be treated as a literal
+          default: false
+        ai_updatable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ai Updatable
+          description: Whether the factor is eligible for AI updates
+          default: false
+        validation:
+          anyOf:
+          - $ref: '#/components/schemas/Validation'
+          - type: 'null'
+        source_attribution:
           anyOf:
           - type: string
           - type: 'null'
-          title: Description
-          description: Description of the Source Type
+          title: Source Attribution
+        attribution_link:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revert Value
       type: object
       required:
       - id
+      - sequence
       - name
-      title: SourceType
-      description: SourceType model
+      - description
+      - unit_type_id
+      - unit_type
+      - precision
+      - value
+      title: Factor
+      description: Factor model
     AllFactor:
       properties:
         factor_id:
@@ -637,127 +794,92 @@ components:
       - description
       title: AllFactor
       description: All-factors response model — one entry per unique factor
-    Factor_2:
+    MessageResponse_2:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    FactorValue_2:
       properties:
         id:
           type: string
           title: Id
-          description: ID for the Factor
-        sequence:
-          type: string
-          title: Sequence
-          description: Sequence of the Factor
-        name:
-          type: string
-          title: Name
-          description: Name of the Factor
-        description:
-          type: string
-          title: Description
-          description: Description of the Factor
-        unit_type_id:
-          type: string
-          title: Unit Type Id
-          description: Unit type of the Factor
-        unit_type:
-          $ref: '#/components/schemas/UnitType'
-          description: Unit Type object for the Factor Unit Type
-        precision:
-          type: string
-          title: Precision
-          description: Decimal precision for the Factor
+          description: ID of the Factor being saved
+        source_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Source Type Id
+          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
+          default: '4'
         value:
           anyOf:
           - type: string
           - type: integer
           - type: number
           title: Value
-          description: Value of the Factor
-        value_fr:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          title: Value Fr
-          description: Value of the Factor
-          default: 0
-        value_fmt:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          title: Value Fmt
-          description: Value of the Factor
-          default: 0
-        source_type:
-          anyOf:
-          - $ref: '#/components/schemas/value_proposition__factors__models__SourceType'
-          - type: 'null'
-          description: SourceType of the Factor
-        has_scratchpad:
+          description: Value of the Factor being saved
+        year:
           anyOf:
           - type: integer
           - type: 'null'
-          title: Has Scratchpad
-          description: Denotes if the factor has a scratchpad
-          default: 0
-        scratchpad_used:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Scratchpad Used
-          description: Denotes if factor scratchpad is in use
-          default: 0
-        literal_number:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Literal Number
-          description: Denotes whether the factor should be treated as a literal
-          default: false
-        ai_updatable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Ai Updatable
-          description: Whether the factor is eligible for AI updates
-          default: false
-        validation:
-          anyOf:
-          - $ref: '#/components/schemas/Validation'
-          - type: 'null'
-        source_attribution:
+          title: Year
+          description: Year in the factor
+          default: 1
+        validating_user_name:
           anyOf:
           - type: string
           - type: 'null'
-          title: Source Attribution
-        attribution_link:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Link
-        attribution_tooltip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Tooltip
-        revert_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Revert Value
+          title: Validating User Name
       type: object
       required:
       - id
-      - sequence
-      - name
-      - description
-      - unit_type_id
-      - unit_type
-      - precision
       - value
-      title: Factor
-      description: Factor model
+      title: FactorValue
+      description: FactorValue model
+    value_proposition__factors__models__SourceType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: ID for the Source Type
+        name:
+          type: string
+          title: Name
+          description: Name of the Source Type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Source Type
+      type: object
+      required:
+      - id
+      - name
+      title: SourceType
+      description: SourceType model
+    FactorOverrideNamePayload:
+      properties:
+        factor_id:
+          type: integer
+          title: Factor Id
+          description: ID of the factor
+        override_name:
+          type: string
+          title: Override Name
+          description: Overriding the factor name
+      type: object
+      required:
+      - factor_id
+      - override_name
+      title: FactorOverrideNamePayload
+      description: FactorOverrideNamePayload model
     Validation:
       properties:
         id:
@@ -815,75 +937,11 @@ components:
       - date
       title: Validation
       description: Factor Validation Model
-    FactorValue_2:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID of the Factor being saved
-        source_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Source Type Id
-          description: 'Source type: will always be 4, Value Execution will change to Customer if needed'
-          default: '4'
-        value:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: number
-          title: Value
-          description: Value of the Factor being saved
-        year:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Year
-          description: Year in the factor
-          default: 1
-        validating_user_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Validating User Name
-      type: object
-      required:
-      - id
-      - value
-      title: FactorValue
-      description: FactorValue model
-    FactorOverrideNamePayload:
-      properties:
-        factor_id:
-          type: integer
-          title: Factor Id
-          description: ID of the factor
-        override_name:
-          type: string
-          title: Override Name
-          description: Overriding the factor name
-      type: object
-      required:
-      - factor_id
-      - override_name
-      title: FactorOverrideNamePayload
-      description: FactorOverrideNamePayload model
-    MessageResponse_2:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http
       description: Access token in the form of a JWT
       scheme: bearer
 x-refined-from:
-- decisionlink-collaboration-openapi.yml
-- decisionlink-value-proposition-openapi.yml
+- decisionlink-collaboration-openapi.json
+- decisionlink-value-proposition-openapi.json

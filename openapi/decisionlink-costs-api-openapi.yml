@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Costs API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: costs
+- name: Costs
 paths:
   /v1/value-proposition/{valuePropId}/costs:
     get:
       tags:
-      - costs
+      - Costs
       summary: Get the costs of Value Proposition
       description: Endpoint for reading the saved costs of a value proposition.
       operationId: get_costs_v1_value_proposition__valuePropId__costs_get
@@ -43,7 +39,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - costs
+      - Costs
       summary: Save the values for costs
       description: Create a cost for a value proposition and roll up its totals.
       operationId: store_cost_v1_value_proposition__valuePropId__costs_post
@@ -78,7 +74,7 @@ paths:
   /v1/value-proposition/{valuePropId}/available-costs:
     get:
       tags:
-      - costs
+      - Costs
       summary: Get the available costs of Value Proposition
       description: Endpoint for reading the available (not yet added) costs of a VP.
       operationId: get_available_costs_v1_value_proposition__valuePropId__available_costs_get
@@ -110,7 +106,7 @@ paths:
   /v1/value-proposition/{valuePropId}/costs/{costId}:
     delete:
       tags:
-      - costs
+      - Costs
       summary: Delete a cost from the Value Proposition
       description: Delete a cost from a value proposition and roll up its totals.
       operationId: delete_cost_v1_value_proposition__valuePropId__costs__costId__delete
@@ -144,7 +140,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - costs
+      - Costs
       summary: Update a cost in the Value Proposition
       description: Update a cost of a value proposition and roll up its totals.
       operationId: update_cost_v1_value_proposition__valuePropId__costs__costId__patch
@@ -185,7 +181,7 @@ paths:
   /v1/value-proposition/{valuePropId}/costs/{costId}/name:
     patch:
       tags:
-      - costs
+      - Costs
       summary: Update a cost name in the Value Proposition
       description: Endpoint to update the name of a cost
       operationId: update_cost_name_v1_value_proposition__valuePropId__costs__costId__name_patch
@@ -225,15 +221,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     CostResponse:
       properties:
         name:
@@ -419,27 +406,6 @@ components:
       - cost_category_type
       title: CostResponse
       description: Cost Response model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     CostNameUpdate:
       properties:
         cost_name:
@@ -450,155 +416,6 @@ components:
       - cost_name
       title: CostNameUpdate
       description: Cost Name Model
-    CostCreate:
-      properties:
-        accrual_type_id:
-          type: integer
-          title: Accrual Type Id
-          description: Accrual Type ID.
-        cost_category_type_id:
-          type: integer
-          title: Cost Category Type Id
-          description: Cost Category Type ID.
-        cost_type_id:
-          type: integer
-          title: Cost Type Id
-          description: Cost Type ID.
-        expense_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Expense Type Id
-          description: Expense Type ID.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the cost item.
-        name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Name
-          description: Name of the cost item.
-        quantity:
-          type: number
-          title: Quantity
-          description: Quantity of the cost item.
-        rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Rate
-          description: Rate per unit for the cost item.
-        cost:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Cost
-          description: Total cost for the item.
-        discount:
-          anyOf:
-          - type: number
-            maximum: 100.0
-            minimum: 0.0
-          - type: 'null'
-          title: Discount
-          description: Discount applied to the cost item.
-        lease_term:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Lease Term
-          description: Lease term.
-        buyout_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Buyout Value
-          description: Buyout value.
-        present_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Present Value
-          description: Present value of the cost item.
-        residual_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Residual Value
-          description: Residual value of the cost item.
-        yr1_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr1 Costs
-          description: Cost for year 1.
-        yr2_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr2 Costs
-          description: Cost for year 2.
-        yr3_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr3 Costs
-          description: Cost for year 3.
-        yr4_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr4 Costs
-          description: Cost for year 4.
-        yr5_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr5 Costs
-          description: Cost for year 5.
-        yr6_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr6 Costs
-          description: Cost for year 6.
-        yr7_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr7 Costs
-          description: Cost for year 7.
-        yr8_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr8 Costs
-          description: Cost for year 8.
-        yr9_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr9 Costs
-          description: Cost for year 9.
-        yr10_costs:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Yr10 Costs
-          description: Cost for year 10.
-      type: object
-      required:
-      - accrual_type_id
-      - cost_category_type_id
-      - cost_type_id
-      - quantity
-      title: CostCreate
-      description: Cost Create model
     CostType:
       properties:
         id:
@@ -655,40 +472,37 @@ components:
       - name
       title: ExpenseType
       description: Expense Type model
-    AccrualType:
+    MessageResponse:
       properties:
-        id:
-          type: integer
-          title: Id
-          description: Unique identifier for the accrual type.
-        name:
+        message:
           type: string
-          title: Name
-          description: Name of the accrual type.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the accrual type.
-        created:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Created
-          description: Timestamp when the accrual type was created.
-        modified:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Modified
-          description: Timestamp when the accrual type was last updated.
+          title: Message
       type: object
       required:
-      - id
-      - name
-      title: AccrualType
-      description: Accrual Type model
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AvailableCost:
       properties:
         id:
@@ -1013,6 +827,198 @@ components:
       - updated_at
       title: AvailableCost
       description: Available Cost model
+    AccrualType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the accrual type.
+        name:
+          type: string
+          title: Name
+          description: Name of the accrual type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the accrual type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the accrual type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the accrual type was last updated.
+      type: object
+      required:
+      - id
+      - name
+      title: AccrualType
+      description: Accrual Type model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CostCreate:
+      properties:
+        accrual_type_id:
+          type: integer
+          title: Accrual Type Id
+          description: Accrual Type ID.
+        cost_category_type_id:
+          type: integer
+          title: Cost Category Type Id
+          description: Cost Category Type ID.
+        cost_type_id:
+          type: integer
+          title: Cost Type Id
+          description: Cost Type ID.
+        expense_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Expense Type Id
+          description: Expense Type ID.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost item.
+        name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Name
+          description: Name of the cost item.
+        quantity:
+          type: number
+          title: Quantity
+          description: Quantity of the cost item.
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: Rate per unit for the cost item.
+        cost:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cost
+          description: Total cost for the item.
+        discount:
+          anyOf:
+          - type: number
+            maximum: 100.0
+            minimum: 0.0
+          - type: 'null'
+          title: Discount
+          description: Discount applied to the cost item.
+        lease_term:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lease Term
+          description: Lease term.
+        buyout_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Buyout Value
+          description: Buyout value.
+        present_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Present Value
+          description: Present value of the cost item.
+        residual_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Residual Value
+          description: Residual value of the cost item.
+        yr1_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr1 Costs
+          description: Cost for year 1.
+        yr2_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr2 Costs
+          description: Cost for year 2.
+        yr3_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr3 Costs
+          description: Cost for year 3.
+        yr4_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr4 Costs
+          description: Cost for year 4.
+        yr5_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr5 Costs
+          description: Cost for year 5.
+        yr6_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr6 Costs
+          description: Cost for year 6.
+        yr7_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr7 Costs
+          description: Cost for year 7.
+        yr8_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr8 Costs
+          description: Cost for year 8.
+        yr9_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr9 Costs
+          description: Cost for year 9.
+        yr10_costs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Yr10 Costs
+          description: Cost for year 10.
+      type: object
+      required:
+      - accrual_type_id
+      - cost_category_type_id
+      - cost_type_id
+      - quantity
+      title: CostCreate
+      description: Cost Create model
     CostCategoryType:
       properties:
         id:
@@ -1047,16 +1053,6 @@ components:
       - name
       title: CostCategoryType
       description: Cost Category Type model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

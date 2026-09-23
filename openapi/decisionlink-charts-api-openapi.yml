@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Charts API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: charts
+- name: Charts
 paths:
   /v1/value-proposition/{valuePropId}/cost-of-delay:
     get:
       tags:
-      - charts
+      - Charts
       summary: Get the cost of delay of a Value Proposition
       description: Read cost of delay data for a value proposition.
       operationId: get_value_proposition_cost_of_delay_v1_value_proposition__valuePropId__cost_of_delay_get
@@ -41,7 +37,7 @@ paths:
   /v1/value-proposition/{valuePropId}/payback-chart:
     get:
       tags:
-      - charts
+      - Charts
       summary: Get the payback chart of a Value Proposition
       description: Read payback chart data for a value proposition.
       operationId: get_value_proposition_payback_chart_v1_value_proposition__valuePropId__payback_chart_get
@@ -78,27 +74,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     PaybackChart:
       properties:
         net:
@@ -157,6 +132,27 @@ components:
       - three_months_cost_of_delay_fmt
       title: CostOfDelay
       description: Cost of delay (cost of inaction) chart data.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

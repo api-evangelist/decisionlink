@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Phasing API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: phasing
 paths:
@@ -14,7 +10,23 @@ paths:
       tags:
       - phasing
       summary: Update a Driver's Phasing
-      description: "Endpoint for updating a driver's phasing\n\nParameters\n----------\npayload : UpdateDriverPhasingPayload\n\nReturns\n-------\nMessageResponse\n    Returns the success message"
+      description: 'Endpoint for updating a driver''s phasing
+
+
+        Parameters
+
+        ----------
+
+        payload : UpdateDriverPhasingPayload
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns the success message'
       operationId: update_driver_phasing_v1_value_proposition__valuePropId__driver_phasing_put
       security:
       - HTTPBearer: []
@@ -55,6 +67,16 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     UpdateDriverPhasingPayload:
       properties:
         value_prop_metric_id:
@@ -143,16 +165,6 @@ components:
       - msg
       - type
       title: ValidationError
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

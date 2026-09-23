@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Proposition Scratchpads API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: scratchpads
 paths:
@@ -14,7 +10,25 @@ paths:
       tags:
       - scratchpads
       summary: Get scratchpad by factor
-      description: "Endpoint for a factor's scratchpad\n\nParameters\n----------\nfactor_id : int\n    The factor whose scratchpad is being requested\n\nReturns\n-------\nScratchpadResponse\n    Returns the scratchpad and its units"
+      description: 'Endpoint for a factor''s scratchpad
+
+
+        Parameters
+
+        ----------
+
+        factor_id : int
+
+        The factor whose scratchpad is being requested
+
+
+        Returns
+
+        -------
+
+        ScratchpadResponse
+
+        Returns the scratchpad and its units'
       operationId: get_scratchpad_v1_value_proposition__valuePropId__scratchpads__factorId__get
       security:
       - HTTPBearer: []
@@ -49,7 +63,25 @@ paths:
       tags:
       - scratchpads
       summary: Endpoint to calculate scratchpad total
-      description: "Endpoint for getting scratchpad calculation total\n\nParameters\n----------\npayload : ScratchpadTotalPayload\n    The pieces of the scratchpad to calculate\n\nReturns\n-------\nScratchpadTotalResponse\n    Returns the scratchpad total"
+      description: 'Endpoint for getting scratchpad calculation total
+
+
+        Parameters
+
+        ----------
+
+        payload : ScratchpadTotalPayload
+
+        The pieces of the scratchpad to calculate
+
+
+        Returns
+
+        -------
+
+        ScratchpadTotalResponse
+
+        Returns the scratchpad total'
       operationId: get_scratchpad_total_v1_value_proposition__valuePropId__scratchpads_total_post
       security:
       - HTTPBearer: []
@@ -81,15 +113,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ScratchpadResponse:
       properties:
         scratchpad:
@@ -416,27 +439,27 @@ components:
       - years
       title: ScratchpadUnit
       description: Scratchpad Unit model
-    ScratchpadUnitYear:
+    ValidationError:
       properties:
-        value:
-          type: number
-          title: Value
-          description: The value for the given year
-        key:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Key
-          description: The key for the year (e.g., year1, year2)
-        override:
-          type: number
-          title: Override
-          description: Override value for the year, if any
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - value
-      - key
-      - override
-      title: ScratchpadUnitYear
-      description: Yearly date for scratchpad unit
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ScratchpadTotalPayload:
       properties:
         factor_id:
@@ -484,27 +507,36 @@ components:
       - total
       title: ScratchpadTotalResponse
       description: Scratchpad Total Response model
-    ValidationError:
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ScratchpadUnitYear:
+      properties:
+        value:
+          type: number
+          title: Value
+          description: The value for the given year
+        key:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Key
+          description: The key for the year (e.g., year1, year2)
+        override:
+          type: number
+          title: Override
+          description: Override value for the year, if any
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - value
+      - key
+      - override
+      title: ScratchpadUnitYear
+      description: Yearly date for scratchpad unit
   securitySchemes:
     HTTPBearer:
       type: http

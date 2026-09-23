@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Groups API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: groups
+- name: Groups
 paths:
   /v1/value-proposition/groups/{valuePropGroupId}:
     delete:
       tags:
-      - groups
+      - Groups
       summary: Delete value prop group
       description: Endpoint for deleting a value prop group
       operationId: delete_value_prop_group_v1_value_proposition_groups__valuePropGroupId__delete
@@ -40,15 +36,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -80,6 +67,15 @@ components:
       - message
       title: MessageResponse
       description: Response model for simple message responses
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

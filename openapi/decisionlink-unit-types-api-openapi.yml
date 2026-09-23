@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Facts Unit Types API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: unit_types
 paths:
@@ -13,7 +9,7 @@ paths:
     get:
       tags:
       - unit_types
-      summary: Get all unit types.
+      summary: Get all unit types
       description: Get all unit types.
       operationId: get_unit_types_v1_value_facts_unit_types_get
       responses:

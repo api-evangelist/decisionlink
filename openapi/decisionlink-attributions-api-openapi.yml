@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Attributions API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: attributions
+- name: Attributions
 paths:
   /v1/value-proposition/{valuePropId}/attributions:
     post:
       tags:
-      - attributions
+      - Attributions
       summary: Save new value prop attributions
       description: Endpoint to create value prop attributions
       operationId: save_value_prop_attributions_v1_value_proposition__valuePropId__attributions_post
@@ -46,7 +42,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - attributions
+      - Attributions
       summary: Read attributions for VP
       description: Endpoint to get attributions
       operationId: read_attributions_v1_value_proposition__valuePropId__attributions_get
@@ -89,25 +85,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -155,6 +132,25 @@ components:
       - suggested_value_text
       title: CreateAttribution
       description: Attribution Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

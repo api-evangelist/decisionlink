@@ -2,10 +2,6 @@ openapi: 3.2.0
 info:
   title: Value Facts Threshold Types API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-facts/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
 - name: threshold_types
 paths:
@@ -13,7 +9,7 @@ paths:
     get:
       tags:
       - threshold_types
-      summary: Get solution threshold types.
+      summary: Get solution threshold types
       description: Get solution threshold types.
       operationId: get_threshold_types_v1_value_facts_threshold_types_get
       responses:

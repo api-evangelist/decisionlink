@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Solutions API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: solutions
+- name: Solutions
 paths:
   /v1/value-proposition/{valuePropId}/solutions:
     post:
       tags:
-      - solutions
+      - Solutions
       summary: Post selected solutions
       description: 'Passthrough endpoint to submit the selected solutions.
 
@@ -52,7 +48,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - solutions
+      - Solutions
       summary: Get the solutions for a Value Proposition
       description: Endpoint to return all the solutions for the value prop.
       operationId: get_solutions_v1_value_proposition__valuePropId__solutions_get
@@ -84,7 +80,7 @@ paths:
   /v1/value-proposition/{valuePropId}/solution-categories:
     get:
       tags:
-      - solutions
+      - Solutions
       summary: Get the solutions for a Value Proposition
       description: Retrieve all solution categories
       operationId: get_solution_categories_v1_value_proposition__valuePropId__solution_categories_get
@@ -116,7 +112,7 @@ paths:
   /v1/value-proposition/available-solutions:
     get:
       tags:
-      - solutions
+      - Solutions
       summary: Get available solutions
       description: 'Retrieve all available solutions for the current user.
 
@@ -156,15 +152,67 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    CategorySolution:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        account_solution_name:
+          type: string
+          title: Account Solution Name
+          description: Name of the solution
+        account_solution_description:
+          type: string
+          title: Account Solution Description
+          description: Account Solution Description
+        selected:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Selected
+          description: Indicates if the solution is selected
       type: object
-      title: HTTPValidationError
+      required:
+      - account_solution_id
+      - account_solution_name
+      - account_solution_description
+      title: CategorySolution
+      description: Solutions grouped by categories
+    SolutionSelection:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+          description: List of selected solution IDs
+      type: object
+      required:
+      - solutions
+      title: SolutionSelection
+      description: SolutionSelection model for submitting selected solutions.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     value_proposition__solutions__models__Solution:
       properties:
         id:
@@ -211,33 +259,6 @@ components:
       - quantity_enabled
       title: Solution
       description: Solution Model
-    CategorySolution:
-      properties:
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-          description: Account Solution ID
-        account_solution_name:
-          type: string
-          title: Account Solution Name
-          description: Name of the solution
-        account_solution_description:
-          type: string
-          title: Account Solution Description
-          description: Account Solution Description
-        selected:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Selected
-          description: Indicates if the solution is selected
-      type: object
-      required:
-      - account_solution_id
-      - account_solution_name
-      - account_solution_description
-      title: CategorySolution
-      description: Solutions grouped by categories
     Category:
       properties:
         category_id:
@@ -266,40 +287,15 @@ components:
       - solutions
       title: Category
       description: Solution Categories
-    SolutionSelection:
+    HTTPValidationError:
       properties:
-        solutions:
+        detail:
           items:
-            type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Solutions
-          description: List of selected solution IDs
+          title: Detail
       type: object
-      required:
-      - solutions
-      title: SolutionSelection
-      description: SolutionSelection model for submitting selected solutions.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

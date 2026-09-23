@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Collaborations API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: collaborations
+- name: Collaborations
 paths:
   /v1/value-proposition/{valuePropId}/collaborations:
     get:
       tags:
-      - collaborations
+      - Collaborations
       summary: Read customer collaboration shares
       description: Fetch and return all collaboration shares for the given value proposition.
       operationId: get_collaborations_v1_value_proposition__valuePropId__collaborations_get
@@ -43,7 +39,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - collaborations
+      - Collaborations
       summary: Create collaboration shares
       description: Endpoint to create collaboration shares for value prop
       operationId: create_collaboration_share_v1_value_proposition__valuePropId__collaborations_post
@@ -78,7 +74,7 @@ paths:
   /v1/value-proposition/{valuePropId}/collaborations/{collaborationId}:
     put:
       tags:
-      - collaborations
+      - Collaborations
       summary: Update customer collaboration share
       description: Endpoint to update a collaboration share
       operationId: update_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__put
@@ -117,7 +113,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - collaborations
+      - Collaborations
       summary: Delete customer collaboration share
       description: Endpoint to delete a collaboration share
       operationId: delete_customer_collaboration_v1_value_proposition__valuePropId__collaborations__collaborationId__delete
@@ -150,15 +146,18 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    CreateCollaborationResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        message:
+          type: string
+          title: Message
+        share_details:
+          $ref: '#/components/schemas/CollaborationShare'
       type: object
-      title: HTTPValidationError
+      required:
+      - message
+      - share_details
+      title: CreateCollaborationResponse
     CollaborationShare:
       properties:
         id:
@@ -255,18 +254,33 @@ components:
       - discovery_questions_enabled
       title: CollaborationShare
       description: Collaboration Model
-    CreateCollaborationResponse:
+    UpdateCollaboration:
       properties:
-        message:
+        expires:
           type: string
-          title: Message
-        share_details:
-          $ref: '#/components/schemas/CollaborationShare'
+          format: date-time
+          title: Expires
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          type: integer
+          title: Account Asset Template Id
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
       type: object
       required:
-      - message
-      - share_details
-      title: CreateCollaborationResponse
+      - expires
+      - benefits_editable
+      - assumptions_editable
+      - account_asset_template_id
+      - discovery_questions_enabled
+      title: UpdateCollaboration
+      description: Model for updating a collaboration
     CreateCollaboration:
       properties:
         first_name:
@@ -314,33 +328,6 @@ components:
       - discovery_questions_enabled
       title: CreateCollaboration
       description: Model for creating a collaboration
-    UpdateCollaboration:
-      properties:
-        expires:
-          type: string
-          format: date-time
-          title: Expires
-        benefits_editable:
-          type: integer
-          title: Benefits Editable
-        assumptions_editable:
-          type: integer
-          title: Assumptions Editable
-        account_asset_template_id:
-          type: integer
-          title: Account Asset Template Id
-        discovery_questions_enabled:
-          type: integer
-          title: Discovery Questions Enabled
-      type: object
-      required:
-      - expires
-      - benefits_editable
-      - assumptions_editable
-      - account_asset_template_id
-      - discovery_questions_enabled
-      title: UpdateCollaboration
-      description: Model for updating a collaboration
     ValidationError:
       properties:
         loc:
@@ -362,6 +349,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

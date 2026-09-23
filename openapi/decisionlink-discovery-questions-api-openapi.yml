@@ -2,12 +2,7 @@ openapi: 3.2.0
 info:
   title: Decisionlink Discovery Questions API
   version: 0.1.0
-  x-refined-note:
-  - x-api-evangelist-source differs across the merged source definitions and was not carried
-  description: 'Operations tagged discovery_questions across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: 'Operations tagged discovery_questions across 2 of this provider''s published API definitions: decisionlink-collaboration-openapi.json, decisionlink-value-proposition-openapi.json. Each path carries the servers of the definition it was published in.'
 tags:
 - name: discovery_questions
 paths:
@@ -16,7 +11,16 @@ paths:
       tags:
       - discovery_questions
       summary: Get the Discovery Questions for a Collaboration
-      description: "Endpoint for reading Discovery Questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    Returns the Discovery Questions"
+      description: 'Endpoint for reading Discovery Questions
+
+
+        Returns
+
+        -------
+
+        List[DiscoveryQuestion]
+
+        Returns the Discovery Questions'
       operationId: get_discovery_questions_v1_collaboration_valueProps_discovery_get
       responses:
         '200':
@@ -34,7 +38,25 @@ paths:
       tags:
       - discovery_questions
       summary: Save the Discovery Question Answers for a Collaboration
-      description: "Endpoint for saving Discovery Question Answers\n\nParameters\n----------\nquestions : DiscoveryAnswerPayload\n    The answers to Discovery Questions\n\nReturns\n-------\nMessageResponse\n    Returns success and message"
+      description: 'Endpoint for saving Discovery Question Answers
+
+
+        Parameters
+
+        ----------
+
+        questions : DiscoveryAnswerPayload
+
+        The answers to Discovery Questions
+
+
+        Returns
+
+        -------
+
+        MessageResponse
+
+        Returns success and message'
       operationId: create_discovery_questions_v1_collaboration_valueProps_discovery_patch
       requestBody:
         content:
@@ -57,15 +79,31 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/{valuePropId}/discovery-questions:
     get:
       tags:
       - discovery_questions
       summary: Read value proposition discovery questions
-      description: "Parameters\n----------\nsection_type_id : int (Optional)\n    If sent, will only return discovery questions for this section\nai_updatable_only : bool (Optional)\n    If true, only return discovery questions that are AI updatable\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+      description: 'Parameters
+
+        ----------
+
+        section_type_id : int (Optional)
+
+        If sent, will only return discovery questions for this section
+
+        ai_updatable_only : bool (Optional)
+
+        If true, only return discovery questions that are AI updatable
+
+
+        Returns
+
+        -------
+
+        List[DiscoveryQuestion]
+
+        The list of discovery questions'
       operationId: get_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_get
       security:
       - HTTPBearer: []
@@ -111,7 +149,25 @@ paths:
       tags:
       - discovery_questions
       summary: Update discovery question answers
-      description: "Update answers to discovery questions\n\nParameters\n----------\npayload : DiscoveryAnswerPayload\n    List of answers to discovery questions\n\nReturns\n-------\nList[DiscoveryQuestion]\n    The list of discovery questions"
+      description: 'Update answers to discovery questions
+
+
+        Parameters
+
+        ----------
+
+        payload : DiscoveryAnswerPayload
+
+        List of answers to discovery questions
+
+
+        Returns
+
+        -------
+
+        List[DiscoveryQuestion]
+
+        The list of discovery questions'
       operationId: update_discovery_questions_v1_value_proposition__valuePropId__discovery_questions_post
       security:
       - HTTPBearer: []
@@ -144,57 +200,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    QuestionType:
+    DiscoveryAnswer:
       properties:
         id:
           type: string
           title: Id
-          description: ID for the question type
-        type:
+          description: The ID for the Discovery Question
+        answer:
           type: string
-          title: Type
-          description: Question type
+          title: Answer
+          description: The answer to the Discovery Question
       type: object
       required:
       - id
-      - type
-      title: QuestionType
-      description: QuestionType model
+      - answer
+      title: DiscoveryAnswer
+      description: DiscoveryAnswer model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Response message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
+    DiscoveryAnswerPayload:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/DiscoveryAnswer'
+          type: array
+          title: Questions
+          description: The list of Discovery Question Answers to save
+      type: object
+      required:
+      - questions
+      title: DiscoveryAnswerPayload
+      description: DiscoveryAnswerPayload model
     DiscoveryQuestion:
       properties:
         id:
@@ -240,62 +287,93 @@ components:
       - placeholder
       title: DiscoveryQuestion
       description: DiscoveryQuestion model
-    DiscoveryAnswer:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    QuestionType:
       properties:
         id:
           type: string
           title: Id
-          description: The ID for the Discovery Question
+          description: ID for the question type
+        type:
+          type: string
+          title: Type
+          description: Question type
+      type: object
+      required:
+      - id
+      - type
+      title: QuestionType
+      description: QuestionType model
+    DiscoveryAnswer_2:
+      properties:
+        account_discovery_question_id:
+          type: integer
+          title: Account Discovery Question Id
+          description: ID of the discovery question
         answer:
           type: string
           title: Answer
-          description: The answer to the Discovery Question
+          description: The answer to the discovery question
+        value_prop_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Id
+          description: The value prop ID
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID updating the answer
       type: object
       required:
-      - id
+      - account_discovery_question_id
       - answer
       title: DiscoveryAnswer
-      description: DiscoveryAnswer model
-    DiscoveryAnswerPayload:
+      description: Discovery Question Answer Model
+    DiscoveryAnswerPayload_2:
       properties:
-        questions:
+        discovery_questions:
           items:
-            $ref: '#/components/schemas/DiscoveryAnswer'
+            $ref: '#/components/schemas/DiscoveryAnswer_2'
           type: array
-          title: Questions
-          description: The list of Discovery Question Answers to save
+          title: Discovery Questions
+          description: List of answers to discovery questions
       type: object
       required:
-      - questions
+      - discovery_questions
       title: DiscoveryAnswerPayload
-      description: DiscoveryAnswerPayload model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Response message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: MessageResponse model
-    DiscoveryQuestionSection:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: The ID of the section
-        name:
-          type: string
-          title: Name
-          description: The name of the section
-      type: object
-      required:
-      - id
-      - name
-      title: DiscoveryQuestionSection
-      description: DiscoveryQuestionSection Model
+      description: Discovery Question Answer Payload Model
     DiscoveryQuestion_2:
       properties:
         account_discovery_question_id:
@@ -404,52 +482,27 @@ components:
       - sequence
       title: DiscoveryQuestion
       description: DiscoveryQuestion Model
-    DiscoveryAnswer_2:
+    DiscoveryQuestionSection:
       properties:
-        account_discovery_question_id:
+        id:
           type: integer
-          title: Account Discovery Question Id
-          description: ID of the discovery question
-        answer:
+          title: Id
+          description: The ID of the section
+        name:
           type: string
-          title: Answer
-          description: The answer to the discovery question
-        value_prop_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Value Prop Id
-          description: The value prop ID
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-          description: The user ID updating the answer
+          title: Name
+          description: The name of the section
       type: object
       required:
-      - account_discovery_question_id
-      - answer
-      title: DiscoveryAnswer
-      description: Discovery Question Answer Model
-    DiscoveryAnswerPayload_2:
-      properties:
-        discovery_questions:
-          items:
-            $ref: '#/components/schemas/DiscoveryAnswer_2'
-          type: array
-          title: Discovery Questions
-          description: List of answers to discovery questions
-      type: object
-      required:
-      - discovery_questions
-      title: DiscoveryAnswerPayload
-      description: Discovery Question Answer Payload Model
+      - id
+      - name
+      title: DiscoveryQuestionSection
+      description: DiscoveryQuestionSection Model
   securitySchemes:
     HTTPBearer:
       type: http
       description: Access token in the form of a JWT
       scheme: bearer
 x-refined-from:
-- decisionlink-collaboration-openapi.yml
-- decisionlink-value-proposition-openapi.yml
+- decisionlink-collaboration-openapi.json
+- decisionlink-value-proposition-openapi.json

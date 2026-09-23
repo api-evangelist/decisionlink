@@ -3,17 +3,13 @@ info:
   title: Chat Server Value API
   description: Value chat service
   version: '1.0'
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: value
+- name: Value
 paths:
   /v1/value-chat/prompts:
     get:
       tags:
-      - value
+      - Value
       summary: Gets value prompts for user
       description: Get value specific pills and prompts for value user
       operationId: get_value_prompts_v1_value_chat_prompts_get
@@ -49,7 +45,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - value
+      - Value
       summary: Create a value prompt
       description: Create a new value prompt (xfactor admins only)
       operationId: create_value_prompt_route_v1_value_chat_prompts_post
@@ -77,7 +73,7 @@ paths:
   /v1/value-chat/prompts/{prompt_id}:
     put:
       tags:
-      - value
+      - Value
       summary: Update a value prompt
       description: Update an existing value prompt (xfactor admins only)
       operationId: update_value_prompt_route_v1_value_chat_prompts__prompt_id__put
@@ -111,7 +107,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - value
+      - Value
       summary: Delete a value prompt
       description: Delete a value prompt (xfactor admins only)
       operationId: delete_value_prompt_route_v1_value_chat_prompts__prompt_id__delete
@@ -139,15 +135,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ValuePromptUpdate:
       properties:
         sequence:
@@ -185,27 +193,6 @@ components:
       type: object
       title: ValuePromptUpdate
       description: Value Prompt Update Model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ValuePromptCreate:
       properties:
         sequence:
@@ -239,6 +226,15 @@ components:
       - display_name
       title: ValuePromptCreate
       description: Value Prompt Create Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

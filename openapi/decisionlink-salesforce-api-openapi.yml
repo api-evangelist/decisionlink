@@ -2,17 +2,13 @@ openapi: 3.2.0
 info:
   title: Value Proposition Salesforce API
   version: 0.1.0
-  x-api-evangelist-source: https://api.xfactor.io/v1/value-proposition/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: salesforce
+- name: Salesforce
 paths:
   /v1/value-proposition/groups-by-account:
     get:
       tags:
-      - salesforce
+      - Salesforce
       summary: Get value prop groups for account
       description: Endpoint for getting value prop groups for an account
       operationId: groups_by_account_v1_value_proposition_groups_by_account_get
@@ -58,7 +54,7 @@ paths:
   /v1/value-proposition/value-props-by-account:
     get:
       tags:
-      - salesforce
+      - Salesforce
       summary: Get value props by account
       description: Endpoint for getting value props by account
       operationId: value_props_by_account_v1_value_proposition_value_props_by_account_get
@@ -104,7 +100,7 @@ paths:
   /v1/value-proposition/value-trackers-by-account:
     get:
       tags:
-      - salesforce
+      - Salesforce
       summary: Get value trackers by account
       description: Endpoint for getting value trackers by account
       operationId: value_trackers_by_account_v1_value_proposition_value_trackers_by_account_get
@@ -305,96 +301,6 @@ components:
       - variance_raw
       title: ExternalTracker
       description: ValueTracker Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ExternalVPGroup:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: Id of the value proposition
-        name:
-          type: string
-          title: Name
-          description: Name of the value proposition
-        company_id:
-          type: string
-          title: Company Id
-          description: Id of the associated company
-        total_benefits_fmt:
-          type: string
-          title: Total Benefits Fmt
-          description: Formatted total benefits
-        total_costs_fmt:
-          type: string
-          title: Total Costs Fmt
-          description: Formatted total costs
-        npv:
-          type: string
-          title: Npv
-          description: Net Present Value
-        roi:
-          type: string
-          title: Roi
-          description: Return on Investment
-        tco:
-          type: string
-          title: Tco
-          description: Total Cost of Ownership
-        cost_of_delay:
-          type: string
-          title: Cost Of Delay
-          description: Cost of Delay
-        payback:
-          type: string
-          title: Payback
-          description: Payback period
-        benefits_per_transaction_fmt:
-          type: string
-          title: Benefits Per Transaction Fmt
-          description: Formatted benefits per transaction
-        created:
-          type: string
-          title: Created
-          description: Creation date of the record
-        vp_creator_name:
-          type: string
-          title: Vp Creator Name
-          description: Name of the VP creator
-        last_modified_date:
-          type: string
-          title: Last Modified Date
-          description: Date of last modification
-        last_modified_by_name:
-          type: string
-          title: Last Modified By Name
-          description: Name of person who last modified
-      type: object
-      required:
-      - id
-      - name
-      - company_id
-      - total_benefits_fmt
-      - total_costs_fmt
-      - npv
-      - roi
-      - tco
-      - cost_of_delay
-      - payback
-      - benefits_per_transaction_fmt
-      - created
-      - vp_creator_name
-      - last_modified_date
-      - last_modified_by_name
-      title: ExternalVPGroup
-      description: ExternalVPGroup model
     ValuePropResult:
       properties:
         value_props:
@@ -406,17 +312,6 @@ components:
       required:
       - value_props
       title: ValuePropResult
-    FormattedResponse_list_ExternalTracker__:
-      properties:
-        result:
-          items:
-            $ref: '#/components/schemas/ExternalTracker'
-          type: array
-          title: Result
-      type: object
-      required:
-      - result
-      title: FormattedResponse[list[ExternalTracker]]
     FormattedResponse_VPGroupResult_:
       properties:
         result:
@@ -425,6 +320,27 @@ components:
       required:
       - result
       title: FormattedResponse[VPGroupResult]
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ExternalVP:
       properties:
         id:
@@ -648,6 +564,115 @@ components:
       - last_modified_by_name
       title: ExternalVP
       description: ExternalVPGroup model
+    ExternalVPGroup:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Id of the value proposition
+        name:
+          type: string
+          title: Name
+          description: Name of the value proposition
+        company_id:
+          type: string
+          title: Company Id
+          description: Id of the associated company
+        total_benefits_fmt:
+          type: string
+          title: Total Benefits Fmt
+          description: Formatted total benefits
+        total_costs_fmt:
+          type: string
+          title: Total Costs Fmt
+          description: Formatted total costs
+        npv:
+          type: string
+          title: Npv
+          description: Net Present Value
+        roi:
+          type: string
+          title: Roi
+          description: Return on Investment
+        tco:
+          type: string
+          title: Tco
+          description: Total Cost of Ownership
+        cost_of_delay:
+          type: string
+          title: Cost Of Delay
+          description: Cost of Delay
+        payback:
+          type: string
+          title: Payback
+          description: Payback period
+        benefits_per_transaction_fmt:
+          type: string
+          title: Benefits Per Transaction Fmt
+          description: Formatted benefits per transaction
+        created:
+          type: string
+          title: Created
+          description: Creation date of the record
+        vp_creator_name:
+          type: string
+          title: Vp Creator Name
+          description: Name of the VP creator
+        last_modified_date:
+          type: string
+          title: Last Modified Date
+          description: Date of last modification
+        last_modified_by_name:
+          type: string
+          title: Last Modified By Name
+          description: Name of person who last modified
+      type: object
+      required:
+      - id
+      - name
+      - company_id
+      - total_benefits_fmt
+      - total_costs_fmt
+      - npv
+      - roi
+      - tco
+      - cost_of_delay
+      - payback
+      - benefits_per_transaction_fmt
+      - created
+      - vp_creator_name
+      - last_modified_date
+      - last_modified_by_name
+      title: ExternalVPGroup
+      description: ExternalVPGroup model
+    FormattedResponse_list_ExternalTracker__:
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/ExternalTracker'
+          type: array
+          title: Result
+      type: object
+      required:
+      - result
+      title: FormattedResponse[list[ExternalTracker]]
+    FormattedResponse_ValuePropResult_:
+      properties:
+        result:
+          $ref: '#/components/schemas/ValuePropResult'
+      type: object
+      required:
+      - result
+      title: FormattedResponse[ValuePropResult]
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     VPGroupResult:
       properties:
         value_prop_groups:
@@ -659,35 +684,6 @@ components:
       required:
       - value_prop_groups
       title: VPGroupResult
-    FormattedResponse_ValuePropResult_:
-      properties:
-        result:
-          $ref: '#/components/schemas/ValuePropResult'
-      type: object
-      required:
-      - result
-      title: FormattedResponse[ValuePropResult]
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

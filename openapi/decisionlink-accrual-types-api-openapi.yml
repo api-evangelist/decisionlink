@@ -2,12 +2,7 @@ openapi: 3.2.0
 info:
   title: Decisionlink Accrual Types API
   version: 0.1.0
-  x-refined-note:
-  - x-api-evangelist-source differs across the merged source definitions and was not carried
-  description: 'Operations tagged accrual_types across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.yml, decisionlink-value-proposition-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
+  description: 'Operations tagged accrual_types across 2 of this provider''s published API definitions: decisionlink-value-facts-openapi.json, decisionlink-value-proposition-openapi.json. Each path carries the servers of the definition it was published in.'
 tags:
 - name: accrual_types
 paths:
@@ -15,7 +10,7 @@ paths:
     get:
       tags:
       - accrual_types
-      summary: Get all accrual types.
+      summary: Get all accrual types
       description: Get all accrual types.
       operationId: get_accrual_types_v1_value_facts_accrual_types_get
       responses:
@@ -30,15 +25,19 @@ paths:
                 title: Response Get Accrual Types V1 Value Facts Accrual Types Get
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
   /v1/value-proposition/accrual-types:
     get:
       tags:
       - accrual_types
-      summary: Get all accrual types.
-      description: "Get all accrual types.\n\nReturns\n-------\n - list[AccrualType]: List of all accrual types."
+      summary: Get all accrual types
+      description: 'Get all accrual types.
+
+
+        Returns
+
+        -------
+
+        - list[AccrualType]: List of all accrual types.'
       operationId: get_accrual_types_v1_value_proposition_accrual_types_get
       responses:
         '200':
@@ -52,9 +51,6 @@ paths:
                 title: Response Get Accrual Types V1 Value Proposition Accrual Types Get
       security:
       - HTTPBearer: []
-    servers:
-    - url: https://api.xfactor.io
-      description: Production API host (Auth0 audience of the Xfactor.io web application)
 components:
   schemas:
     AccrualType:
@@ -119,5 +115,5 @@ components:
       description: Access token in the form of a JWT
       scheme: bearer
 x-refined-from:
-- decisionlink-value-facts-openapi.yml
-- decisionlink-value-proposition-openapi.yml
+- decisionlink-value-facts-openapi.json
+- decisionlink-value-proposition-openapi.json

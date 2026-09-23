@@ -3,17 +3,13 @@ info:
   title: Value Chat Server Healthcheck API
   description: Value chat service
   version: '1.0'
-  x-api-evangelist-source: https://api.xfactor.io/api/v1/value-chat/openapi.json
-servers:
-- url: https://api.xfactor.io
-  description: Production API host (Auth0 audience of the Xfactor.io web application)
 tags:
-- name: healthcheck
+- name: Health Check
 paths:
   /healthz:
     get:
       tags:
-      - healthcheck
+      - Health Check
       summary: Perform a Health Check
       operationId: get_health_healthz_get
       responses:
