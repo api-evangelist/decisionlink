@@ -207,53 +207,6 @@ components:
       - msg
       - type
       title: ValidationError
-    MappingResponse:
-      properties:
-        crm:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Crm
-          description: CRM for mapping
-          default: salesforce
-        account_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Account Id
-          description: Account to which the mapping belongs
-        value_object_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value Object Type
-          description: Type of Value object being mapped
-          default: factor
-        value_object_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Value Object Id
-          description: Value ID for the object being mapping
-          default: 0
-        crm_object_type:
-          type: string
-          title: Crm Object Type
-          description: CRM object being mapped
-        crm_object_field:
-          type: string
-          title: Crm Object Field
-          description: CRM object field being mapped
-        id:
-          type: integer
-          title: Id
-          description: ID for the account CRM mapping
-      type: object
-      required:
-      - crm_object_type
-      - crm_object_field
-      title: MappingResponse
-      description: Mapping Response model
     HTTPValidationError:
       properties:
         detail:
@@ -306,6 +259,53 @@ components:
       - crm_object_field
       title: Mapping
       description: Mapping model
+    MappingResponse:
+      properties:
+        crm:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Crm
+          description: CRM for mapping
+          default: salesforce
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+          description: Account to which the mapping belongs
+        value_object_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Object Type
+          description: Type of Value object being mapped
+          default: factor
+        value_object_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Object Id
+          description: Value ID for the object being mapping
+          default: 0
+        crm_object_type:
+          type: string
+          title: Crm Object Type
+          description: CRM object being mapped
+        crm_object_field:
+          type: string
+          title: Crm Object Field
+          description: CRM object field being mapped
+        id:
+          type: integer
+          title: Id
+          description: ID for the account CRM mapping
+      type: object
+      required:
+      - crm_object_type
+      - crm_object_field
+      title: MappingResponse
+      description: Mapping Response model
   securitySchemes:
     HTTPBearer:
       type: http

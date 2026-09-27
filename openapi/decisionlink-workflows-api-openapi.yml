@@ -81,60 +81,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ConversationMember:
-      properties:
-        account_workflow_id:
-          type: integer
-          title: Account Workflow Id
-          description: The ID of the workflow the ConversationMember belongs to
-        id:
-          type: integer
-          title: Id
-          description: The ID of the ConversationMember
-        account_workflow_section_id:
-          type: integer
-          title: Account Workflow Section Id
-          description: The workflow section of the ConversationMember
-        workflow_data_source_id:
-          type: integer
-          title: Workflow Data Source Id
-          description: The source of data for the workflow
-        member_id:
-          type: integer
-          title: Member Id
-          description: The member ID for the ConversationMember
-        name:
-          type: string
-          title: Name
-          description: The name of the ConversationMember
-        description:
-          type: string
-          title: Description
-          description: The description of the ConversationMember
-        default_member_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Default Member Id
-          description: The default member's ID, if applicable
-        is_default_member:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Default Member
-          description: A flag indicating whether the member is the default member in the ConversationMember
-          default: false
-      type: object
-      required:
-      - account_workflow_id
-      - id
-      - account_workflow_section_id
-      - workflow_data_source_id
-      - member_id
-      - name
-      - description
-      title: ConversationMember
-      description: ConversationMember Model
     HTTPValidationError:
       properties:
         detail:
@@ -230,6 +176,60 @@ components:
       - default_assignment
       title: Workflow
       description: Workflow Model
+    ConversationMember:
+      properties:
+        account_workflow_id:
+          type: integer
+          title: Account Workflow Id
+          description: The ID of the workflow the ConversationMember belongs to
+        id:
+          type: integer
+          title: Id
+          description: The ID of the ConversationMember
+        account_workflow_section_id:
+          type: integer
+          title: Account Workflow Section Id
+          description: The workflow section of the ConversationMember
+        workflow_data_source_id:
+          type: integer
+          title: Workflow Data Source Id
+          description: The source of data for the workflow
+        member_id:
+          type: integer
+          title: Member Id
+          description: The member ID for the ConversationMember
+        name:
+          type: string
+          title: Name
+          description: The name of the ConversationMember
+        description:
+          type: string
+          title: Description
+          description: The description of the ConversationMember
+        default_member_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Default Member Id
+          description: The default member's ID, if applicable
+        is_default_member:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Default Member
+          description: A flag indicating whether the member is the default member in the ConversationMember
+          default: false
+      type: object
+      required:
+      - account_workflow_id
+      - id
+      - account_workflow_section_id
+      - workflow_data_source_id
+      - member_id
+      - name
+      - description
+      title: ConversationMember
+      description: ConversationMember Model
   securitySchemes:
     HTTPBearer:
       type: http

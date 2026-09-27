@@ -199,44 +199,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    TriggerSettingsResponse:
-      properties:
-        trigger_stages:
-          items:
-            type: string
-          type: array
-          title: Trigger Stages
-        trigger_types:
-          items:
-            type: string
-          type: array
-          title: Trigger Types
-          default: []
-      type: object
-      required:
-      - trigger_stages
-      title: TriggerSettingsResponse
-      description: Response for trigger stage and type settings
-    value_proposition__dynamic_discovery__models__Solution:
-      properties:
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          default: ''
-      type: object
-      required:
-      - account_solution_id
-      - name
-      title: Solution
-      description: Solutions model
     ValidationError:
       properties:
         loc:
@@ -258,6 +220,36 @@ components:
       - msg
       - type
       title: ValidationError
+    SolutionsPayload:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+      type: object
+      required:
+      - solutions
+      title: SolutionsPayload
+      description: SolutionsPayload Model
+    TriggerSettingsResponse:
+      properties:
+        trigger_stages:
+          items:
+            type: string
+          type: array
+          title: Trigger Stages
+        trigger_types:
+          items:
+            type: string
+          type: array
+          title: Trigger Types
+          default: []
+      type: object
+      required:
+      - trigger_stages
+      title: TriggerSettingsResponse
+      description: Response for trigger stage and type settings
     DynamicDiscoveryResponse:
       properties:
         has_permission:
@@ -342,18 +334,26 @@ components:
       type: object
       title: TriggerSettingsPayload
       description: Payload for updating trigger stage and type settings
-    SolutionsPayload:
+    value_proposition__dynamic_discovery__models__Solution:
       properties:
-        solutions:
-          items:
-            type: integer
-          type: array
-          title: Solutions
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          default: ''
       type: object
       required:
-      - solutions
-      title: SolutionsPayload
-      description: SolutionsPayload Model
+      - account_solution_id
+      - name
+      title: Solution
+      description: Solutions model
     HTTPValidationError:
       properties:
         detail:

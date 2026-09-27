@@ -122,14 +122,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ListMode:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      title: ListMode
-      description: Mode for filtering value propositions by status.
     HTTPValidationError:
       properties:
         detail:
@@ -139,6 +131,14 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
   securitySchemes:
     HTTPBearer:
       type: http

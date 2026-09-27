@@ -180,22 +180,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    RefreshValueTrackerPayload:
-      properties:
-        sfdc_vt_id:
-          type: string
-          title: Sfdc Vt Id
-          description: The sfdc value tracker ID
-        value_prop_id:
-          type: string
-          title: Value Prop Id
-          description: The value prop ID
-      type: object
-      required:
-      - sfdc_vt_id
-      - value_prop_id
-      title: RefreshValueTrackerPayload
-      description: Model representing the refresh value tracker payload.
     ValidationError:
       properties:
         loc:
@@ -217,6 +201,22 @@ components:
       - msg
       - type
       title: ValidationError
+    RefreshValuePropGroupPayload:
+      properties:
+        sfdc_vp_id:
+          type: string
+          title: Sfdc Vp Id
+          description: The sfdc value prop ID
+        value_prop_group_id:
+          type: string
+          title: Value Prop Group Id
+          description: The value prop group ID
+      type: object
+      required:
+      - sfdc_vp_id
+      - value_prop_group_id
+      title: RefreshValuePropGroupPayload
+      description: Model representing the refresh value proposition group payload.
     RefreshValuePropPayload:
       properties:
         sfdc_vp_id:
@@ -242,22 +242,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    RefreshValuePropGroupPayload:
+    RefreshValueTrackerPayload:
       properties:
-        sfdc_vp_id:
+        sfdc_vt_id:
           type: string
-          title: Sfdc Vp Id
-          description: The sfdc value prop ID
-        value_prop_group_id:
+          title: Sfdc Vt Id
+          description: The sfdc value tracker ID
+        value_prop_id:
           type: string
-          title: Value Prop Group Id
-          description: The value prop group ID
+          title: Value Prop Id
+          description: The value prop ID
       type: object
       required:
-      - sfdc_vp_id
-      - value_prop_group_id
-      title: RefreshValuePropGroupPayload
-      description: Model representing the refresh value proposition group payload.
+      - sfdc_vt_id
+      - value_prop_id
+      title: RefreshValueTrackerPayload
+      description: Model representing the refresh value tracker payload.
   securitySchemes:
     HTTPBearer:
       type: http

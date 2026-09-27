@@ -152,67 +152,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CategorySolution:
-      properties:
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-          description: Account Solution ID
-        account_solution_name:
-          type: string
-          title: Account Solution Name
-          description: Name of the solution
-        account_solution_description:
-          type: string
-          title: Account Solution Description
-          description: Account Solution Description
-        selected:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Selected
-          description: Indicates if the solution is selected
-      type: object
-      required:
-      - account_solution_id
-      - account_solution_name
-      - account_solution_description
-      title: CategorySolution
-      description: Solutions grouped by categories
-    SolutionSelection:
-      properties:
-        solutions:
-          items:
-            type: integer
-          type: array
-          title: Solutions
-          description: List of selected solution IDs
-      type: object
-      required:
-      - solutions
-      title: SolutionSelection
-      description: SolutionSelection model for submitting selected solutions.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     value_proposition__solutions__models__Solution:
       properties:
         id:
@@ -259,6 +198,27 @@ components:
       - quantity_enabled
       title: Solution
       description: Solution Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Category:
       properties:
         category_id:
@@ -287,6 +247,19 @@ components:
       - solutions
       title: Category
       description: Solution Categories
+    SolutionSelection:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+          description: List of selected solution IDs
+      type: object
+      required:
+      - solutions
+      title: SolutionSelection
+      description: SolutionSelection model for submitting selected solutions.
     HTTPValidationError:
       properties:
         detail:
@@ -296,6 +269,33 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    CategorySolution:
+      properties:
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        account_solution_name:
+          type: string
+          title: Account Solution Name
+          description: Name of the solution
+        account_solution_description:
+          type: string
+          title: Account Solution Description
+          description: Account Solution Description
+        selected:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Selected
+          description: Indicates if the solution is selected
+      type: object
+      required:
+      - account_solution_id
+      - account_solution_name
+      - account_solution_description
+      title: CategorySolution
+      description: Solutions grouped by categories
   securitySchemes:
     HTTPBearer:
       type: http

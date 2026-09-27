@@ -290,15 +290,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
-      properties:
-        title:
-          type: string
-          title: Title
-      type: object
-      required:
-      - title
-      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
     Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
       properties:
         file:
@@ -357,6 +348,15 @@ components:
       - vote_score
       title: ChatFeedbackIn
       description: Chat feedback input model
+    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
+      properties:
+        title:
+          type: string
+          title: Title
+      type: object
+      required:
+      - title
+      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
     HTTPValidationError:
       properties:
         detail:

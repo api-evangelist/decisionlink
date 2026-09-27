@@ -72,65 +72,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ScorecardResponse:
-      properties:
-        value_prop_status:
-          type: integer
-          title: Value Prop Status
-          description: Overall value proposition status
-        threshold_types:
-          items:
-            $ref: '#/components/schemas/ThresholdStatus'
-          type: array
-          title: Threshold Types
-          description: List of threshold status evaluations
-        phasing_activated:
-          type: boolean
-          title: Phasing Activated
-          description: Whether phasing is activated
-        driver_override:
-          type: number
-          title: Driver Override
-          description: Driver override percentage
-        financial_override:
-          type: number
-          title: Financial Override
-          description: Financial override percentage
-        impact_override:
-          type: number
-          title: Impact Override
-          description: Impact override percentage
-      type: object
-      required:
-      - value_prop_status
-      - threshold_types
-      - phasing_activated
-      - driver_override
-      - financial_override
-      - impact_override
-      title: ScorecardResponse
-      description: Complete scorecard response model
     ThresholdStatus:
       properties:
         id:
@@ -202,6 +143,65 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ScorecardResponse:
+      properties:
+        value_prop_status:
+          type: integer
+          title: Value Prop Status
+          description: Overall value proposition status
+        threshold_types:
+          items:
+            $ref: '#/components/schemas/ThresholdStatus'
+          type: array
+          title: Threshold Types
+          description: List of threshold status evaluations
+        phasing_activated:
+          type: boolean
+          title: Phasing Activated
+          description: Whether phasing is activated
+        driver_override:
+          type: number
+          title: Driver Override
+          description: Driver override percentage
+        financial_override:
+          type: number
+          title: Financial Override
+          description: Financial override percentage
+        impact_override:
+          type: number
+          title: Impact Override
+          description: Impact override percentage
+      type: object
+      required:
+      - value_prop_status
+      - threshold_types
+      - phasing_activated
+      - driver_override
+      - financial_override
+      - impact_override
+      title: ScorecardResponse
+      description: Complete scorecard response model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

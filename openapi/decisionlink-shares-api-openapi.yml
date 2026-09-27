@@ -158,6 +158,38 @@ components:
       - message
       title: MessageResponse
       description: Response model for simple message responses
+    UpdateShare:
+      properties:
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+      type: object
+      required:
+      - share_role_type_id
+      title: UpdateShare
+      description: Model for updating a share
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Shares:
       properties:
         id:
@@ -199,6 +231,15 @@ components:
       - id
       title: Shares
       description: Model for shares
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CreateShare:
       properties:
         user_id:
@@ -222,47 +263,6 @@ components:
       - share_role_type_id
       title: CreateShare
       description: Model for creating a share
-    UpdateShare:
-      properties:
-        share_role_type_id:
-          type: integer
-          title: Share Role Type Id
-          description: Id for the share role type
-      type: object
-      required:
-      - share_role_type_id
-      title: UpdateShare
-      description: Model for updating a share
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

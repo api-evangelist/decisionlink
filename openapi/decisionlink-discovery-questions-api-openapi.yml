@@ -202,22 +202,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    DiscoveryAnswer:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID for the Discovery Question
-        answer:
-          type: string
-          title: Answer
-          description: The answer to the Discovery Question
-      type: object
-      required:
-      - id
-      - answer
-      title: DiscoveryAnswer
-      description: DiscoveryAnswer model
     MessageResponse:
       properties:
         message:
@@ -229,19 +213,6 @@ components:
       - message
       title: MessageResponse
       description: MessageResponse model
-    DiscoveryAnswerPayload:
-      properties:
-        questions:
-          items:
-            $ref: '#/components/schemas/DiscoveryAnswer'
-          type: array
-          title: Questions
-          description: The list of Discovery Question Answers to save
-      type: object
-      required:
-      - questions
-      title: DiscoveryAnswerPayload
-      description: DiscoveryAnswerPayload model
     DiscoveryQuestion:
       properties:
         id:
@@ -308,15 +279,22 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    DiscoveryAnswer:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        id:
+          type: string
+          title: Id
+          description: The ID for the Discovery Question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the Discovery Question
       type: object
-      title: HTTPValidationError
+      required:
+      - id
+      - answer
+      title: DiscoveryAnswer
+      description: DiscoveryAnswer model
     QuestionType:
       properties:
         id:
@@ -333,47 +311,28 @@ components:
       - type
       title: QuestionType
       description: QuestionType model
-    DiscoveryAnswer_2:
+    DiscoveryAnswerPayload:
       properties:
-        account_discovery_question_id:
-          type: integer
-          title: Account Discovery Question Id
-          description: ID of the discovery question
-        answer:
-          type: string
-          title: Answer
-          description: The answer to the discovery question
-        value_prop_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Value Prop Id
-          description: The value prop ID
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-          description: The user ID updating the answer
-      type: object
-      required:
-      - account_discovery_question_id
-      - answer
-      title: DiscoveryAnswer
-      description: Discovery Question Answer Model
-    DiscoveryAnswerPayload_2:
-      properties:
-        discovery_questions:
+        questions:
           items:
-            $ref: '#/components/schemas/DiscoveryAnswer_2'
+            $ref: '#/components/schemas/DiscoveryAnswer'
           type: array
-          title: Discovery Questions
-          description: List of answers to discovery questions
+          title: Questions
+          description: The list of Discovery Question Answers to save
       type: object
       required:
-      - discovery_questions
+      - questions
       title: DiscoveryAnswerPayload
-      description: Discovery Question Answer Payload Model
+      description: DiscoveryAnswerPayload model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     DiscoveryQuestion_2:
       properties:
         account_discovery_question_id:
@@ -498,6 +457,47 @@ components:
       - name
       title: DiscoveryQuestionSection
       description: DiscoveryQuestionSection Model
+    DiscoveryAnswer_2:
+      properties:
+        account_discovery_question_id:
+          type: integer
+          title: Account Discovery Question Id
+          description: ID of the discovery question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the discovery question
+        value_prop_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Id
+          description: The value prop ID
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID updating the answer
+      type: object
+      required:
+      - account_discovery_question_id
+      - answer
+      title: DiscoveryAnswer
+      description: Discovery Question Answer Model
+    DiscoveryAnswerPayload_2:
+      properties:
+        discovery_questions:
+          items:
+            $ref: '#/components/schemas/DiscoveryAnswer_2'
+          type: array
+          title: Discovery Questions
+          description: List of answers to discovery questions
+      type: object
+      required:
+      - discovery_questions
+      title: DiscoveryAnswerPayload
+      description: Discovery Question Answer Payload Model
   securitySchemes:
     HTTPBearer:
       type: http

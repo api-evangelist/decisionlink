@@ -60,6 +60,23 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
     SearchRequest:
       properties:
         search_term:
@@ -107,23 +124,6 @@ components:
       type: object
       title: SearchRequest
       description: Request model for searching value propositions.
-    ListMode:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      title: ListMode
-      description: Mode for filtering value propositions by status.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

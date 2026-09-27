@@ -146,18 +146,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateCollaborationResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-        share_details:
-          $ref: '#/components/schemas/CollaborationShare'
-      type: object
-      required:
-      - message
-      - share_details
-      title: CreateCollaborationResponse
     CollaborationShare:
       properties:
         id:
@@ -254,6 +242,27 @@ components:
       - discovery_questions_enabled
       title: CollaborationShare
       description: Collaboration Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     UpdateCollaboration:
       properties:
         expires:
@@ -328,27 +337,6 @@ components:
       - discovery_questions_enabled
       title: CreateCollaboration
       description: Model for creating a collaboration
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -358,6 +346,18 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    CreateCollaborationResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        share_details:
+          $ref: '#/components/schemas/CollaborationShare'
+      type: object
+      required:
+      - message
+      - share_details
+      title: CreateCollaborationResponse
   securitySchemes:
     HTTPBearer:
       type: http

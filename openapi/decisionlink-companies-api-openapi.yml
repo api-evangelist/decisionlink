@@ -202,6 +202,69 @@ components:
       - name
       title: AdminValidatePayload
       description: Validate Admin Payload Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    CompanyValidateReturn:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: If the validate company was a success or not
+        company_id:
+          type: integer
+          title: Company Id
+          description: ID of the company
+        acc_specific:
+          type: boolean
+          title: Acc Specific
+          description: Tells whether the account has account specific companies
+      type: object
+      required:
+      - success
+      - company_id
+      - acc_specific
+      title: CompanyValidateReturn
+      description: Validate Company Return Model
+    SearchPayload:
+      properties:
+        search_term:
+          type: string
+          title: Search Term
+          description: The name of the company being searched for
+      type: object
+      required:
+      - search_term
+      title: SearchPayload
+      description: SearchPayload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Company:
       properties:
         id:
@@ -395,16 +458,6 @@ components:
       - country
       title: Company
       description: Company Model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
     CreateCompanyPayload:
       properties:
         name:
@@ -486,27 +539,15 @@ components:
       - name
       title: CreateCompanyPayload
       description: CreateCompanyPayload Model
-    ValidationError:
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     CompanyValidatePayload:
       properties:
         sf_account_id:
@@ -518,47 +559,6 @@ components:
       - sf_account_id
       title: CompanyValidatePayload
       description: Validate Company Payload Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SearchPayload:
-      properties:
-        search_term:
-          type: string
-          title: Search Term
-          description: The name of the company being searched for
-      type: object
-      required:
-      - search_term
-      title: SearchPayload
-      description: SearchPayload Model
-    CompanyValidateReturn:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: If the validate company was a success or not
-        company_id:
-          type: integer
-          title: Company Id
-          description: ID of the company
-        acc_specific:
-          type: boolean
-          title: Acc Specific
-          description: Tells whether the account has account specific companies
-      type: object
-      required:
-      - success
-      - company_id
-      - acc_specific
-      title: CompanyValidateReturn
-      description: Validate Company Return Model
   securitySchemes:
     HTTPBearer:
       type: http

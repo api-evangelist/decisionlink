@@ -168,35 +168,6 @@ components:
       type: object
       title: ValuePropAdvanced
       description: Model representing the advanced details of a value proposition.
-    NumberFormatType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the number format type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the number format type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A description of the number format type
-        locale:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locale
-          description: The locale associated with the number format type
-      type: object
-      title: NumberFormatType
-      description: Model representing a number format type.
     ValidationError:
       properties:
         loc:
@@ -218,6 +189,47 @@ components:
       - msg
       - type
       title: ValidationError
+    CurrencyType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the currency type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the currency type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A brief description of the currency type
+        abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbreviation
+          description: The abbreviation for the currency type
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: The exchange rate for the currency
+        decoration:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Decoration
+          description: The symbol or decoration for the currency
+      type: object
+      title: CurrencyType
+      description: Model representing a currency type.
     ValuePropAdvancedPayload:
       properties:
         baseline_type_id:
@@ -286,47 +298,6 @@ components:
       - term
       title: ValuePropAdvancedPayload
       description: Model representing the advanced details of a value proposition payload.
-    CurrencyType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the currency type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the currency type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A brief description of the currency type
-        abbreviation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbreviation
-          description: The abbreviation for the currency type
-        rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Rate
-          description: The exchange rate for the currency
-        decoration:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Decoration
-          description: The symbol or decoration for the currency
-      type: object
-      title: CurrencyType
-      description: Model representing a currency type.
     HTTPValidationError:
       properties:
         detail:
@@ -336,6 +307,35 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    NumberFormatType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the number format type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the number format type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A description of the number format type
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: The locale associated with the number format type
+      type: object
+      title: NumberFormatType
+      description: Model representing a number format type.
   securitySchemes:
     HTTPBearer:
       type: http
