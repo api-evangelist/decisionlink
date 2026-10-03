@@ -111,6 +111,191 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Situation:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Situation
+        name:
+          type: string
+          title: Name
+          description: Name of the Situation
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Situation
+          default: ''
+        multi_select:
+          type: boolean
+          title: Multi Select
+          description: Multi-select status of the Situation
+        question_type:
+          type: string
+          title: Question Type
+          description: Question type of the Situation
+        required:
+          type: boolean
+          title: Required
+          description: Required status of the Situation
+        elements:
+          items:
+            $ref: '#/components/schemas/Element'
+          type: array
+          title: Elements
+          description: Elements of the Situation
+        source_attribution:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Attribution
+        attribution_link:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Revert Value
+      type: object
+      required:
+      - id
+      - name
+      - multi_select
+      - question_type
+      - required
+      - elements
+      title: Situation
+      description: Situation model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Element:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the Element
+        sequence:
+          anyOf:
+          - type: string
+          - type: integer
+          title: Sequence
+          description: Sequence of the Element
+        name:
+          type: string
+          title: Name
+          description: Name of the Element
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the Element
+          default: ''
+        situation_category_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Situation Category Id
+          description: Situation Category ID
+        selected:
+          type: boolean
+          title: Selected
+          description: Selected status of the Element
+        child_element_type_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Child Element Type Id
+          description: Select-type for this element's children (maps to fact_situation_element_types)
+        can_set_child_element:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Can Set Child Element
+          description: Whether the element accepts child elements
+        child_multi_select:
+          type: boolean
+          title: Child Multi Select
+          description: 'Derived: children allow multi-select (type 2 or 4)'
+          default: false
+        child_question_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Child Question Type
+          description: Derived label for the children sub-list control (Radio Button / Check Box / Drop Down)
+        children:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ChildElement'
+            type: array
+          - type: 'null'
+          title: Children
+          description: Children of the Element
+        created_at:
+          type: string
+          title: Created At
+          description: Date when the Element was created
+        updated_at:
+          type: string
+          title: Updated At
+          description: Date when the Element was updated
+      type: object
+      required:
+      - id
+      - sequence
+      - name
+      - selected
+      - created_at
+      - updated_at
+      title: Element
+      description: Element model
+    SituationValue:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Situation ID
+        element_id:
+          type: string
+          title: Element Id
+          description: Situation Element ID
+      type: object
+      required:
+      - id
+      - element_id
+      title: SituationValue
+      description: SituationValue model
+    SituationPayload:
+      properties:
+        situations:
+          items:
+            $ref: '#/components/schemas/SituationValue'
+          type: array
+          title: Situations
+          description: The list of situations to being saved
+      type: object
+      required:
+      - situations
+      title: SituationPayload
+      description: SituationPayload model
     MessageResponse:
       properties:
         message:
@@ -142,35 +327,6 @@ components:
       - msg
       - type
       title: ValidationError
-    SituationPayload:
-      properties:
-        situations:
-          items:
-            $ref: '#/components/schemas/SituationValue'
-          type: array
-          title: Situations
-          description: The list of situations to being saved
-      type: object
-      required:
-      - situations
-      title: SituationPayload
-      description: SituationPayload model
-    SituationValue:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: Situation ID
-        element_id:
-          type: string
-          title: Element Id
-          description: Situation Element ID
-      type: object
-      required:
-      - id
-      - element_id
-      title: SituationValue
-      description: SituationValue model
     ChildElement:
       properties:
         id:
@@ -285,162 +441,6 @@ components:
       - can_set_child_element
       title: ChildElement
       description: Child Element model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Situation:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the Situation
-        name:
-          type: string
-          title: Name
-          description: Name of the Situation
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the Situation
-          default: ''
-        multi_select:
-          type: boolean
-          title: Multi Select
-          description: Multi-select status of the Situation
-        question_type:
-          type: string
-          title: Question Type
-          description: Question type of the Situation
-        required:
-          type: boolean
-          title: Required
-          description: Required status of the Situation
-        elements:
-          items:
-            $ref: '#/components/schemas/Element'
-          type: array
-          title: Elements
-          description: Elements of the Situation
-        source_attribution:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Attribution
-        attribution_link:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Link
-        attribution_tooltip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Tooltip
-        revert_value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Revert Value
-      type: object
-      required:
-      - id
-      - name
-      - multi_select
-      - question_type
-      - required
-      - elements
-      title: Situation
-      description: Situation model
-    Element:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the Element
-        sequence:
-          anyOf:
-          - type: string
-          - type: integer
-          title: Sequence
-          description: Sequence of the Element
-        name:
-          type: string
-          title: Name
-          description: Name of the Element
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the Element
-          default: ''
-        situation_category_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Situation Category Id
-          description: Situation Category ID
-        selected:
-          type: boolean
-          title: Selected
-          description: Selected status of the Element
-        child_element_type_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Child Element Type Id
-          description: Select-type for this element's children (maps to fact_situation_element_types)
-        can_set_child_element:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Can Set Child Element
-          description: Whether the element accepts child elements
-        child_multi_select:
-          type: boolean
-          title: Child Multi Select
-          description: 'Derived: children allow multi-select (type 2 or 4)'
-          default: false
-        child_question_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Child Question Type
-          description: Derived label for the children sub-list control (Radio Button / Check Box / Drop Down)
-        children:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ChildElement'
-            type: array
-          - type: 'null'
-          title: Children
-          description: Children of the Element
-        created_at:
-          type: string
-          title: Created At
-          description: Date when the Element was created
-        updated_at:
-          type: string
-          title: Updated At
-          description: Date when the Element was updated
-      type: object
-      required:
-      - id
-      - sequence
-      - name
-      - selected
-      - created_at
-      - updated_at
-      title: Element
-      description: Element model
   securitySchemes:
     HTTPBearer:
       type: http

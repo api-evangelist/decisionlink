@@ -208,6 +208,70 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValueRealizationGoalGroup:
+      properties:
+        category_id:
+          type: integer
+          title: Category Id
+          description: Factor category ID
+        category_name:
+          type: string
+          title: Category Name
+          description: Factor category name
+        category_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category Description
+          description: Factor category description
+          default: ''
+        goals:
+          items:
+            $ref: '#/components/schemas/ValueRealizationGoal'
+          type: array
+          title: Goals
+      type: object
+      required:
+      - category_id
+      - category_name
+      - goals
+      title: ValueRealizationGoalGroup
+      description: Value Realization Group Group Model
+    ValueRealizationGoalUpdate:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: The Value Prop Goal ID to update
+        baseline_value:
+          type: number
+          title: Baseline Value
+          description: New baseline value (defaults to 0)
+          default: 0
+        value:
+          type: number
+          title: Value
+          description: New target value (defaults to 0)
+          default: 0
+        active:
+          type: integer
+          title: Active
+          description: Whether this goal is active (0 or 1)
+          default: 0
+      type: object
+      required:
+      - id
+      title: ValueRealizationGoalUpdate
+      description: Value Realization Goal Update Model
     ValueRealizationGoal:
       properties:
         id:
@@ -356,70 +420,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ValueRealizationGoalUpdate:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: The Value Prop Goal ID to update
-        baseline_value:
-          type: number
-          title: Baseline Value
-          description: New baseline value (defaults to 0)
-          default: 0
-        value:
-          type: number
-          title: Value
-          description: New target value (defaults to 0)
-          default: 0
-        active:
-          type: integer
-          title: Active
-          description: Whether this goal is active (0 or 1)
-          default: 0
-      type: object
-      required:
-      - id
-      title: ValueRealizationGoalUpdate
-      description: Value Realization Goal Update Model
-    ValueRealizationGoalGroup:
-      properties:
-        category_id:
-          type: integer
-          title: Category Id
-          description: Factor category ID
-        category_name:
-          type: string
-          title: Category Name
-          description: Factor category name
-        category_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Category Description
-          description: Factor category description
-          default: ''
-        goals:
-          items:
-            $ref: '#/components/schemas/ValueRealizationGoal'
-          type: array
-          title: Goals
-      type: object
-      required:
-      - category_id
-      - category_name
-      - goals
-      title: ValueRealizationGoalGroup
-      description: Value Realization Group Group Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

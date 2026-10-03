@@ -182,57 +182,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    AdminValidatePayload:
-      properties:
-        sfdc_account_id:
-          type: string
-          title: Sfdc Account Id
-          description: Salesforce account id.
-        user_id:
-          type: integer
-          title: User Id
-          description: User id.
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - sfdc_account_id
-      - user_id
-      - name
-      title: AdminValidatePayload
-      description: Validate Admin Payload Model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
-    CompanyValidateReturn:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: If the validate company was a success or not
-        company_id:
-          type: integer
-          title: Company Id
-          description: ID of the company
-        acc_specific:
-          type: boolean
-          title: Acc Specific
-          description: Tells whether the account has account specific companies
-      type: object
-      required:
-      - success
-      - company_id
-      - acc_specific
-      title: CompanyValidateReturn
-      description: Validate Company Return Model
     SearchPayload:
       properties:
         search_term:
@@ -244,27 +193,6 @@ components:
       - search_term
       title: SearchPayload
       description: SearchPayload Model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     Company:
       properties:
         id:
@@ -548,6 +476,58 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    CompanyValidateReturn:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: If the validate company was a success or not
+        company_id:
+          type: integer
+          title: Company Id
+          description: ID of the company
+        acc_specific:
+          type: boolean
+          title: Acc Specific
+          description: Tells whether the account has account specific companies
+      type: object
+      required:
+      - success
+      - company_id
+      - acc_specific
+      title: CompanyValidateReturn
+      description: Validate Company Return Model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     CompanyValidatePayload:
       properties:
         sf_account_id:
@@ -559,6 +539,26 @@ components:
       - sf_account_id
       title: CompanyValidatePayload
       description: Validate Company Payload Model
+    AdminValidatePayload:
+      properties:
+        sfdc_account_id:
+          type: string
+          title: Sfdc Account Id
+          description: Salesforce account id.
+        user_id:
+          type: integer
+          title: User Id
+          description: User id.
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - sfdc_account_id
+      - user_id
+      - name
+      title: AdminValidatePayload
+      description: Validate Admin Payload Model
   securitySchemes:
     HTTPBearer:
       type: http

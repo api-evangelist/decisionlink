@@ -83,29 +83,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Login:
-      properties:
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-          description: Password for the collaboration
-        hash:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hash
-          description: The hash for the collaboration
-        ac:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ac
-          description: Access Code to access the collaboration
-      type: object
-      title: Login
-      description: Login model
     CollaborationMetadata:
       properties:
         access_token:
@@ -168,6 +145,29 @@ components:
       - value_prop_id
       title: CollaborationMetadata
       description: CollaborationMetadata model
+    Login:
+      properties:
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+          description: Password for the collaboration
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+          description: The hash for the collaboration
+        ac:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ac
+          description: Access Code to access the collaboration
+      type: object
+      title: Login
+      description: Login model
   securitySchemes:
     HTTPBearer:
       type: http

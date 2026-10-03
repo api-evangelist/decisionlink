@@ -146,6 +146,74 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateCollaboration:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Asset Template Id
+          default: 0
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - expires
+      - benefits_editable
+      - assumptions_editable
+      - discovery_questions_enabled
+      title: CreateCollaboration
+      description: Model for creating a collaboration
+    CreateCollaborationResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        share_details:
+          $ref: '#/components/schemas/CollaborationShare'
+      type: object
+      required:
+      - message
+      - share_details
+      title: CreateCollaborationResponse
     CollaborationShare:
       properties:
         id:
@@ -242,27 +310,6 @@ components:
       - discovery_questions_enabled
       title: CollaborationShare
       description: Collaboration Model
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     UpdateCollaboration:
       properties:
         expires:
@@ -290,74 +337,27 @@ components:
       - discovery_questions_enabled
       title: UpdateCollaboration
       description: Model for updating a collaboration
-    CreateCollaboration:
+    ValidationError:
       properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        expires:
-          type: string
-          format: date-time
-          title: Expires
-        benefits_editable:
-          type: integer
-          title: Benefits Editable
-        assumptions_editable:
-          type: integer
-          title: Assumptions Editable
-        account_asset_template_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Account Asset Template Id
-          default: 0
-        discovery_questions_enabled:
-          type: integer
-          title: Discovery Questions Enabled
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      - expires
-      - benefits_editable
-      - assumptions_editable
-      - discovery_questions_enabled
-      title: CreateCollaboration
-      description: Model for creating a collaboration
-    HTTPValidationError:
-      properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateCollaborationResponse:
-      properties:
-        message:
+          title: Location
+        msg:
           type: string
           title: Message
-        share_details:
-          $ref: '#/components/schemas/CollaborationShare'
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - message
-      - share_details
-      title: CreateCollaborationResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

@@ -106,6 +106,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CreateAttribution:
       properties:
         section_type_id:
@@ -132,15 +141,6 @@ components:
       - suggested_value_text
       title: CreateAttribution
       description: Attribution Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     MessageResponse:
       properties:
         message:

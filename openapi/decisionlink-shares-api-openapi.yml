@@ -148,16 +148,29 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MessageResponse:
+    CreateShare:
       properties:
-        message:
-          type: string
-          title: Message
+        user_id:
+          type: integer
+          title: User Id
+          description: Id of user the share is for
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+        from_crm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Crm
+          description: If created from crm
+          default: 0
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - user_id
+      - share_role_type_id
+      title: CreateShare
+      description: Model for creating a share
     UpdateShare:
       properties:
         share_role_type_id:
@@ -169,27 +182,15 @@ components:
       - share_role_type_id
       title: UpdateShare
       description: Model for updating a share
-    ValidationError:
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     Shares:
       properties:
         id:
@@ -231,38 +232,37 @@ components:
       - id
       title: Shares
       description: Model for shares
-    HTTPValidationError:
+    MessageResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateShare:
-      properties:
-        user_id:
-          type: integer
-          title: User Id
-          description: Id of user the share is for
-        share_role_type_id:
-          type: integer
-          title: Share Role Type Id
-          description: Id for the share role type
-        from_crm:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: From Crm
-          description: If created from crm
-          default: 0
+        message:
+          type: string
+          title: Message
       type: object
       required:
-      - user_id
-      - share_role_type_id
-      title: CreateShare
-      description: Model for creating a share
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

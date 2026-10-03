@@ -180,6 +180,47 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
+    RefreshValuePropGroupPayload:
+      properties:
+        sfdc_vp_id:
+          type: string
+          title: Sfdc Vp Id
+          description: The sfdc value prop ID
+        value_prop_group_id:
+          type: string
+          title: Value Prop Group Id
+          description: The value prop group ID
+      type: object
+      required:
+      - sfdc_vp_id
+      - value_prop_group_id
+      title: RefreshValuePropGroupPayload
+      description: Model representing the refresh value proposition group payload.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RefreshValuePropPayload:
+      properties:
+        sfdc_vp_id:
+          type: string
+          title: Sfdc Vp Id
+          description: The sfdc value prop ID
+        value_prop_id:
+          type: string
+          title: Value Prop Id
+          description: The value prop ID
+      type: object
+      required:
+      - sfdc_vp_id
+      - value_prop_id
+      title: RefreshValuePropPayload
+      description: Model representing the refresh value proposition payload.
     ValidationError:
       properties:
         loc:
@@ -201,47 +242,6 @@ components:
       - msg
       - type
       title: ValidationError
-    RefreshValuePropGroupPayload:
-      properties:
-        sfdc_vp_id:
-          type: string
-          title: Sfdc Vp Id
-          description: The sfdc value prop ID
-        value_prop_group_id:
-          type: string
-          title: Value Prop Group Id
-          description: The value prop group ID
-      type: object
-      required:
-      - sfdc_vp_id
-      - value_prop_group_id
-      title: RefreshValuePropGroupPayload
-      description: Model representing the refresh value proposition group payload.
-    RefreshValuePropPayload:
-      properties:
-        sfdc_vp_id:
-          type: string
-          title: Sfdc Vp Id
-          description: The sfdc value prop ID
-        value_prop_id:
-          type: string
-          title: Value Prop Id
-          description: The value prop ID
-      type: object
-      required:
-      - sfdc_vp_id
-      - value_prop_id
-      title: RefreshValuePropPayload
-      description: Model representing the refresh value proposition payload.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     RefreshValueTrackerPayload:
       properties:
         sfdc_vt_id:

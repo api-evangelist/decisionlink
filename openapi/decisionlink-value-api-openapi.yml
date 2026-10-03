@@ -156,6 +156,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValuePromptCreate:
       properties:
         sequence:
@@ -189,15 +198,6 @@ components:
       - display_name
       title: ValuePromptCreate
       description: Value Prompt Create Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValuePromptUpdate:
       properties:
         sequence:

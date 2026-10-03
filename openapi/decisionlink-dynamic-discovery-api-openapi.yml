@@ -199,39 +199,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    SolutionsPayload:
-      properties:
-        solutions:
-          items:
-            type: integer
-          type: array
-          title: Solutions
-      type: object
-      required:
-      - solutions
-      title: SolutionsPayload
-      description: SolutionsPayload Model
     TriggerSettingsResponse:
       properties:
         trigger_stages:
@@ -250,6 +217,15 @@ components:
       - trigger_stages
       title: TriggerSettingsResponse
       description: Response for trigger stage and type settings
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     DynamicDiscoveryResponse:
       properties:
         has_permission:
@@ -317,23 +293,39 @@ components:
       - has_permission
       title: DynamicDiscoveryResponse
       description: Model for dynamic discovery
-    TriggerSettingsPayload:
+    SolutionsPayload:
       properties:
-        trigger_stages:
+        solutions:
           items:
-            type: string
+            type: integer
           type: array
-          title: Trigger Stages
-          default: []
-        trigger_types:
-          items:
-            type: string
-          type: array
-          title: Trigger Types
-          default: []
+          title: Solutions
       type: object
-      title: TriggerSettingsPayload
-      description: Payload for updating trigger stage and type settings
+      required:
+      - solutions
+      title: SolutionsPayload
+      description: SolutionsPayload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     value_proposition__dynamic_discovery__models__Solution:
       properties:
         account_solution_id:
@@ -354,15 +346,23 @@ components:
       - name
       title: Solution
       description: Solutions model
-    HTTPValidationError:
+    TriggerSettingsPayload:
       properties:
-        detail:
+        trigger_stages:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
-          title: Detail
+          title: Trigger Stages
+          default: []
+        trigger_types:
+          items:
+            type: string
+          type: array
+          title: Trigger Types
+          default: []
       type: object
-      title: HTTPValidationError
+      title: TriggerSettingsPayload
+      description: Payload for updating trigger stage and type settings
   securitySchemes:
     HTTPBearer:
       type: http

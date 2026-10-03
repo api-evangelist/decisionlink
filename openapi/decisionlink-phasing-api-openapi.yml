@@ -88,16 +88,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
     UpdateDriverPhasingPayload:
       properties:
         value_prop_metric_id:
@@ -165,6 +155,16 @@ components:
       - value_prop_metric_id
       title: UpdateDriverPhasingPayload
       description: UpdateDriverPhasingPayload model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

@@ -69,6 +69,112 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    NumberFormatType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the number format type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the number format type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A description of the number format type
+        locale:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locale
+          description: The locale associated with the number format type
+      type: object
+      title: NumberFormatType
+      description: Model representing a number format type.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValuePropAdvancedPayload:
+      properties:
+        baseline_type_id:
+          type: integer
+          title: Baseline Type Id
+          description: The baseline type ID
+        customer_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Customer Type Id
+          description: The customer type ID
+          default: 1
+        deployment_time:
+          type: integer
+          title: Deployment Time
+          description: The deployment time
+        gross_profit:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Gross Profit
+          description: The gross profit
+          default: 0
+        currency_type_id:
+          type: number
+          title: Currency Type Id
+          description: The currency type ID
+        number_format:
+          type: integer
+          title: Number Format
+          description: The selected number format
+        conversion_rate:
+          type: number
+          title: Conversion Rate
+          description: The conversion rate
+        term:
+          type: integer
+          title: Term
+          description: The term duration
+        language_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Language Type Id
+          description: The language type ID
+        wacc:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Wacc
+          description: The weighted average cost of capital (WACC)
+        opportunity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Opportunity Id
+          description: The opportunity ID
+      type: object
+      required:
+      - baseline_type_id
+      - deployment_time
+      - currency_type_id
+      - number_format
+      - conversion_rate
+      - term
+      title: ValuePropAdvancedPayload
+      description: Model representing the advanced details of a value proposition payload.
     ValuePropAdvanced:
       properties:
         value_prop_id:
@@ -230,112 +336,6 @@ components:
       type: object
       title: CurrencyType
       description: Model representing a currency type.
-    ValuePropAdvancedPayload:
-      properties:
-        baseline_type_id:
-          type: integer
-          title: Baseline Type Id
-          description: The baseline type ID
-        customer_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Customer Type Id
-          description: The customer type ID
-          default: 1
-        deployment_time:
-          type: integer
-          title: Deployment Time
-          description: The deployment time
-        gross_profit:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Gross Profit
-          description: The gross profit
-          default: 0
-        currency_type_id:
-          type: number
-          title: Currency Type Id
-          description: The currency type ID
-        number_format:
-          type: integer
-          title: Number Format
-          description: The selected number format
-        conversion_rate:
-          type: number
-          title: Conversion Rate
-          description: The conversion rate
-        term:
-          type: integer
-          title: Term
-          description: The term duration
-        language_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Language Type Id
-          description: The language type ID
-        wacc:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Wacc
-          description: The weighted average cost of capital (WACC)
-        opportunity_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Opportunity Id
-          description: The opportunity ID
-      type: object
-      required:
-      - baseline_type_id
-      - deployment_time
-      - currency_type_id
-      - number_format
-      - conversion_rate
-      - term
-      title: ValuePropAdvancedPayload
-      description: Model representing the advanced details of a value proposition payload.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    NumberFormatType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the number format type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the number format type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A description of the number format type
-        locale:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locale
-          description: The locale associated with the number format type
-      type: object
-      title: NumberFormatType
-      description: Model representing a number format type.
   securitySchemes:
     HTTPBearer:
       type: http

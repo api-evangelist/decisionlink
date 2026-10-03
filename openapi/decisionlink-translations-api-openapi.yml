@@ -290,16 +290,36 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    MessageResponse:
+    SaveTranslationOverride:
       properties:
-        message:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Base translation identifier to override.
+        value:
           type: string
-          title: Message
+          title: Value
+          description: New account-specific translation value.
+        version:
+          type: integer
+          title: Version
+          description: Translations components version (default 2).
+          default: 2
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - translation_id
+      - value
+      title: SaveTranslationOverride
+      description: Request body for saving an inline translation override.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Translation:
       properties:
         id:
@@ -336,27 +356,6 @@ components:
       - val
       title: Translation
       description: Translation string model.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     TranslationWithOverride:
       properties:
         translation_id:
@@ -383,36 +382,6 @@ components:
       - is_override
       title: TranslationWithOverride
       description: Translation row with optional account override applied.
-    SaveTranslationOverride:
-      properties:
-        translation_id:
-          type: integer
-          title: Translation Id
-          description: Base translation identifier to override.
-        value:
-          type: string
-          title: Value
-          description: New account-specific translation value.
-        version:
-          type: integer
-          title: Version
-          description: Translations components version (default 2).
-          default: 2
-      type: object
-      required:
-      - translation_id
-      - value
-      title: SaveTranslationOverride
-      description: Request body for saving an inline translation override.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     TranslationComponent:
       properties:
         id:
@@ -439,6 +408,37 @@ components:
       - component
       title: TranslationComponent
       description: Translation component model.
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Translation_2:
       properties:
         id:

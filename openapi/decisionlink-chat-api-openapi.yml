@@ -290,6 +290,51 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
+      properties:
+        title:
+          type: string
+          title: Title
+      type: object
+      required:
+      - title
+      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ChatFeedbackIn:
+      properties:
+        chat_id:
+          type: string
+          title: Chat Id
+          description: The ID of the chat
+        message_index:
+          type: integer
+          title: Message Index
+          description: The index of the message
+        vote_score:
+          type: integer
+          title: Vote Score
+          description: The vote score
+        comments:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Comments
+          description: The comments
+      type: object
+      required:
+      - chat_id
+      - message_index
+      - vote_score
+      title: ChatFeedbackIn
+      description: Chat feedback input model
     Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
       properties:
         file:
@@ -321,51 +366,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ChatFeedbackIn:
-      properties:
-        chat_id:
-          type: string
-          title: Chat Id
-          description: The ID of the chat
-        message_index:
-          type: integer
-          title: Message Index
-          description: The index of the message
-        vote_score:
-          type: integer
-          title: Vote Score
-          description: The vote score
-        comments:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Comments
-          description: The comments
-      type: object
-      required:
-      - chat_id
-      - message_index
-      - vote_score
-      title: ChatFeedbackIn
-      description: Chat feedback input model
-    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
-      properties:
-        title:
-          type: string
-          title: Title
-      type: object
-      required:
-      - title
-      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http
