@@ -139,6 +139,25 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    FormattedResponse_ValuePropResult_:
+      properties:
+        result:
+          $ref: '#/components/schemas/ValuePropResult'
+      type: object
+      required:
+      - result
+      title: FormattedResponse[ValuePropResult]
+    VPGroupResult:
+      properties:
+        value_prop_groups:
+          items:
+            $ref: '#/components/schemas/ExternalVPGroup'
+          type: array
+          title: Value Prop Groups
+      type: object
+      required:
+      - value_prop_groups
+      title: VPGroupResult
     ExternalVP:
       properties:
         id:
@@ -362,6 +381,14 @@ components:
       - last_modified_by_name
       title: ExternalVP
       description: ExternalVPGroup model
+    FormattedResponse_VPGroupResult_:
+      properties:
+        result:
+          $ref: '#/components/schemas/VPGroupResult'
+      type: object
+      required:
+      - result
+      title: FormattedResponse[VPGroupResult]
     ValuePropResult:
       properties:
         value_props:
@@ -373,14 +400,6 @@ components:
       required:
       - value_props
       title: ValuePropResult
-    FormattedResponse_ValuePropResult_:
-      properties:
-        result:
-          $ref: '#/components/schemas/ValuePropResult'
-      type: object
-      required:
-      - result
-      title: FormattedResponse[ValuePropResult]
     ExternalVPGroup:
       properties:
         id:
@@ -633,14 +652,6 @@ components:
       - variance_raw
       title: ExternalTracker
       description: ValueTracker Model
-    FormattedResponse_VPGroupResult_:
-      properties:
-        result:
-          $ref: '#/components/schemas/VPGroupResult'
-      type: object
-      required:
-      - result
-      title: FormattedResponse[VPGroupResult]
     ValidationError:
       properties:
         loc:
@@ -673,17 +684,6 @@ components:
       required:
       - result
       title: FormattedResponse[list[ExternalTracker]]
-    VPGroupResult:
-      properties:
-        value_prop_groups:
-          items:
-            $ref: '#/components/schemas/ExternalVPGroup'
-          type: array
-          title: Value Prop Groups
-      type: object
-      required:
-      - value_prop_groups
-      title: VPGroupResult
   securitySchemes:
     HTTPBearer:
       type: http

@@ -63,6 +63,16 @@ components:
       - msg
       - type
       title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     HTTPValidationError:
       properties:
         detail:
@@ -119,16 +129,6 @@ components:
       type: object
       title: Done
       description: Done model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

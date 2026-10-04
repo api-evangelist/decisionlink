@@ -182,15 +182,6 @@ components:
       - share_role_type_id
       title: UpdateShare
       description: Model for updating a share
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Shares:
       properties:
         id:
@@ -232,16 +223,15 @@ components:
       - id
       title: Shares
       description: Model for shares
-    MessageResponse:
+    HTTPValidationError:
       properties:
-        message:
-          type: string
-          title: Message
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -263,6 +253,16 @@ components:
       - msg
       - type
       title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

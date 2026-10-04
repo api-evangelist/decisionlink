@@ -99,6 +99,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     OneTimeBenefitResponse:
       properties:
         value_prop_metric_id:
@@ -161,15 +170,6 @@ components:
       - unit_type_id
       title: OneTimeBenefitResponse
       description: Response model for a created one-time benefit.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     OneTimeBenefitCreate:
       properties:
         name:
@@ -427,6 +427,37 @@ components:
           value_survey_id:
           - 55
           - 66
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     OneTimeBenefitPatch:
       properties:
         name:
@@ -570,37 +601,6 @@ components:
       type: object
       title: OneTimeBenefitPatch
       description: Payload for partial update of a one-time benefit.
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

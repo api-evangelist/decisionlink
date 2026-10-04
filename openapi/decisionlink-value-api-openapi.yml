@@ -156,6 +156,43 @@ components:
       - msg
       - type
       title: ValidationError
+    ValuePromptUpdate:
+      properties:
+        sequence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sequence
+        active:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Active
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        sections:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sections
+      type: object
+      title: ValuePromptUpdate
+      description: Value Prompt Update Model
     HTTPValidationError:
       properties:
         detail:
@@ -198,43 +235,6 @@ components:
       - display_name
       title: ValuePromptCreate
       description: Value Prompt Create Model
-    ValuePromptUpdate:
-      properties:
-        sequence:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Sequence
-        active:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Active
-        display_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        prompt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prompt
-        sections:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Sections
-      type: object
-      title: ValuePromptUpdate
-      description: Value Prompt Update Model
   securitySchemes:
     HTTPBearer:
       type: http

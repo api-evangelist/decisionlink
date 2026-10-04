@@ -146,15 +146,33 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    UpdateCollaboration:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        expires:
+          type: string
+          format: date-time
+          title: Expires
+        benefits_editable:
+          type: integer
+          title: Benefits Editable
+        assumptions_editable:
+          type: integer
+          title: Assumptions Editable
+        account_asset_template_id:
+          type: integer
+          title: Account Asset Template Id
+        discovery_questions_enabled:
+          type: integer
+          title: Discovery Questions Enabled
       type: object
-      title: HTTPValidationError
+      required:
+      - expires
+      - benefits_editable
+      - assumptions_editable
+      - account_asset_template_id
+      - discovery_questions_enabled
+      title: UpdateCollaboration
+      description: Model for updating a collaboration
     CreateCollaboration:
       properties:
         first_name:
@@ -214,6 +232,15 @@ components:
       - message
       - share_details
       title: CreateCollaborationResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CollaborationShare:
       properties:
         id:
@@ -310,33 +337,6 @@ components:
       - discovery_questions_enabled
       title: CollaborationShare
       description: Collaboration Model
-    UpdateCollaboration:
-      properties:
-        expires:
-          type: string
-          format: date-time
-          title: Expires
-        benefits_editable:
-          type: integer
-          title: Benefits Editable
-        assumptions_editable:
-          type: integer
-          title: Assumptions Editable
-        account_asset_template_id:
-          type: integer
-          title: Account Asset Template Id
-        discovery_questions_enabled:
-          type: integer
-          title: Discovery Questions Enabled
-      type: object
-      required:
-      - expires
-      - benefits_editable
-      - assumptions_editable
-      - account_asset_template_id
-      - discovery_questions_enabled
-      title: UpdateCollaboration
-      description: Model for updating a collaboration
     ValidationError:
       properties:
         loc:

@@ -69,44 +69,47 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    NumberFormatType:
+    CurrencyType:
       properties:
         id:
           anyOf:
           - type: integer
           - type: 'null'
           title: Id
-          description: The ID for the number format type
+          description: The ID for the currency type
         name:
           anyOf:
           - type: string
           - type: 'null'
           title: Name
-          description: The name of the number format type
+          description: The name of the currency type
         description:
           anyOf:
           - type: string
           - type: 'null'
           title: Description
-          description: A description of the number format type
-        locale:
+          description: A brief description of the currency type
+        abbreviation:
           anyOf:
           - type: string
           - type: 'null'
-          title: Locale
-          description: The locale associated with the number format type
+          title: Abbreviation
+          description: The abbreviation for the currency type
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: The exchange rate for the currency
+        decoration:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Decoration
+          description: The symbol or decoration for the currency
       type: object
-      title: NumberFormatType
-      description: Model representing a number format type.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      title: CurrencyType
+      description: Model representing a currency type.
     ValuePropAdvancedPayload:
       properties:
         baseline_type_id:
@@ -274,6 +277,15 @@ components:
       type: object
       title: ValuePropAdvanced
       description: Model representing the advanced details of a value proposition.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -295,47 +307,35 @@ components:
       - msg
       - type
       title: ValidationError
-    CurrencyType:
+    NumberFormatType:
       properties:
         id:
           anyOf:
           - type: integer
           - type: 'null'
           title: Id
-          description: The ID for the currency type
+          description: The ID for the number format type
         name:
           anyOf:
           - type: string
           - type: 'null'
           title: Name
-          description: The name of the currency type
+          description: The name of the number format type
         description:
           anyOf:
           - type: string
           - type: 'null'
           title: Description
-          description: A brief description of the currency type
-        abbreviation:
+          description: A description of the number format type
+        locale:
           anyOf:
           - type: string
           - type: 'null'
-          title: Abbreviation
-          description: The abbreviation for the currency type
-        rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Rate
-          description: The exchange rate for the currency
-        decoration:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Decoration
-          description: The symbol or decoration for the currency
+          title: Locale
+          description: The locale associated with the number format type
       type: object
-      title: CurrencyType
-      description: Model representing a currency type.
+      title: NumberFormatType
+      description: Model representing a number format type.
   securitySchemes:
     HTTPBearer:
       type: http

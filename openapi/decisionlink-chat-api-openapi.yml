@@ -290,24 +290,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
-      properties:
-        title:
-          type: string
-          title: Title
-      type: object
-      required:
-      - title
-      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ChatFeedbackIn:
       properties:
         chat_id:
@@ -335,16 +317,6 @@ components:
       - vote_score
       title: ChatFeedbackIn
       description: Chat feedback input model
-    Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post
     ValidationError:
       properties:
         loc:
@@ -366,6 +338,34 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_update_chat_title_v1_value_chat_chat__chat_id__patch:
+      properties:
+        title:
+          type: string
+          title: Title
+      type: object
+      required:
+      - title
+      title: Body_update_chat_title_v1_value_chat_chat__chat_id__patch
+    Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_chat_file_v1_value_chat_chat__chat_id__upload_post
   securitySchemes:
     HTTPBearer:
       type: http

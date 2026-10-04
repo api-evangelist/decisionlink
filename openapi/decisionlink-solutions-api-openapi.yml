@@ -152,70 +152,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CategorySolution:
-      properties:
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-          description: Account Solution ID
-        account_solution_name:
-          type: string
-          title: Account Solution Name
-          description: Name of the solution
-        account_solution_description:
-          type: string
-          title: Account Solution Description
-          description: Account Solution Description
-        selected:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Selected
-          description: Indicates if the solution is selected
-      type: object
-      required:
-      - account_solution_id
-      - account_solution_name
-      - account_solution_description
-      title: CategorySolution
-      description: Solutions grouped by categories
-    Category:
-      properties:
-        category_id:
-          type: integer
-          title: Category Id
-          description: Category ID
-        category_name:
-          type: string
-          title: Category Name
-          description: Category Name
-        category_description:
-          type: string
-          title: Category Description
-          description: Category Description
-        solutions:
-          items:
-            $ref: '#/components/schemas/CategorySolution'
-          type: array
-          title: Solutions
-          description: List of solutions under this category
-      type: object
-      required:
-      - category_id
-      - category_name
-      - category_description
-      - solutions
-      title: Category
-      description: Solution Categories
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     value_proposition__solutions__models__Solution:
       properties:
         id:
@@ -262,6 +198,56 @@ components:
       - quantity_enabled
       title: Solution
       description: Solution Model
+    SolutionSelection:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+          description: List of selected solution IDs
+      type: object
+      required:
+      - solutions
+      title: SolutionSelection
+      description: SolutionSelection model for submitting selected solutions.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Category:
+      properties:
+        category_id:
+          type: integer
+          title: Category Id
+          description: Category ID
+        category_name:
+          type: string
+          title: Category Name
+          description: Category Name
+        category_description:
+          type: string
+          title: Category Description
+          description: Category Description
+        solutions:
+          items:
+            $ref: '#/components/schemas/CategorySolution'
+          type: array
+          title: Solutions
+          description: List of solutions under this category
+      type: object
+      required:
+      - category_id
+      - category_name
+      - category_description
+      - solutions
+      title: Category
+      description: Solution Categories
     ValidationError:
       properties:
         loc:
@@ -283,19 +269,33 @@ components:
       - msg
       - type
       title: ValidationError
-    SolutionSelection:
+    CategorySolution:
       properties:
-        solutions:
-          items:
-            type: integer
-          type: array
-          title: Solutions
-          description: List of selected solution IDs
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        account_solution_name:
+          type: string
+          title: Account Solution Name
+          description: Name of the solution
+        account_solution_description:
+          type: string
+          title: Account Solution Description
+          description: Account Solution Description
+        selected:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Selected
+          description: Indicates if the solution is selected
       type: object
       required:
-      - solutions
-      title: SolutionSelection
-      description: SolutionSelection model for submitting selected solutions.
+      - account_solution_id
+      - account_solution_name
+      - account_solution_description
+      title: CategorySolution
+      description: Solutions grouped by categories
   securitySchemes:
     HTTPBearer:
       type: http

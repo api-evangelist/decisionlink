@@ -101,6 +101,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ListMode:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      title: ListMode
+      description: Mode for filtering value propositions by status.
     ValidationError:
       properties:
         loc:
@@ -131,14 +139,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ListMode:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      title: ListMode
-      description: Mode for filtering value propositions by status.
   securitySchemes:
     HTTPBearer:
       type: http

@@ -321,27 +321,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
+    FactorPayload:
       properties:
-        loc:
+        factors:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/FactorValue'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Factors
+          description: The factors and values being saved
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - factors
+      title: FactorPayload
+      description: FactorPayload model
     UnitType:
       properties:
         id:
@@ -365,6 +357,17 @@ components:
       - abbreviation
       title: UnitType
       description: UnitType model
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Response message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: MessageResponse model
     HTTPValidationError:
       properties:
         detail:
@@ -401,17 +404,27 @@ components:
       - value
       title: FactorValue
       description: FactorValue model
-    MessageResponse:
+    ValidationError:
       properties:
-        message:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
           title: Message
-          description: Response message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: MessageResponse model
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Factor:
       properties:
         id:
@@ -476,19 +489,6 @@ components:
       - value
       title: Factor
       description: Factor model
-    FactorPayload:
-      properties:
-        factors:
-          items:
-            $ref: '#/components/schemas/FactorValue'
-          type: array
-          title: Factors
-          description: The factors and values being saved
-      type: object
-      required:
-      - factors
-      title: FactorPayload
-      description: FactorPayload model
     FactorGroup:
       properties:
         id:
@@ -517,6 +517,32 @@ components:
       - factors
       title: FactorGroup
       description: FactorGroup model
+    FactorOverrideNamePayload:
+      properties:
+        factor_id:
+          type: integer
+          title: Factor Id
+          description: ID of the factor
+        override_name:
+          type: string
+          title: Override Name
+          description: Overriding the factor name
+      type: object
+      required:
+      - factor_id
+      - override_name
+      title: FactorOverrideNamePayload
+      description: FactorOverrideNamePayload model
+    MessageResponse_2:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     value_proposition__factors__models__SourceType:
       properties:
         id:
@@ -577,153 +603,63 @@ components:
       - value
       title: FactorValue
       description: FactorValue model
-    MessageResponse_2:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
-    Factor_2:
+    Validation:
       properties:
         id:
-          type: string
+          type: integer
           title: Id
-          description: ID for the Factor
-        sequence:
-          type: string
-          title: Sequence
-          description: Sequence of the Factor
-        name:
-          type: string
-          title: Name
-          description: Name of the Factor
-        description:
-          type: string
-          title: Description
-          description: Description of the Factor
-        unit_type_id:
-          type: string
-          title: Unit Type Id
-          description: Unit type of the Factor
-        unit_type:
-          $ref: '#/components/schemas/UnitType'
-          description: Unit Type object for the Factor Unit Type
-        precision:
-          type: string
-          title: Precision
-          description: Decimal precision for the Factor
-        value:
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+        account_factor_id:
+          type: integer
+          title: Account Factor Id
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        validating_user_name:
           anyOf:
           - type: string
+          - type: 'null'
+          title: Validating User Name
+        previous_val:
+          anyOf:
           - type: integer
           - type: number
-          title: Value
-          description: Value of the Factor
-        value_fr:
-          anyOf:
-          - type: string
-          - type: integer
           - type: 'null'
-          title: Value Fr
-          description: Value of the Factor
-          default: 0
-        value_fmt:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: 'null'
-          title: Value Fmt
-          description: Value of the Factor
-          default: 0
-        source_type:
-          anyOf:
-          - $ref: '#/components/schemas/value_proposition__factors__models__SourceType'
-          - type: 'null'
-          description: SourceType of the Factor
-        has_scratchpad:
+          title: Previous Val
+        new_val:
           anyOf:
           - type: integer
-          - type: 'null'
-          title: Has Scratchpad
-          description: Denotes if the factor has a scratchpad
-          default: 0
-        scratchpad_used:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Scratchpad Used
-          description: Denotes if factor scratchpad is in use
-          default: 0
-        literal_number:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Literal Number
-          description: Denotes whether the factor should be treated as a literal
-          default: false
-        ai_updatable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Ai Updatable
-          description: Whether the factor is eligible for AI updates
-          default: false
-        validation:
-          anyOf:
-          - $ref: '#/components/schemas/Validation'
-          - type: 'null'
-        source_attribution:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Attribution
-        attribution_link:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Link
-        attribution_tooltip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Attribution Tooltip
-        revert_value:
-          anyOf:
           - type: number
           - type: 'null'
-          title: Revert Value
+          title: New Val
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+        date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Date
       type: object
       required:
       - id
-      - sequence
-      - name
-      - description
-      - unit_type_id
-      - unit_type
-      - precision
-      - value
-      title: Factor
-      description: Factor model
-    FactorOverrideNamePayload:
-      properties:
-        factor_id:
-          type: integer
-          title: Factor Id
-          description: ID of the factor
-        override_name:
-          type: string
-          title: Override Name
-          description: Overriding the factor name
-      type: object
-      required:
-      - factor_id
-      - override_name
-      title: FactorOverrideNamePayload
-      description: FactorOverrideNamePayload model
+      - value_prop_id
+      - account_factor_id
+      - user_id
+      - validating_user_name
+      - previous_val
+      - new_val
+      - year
+      - date
+      title: Validation
+      description: Factor Validation Model
     AllFactor:
       properties:
         factor_id:
@@ -880,63 +816,127 @@ components:
       - description
       title: AllFactor
       description: All-factors response model — one entry per unique factor
-    Validation:
+    Factor_2:
       properties:
         id:
-          type: integer
+          type: string
           title: Id
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-        account_factor_id:
-          type: integer
-          title: Account Factor Id
-        user_id:
+          description: ID for the Factor
+        sequence:
+          type: string
+          title: Sequence
+          description: Sequence of the Factor
+        name:
+          type: string
+          title: Name
+          description: Name of the Factor
+        description:
+          type: string
+          title: Description
+          description: Description of the Factor
+        unit_type_id:
+          type: string
+          title: Unit Type Id
+          description: Unit type of the Factor
+        unit_type:
+          $ref: '#/components/schemas/UnitType'
+          description: Unit Type object for the Factor Unit Type
+        precision:
+          type: string
+          title: Precision
+          description: Decimal precision for the Factor
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: number
+          title: Value
+          description: Value of the Factor
+        value_fr:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Value Fr
+          description: Value of the Factor
+          default: 0
+        value_fmt:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: 'null'
+          title: Value Fmt
+          description: Value of the Factor
+          default: 0
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/value_proposition__factors__models__SourceType'
+          - type: 'null'
+          description: SourceType of the Factor
+        has_scratchpad:
           anyOf:
           - type: integer
           - type: 'null'
-          title: User Id
-        validating_user_name:
+          title: Has Scratchpad
+          description: Denotes if the factor has a scratchpad
+          default: 0
+        scratchpad_used:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Scratchpad Used
+          description: Denotes if factor scratchpad is in use
+          default: 0
+        literal_number:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Literal Number
+          description: Denotes whether the factor should be treated as a literal
+          default: false
+        ai_updatable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Ai Updatable
+          description: Whether the factor is eligible for AI updates
+          default: false
+        validation:
+          anyOf:
+          - $ref: '#/components/schemas/Validation'
+          - type: 'null'
+        source_attribution:
           anyOf:
           - type: string
           - type: 'null'
-          title: Validating User Name
-        previous_val:
-          anyOf:
-          - type: integer
-          - type: number
-          - type: 'null'
-          title: Previous Val
-        new_val:
-          anyOf:
-          - type: integer
-          - type: number
-          - type: 'null'
-          title: New Val
-        year:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Year
-        date:
+          title: Source Attribution
+        attribution_link:
           anyOf:
           - type: string
-            format: date-time
           - type: 'null'
-          title: Date
+          title: Attribution Link
+        attribution_tooltip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Attribution Tooltip
+        revert_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Revert Value
       type: object
       required:
       - id
-      - value_prop_id
-      - account_factor_id
-      - user_id
-      - validating_user_name
-      - previous_val
-      - new_val
-      - year
-      - date
-      title: Validation
-      description: Factor Validation Model
+      - sequence
+      - name
+      - description
+      - unit_type_id
+      - unit_type
+      - precision
+      - value
+      title: Factor
+      description: Factor model
   securitySchemes:
     HTTPBearer:
       type: http

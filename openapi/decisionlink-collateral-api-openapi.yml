@@ -204,69 +204,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CollateralUpdatePayload:
-      properties:
-        format_type_id:
-          type: integer
-          title: Format Type Id
-          description: Foreign key to fact_format_types
-        name:
-          type: string
-          title: Name
-          description: Name of the asset
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Detailed description of the asset
-          default: ''
-        url:
-          type: string
-          title: Url
-          description: URL where this asset can be accessed
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-          description: Identifier for the related value proposition (defaults to 0)
-          default: 0
-      type: object
-      required:
-      - format_type_id
-      - name
-      - url
-      title: CollateralUpdatePayload
-      description: Detailed Collateral Update Payload Model
     Collateral:
       properties:
         id:
@@ -313,16 +250,48 @@ components:
       - format
       title: Collateral
       description: Detailed Collateral Model
-    MessageResponse:
+    CollateralUpdatePayload:
       properties:
-        message:
+        format_type_id:
+          type: integer
+          title: Format Type Id
+          description: Foreign key to fact_format_types
+        name:
           type: string
-          title: Message
+          title: Name
+          description: Name of the asset
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Detailed description of the asset
+          default: ''
+        url:
+          type: string
+          title: Url
+          description: URL where this asset can be accessed
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Identifier for the related value proposition (defaults to 0)
+          default: 0
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - format_type_id
+      - name
+      - url
+      title: CollateralUpdatePayload
+      description: Detailed Collateral Update Payload Model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     CollateralCreatePayload:
       properties:
         account_solution_id:
@@ -361,6 +330,37 @@ components:
       - url
       title: CollateralCreatePayload
       description: Detailed Collateral Create Payload Model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http

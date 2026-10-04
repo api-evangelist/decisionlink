@@ -221,6 +221,40 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    AccrualType:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the accrual type.
+        name:
+          type: string
+          title: Name
+          description: Name of the accrual type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the accrual type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the accrual type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the accrual type was last updated.
+      type: object
+      required:
+      - id
+      - name
+      title: AccrualType
+      description: Accrual Type model
     CostCategoryType:
       properties:
         id:
@@ -255,22 +289,231 @@ components:
       - name
       title: CostCategoryType
       description: Cost Category Type model
-    CostType:
+    ExpenseType:
       properties:
         id:
           type: integer
           title: Id
-          description: Unique identifier for the cost type.
+          description: Unique identifier for the expense type.
         name:
           type: string
           title: Name
-          description: Name of the cost type.
+          description: Name of the expense type.
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          description: Abbreviation of the expense type.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the expense type.
+        created:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created
+          description: Timestamp when the expense type was created.
+        modified:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Modified
+          description: Timestamp when the expense type was last updated.
       type: object
       required:
       - id
       - name
-      title: CostType
-      description: Cost Type model
+      title: ExpenseType
+      description: Expense Type model
+    CostResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the cost item.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the cost item.
+        alt_cost_description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Alt Cost Description
+          description: Alternative cost description.
+        quantity:
+          type: number
+          title: Quantity
+          description: Quantity of the cost item.
+        rate:
+          type: number
+          title: Rate
+          description: Rate per unit for the cost item.
+        cost:
+          type: number
+          title: Cost
+          description: Total cost for the item.
+        year1_costs:
+          type: number
+          title: Year1 Costs
+          description: Cost for year 1.
+        year2_costs:
+          type: number
+          title: Year2 Costs
+          description: Cost for year 2.
+        year3_costs:
+          type: number
+          title: Year3 Costs
+          description: Cost for year 3.
+        year4_costs:
+          type: number
+          title: Year4 Costs
+          description: Cost for year 4.
+        year5_costs:
+          type: number
+          title: Year5 Costs
+          description: Cost for year 5.
+        year6_costs:
+          type: number
+          title: Year6 Costs
+          description: Cost for year 6.
+        year7_costs:
+          type: number
+          title: Year7 Costs
+          description: Cost for year 7.
+        year8_costs:
+          type: number
+          title: Year8 Costs
+          description: Cost for year 8.
+        year9_costs:
+          type: number
+          title: Year9 Costs
+          description: Cost for year 9.
+        year10_costs:
+          type: number
+          title: Year10 Costs
+          description: Cost for year 10.
+        year1_quantity:
+          type: number
+          title: Year1 Quantity
+          description: Quantity for year 1.
+        year2_quantity:
+          type: number
+          title: Year2 Quantity
+          description: Quantity for year 2.
+        year3_quantity:
+          type: number
+          title: Year3 Quantity
+          description: Quantity for year 3.
+        year4_quantity:
+          type: number
+          title: Year4 Quantity
+          description: Quantity for year 4.
+        year5_quantity:
+          type: number
+          title: Year5 Quantity
+          description: Quantity for year 5.
+        year6_quantity:
+          type: number
+          title: Year6 Quantity
+          description: Quantity for year 6.
+        year7_quantity:
+          type: number
+          title: Year7 Quantity
+          description: Quantity for year 7.
+        year8_quantity:
+          type: number
+          title: Year8 Quantity
+          description: Quantity for year 8.
+        year9_quantity:
+          type: number
+          title: Year9 Quantity
+          description: Quantity for year 9.
+        year10_quantity:
+          type: number
+          title: Year10 Quantity
+          description: Quantity for year 10.
+        subtotal:
+          type: number
+          title: Subtotal
+          description: Subtotal cost before discounts.
+        discount:
+          type: number
+          title: Discount
+          description: Discount applied to the cost item.
+        grand_total:
+          type: number
+          title: Grand Total
+          description: Final cost after applying discounts.
+        term:
+          type: integer
+          title: Term
+          description: Term of the cost agreement.
+        created_at:
+          type: string
+          title: Created At
+          description: Timestamp when the cost item was created.
+        updated_at:
+          type: string
+          title: Updated At
+          description: Timestamp when the cost item was last updated.
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the cost item.
+        accrual_type:
+          $ref: '#/components/schemas/AccrualType'
+          description: Details of the accrual type.
+        cost_type:
+          $ref: '#/components/schemas/CostType'
+          description: Details of the cost type.
+        cost_category_type:
+          $ref: '#/components/schemas/CostCategoryType'
+          description: Details of the cost category type.
+      type: object
+      required:
+      - name
+      - quantity
+      - rate
+      - cost
+      - year1_costs
+      - year2_costs
+      - year3_costs
+      - year4_costs
+      - year5_costs
+      - year6_costs
+      - year7_costs
+      - year8_costs
+      - year9_costs
+      - year10_costs
+      - year1_quantity
+      - year2_quantity
+      - year3_quantity
+      - year4_quantity
+      - year5_quantity
+      - year6_quantity
+      - year7_quantity
+      - year8_quantity
+      - year9_quantity
+      - year10_quantity
+      - subtotal
+      - discount
+      - grand_total
+      - term
+      - created_at
+      - updated_at
+      - id
+      - accrual_type
+      - cost_type
+      - cost_category_type
+      title: CostResponse
+      description: Cost Response model
     AvailableCost:
       properties:
         id:
@@ -753,191 +996,6 @@ components:
       - quantity
       title: CostCreate
       description: Cost Create model
-    CostResponse:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the cost item.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the cost item.
-        alt_cost_description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Alt Cost Description
-          description: Alternative cost description.
-        quantity:
-          type: number
-          title: Quantity
-          description: Quantity of the cost item.
-        rate:
-          type: number
-          title: Rate
-          description: Rate per unit for the cost item.
-        cost:
-          type: number
-          title: Cost
-          description: Total cost for the item.
-        year1_costs:
-          type: number
-          title: Year1 Costs
-          description: Cost for year 1.
-        year2_costs:
-          type: number
-          title: Year2 Costs
-          description: Cost for year 2.
-        year3_costs:
-          type: number
-          title: Year3 Costs
-          description: Cost for year 3.
-        year4_costs:
-          type: number
-          title: Year4 Costs
-          description: Cost for year 4.
-        year5_costs:
-          type: number
-          title: Year5 Costs
-          description: Cost for year 5.
-        year6_costs:
-          type: number
-          title: Year6 Costs
-          description: Cost for year 6.
-        year7_costs:
-          type: number
-          title: Year7 Costs
-          description: Cost for year 7.
-        year8_costs:
-          type: number
-          title: Year8 Costs
-          description: Cost for year 8.
-        year9_costs:
-          type: number
-          title: Year9 Costs
-          description: Cost for year 9.
-        year10_costs:
-          type: number
-          title: Year10 Costs
-          description: Cost for year 10.
-        year1_quantity:
-          type: number
-          title: Year1 Quantity
-          description: Quantity for year 1.
-        year2_quantity:
-          type: number
-          title: Year2 Quantity
-          description: Quantity for year 2.
-        year3_quantity:
-          type: number
-          title: Year3 Quantity
-          description: Quantity for year 3.
-        year4_quantity:
-          type: number
-          title: Year4 Quantity
-          description: Quantity for year 4.
-        year5_quantity:
-          type: number
-          title: Year5 Quantity
-          description: Quantity for year 5.
-        year6_quantity:
-          type: number
-          title: Year6 Quantity
-          description: Quantity for year 6.
-        year7_quantity:
-          type: number
-          title: Year7 Quantity
-          description: Quantity for year 7.
-        year8_quantity:
-          type: number
-          title: Year8 Quantity
-          description: Quantity for year 8.
-        year9_quantity:
-          type: number
-          title: Year9 Quantity
-          description: Quantity for year 9.
-        year10_quantity:
-          type: number
-          title: Year10 Quantity
-          description: Quantity for year 10.
-        subtotal:
-          type: number
-          title: Subtotal
-          description: Subtotal cost before discounts.
-        discount:
-          type: number
-          title: Discount
-          description: Discount applied to the cost item.
-        grand_total:
-          type: number
-          title: Grand Total
-          description: Final cost after applying discounts.
-        term:
-          type: integer
-          title: Term
-          description: Term of the cost agreement.
-        created_at:
-          type: string
-          title: Created At
-          description: Timestamp when the cost item was created.
-        updated_at:
-          type: string
-          title: Updated At
-          description: Timestamp when the cost item was last updated.
-        id:
-          type: integer
-          title: Id
-          description: Unique identifier for the cost item.
-        accrual_type:
-          $ref: '#/components/schemas/AccrualType'
-          description: Details of the accrual type.
-        cost_type:
-          $ref: '#/components/schemas/CostType'
-          description: Details of the cost type.
-        cost_category_type:
-          $ref: '#/components/schemas/CostCategoryType'
-          description: Details of the cost category type.
-      type: object
-      required:
-      - name
-      - quantity
-      - rate
-      - cost
-      - year1_costs
-      - year2_costs
-      - year3_costs
-      - year4_costs
-      - year5_costs
-      - year6_costs
-      - year7_costs
-      - year8_costs
-      - year9_costs
-      - year10_costs
-      - year1_quantity
-      - year2_quantity
-      - year3_quantity
-      - year4_quantity
-      - year5_quantity
-      - year6_quantity
-      - year7_quantity
-      - year8_quantity
-      - year9_quantity
-      - year10_quantity
-      - subtotal
-      - discount
-      - grand_total
-      - term
-      - created_at
-      - updated_at
-      - id
-      - accrual_type
-      - cost_type
-      - cost_category_type
-      title: CostResponse
-      description: Cost Response model
     CostNameUpdate:
       properties:
         cost_name:
@@ -948,16 +1006,6 @@ components:
       - cost_name
       title: CostNameUpdate
       description: Cost Name Model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
     ValidationError:
       properties:
         loc:
@@ -979,80 +1027,32 @@ components:
       - msg
       - type
       title: ValidationError
-    AccrualType:
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
+    CostType:
       properties:
         id:
           type: integer
           title: Id
-          description: Unique identifier for the accrual type.
+          description: Unique identifier for the cost type.
         name:
           type: string
           title: Name
-          description: Name of the accrual type.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the accrual type.
-        created:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Created
-          description: Timestamp when the accrual type was created.
-        modified:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Modified
-          description: Timestamp when the accrual type was last updated.
+          description: Name of the cost type.
       type: object
       required:
       - id
       - name
-      title: AccrualType
-      description: Accrual Type model
-    ExpenseType:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: Unique identifier for the expense type.
-        name:
-          type: string
-          title: Name
-          description: Name of the expense type.
-        abbr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbr
-          description: Abbreviation of the expense type.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Description of the expense type.
-        created:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Created
-          description: Timestamp when the expense type was created.
-        modified:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Modified
-          description: Timestamp when the expense type was last updated.
-      type: object
-      required:
-      - id
-      - name
-      title: ExpenseType
-      description: Expense Type model
+      title: CostType
+      description: Cost Type model
   securitySchemes:
     HTTPBearer:
       type: http

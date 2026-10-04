@@ -115,6 +115,16 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     CreateAttribution:
       properties:
         section_type_id:
@@ -141,16 +151,6 @@ components:
       - suggested_value_text
       title: CreateAttribution
       description: Attribution Model
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
   securitySchemes:
     HTTPBearer:
       type: http
