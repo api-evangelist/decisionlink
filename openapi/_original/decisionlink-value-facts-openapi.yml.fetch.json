@@ -1,0 +1,12 @@
+{
+ "url": "https://api.xfactor.io/v1/value-facts/openapi.json",
+ "requested_url": "https://api.xfactor.io/v1/value-facts/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 20494,
+ "sha256": "ffb6e94f86100c80c28e00455e9c7715132fe45b82ffb7f794d59e0ae7bbdb01",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.944), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
