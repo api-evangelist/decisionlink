@@ -152,65 +152,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    value_proposition__solutions__models__Solution:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: Solution ID
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-          description: Value Proposition ID
-        account_solution_id:
-          type: integer
-          title: Account Solution Id
-          description: Account Solution ID
-        quantity:
-          type: integer
-          title: Quantity
-          description: Quantity
-        deployment_time:
-          type: number
-          title: Deployment Time
-          description: Deployment Time
-        name:
-          type: string
-          title: Name
-          description: Name of the solution
-        description:
-          type: string
-          title: Description
-          description: Description of the solution
-        quantity_enabled:
-          type: integer
-          title: Quantity Enabled
-          description: Indicates if quantity is enabled
-      type: object
-      required:
-      - id
-      - value_prop_id
-      - account_solution_id
-      - quantity
-      - deployment_time
-      - name
-      - description
-      - quantity_enabled
-      title: Solution
-      description: Solution Model
-    SolutionSelection:
-      properties:
-        solutions:
-          items:
-            type: integer
-          type: array
-          title: Solutions
-          description: List of selected solution IDs
-      type: object
-      required:
-      - solutions
-      title: SolutionSelection
-      description: SolutionSelection model for submitting selected solutions.
     HTTPValidationError:
       properties:
         detail:
@@ -296,6 +237,65 @@ components:
       - account_solution_description
       title: CategorySolution
       description: Solutions grouped by categories
+    value_proposition__solutions__models__Solution:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Solution ID
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: Value Proposition ID
+        account_solution_id:
+          type: integer
+          title: Account Solution Id
+          description: Account Solution ID
+        quantity:
+          type: integer
+          title: Quantity
+          description: Quantity
+        deployment_time:
+          type: number
+          title: Deployment Time
+          description: Deployment Time
+        name:
+          type: string
+          title: Name
+          description: Name of the solution
+        description:
+          type: string
+          title: Description
+          description: Description of the solution
+        quantity_enabled:
+          type: integer
+          title: Quantity Enabled
+          description: Indicates if quantity is enabled
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_solution_id
+      - quantity
+      - deployment_time
+      - name
+      - description
+      - quantity_enabled
+      title: Solution
+      description: Solution Model
+    SolutionSelection:
+      properties:
+        solutions:
+          items:
+            type: integer
+          type: array
+          title: Solutions
+          description: List of selected solution IDs
+      type: object
+      required:
+      - solutions
+      title: SolutionSelection
+      description: SolutionSelection model for submitting selected solutions.
   securitySchemes:
     HTTPBearer:
       type: http

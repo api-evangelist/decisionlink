@@ -113,6 +113,195 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Scratchpad:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: Unique identifier for the scratchpad
+        value_prop_id:
+          type: integer
+          title: Value Prop Id
+          description: ID for the associated value prop
+        account_scratchpad_id:
+          type: integer
+          title: Account Scratchpad Id
+          description: ID for the associated account scratchpad
+        factor_id:
+          type: integer
+          title: Factor Id
+          description: ID for the factor
+        factor_type_id:
+          type: integer
+          title: Factor Type Id
+          description: ID for the factor type
+        value_prop_metric_id:
+          type: integer
+          title: Value Prop Metric Id
+          description: ID for the value prop metric
+        is_current_effort:
+          type: string
+          title: Is Current Effort
+          description: Indicates if the effort is current (as a string)
+        formula:
+          type: string
+          title: Formula
+          description: Formula used for the calculation
+        total:
+          type: number
+          title: Total
+          description: Total value for the calculation
+        created:
+          type: string
+          title: Created
+          description: Creation timestamp
+        modified:
+          type: string
+          title: Modified
+          description: Last modified timestamp
+        value_prop_scratchpad_id:
+          type: integer
+          title: Value Prop Scratchpad Id
+          description: ID for the associated value prop scratchpad
+        factor_name:
+          type: string
+          title: Factor Name
+          description: Name of the factor
+        unit_type_id:
+          type: integer
+          title: Unit Type Id
+        unit_type:
+          type: string
+          title: Unit Type
+        abbr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbr
+          default: ''
+      type: object
+      required:
+      - id
+      - value_prop_id
+      - account_scratchpad_id
+      - factor_id
+      - factor_type_id
+      - value_prop_metric_id
+      - is_current_effort
+      - formula
+      - total
+      - created
+      - modified
+      - value_prop_scratchpad_id
+      - factor_name
+      - unit_type_id
+      - unit_type
+      title: Scratchpad
+      description: Scratchpad Model
+    ScratchpadTotalPayload:
+      properties:
+        factor_id:
+          type: string
+          title: Factor Id
+          description: Comma-separated string of factor IDs
+        operator_id:
+          type: string
+          title: Operator Id
+          description: Comma-separated string of operator IDs
+        operand:
+          type: string
+          title: Operand
+          description: Comma-separated string of operands
+        open_paren:
+          type: string
+          title: Open Paren
+          description: Comma-separated string for open parentheses
+        close_paren:
+          type: string
+          title: Close Paren
+          description: Comma-separated string for close parentheses
+        scratchpad_factor_id:
+          type: string
+          title: Scratchpad Factor Id
+          description: Scratchpad factor ID as a string
+      type: object
+      required:
+      - factor_id
+      - operator_id
+      - operand
+      - open_paren
+      - close_paren
+      - scratchpad_factor_id
+      title: ScratchpadTotalPayload
+      description: Scratchpad Total Payload
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ScratchpadUnitYear:
+      properties:
+        value:
+          type: number
+          title: Value
+          description: The value for the given year
+        key:
+          type: string
+          title: Key
+          description: The key for the year (e.g., year1, year2)
+        override:
+          type: number
+          title: Override
+          description: Override value for the year, if any
+      type: object
+      required:
+      - value
+      - key
+      - override
+      title: ScratchpadUnitYear
+      description: Yearly date for scratchpad unit
+    ScratchpadResponse:
+      properties:
+        scratchpad:
+          $ref: '#/components/schemas/Scratchpad'
+          description: The scratchpad data
+        units:
+          items:
+            $ref: '#/components/schemas/ScratchpadUnit'
+          type: array
+          title: Units
+          description: List of units associated with the scratchpad
+      type: object
+      required:
+      - scratchpad
+      - units
+      title: ScratchpadResponse
+      description: Scratchpad Response Model
     ScratchpadUnit:
       properties:
         id:
@@ -337,27 +526,6 @@ components:
       - years
       title: ScratchpadUnit
       description: Scratchpad Unit model
-    ScratchpadUnitYear:
-      properties:
-        value:
-          type: number
-          title: Value
-          description: The value for the given year
-        key:
-          type: string
-          title: Key
-          description: The key for the year (e.g., year1, year2)
-        override:
-          type: number
-          title: Override
-          description: Override value for the year, if any
-      type: object
-      required:
-      - value
-      - key
-      - override
-      title: ScratchpadUnitYear
-      description: Yearly date for scratchpad unit
     ScratchpadTotalResponse:
       properties:
         total:
@@ -369,174 +537,6 @@ components:
       - total
       title: ScratchpadTotalResponse
       description: Scratchpad Total Response model
-    Scratchpad:
-      properties:
-        id:
-          type: integer
-          title: Id
-          description: Unique identifier for the scratchpad
-        value_prop_id:
-          type: integer
-          title: Value Prop Id
-          description: ID for the associated value prop
-        account_scratchpad_id:
-          type: integer
-          title: Account Scratchpad Id
-          description: ID for the associated account scratchpad
-        factor_id:
-          type: integer
-          title: Factor Id
-          description: ID for the factor
-        factor_type_id:
-          type: integer
-          title: Factor Type Id
-          description: ID for the factor type
-        value_prop_metric_id:
-          type: integer
-          title: Value Prop Metric Id
-          description: ID for the value prop metric
-        is_current_effort:
-          type: string
-          title: Is Current Effort
-          description: Indicates if the effort is current (as a string)
-        formula:
-          type: string
-          title: Formula
-          description: Formula used for the calculation
-        total:
-          type: number
-          title: Total
-          description: Total value for the calculation
-        created:
-          type: string
-          title: Created
-          description: Creation timestamp
-        modified:
-          type: string
-          title: Modified
-          description: Last modified timestamp
-        value_prop_scratchpad_id:
-          type: integer
-          title: Value Prop Scratchpad Id
-          description: ID for the associated value prop scratchpad
-        factor_name:
-          type: string
-          title: Factor Name
-          description: Name of the factor
-        unit_type_id:
-          type: integer
-          title: Unit Type Id
-        unit_type:
-          type: string
-          title: Unit Type
-        abbr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbr
-          default: ''
-      type: object
-      required:
-      - id
-      - value_prop_id
-      - account_scratchpad_id
-      - factor_id
-      - factor_type_id
-      - value_prop_metric_id
-      - is_current_effort
-      - formula
-      - total
-      - created
-      - modified
-      - value_prop_scratchpad_id
-      - factor_name
-      - unit_type_id
-      - unit_type
-      title: Scratchpad
-      description: Scratchpad Model
-    ScratchpadResponse:
-      properties:
-        scratchpad:
-          $ref: '#/components/schemas/Scratchpad'
-          description: The scratchpad data
-        units:
-          items:
-            $ref: '#/components/schemas/ScratchpadUnit'
-          type: array
-          title: Units
-          description: List of units associated with the scratchpad
-      type: object
-      required:
-      - scratchpad
-      - units
-      title: ScratchpadResponse
-      description: Scratchpad Response Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ScratchpadTotalPayload:
-      properties:
-        factor_id:
-          type: string
-          title: Factor Id
-          description: Comma-separated string of factor IDs
-        operator_id:
-          type: string
-          title: Operator Id
-          description: Comma-separated string of operator IDs
-        operand:
-          type: string
-          title: Operand
-          description: Comma-separated string of operands
-        open_paren:
-          type: string
-          title: Open Paren
-          description: Comma-separated string for open parentheses
-        close_paren:
-          type: string
-          title: Close Paren
-          description: Comma-separated string for close parentheses
-        scratchpad_factor_id:
-          type: string
-          title: Scratchpad Factor Id
-          description: Scratchpad factor ID as a string
-      type: object
-      required:
-      - factor_id
-      - operator_id
-      - operand
-      - open_paren
-      - close_paren
-      - scratchpad_factor_id
-      title: ScratchpadTotalPayload
-      description: Scratchpad Total Payload
   securitySchemes:
     HTTPBearer:
       type: http

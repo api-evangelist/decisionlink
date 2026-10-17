@@ -182,26 +182,16 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    AdminValidatePayload:
+    MessageResponse:
       properties:
-        sfdc_account_id:
+        message:
           type: string
-          title: Sfdc Account Id
-          description: Salesforce account id.
-        user_id:
-          type: integer
-          title: User Id
-          description: User id.
-        name:
-          type: string
-          title: Name
+          title: Message
       type: object
       required:
-      - sfdc_account_id
-      - user_id
-      - name
-      title: AdminValidatePayload
-      description: Validate Admin Payload Model
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     SearchPayload:
       properties:
         search_term:
@@ -213,87 +203,57 @@ components:
       - search_term
       title: SearchPayload
       description: SearchPayload Model
-    CreateCompanyPayload:
+    HTTPValidationError:
       properties:
-        name:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Name
-          description: The name of the Company
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-          description: The user ID who created the Company
-          default: 0
-        account_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Account Id
-          description: The account ID of the Company, if account specific
-          default: 0
-        address1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address1
-          description: The first line of the address of the Company
-          default: ''
-        city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: City
-          description: The city of the Company
-          default: ''
-        zip:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Zip
-          description: The ZIP code of the Company
-          default: ''
-        state:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State
-          description: The state of the Company
-          default: ''
-        country_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Country Id
-          description: The country ID of the Company
-          default: 0
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-          description: The name of the country of the Company
-          default: ''
-        account_defined_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Defined Id
-          description: An account-defined ID associated with the Company
-          default: ''
-        from_calculator:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: From Calculator
-          description: Denotes whether the company is from a calculator Value Proposition
-          default: 0
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - name
-      title: CreateCompanyPayload
-      description: CreateCompanyPayload Model
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CompanyValidateReturn:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: If the validate company was a success or not
+        company_id:
+          type: integer
+          title: Company Id
+          description: ID of the company
+        acc_specific:
+          type: boolean
+          title: Acc Specific
+          description: Tells whether the account has account specific companies
+      type: object
+      required:
+      - success
+      - company_id
+      - acc_specific
+      title: CompanyValidateReturn
+      description: Validate Company Return Model
     CompanyValidatePayload:
       properties:
         sf_account_id:
@@ -305,15 +265,6 @@ components:
       - sf_account_id
       title: CompanyValidatePayload
       description: Validate Company Payload Model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Company:
       properties:
         id:
@@ -507,58 +458,107 @@ components:
       - country
       title: Company
       description: Company Model
-    CompanyValidateReturn:
+    AdminValidatePayload:
       properties:
-        success:
-          type: boolean
-          title: Success
-          description: If the validate company was a success or not
-        company_id:
+        sfdc_account_id:
+          type: string
+          title: Sfdc Account Id
+          description: Salesforce account id.
+        user_id:
           type: integer
-          title: Company Id
-          description: ID of the company
-        acc_specific:
-          type: boolean
-          title: Acc Specific
-          description: Tells whether the account has account specific companies
+          title: User Id
+          description: User id.
+        name:
+          type: string
+          title: Name
       type: object
       required:
-      - success
-      - company_id
-      - acc_specific
-      title: CompanyValidateReturn
-      description: Validate Company Return Model
-    ValidationError:
+      - sfdc_account_id
+      - user_id
+      - name
+      title: AdminValidatePayload
+      description: Validate Admin Payload Model
+    CreateCompanyPayload:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        name:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Name
+          description: The name of the Company
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID who created the Company
+          default: 0
+        account_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Account Id
+          description: The account ID of the Company, if account specific
+          default: 0
+        address1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address1
+          description: The first line of the address of the Company
+          default: ''
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+          description: The city of the Company
+          default: ''
+        zip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Zip
+          description: The ZIP code of the Company
+          default: ''
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+          description: The state of the Company
+          default: ''
+        country_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Country Id
+          description: The country ID of the Company
+          default: 0
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+          description: The name of the country of the Company
+          default: ''
+        account_defined_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Defined Id
+          description: An account-defined ID associated with the Company
+          default: ''
+        from_calculator:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Calculator
+          description: Denotes whether the company is from a calculator Value Proposition
+          default: 0
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - name
+      title: CreateCompanyPayload
+      description: CreateCompanyPayload Model
   securitySchemes:
     HTTPBearer:
       type: http

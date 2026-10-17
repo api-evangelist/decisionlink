@@ -202,22 +202,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    QuestionType:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: ID for the question type
-        type:
-          type: string
-          title: Type
-          description: Question type
-      type: object
-      required:
-      - id
-      - type
-      title: QuestionType
-      description: QuestionType model
     DiscoveryAnswerPayload:
       properties:
         questions:
@@ -231,52 +215,6 @@ components:
       - questions
       title: DiscoveryAnswerPayload
       description: DiscoveryAnswerPayload model
-    DiscoveryAnswer:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The ID for the Discovery Question
-        answer:
-          type: string
-          title: Answer
-          description: The answer to the Discovery Question
-      type: object
-      required:
-      - id
-      - answer
-      title: DiscoveryAnswer
-      description: DiscoveryAnswer model
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     MessageResponse:
       properties:
         message:
@@ -333,6 +271,68 @@ components:
       - placeholder
       title: DiscoveryQuestion
       description: DiscoveryQuestion model
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DiscoveryAnswer:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The ID for the Discovery Question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the Discovery Question
+      type: object
+      required:
+      - id
+      - answer
+      title: DiscoveryAnswer
+      description: DiscoveryAnswer model
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    QuestionType:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: ID for the question type
+        type:
+          type: string
+          title: Type
+          description: Question type
+      type: object
+      required:
+      - id
+      - type
+      title: QuestionType
+      description: QuestionType model
     DiscoveryAnswerPayload_2:
       properties:
         discovery_questions:
@@ -346,34 +346,6 @@ components:
       - discovery_questions
       title: DiscoveryAnswerPayload
       description: Discovery Question Answer Payload Model
-    DiscoveryAnswer_2:
-      properties:
-        account_discovery_question_id:
-          type: integer
-          title: Account Discovery Question Id
-          description: ID of the discovery question
-        answer:
-          type: string
-          title: Answer
-          description: The answer to the discovery question
-        value_prop_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Value Prop Id
-          description: The value prop ID
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-          description: The user ID updating the answer
-      type: object
-      required:
-      - account_discovery_question_id
-      - answer
-      title: DiscoveryAnswer
-      description: Discovery Question Answer Model
     DiscoveryQuestion_2:
       properties:
         account_discovery_question_id:
@@ -482,6 +454,34 @@ components:
       - sequence
       title: DiscoveryQuestion
       description: DiscoveryQuestion Model
+    DiscoveryAnswer_2:
+      properties:
+        account_discovery_question_id:
+          type: integer
+          title: Account Discovery Question Id
+          description: ID of the discovery question
+        answer:
+          type: string
+          title: Answer
+          description: The answer to the discovery question
+        value_prop_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Prop Id
+          description: The value prop ID
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+          description: The user ID updating the answer
+      type: object
+      required:
+      - account_discovery_question_id
+      - answer
+      title: DiscoveryAnswer
+      description: Discovery Question Answer Model
     DiscoveryQuestionSection:
       properties:
         id:

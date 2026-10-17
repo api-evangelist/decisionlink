@@ -180,22 +180,6 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    RefreshValueTrackerPayload:
-      properties:
-        sfdc_vt_id:
-          type: string
-          title: Sfdc Vt Id
-          description: The sfdc value tracker ID
-        value_prop_id:
-          type: string
-          title: Value Prop Id
-          description: The value prop ID
-      type: object
-      required:
-      - sfdc_vt_id
-      - value_prop_id
-      title: RefreshValueTrackerPayload
-      description: Model representing the refresh value tracker payload.
     RefreshValuePropGroupPayload:
       properties:
         sfdc_vp_id:
@@ -258,6 +242,22 @@ components:
       - msg
       - type
       title: ValidationError
+    RefreshValueTrackerPayload:
+      properties:
+        sfdc_vt_id:
+          type: string
+          title: Sfdc Vt Id
+          description: The sfdc value tracker ID
+        value_prop_id:
+          type: string
+          title: Value Prop Id
+          description: The value prop ID
+      type: object
+      required:
+      - sfdc_vt_id
+      - value_prop_id
+      title: RefreshValueTrackerPayload
+      description: Model representing the refresh value tracker payload.
   securitySchemes:
     HTTPBearer:
       type: http

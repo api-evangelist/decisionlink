@@ -148,40 +148,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateShare:
+    MessageResponse:
       properties:
-        user_id:
-          type: integer
-          title: User Id
-          description: Id of user the share is for
-        share_role_type_id:
-          type: integer
-          title: Share Role Type Id
-          description: Id for the share role type
-        from_crm:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: From Crm
-          description: If created from crm
-          default: 0
+        message:
+          type: string
+          title: Message
       type: object
       required:
-      - user_id
-      - share_role_type_id
-      title: CreateShare
-      description: Model for creating a share
-    UpdateShare:
-      properties:
-        share_role_type_id:
-          type: integer
-          title: Share Role Type Id
-          description: Id for the share role type
-      type: object
-      required:
-      - share_role_type_id
-      title: UpdateShare
-      description: Model for updating a share
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     Shares:
       properties:
         id:
@@ -253,16 +229,40 @@ components:
       - msg
       - type
       title: ValidationError
-    MessageResponse:
+    CreateShare:
       properties:
-        message:
-          type: string
-          title: Message
+        user_id:
+          type: integer
+          title: User Id
+          description: Id of user the share is for
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+        from_crm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Crm
+          description: If created from crm
+          default: 0
       type: object
       required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
+      - user_id
+      - share_role_type_id
+      title: CreateShare
+      description: Model for creating a share
+    UpdateShare:
+      properties:
+        share_role_type_id:
+          type: integer
+          title: Share Role Type Id
+          description: Id for the share role type
+      type: object
+      required:
+      - share_role_type_id
+      title: UpdateShare
+      description: Model for updating a share
   securitySchemes:
     HTTPBearer:
       type: http

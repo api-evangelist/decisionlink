@@ -290,32 +290,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    TranslationWithOverride:
+    MessageResponse:
       properties:
-        translation_id:
-          type: integer
-          title: Translation Id
-          description: Unique translation identifier.
-        key:
+        message:
           type: string
-          title: Key
-          description: Translation key.
-        value:
-          type: string
-          title: Value
-          description: Resolved translation value (override or base).
-        is_override:
-          type: integer
-          title: Is Override
-          description: 1 when an account override was applied, 0 otherwise.
+          title: Message
       type: object
       required:
-      - translation_id
-      - key
-      - value
-      - is_override
-      title: TranslationWithOverride
-      description: Translation row with optional account override applied.
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     TranslationComponent:
       properties:
         id:
@@ -408,16 +392,6 @@ components:
       - msg
       - type
       title: ValidationError
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
     SaveTranslationOverride:
       properties:
         translation_id:
@@ -439,6 +413,32 @@ components:
       - value
       title: SaveTranslationOverride
       description: Request body for saving an inline translation override.
+    TranslationWithOverride:
+      properties:
+        translation_id:
+          type: integer
+          title: Translation Id
+          description: Unique translation identifier.
+        key:
+          type: string
+          title: Key
+          description: Translation key.
+        value:
+          type: string
+          title: Value
+          description: Resolved translation value (override or base).
+        is_override:
+          type: integer
+          title: Is Override
+          description: 1 when an account override was applied, 0 otherwise.
+      type: object
+      required:
+      - translation_id
+      - key
+      - value
+      - is_override
+      title: TranslationWithOverride
+      description: Translation row with optional account override applied.
     Translation_2:
       properties:
         id:

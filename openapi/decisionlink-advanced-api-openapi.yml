@@ -69,47 +69,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CurrencyType:
-      properties:
-        id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Id
-          description: The ID for the currency type
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: The name of the currency type
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: A brief description of the currency type
-        abbreviation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Abbreviation
-          description: The abbreviation for the currency type
-        rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Rate
-          description: The exchange rate for the currency
-        decoration:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Decoration
-          description: The symbol or decoration for the currency
-      type: object
-      title: CurrencyType
-      description: Model representing a currency type.
     ValuePropAdvancedPayload:
       properties:
         baseline_type_id:
@@ -178,6 +137,36 @@ components:
       - term
       title: ValuePropAdvancedPayload
       description: Model representing the advanced details of a value proposition payload.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     ValuePropAdvanced:
       properties:
         value_prop_id:
@@ -277,36 +266,6 @@ components:
       type: object
       title: ValuePropAdvanced
       description: Model representing the advanced details of a value proposition.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     NumberFormatType:
       properties:
         id:
@@ -336,6 +295,47 @@ components:
       type: object
       title: NumberFormatType
       description: Model representing a number format type.
+    CurrencyType:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: The ID for the currency type
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The name of the currency type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: A brief description of the currency type
+        abbreviation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Abbreviation
+          description: The abbreviation for the currency type
+        rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Rate
+          description: The exchange rate for the currency
+        decoration:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Decoration
+          description: The symbol or decoration for the currency
+      type: object
+      title: CurrencyType
+      description: Model representing a currency type.
   securitySchemes:
     HTTPBearer:
       type: http

@@ -99,6 +99,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    MessageResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: MessageResponse
+      description: Response model for simple message responses
     HTTPValidationError:
       properties:
         detail:
@@ -108,6 +118,170 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OneTimeBenefitPatch:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Benefit name stored as metric_name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Benefit description
+        value_category_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Value Category Id
+          description: Value category for this benefit
+        accrual_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Accrual Type Id
+          description: Accrual type for benefit phasing
+        driver_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Driver Factor Id
+          description: Driver factor (aggregated) ID
+        improvement_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Improvement Factor Id
+          description: Improvement factor (aggregated) ID
+        financial_factor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Financial Factor Id
+          description: Financial factor (aggregated) ID
+        driver_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Driver Value
+          description: Driver baseline answer / estimate value
+        improvement_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Improvement Value
+          description: Improvement value stored as conservative/probable/aggressive
+        financial_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Financial Value
+          description: Financial baseline answer / estimate value
+        impact_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Impact Type Id
+          description: Impact type ID
+        unit_type_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Unit Type Id
+          description: Unit type override
+        current_effort:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Current Effort
+          description: Current effort value
+        features:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Features
+          description: Features text
+        quantified:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quantified
+          description: Quantified flag
+        soft:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Soft
+          description: Soft benefit flag
+        tco_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tco Name
+          description: TCO name text
+        value_statement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value Statement
+          description: Value statement text
+        course_correction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Course Correction
+          description: Course correction text
+        metric_note_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 2
+          description: Metric note 2 text
+        metric_note_3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric Note 3
+          description: Metric note 3 text
+        metric_note_2_cf:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Metric Note 2 Cf
+          description: Metric note 2 carry-forward flag
+        metric_note_3_cf:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Metric Note 3 Cf
+          description: Metric note 3 carry-forward flag
+      type: object
+      title: OneTimeBenefitPatch
+      description: Payload for partial update of a one-time benefit.
     OneTimeBenefitResponse:
       properties:
         value_prop_metric_id:
@@ -427,180 +601,6 @@ components:
           value_survey_id:
           - 55
           - 66
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    MessageResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: MessageResponse
-      description: Response model for simple message responses
-    OneTimeBenefitPatch:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-          description: Benefit name stored as metric_name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Benefit description
-        value_category_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Value Category Id
-          description: Value category for this benefit
-        accrual_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Accrual Type Id
-          description: Accrual type for benefit phasing
-        driver_factor_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Driver Factor Id
-          description: Driver factor (aggregated) ID
-        improvement_factor_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Improvement Factor Id
-          description: Improvement factor (aggregated) ID
-        financial_factor_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Financial Factor Id
-          description: Financial factor (aggregated) ID
-        driver_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Driver Value
-          description: Driver baseline answer / estimate value
-        improvement_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Improvement Value
-          description: Improvement value stored as conservative/probable/aggressive
-        financial_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Financial Value
-          description: Financial baseline answer / estimate value
-        impact_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Impact Type Id
-          description: Impact type ID
-        unit_type_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Unit Type Id
-          description: Unit type override
-        current_effort:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Current Effort
-          description: Current effort value
-        features:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Features
-          description: Features text
-        quantified:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Quantified
-          description: Quantified flag
-        soft:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Soft
-          description: Soft benefit flag
-        tco_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Tco Name
-          description: TCO name text
-        value_statement:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value Statement
-          description: Value statement text
-        course_correction:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Course Correction
-          description: Course correction text
-        metric_note_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Metric Note 2
-          description: Metric note 2 text
-        metric_note_3:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Metric Note 3
-          description: Metric note 3 text
-        metric_note_2_cf:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Metric Note 2 Cf
-          description: Metric note 2 carry-forward flag
-        metric_note_3_cf:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Metric Note 3 Cf
-          description: Metric note 3 carry-forward flag
-      type: object
-      title: OneTimeBenefitPatch
-      description: Payload for partial update of a one-time benefit.
   securitySchemes:
     HTTPBearer:
       type: http
