@@ -40,3 +40,9 @@ x-refined-from:
 - decisionlink-collaboration-openapi.json
 - decisionlink-value-facts-openapi.json
 - decisionlink-value-proposition-openapi.json
+x-provenance:
+  method: harvested
+  publisher: DecisionLink
+  source: https://api.xfactor.io/v1/value-proposition/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
